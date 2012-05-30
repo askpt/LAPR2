@@ -2,7 +2,7 @@ package jogosolimpicos;
 
 public class Resultados {
 	
-	float resulltados;
+	float resultados;
 	private Medalhas medalha;
 
 }
