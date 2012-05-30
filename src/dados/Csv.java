@@ -48,7 +48,7 @@ public class Csv extends JComponent implements Accessible {
 	}
 
 	@SuppressWarnings("unused")
-	public static void exportPais(Component janela) {
+	public  void exportPais(Component janela) {
 
 		try {
 			JFileChooser fc = new JFileChooser();
