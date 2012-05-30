@@ -1,7 +1,7 @@
 package listaligada;
 
 /**
- * Main class for the
+ * Main class for the Linked List. Accepts the generic form.
  * 
  * @author http://www.dreamincode.net/forums/topic/143089-linked-list-tutorial/
  * 
@@ -11,15 +11,31 @@ public class ListaLigada<E> {
 	private No<E> cabeca = null;
 	private No<E> cauda = null;
 	private No<E> temp = null;
-
 	private int contador = 0;
 
+	/**
+	 * Constructor of the Linked List. Initializes the instance of the Linked
+	 * List to null and the counter to zero.
+	 */
 	public ListaLigada() {
 	}
+
+	/**
+	 * Method to get the size of the Linked List.
+	 * 
+	 * @return size of the Linked List.
+	 */
 
 	public int size() {
 		return contador;
 	}
+
+	/**
+	 * Method to add an element to the end of the Linked List.
+	 * 
+	 * @param elemento
+	 *            element to be added to Linked List.
+	 */
 
 	public void add(E elemento) {
 		if (cabeca == null) {
@@ -34,6 +50,14 @@ public class ListaLigada<E> {
 		contador++;
 	}
 
+	/**
+	 * Method to add an element to a specific index of the Linked List.
+	 * 
+	 * @param index
+	 *            index of the Linked List, where the element will be added.
+	 * @param elemento
+	 *            element to be added to Linked List.
+	 */
 	public void add(int index, E elemento) {
 		if (index == size()) {
 			add(elemento);
@@ -57,6 +81,14 @@ public class ListaLigada<E> {
 		}
 	}
 
+	/**
+	 * Method to get the element in the specific index in the Linked List.
+	 * 
+	 * @param index
+	 *            index of the Linked List.
+	 * @return element of the Linked List in the index position.
+	 */
+
 	public E get(int index) {
 		assert (index >= 0 && index < size());
 
@@ -67,6 +99,14 @@ public class ListaLigada<E> {
 
 		return temp.elemento;
 	}
+
+	/**
+	 * Method to get the index of certain element in the Linked List.
+	 * 
+	 * @param elem
+	 *            element of the Linked List
+	 * @return index of element or -1 if that element wasn't found.
+	 */
 
 	public int indexOf(E elem) {
 		temp = cabeca;
@@ -81,9 +121,23 @@ public class ListaLigada<E> {
 		return i;
 	}
 
+	/**
+	 * Method to know if that Linked List was empty.
+	 * 
+	 * @return a boolean, if is Empty, returns true.
+	 */
+
 	public boolean isEmpty() {
 		return (cabeca == null && cauda == null);
 	}
+
+	/**
+	 * Method to element a node in the specific index in Linked List.
+	 * 
+	 * @param index
+	 *            index of element to be removed.
+	 * @return the element removed
+	 */
 
 	public E remove(int index) {
 		assert (index >= 0 && index < size());
