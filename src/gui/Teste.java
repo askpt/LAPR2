@@ -1,15 +1,10 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import dados.Csv;
 
 public class Teste extends JFrame{
 	
@@ -21,6 +16,7 @@ public class Teste extends JFrame{
         JMenuBar menuBar;
         JMenu menu;
         JMenuItem menuItem;
+        Csv csv = new Csv();
 
         menuBar = new JMenuBar();
 
@@ -28,18 +24,21 @@ public class Teste extends JFrame{
         menu.setMnemonic( 'F' );
         menuBar.add( menu );
         
-        menuItem = new JMenuItem( "Import" );
+        menuItem = new JMenuItem( "Import Country", 'I' );
         menuItem.addActionListener( new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
+            	// esta a dar erro
+            	csv.importPais(Teste.this);
             }
      } );
         menu.add(menuItem);
         
-        menuItem = new JMenuItem( "Export" );
+        menuItem = new JMenuItem( "Export Country", 'E');
         menuItem.addActionListener( new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
+            	csv.exportPais(Teste.this);
             }
      } );
         menu.add(menuItem);
