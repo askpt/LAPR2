@@ -4,6 +4,7 @@ package listaligada;
  * Main class for the Linked List. Accepts the generic form.
  * 
  * @author http://www.dreamincode.net/forums/topic/143089-linked-list-tutorial/
+ *         (Translated and made some changes by the team).
  * 
  */
 
@@ -167,6 +168,18 @@ public class ListaLigada<E> {
 		contador--;
 
 		return elem;
+	}
+
+	/**
+	 * Method to check if the element is in the Linked List.
+	 * 
+	 * @param elem
+	 *            element to be found
+	 * @return true if exists
+	 */
+
+	public boolean contains(E elem) {
+		return (indexOf(elem) >= 0);
 	}
 
 }
