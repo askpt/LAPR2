@@ -15,7 +15,7 @@ public class ListaLigada {
 	private No primeiro, ultimo;
 	private int nroNos;
 
-	ListaLigada() {
+	public ListaLigada() {
 		primeiro = null;
 		ultimo = null;
 		nroNos = 0;
