@@ -1,109 +1,118 @@
 package listaligada;
 
-
 /**
+ * Main class for the
  * 
- * Classe principal da Lista Ligada. Pertence 
+ * @author http://www.dreamincode.net/forums/topic/143089-linked-list-tutorial/
  * 
- * 
- * 
- * @author http://pt.wikipedia.org/wiki/Lista_ligada
- *
  */
 
-public class ListaLigada {
-	private No primeiro, ultimo;
-	private int nroNos;
+public class ListaLigada<E> {
+	private No<E> cabeca = null;
+	private No<E> cauda = null;
+	private No<E> temp = null;
+
+	private int contador = 0;
 
 	public ListaLigada() {
-		primeiro = null;
-		ultimo = null;
-		nroNos = 0;
 	}
 
-	public boolean isVazia() {
-		return (primeiro == null && ultimo == null);
+	public int size() {
+		return contador;
 	}
 
-	public void addInicio(Object o) {
-		nroNos++;
-		No novoNo = new No(o);
-		if (isVazia())
-			ultimo = novoNo;
-		else
-			novoNo.prox = primeiro;
-		primeiro = novoNo;
-	}
-
-	public void addFinal(Object o) {
-		nroNos++;
-		No novoNo = new No(o);
-		if (isVazia())
-			primeiro = novoNo;
-		else
-			ultimo.prox = novoNo;
-		ultimo = novoNo;
-	}
-
-	public int getNroNos() {
-		return nroNos;
-	}
-
-	/*
-	 * @param posicao posição contada a partir do zero como primeiro elemento
-	 */
-	public void addMeio(Object o, int posicao) {
-		nroNos++;
-		No novoNo = new No(o);
-		if (posicao <= 1) {
-			addInicio(novoNo);
-			return;
-		}
-		if (posicao > nroNos) { // Outra abordagem seria lançar exceção para
-								// posição inválida (>nroNos+1)
-			addFinal(novoNo);
-			return;
-		}
-		No noTemp = primeiro.prox;
-		for (int posAux = 1; posAux < posicao; posAux++)
-			noTemp = noTemp.prox;
-		novoNo.prox = (noTemp.prox).prox;
-		noTemp.prox = novoNo;
-	}
-
-	public void Remover(Object elemento) {
-		No noTemp = primeiro;
-		No noAnt = null;
-
-		if (primeiro.elemento.equals(elemento)) {
-			primeiro = primeiro.prox;
-			nroNos--;
+	public void add(E elemento) {
+		if (cabeca == null) {
+			cabeca = cauda = new No<E>();
+			cabeca.elemento = elemento;
+			cauda = cabeca;
 		} else {
-			while (noTemp != null && !noTemp.elemento.equals(elemento)) {
-				noAnt = noTemp;
-				noTemp = noTemp.prox;
-			}
-			if (noTemp != null) {
-				noAnt.prox = noTemp.prox;
-				nroNos--;
-			}
-			if (noTemp == ultimo) {
-				ultimo = noAnt;
-			}
+			cauda.proximo = new No<E>();
+			cauda = cauda.proximo;
+			cauda.elemento = elemento;
+		}
+		contador++;
+	}
+
+	public void add(int index, E elemento) {
+		if (index == size()) {
+			add(elemento);
+			return;
+		} else if (index == 0) {
+			No<E> temp = new No<E>();
+			temp.elemento = elemento;
+			temp.proximo = cabeca;
+			cabeca.anterior = temp;
+			cabeca = temp;
+			contador++;
+			return;
+		}
+		temp = cabeca;
+		for (int i = 0; i < index - 1; i++) {
+			No<E> no = new No<E>();
+			no.elemento = elemento;
+			no.proximo = temp.proximo;
+			temp.proximo = no;
+			contador++;
 		}
 	}
 
-	public Object BuscarElemento(Object elemento) {
-		int i = 1;
-		No noTemp = primeiro;
+	public E get(int index) {
+		assert (index >= 0 && index < size());
 
-		while (noTemp != null) {
-			if (noTemp.elemento.equals(elemento)) {
-				return noTemp;
-			}
-			i = i + 1;
-			noTemp = noTemp.prox;
+		temp = cabeca;
+		for (int i = 0; i < index; i++) {
+			temp = temp.proximo;
 		}
-		return null;
+
+		return temp.elemento;
 	}
+
+	public int indexOf(E elem) {
+		temp = cabeca;
+		int i = 0;
+
+		for (; !(temp.elemento).equals(elem) && temp != null; i++) {
+			temp = temp.proximo;
+		}
+
+		if (i == size())
+			return -1;
+		return i;
+	}
+
+	public boolean isEmpty() {
+		return (cabeca == null && cauda == null);
+	}
+
+	public E remove(int index) {
+		assert (index >= 0 && index < size());
+		temp = cabeca;
+
+		if (index == 0) {
+			E elem = cabeca.elemento;
+			cabeca = cabeca.proximo;
+			contador--;
+
+			return elem;
+		} else if (index == size()) {
+			E elem = cauda.elemento;
+			cauda = cauda.anterior;
+			contador--;
+
+			return elem;
+		}
+
+		for (int i = 0; i < index - 1; i++) {
+			temp = temp.proximo;
+		}
+		No<E> dois = temp.proximo;
+		temp.proximo = dois.proximo;
+		E elem = dois.elemento;
+		dois = null;
+		contador--;
+
+		return elem;
+	}
+
 }
