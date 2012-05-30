@@ -40,19 +40,27 @@ public class Atleta {
 
 		return mod;
 	}
-	
-	public void setModalidade(Modalidade mod){
-		
+
+	public void setModalidade(Modalidade mod) {
+
 		this.mod = mod;
 	}
-	
-	public void addDisciplina(){
-		
+
+	public void addDisciplina() {
+
 	}
 
-	public String toString(){
-		
+	public String getCodPais() {
+		return codPais;
+	}
+
+	public void setCodPais(String codPais) {
+		this.codPais = codPais;
+	}
+
+	public String toString() {
+
 		return String.format("%d: %s - %s", numid, nome, pais);
 	}
-	
+
 }

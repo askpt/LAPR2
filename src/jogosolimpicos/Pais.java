@@ -4,10 +4,12 @@ public class Pais {
 
 	private String codigoPais;
 	private String nomePais;
-	
-	public Pais(String codigoPais, String nomePais){
+	private Medalhas medalha;
+
+	public Pais(String codigoPais, String nomePais) {
 		setCodigoPais(codigoPais);
 		setNomePais(nomePais);
+
 	}
 
 	public String getCodigoPais() {
@@ -25,15 +27,18 @@ public class Pais {
 	public void setNomePais(String nomePais) {
 		this.nomePais = nomePais;
 	}
-	
+
+	public void setMedalha() {
+		this.medalha = new Medalhas();
+	};
+
+	public Medalhas getMedalha() {
+		return this.medalha;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("%s - %s", codigoPais, nomePais);
 	}
-	
-	
-	
-	
-	
-	
+
 }
