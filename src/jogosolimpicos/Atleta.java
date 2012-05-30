@@ -30,6 +30,10 @@ public class Atleta {
 	}
 
 	// GETTERS
+	public String getCodPais() {
+		return codPais;
+	}
+
 	public void setDisciplinas(ListaLigada<Disciplina> disciplina) {
 		for (int i = 0; i < disciplina.size(); i++) {
 			if (!disc.contains(disciplina.get(i))) {
@@ -65,6 +69,9 @@ public class Atleta {
 	}
 
 	// SETTERS
+	public void setCodPais(String codPais) {
+		this.codPais = codPais;
+	}
 
 	public void setDisciplina(Disciplina disciplina) {
 		if (!disc.contains(disciplina)) {

@@ -7,6 +7,10 @@ public class Modalidade {
 	private String nome;
 	private ListaLigada<Disciplina> disc;
 
+	public ListaLigada<Disciplina> getDisc() {
+		return disc;
+	}
+
 	public Modalidade(String nome) {
 
 		setNome(nome);

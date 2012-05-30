@@ -1,8 +1,10 @@
 package jogosolimpicos;
 
+@SuppressWarnings("rawtypes")
 public class Resultados implements Comparable {
 
-	private Atleta atleta;
+	@SuppressWarnings("unused")
+	private Atleta atleta; // TODO WTF IS THIS?!?
 	private float resultado;
 
 	public Resultados(Atleta atleta, float resultado) {

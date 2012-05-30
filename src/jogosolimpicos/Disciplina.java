@@ -1,7 +1,5 @@
 package jogosolimpicos;
 
-import listaligada.ListaLigada;
-
 public class Disciplina {
 
 	private Modalidade mod;
@@ -33,9 +31,9 @@ public class Disciplina {
 
 	}
 
-	public String toString(){
-		
+	public String toString() {
+
 		return String.format("%s", nome);
 	}
-	
+
 }
