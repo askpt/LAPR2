@@ -1,8 +1,16 @@
 package jogosolimpicos;
 
 public class Resultados {
-	
-	float resultados;
+
+	private float resultados;
 	private Medalhas medalha;
+
+	public Resultados(Atleta atleta, float resultado) {
+
+	}
+
+	public Resultados(Equipa equipa, float resultado) {
+
+	}
 
 }
