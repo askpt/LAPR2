@@ -22,6 +22,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		
+		Teste i = new Teste("Teste");
 	}
 
 }
