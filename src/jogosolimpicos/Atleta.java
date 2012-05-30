@@ -10,30 +10,36 @@ public class Atleta {
 	private static int num;
 	private Pais pais;
 	private Modalidade mod;
-	private ListaLigada disc = new ListaLigada();
+	private Disciplina disciplina;
+	private ListaLigada<Disciplina> disc = new ListaLigada<Disciplina>();
 
-	public Atleta(String nome, Modalidade mod, Pais pais) {
-
-		this.numid = ++num;
+	public Atleta(String nome, Modalidade mod, Pais pais, Disciplina disciplina) {
+		setID();
+		setNome(nome);
+		setModalidade(mod);
+		setPais(pais);
+		setDisciplina(disciplina);
 	}
 
-	public void setNome(String nome) {
-
-		this.nome = nome;
+	public Atleta(String nome, Modalidade mod, Pais pais, ListaLigada<Disciplina> disciplina) {
+		setID();
+		setNome(nome);
+		setModalidade(mod);
+		setPais(pais);
+		setDisciplinas(disciplina);
 	}
 
-	public String getNome() {
-
-		return nome;
+	// GETTERS
+	public void setDisciplinas(ListaLigada<Disciplina> disciplina) {
+		for (int i = 0; i < disciplina.size(); i++) {
+			if (!disc.contains(disciplina.get(i))) {
+				disc.add(disciplina.get(i));
+			}
+		}
 	}
 
-	public Pais getPais() {
-
-		return pais;
-	}
-
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
 
 	public Modalidade getModalidade() {
@@ -41,26 +47,46 @@ public class Atleta {
 		return mod;
 	}
 
-	public void setModalidade(Modalidade mod) {
-
-		this.mod = mod;
+	public String getNome() {
+		return nome;
 	}
 
-	public void addDisciplina() {
-
+	public Pais getPais() {
+		return pais;
 	}
 
-	public String getCodPais() {
-		return codPais;
-	}
-
-	public void setCodPais(String codPais) {
-		this.codPais = codPais;
+	public ListaLigada<Disciplina> getDisciplinas() {
+		return disc;
 	}
 
 	public String toString() {
 
 		return String.format("%d: %s - %s", numid, nome, pais);
+	}
+
+	// SETTERS
+
+	public void setDisciplina(Disciplina disciplina) {
+		if (!disc.contains(disciplina)) {
+			disc.add(disciplina);
+		}
+	}
+
+	public void setID() {
+		this.numid = ++num;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public void setModalidade(Modalidade mod) {
+
+		this.mod = mod;
 	}
 
 }
