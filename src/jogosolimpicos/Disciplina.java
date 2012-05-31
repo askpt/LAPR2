@@ -1,10 +1,13 @@
 
 package jogosolimpicos;
 
+import listaligada.*;
+
 public class Disciplina {
 
-	private Modalidade	mod;
-	private String		nome;
+	private Modalidade			mod;
+	private String				nome;
+	private ListaLigada < Prova >	provas;
 
 	public Disciplina( String nome , Modalidade modalidade ) {
 
