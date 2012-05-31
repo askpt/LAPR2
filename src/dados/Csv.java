@@ -1,7 +1,7 @@
 package dados;
 
 import gui.*;
-
+import listaligada.*;
 import java.io.*;
 import java.util.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ import jogosolimpicos.*;
 @SuppressWarnings("serial")
 public class Csv extends JComponent implements Accessible {
 
-	public void importPais(Component janela) {
+	public void importPais(Component janela, ListaLigada<Pais> paises) {
 
 		try {
 
@@ -36,7 +36,7 @@ public class Csv extends JComponent implements Accessible {
 			in.nextLine();
 			while (in.hasNextLine()) {
 				String temp[] = in.nextLine().split(" ;");
-				Main.getPaises().add(new Pais(temp[0], temp[1]));
+				paises.add(new Pais(temp[0], temp[1]));
 			}
 			in.close();
 			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
@@ -49,7 +49,7 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
-	public void exportPais(Component janela) {
+	public void exportPais(Component janela, ListaLigada<Pais> paises) {
 
 		try {
 			JFileChooser fc = new JFileChooser();
@@ -61,8 +61,8 @@ public class Csv extends JComponent implements Accessible {
 			File ficheiro = fc.getSelectedFile();
 			Formatter out = new Formatter(ficheiro + ".csv");
 			out.format("Code ;Nation (NOC) ;\n");
-			for (int i = 0; i < Main.getPaises().size(); i++) {
-				out.format("%s ;%s ;\n", Main.getPaises().get(i).getCodigoPais(), Main.getPaises().get(i).getNomePais());
+			for (int i = 0; i < paises.size(); i++) {
+				out.format("%s ;%s ;\n", paises.get(i).getCodigoPais(), paises.get(i).getNomePais());
 			}
 			out.close();
 			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
