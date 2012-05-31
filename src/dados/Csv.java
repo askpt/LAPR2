@@ -13,7 +13,6 @@ import jogosolimpicos.*;
 @SuppressWarnings("serial")
 public class Csv extends JComponent implements Accessible {
 
-	@SuppressWarnings("unused")
 	public void importPais(Component janela) {
 
 		try {
@@ -22,6 +21,9 @@ public class Csv extends JComponent implements Accessible {
 			fc.addChoosableFileFilter(new CsvFilter());
 			fc.setAcceptAllFileFilterUsed(false);
 			int returnVal = fc.showOpenDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+
 			File ficheiro = fc.getSelectedFile();
 
 			Scanner in = new Scanner(ficheiro);
@@ -47,16 +49,17 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
-	@SuppressWarnings("unused")
-	public  void exportPais(Component janela) {
+	public void exportPais(Component janela) {
 
 		try {
 			JFileChooser fc = new JFileChooser();
 
 			fc.setFileFilter(new CsvFilter());
 			int returnVal = fc.showSaveDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
 			File ficheiro = fc.getSelectedFile();
-			Formatter out = new Formatter(ficheiro);
+			Formatter out = new Formatter(ficheiro + ".csv");
 			out.format("Code ;Nation (NOC) ;\n");
 			for (int i = 0; i < Main.getPaises().size(); i++) {
 				out.format("%s ;%s ;\n", Main.getPaises().get(i).getCodigoPais(), Main.getPaises().get(i).getNomePais());
@@ -79,6 +82,8 @@ public class Csv extends JComponent implements Accessible {
 			fc.addChoosableFileFilter(new CsvFilter());
 			fc.setAcceptAllFileFilterUsed(false);
 			int returnVal = fc.showOpenDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
 			File ficheiro = fc.getSelectedFile();
 
 			int ponto = ficheiro.getName().lastIndexOf(".");
