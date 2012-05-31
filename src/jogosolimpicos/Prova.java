@@ -13,17 +13,7 @@ public class Prova {
 
 	}
 
-	public void setJogosOlimpicos( JogosOlimpicos jogos ) {
-
-		this.jogos = jogos;
-	}
-
-	private void setDisciplina( Disciplina disc ) {
-
-		this.disc = disc;
-
-	}
-
+	// GETTERS
 	public JogosOlimpicos getJogosOlimpicos() {
 
 		return jogos;
@@ -36,7 +26,20 @@ public class Prova {
 
 	public String toString() {
 
-		return String.format( "%s, %s Games." , disc.getNome() , jogos.toString() );
+		return String.format( "%s, %s" , disc.getNome() , jogos.toString() );
+	}
+
+	// SETTERS
+
+	public void setJogosOlimpicos( JogosOlimpicos jogos ) {
+
+		this.jogos = jogos;
+	}
+
+	private void setDisciplina( Disciplina disc ) {
+
+		this.disc = disc;
+
 	}
 
 }

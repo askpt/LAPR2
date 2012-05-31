@@ -1,49 +1,55 @@
+
 package jogosolimpicos;
 
 import listaligada.*;
 
 public class Atleta {
 
-	private String nome;
-	private String codPais;
-	private int numid;
-	private static int num;
-	private Pais pais;
-	private Modalidade mod;
-	private Disciplina disciplina;
-	private ListaLigada<Disciplina> disc = new ListaLigada<Disciplina>();
+	private String				nome;
+	private String				codPais;
+	private int				numid;
+	private static int			num;
+	private Pais				pais;
+	private Modalidade			mod;
+	private Prova				prova;
+	private ListaLigada < Prova >	provas	= new ListaLigada < Prova >();
 
-	public Atleta(String nome, Modalidade mod, Pais pais, Disciplina disciplina) {
+	public Atleta( String nome , Modalidade mod , Pais pais , Prova prova ) {
+
 		setID();
-		setNome(nome);
-		setModalidade(mod);
-		setPais(pais);
-		setDisciplina(disciplina);
+		setNome( nome );
+		setModalidade( mod );
+		setPais( pais );
+		setProva( prova );
 	}
 
-	public Atleta(String nome, Modalidade mod, Pais pais, ListaLigada<Disciplina> disciplina) {
+	public Atleta( String nome , Modalidade mod , Pais pais , ListaLigada < Prova > provas ) {
+
 		setID();
-		setNome(nome);
-		setModalidade(mod);
-		setPais(pais);
-		setDisciplinas(disciplina);
+		setNome( nome );
+		setModalidade( mod );
+		setPais( pais );
+		setProvas( provas );
 	}
 
 	// GETTERS
 	public String getCodPais() {
+
 		return codPais;
 	}
 
-	public void setDisciplinas(ListaLigada<Disciplina> disciplina) {
-		for (int i = 0; i < disciplina.size(); i++) {
-			if (!disc.contains(disciplina.get(i))) {
-				disc.add(disciplina.get(i));
+	public void setProvas( ListaLigada < Prova > provas ) {
+
+		for ( int i = 0 ; i < this.provas.size() ; i++ ) {
+			if ( ! this.provas.contains( provas.get( i ) ) ) {
+				this.provas.add( provas.get( i ) );
 			}
 		}
 	}
 
-	public Disciplina getDisciplina() {
-		return disciplina;
+	public Prova getProva() {
+
+		return prova;
 	}
 
 	public Modalidade getModalidade() {
@@ -52,46 +58,54 @@ public class Atleta {
 	}
 
 	public String getNome() {
+
 		return nome;
 	}
 
 	public Pais getPais() {
+
 		return pais;
 	}
 
-	public ListaLigada<Disciplina> getDisciplinas() {
-		return disc;
+	public ListaLigada < Prova > getProvas() {
+
+		return provas;
 	}
 
 	public String toString() {
 
-		return String.format("%d: %s - %s", numid, nome, pais);
+		return String.format( "%d: %s - %s" , numid , nome , pais );
 	}
 
 	// SETTERS
-	public void setCodPais(String codPais) {
+	public void setCodPais( String codPais ) {
+
 		this.codPais = codPais;
 	}
 
-	public void setDisciplina(Disciplina disciplina) {
-		if (!disc.contains(disciplina)) {
-			disc.add(disciplina);
+	public void setProva( Prova prova ) {
+
+		if ( ! provas.contains( prova ) ) {
+			provas.add( prova );
 		}
 	}
 
 	public void setID() {
+
 		this.numid = ++num;
 	}
 
-	public void setNome(String nome) {
+	public void setNome( String nome ) {
+
 		this.nome = nome;
 	}
 
-	public void setPais(Pais pais) {
+	public void setPais( Pais pais ) {
+
 		this.pais = pais;
 	}
 
-	public void setModalidade(Modalidade mod) {
+	public void setModalidade( Modalidade mod ) {
 
 		this.mod = mod;
 	}
