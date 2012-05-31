@@ -1,3 +1,4 @@
+
 package gui;
 
 import java.awt.*;
@@ -5,14 +6,14 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import dados.Csv;
+import dados.*;
 
 public class Teste extends JFrame {
 
-	public Teste(String titulo) {
+	public Teste( String titulo ) {
 
-		super(titulo);
-		setLayout(new BorderLayout());
+		super( titulo );
+		setLayout( new BorderLayout() );
 
 		JMenuBar menuBar;
 		JMenu menu;
@@ -21,50 +22,53 @@ public class Teste extends JFrame {
 
 		menuBar = new JMenuBar();
 
-		menu = new JMenu("File");
-		menu.setMnemonic('F');
-		menuBar.add(menu);
+		menu = new JMenu( "File" );
+		menu.setMnemonic( 'F' );
+		menuBar.add( menu );
 
-		menuItem = new JMenuItem("Import Country", 'I');
-		menuItem.addActionListener(new ActionListener() {
+		menuItem = new JMenuItem( "Import Country" , 'I' );
+		menuItem.addActionListener( new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				csv.importPais(Teste.this);
+			public void actionPerformed( ActionEvent e ) {
+
+				csv.importPais( Teste.this );
 			}
-		});
-		menu.add(menuItem);
+		} );
+		menu.add( menuItem );
 
-		menuItem = new JMenuItem("Export Country", 'E');
-		menuItem.addActionListener(new ActionListener() {
+		menuItem = new JMenuItem( "Export Country" , 'E' );
+		menuItem.addActionListener( new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				csv.exportPais(Teste.this);
+			public void actionPerformed( ActionEvent e ) {
+
+				csv.exportPais( Teste.this );
 			}
-		});
+		} );
 
-		menu.add(menuItem);
+		menu.add( menuItem );
 
-		menuItem = new JMenuItem("List Country", 'L');
-		menuItem.addActionListener(new ActionListener() {
+		menuItem = new JMenuItem( "List Country" , 'L' );
+		menuItem.addActionListener( new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				for (int i = 0; i < Main.getPaises().size(); i++) {
-					System.out.println(Main.getPaises().get(i));
+			public void actionPerformed( ActionEvent e ) {
+
+				for ( int i = 0 ; i < Main.getPaises().size() ; i++ ) {
+					System.out.println( Main.getPaises().get( i ) );
 				}
 
 			}
-		});
+		} );
 
-		menu.add(menuItem);
+		menu.add( menuItem );
 
-		setJMenuBar(menuBar);
+		setJMenuBar( menuBar );
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(400, 300);
+		setDefaultCloseOperation( EXIT_ON_CLOSE );
+		setSize( 400 , 300 );
 		pack();
-		setResizable(true);
-		setLocationRelativeTo(null);
-		setVisible(true);
+		setResizable( true );
+		setLocationRelativeTo( null );
+		setVisible( true );
 	}
 }

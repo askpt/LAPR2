@@ -1,22 +1,24 @@
+
 package jogosolimpicos;
 
-import listaligada.ListaLigada;
+import listaligada.*;
 
 public class Modalidade {
 
-	private String nome;
-	private ListaLigada<Disciplina> disc;
+	private String					nome;
+	private ListaLigada < Disciplina >	disc;
 
-	public ListaLigada<Disciplina> getDisc() {
+	public Modalidade( String nome ) {
+
+		setNome( nome );
+	}
+
+	public ListaLigada < Disciplina > getDisc() {
+
 		return disc;
 	}
 
-	public Modalidade(String nome) {
-
-		setNome(nome);
-	}
-
-	public void setNome(String nome) {
+	public void setNome( String nome ) {
 
 		this.nome = nome;
 	}
@@ -24,5 +26,10 @@ public class Modalidade {
 	public String getNome() {
 
 		return nome;
+	}
+
+	public String toString() {
+
+		return String.format( "%s" , nome );
 	}
 }

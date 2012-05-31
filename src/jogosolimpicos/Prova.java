@@ -36,7 +36,7 @@ public class Prova {
 
 	public String toString() {
 
-		return String.format( "%s, %d Games." , disc.getNome() , jogos.getAno() , jogos.getCidade() );
+		return String.format( "%s, %s Games." , disc.getNome() , jogos.toString() );
 	}
 
 }
