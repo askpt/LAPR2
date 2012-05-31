@@ -1,17 +1,18 @@
+
 package jogosolimpicos;
 
 public class Disciplina {
 
-	private Modalidade mod;
-	private String nome;
+	private Modalidade	mod;
+	private String		nome;
 
-	public Disciplina() {
+	public Disciplina( String nome , Modalidade modalidade ) {
 
-		setModalidade(mod);
-		setNome(nome);
+		setNome( nome );
+		setModalidade( mod );
 	}
 
-	public void setNome(String nome) {
+	public void setNome( String nome ) {
 
 		this.nome = nome;
 	}
@@ -26,14 +27,15 @@ public class Disciplina {
 		return mod;
 	}
 
-	public void setModalidade(Modalidade mod) {
+	public void setModalidade( Modalidade mod ) {
+
 		this.mod = mod;
 
 	}
 
 	public String toString() {
 
-		return String.format("%s", nome);
+		return String.format( "%s" , nome );
 	}
 
 }
