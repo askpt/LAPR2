@@ -17,19 +17,27 @@ public class ProvaTempo extends Prova {
 
 		if ( tempo.matches( "^[0-9]{2}:[0-9]{2}:[0-9]{2}$" ) ) {
 			String temp[] = tempo.split( ":" );
-			tempoSec = Float.parseFloat( temp[ 0 ] ) * 3600 + Float.parseFloat( temp[ 1 ] ) * 60 + Float.parseFloat( temp[ 2 ] );
+			setTempoSec(Float.parseFloat( temp[ 0 ] ) * 3600 + Float.parseFloat( temp[ 1 ] ) * 60 + Float.parseFloat( temp[ 2 ] ));
 		} else if ( tempo.matches( "^[0-9]{1,2}:[0-9]{2}(.[0-9]{1,})?$" ) ) {
 			String temp[] = tempo.split( ":" );
-			tempoSec = Float.parseFloat( temp[ 0 ] ) * 60 + Float.parseFloat( temp[ 1 ] );
+			setTempoSec(Float.parseFloat( temp[ 0 ] ) * 60 + Float.parseFloat( temp[ 1 ] ));
 
 		} else {
-			tempoSec = Float.parseFloat( tempo );
+			setTempoSec(Float.parseFloat( tempo ));
 		}
 	}
 
 	private void setTempo( String tempo ) {
 
 		this.tempo = tempo;
+	}
+
+	public float getTempoSec() {
+		return tempoSec;
+	}
+
+	public void setTempoSec(float tempoSec) {
+		this.tempoSec = tempoSec;
 	}
 
 }

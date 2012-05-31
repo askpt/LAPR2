@@ -1,6 +1,5 @@
 package dados;
 
-import gui.*;
 import listaligada.*;
 import java.io.*;
 import java.util.*;
@@ -74,7 +73,7 @@ public class Csv extends JComponent implements Accessible {
 	}
 
 	@SuppressWarnings("unused")
-	public void importProvas(Component janela) {
+	public void importProvas(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Prova> provas) {
 
 		try {
 
@@ -93,15 +92,15 @@ public class Csv extends JComponent implements Accessible {
 			String genero = tempPrin[2];
 			int pos = -1;
 
-			for (int i = 0; i < Main.getModalidades().size(); i++) {
-				if (modalidade.equals(Main.getModalidades().get(i))) {
+			for (int i = 0; i < modalidades.size(); i++) {
+				if (modalidade.equals(modalidades.get(i))) {
 					pos = i;
 				}
 			}
 
 			if (pos == -1) {
-				Main.getModalidades().add(new Modalidade(modalidade));
-				pos = Main.getModalidades().size();
+				modalidades.add(new Modalidade(modalidade));
+				pos = modalidades.size() - 1;
 			}
 
 			Scanner in = new Scanner(ficheiro);

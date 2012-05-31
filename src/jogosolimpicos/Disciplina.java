@@ -1,21 +1,20 @@
-
 package jogosolimpicos;
 
 import listaligada.*;
 
 public class Disciplina {
 
-	private Modalidade			mod;
-	private String				nome;
-	private ListaLigada < Prova >	provas;
+	private Modalidade mod;
+	private String nome;
+	private ListaLigada<Prova> provas;
 
-	public Disciplina( String nome , Modalidade modalidade ) {
+	public Disciplina(String nome, Modalidade modalidade) {
 
-		setNome( nome );
-		setModalidade( mod );
+		setNome(nome);
+		setModalidade(mod);
 	}
 
-	public void setNome( String nome ) {
+	public void setNome(String nome) {
 
 		this.nome = nome;
 	}
@@ -30,7 +29,7 @@ public class Disciplina {
 		return mod;
 	}
 
-	public void setModalidade( Modalidade mod ) {
+	public void setModalidade(Modalidade mod) {
 
 		this.mod = mod;
 
@@ -38,7 +37,11 @@ public class Disciplina {
 
 	public String toString() {
 
-		return String.format( "%s" , nome );
+		return String.format("%s", nome);
+	}
+
+	public ListaLigada<Prova> getProvas() {
+		return provas;
 	}
 
 }
