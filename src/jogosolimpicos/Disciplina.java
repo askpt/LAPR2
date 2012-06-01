@@ -2,13 +2,13 @@ package jogosolimpicos;
 
 public class Disciplina {
 
-	private String mod;
+	private Modalidade mod;
 	private String nome;
 	private boolean tipoDisc; // true = coletivo false = individual
 	private int genero; // 0 = masculino 1 = feminino 2 = both sem mixed masc
 						// 3 = both sem mixed fem 4 = mixed
 
-	public Disciplina(String nome, String modalidade, boolean tipoDisc, int genero) {
+	public Disciplina(String nome, Modalidade modalidade, boolean tipoDisc, int genero) {
 
 		setNome(nome);
 		setModalidade(modalidade);
@@ -17,7 +17,7 @@ public class Disciplina {
 	}
 
 	public Disciplina() {
-
+		setGenero(-1);
 	}
 
 	public void setGenero(int genero) {
@@ -51,14 +51,15 @@ public class Disciplina {
 		return nome;
 	}
 
-	public String getModalidade() {
+	public Modalidade getModalidade() {
 
 		return mod;
 	}
 
-	public void setModalidade(String mod) {
+	public void setModalidade(Modalidade mod) {
 
 		this.mod = mod;
+		mod.getDisc().add(this);
 
 	}
 
@@ -72,7 +73,7 @@ public class Disciplina {
 	}
 
 	public boolean equals(Disciplina disc) {
-		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.getModalidade().equalsIgnoreCase(disc.getModalidade()) && this.genero == disc.getGenero());
+		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.getModalidade().equals(disc.getModalidade()) && this.genero == disc.getGenero());
 	}
 
 }

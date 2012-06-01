@@ -74,6 +74,8 @@ public class Csv extends JComponent implements Accessible {
 
 	public void importDisc(Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
 
+		// diretamente na lista disciplina
+
 		try {
 
 			JFileChooser fc = new JFileChooser();
@@ -95,86 +97,75 @@ public class Csv extends JComponent implements Accessible {
 			// Disciplina(String nome, Modalidade modalidade, boolean tipoDisc,
 			// int genero)
 
+			// import modalidades
 			in.nextLine();
 			while (in.hasNextLine()) {
-				String temp[] = in.nextLine().split(";");
-				Disciplina tempDisc = new Disciplina("teste", "teste", false, -1);
-				Disciplina tempDisc2 = new Disciplina("teste", "teste", false, -1);
+				String tempModal[] = in.nextLine().split(";");
+				boolean temModal = false;
+
+				for (int i = 0; i < modalidades.size(); i++) {
+					if (tempModal[0].equals(modalidades.get(i).getNome()))
+						temModal = true;
+				}
+
+				if (!temModal)
+					modalidades.add(new Modalidade(tempModal[0]));
+			}
+			in.close();
+
+			// import disciplinas
+			Scanner in2 = new Scanner(ficheiro);
+			in2.nextLine();
+			while (in2.hasNextLine()) {
+				String temp[] = in2.nextLine().split(";");
+				Disciplina tempDisc = new Disciplina();
+				Disciplina tempDisc2 = new Disciplina();
+				int i = 0;
+
+				for (; i < modalidades.size(); i++) {
+					if (temp[0].equals(modalidades.get(i).getNome()))
+						break;
+				}
 
 				if (temp[2].equalsIgnoreCase("Individual")) {
 
 					if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], "a", false, 2);
-						tempDisc2 = new Disciplina(temp[1], temp[0], false, 3);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2);
+						tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3);
 						disciplina.add(tempDisc);
 						disciplina.add(tempDisc2);
 
 					} else if (temp[3].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], "a", false, 0);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0);
 						disciplina.add(tempDisc);
 					} else if (temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], "a", false, 1);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1);
 						disciplina.add(tempDisc);
 					}
 					if (temp.length == 6 && temp[5].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], "a", false, 4);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4);
 						disciplina.add(tempDisc);
 					}
 				} else if (temp[2].equalsIgnoreCase("Team")) {
 					if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], temp[0], true, 2);
-						tempDisc2 = new Disciplina(temp[1], temp[0], true, 3);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2);
+						tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3);
 						disciplina.add(tempDisc);
 						disciplina.add(tempDisc2);
 					} else if (temp[3].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], temp[0], true, 0);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0);
 						disciplina.add(tempDisc);
 					} else if (temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], temp[0], true, 1);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1);
 						disciplina.add(tempDisc);
 					}
 					if (temp.length == 6 && temp[5].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], temp[0], true, 4);
+						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4);
 						disciplina.add(tempDisc);
 					}
 				}
-
-				System.out.println(temp[0]);
-
-				boolean controlModal = false;
-				boolean controlDisc = false;
-				boolean controlDisc1 = false;
-				if (tempDisc2.getNome().equals("teste"))
-					controlDisc1 = true;
-				int i = 0;
-
-				for (; !controlModal && i < modalidades.size(); i++) {
-					for (int j = 0; j < modalidades.get(i).getDisc().size(); j++) {
-						if (modalidades.get(i).getNome().equalsIgnoreCase(temp[0])) {
-							controlModal = true;
-							if (modalidades.get(i).getDisc().get(j).equals(tempDisc))
-								controlDisc = true;
-							if (modalidades.get(i).getDisc().get(j).equals(tempDisc) && controlDisc1 == false)
-								controlDisc1 = true;
-						}
-					}
-
-				}
-				if (!controlModal) {
-					modalidades.add(new Modalidade(temp[0]));
-				}
-				if (!controlDisc && modalidades.size() == 0) {
-					modalidades.get(i).getDisc().add(tempDisc);
-				} else
-					modalidades.get(i - 1).getDisc().add(tempDisc);
-
-				if (!controlDisc1 && modalidades.size() == 0) {
-					modalidades.get(i).getDisc().add(tempDisc2);
-				} else
-					modalidades.get(i - 1).getDisc().add(tempDisc2);
-
 			}
-			in.close();
+			in2.close();
 			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
