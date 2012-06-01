@@ -98,42 +98,80 @@ public class Csv extends JComponent implements Accessible {
 			in.nextLine();
 			while (in.hasNextLine()) {
 				String temp[] = in.nextLine().split(";");
+				Disciplina tempDisc = new Disciplina("teste", "teste", false, -1);
+				Disciplina tempDisc2 = new Disciplina("teste", "teste", false, -1);
 
 				if (temp[2].equalsIgnoreCase("Individual")) {
-					if (temp[5].equalsIgnoreCase("X"))
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), false, 4));
-					else if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")){
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), false, 2));
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), false, 3));
-						
+
+					if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], "a", false, 2);
+						tempDisc2 = new Disciplina(temp[1], temp[0], false, 3);
+						disciplina.add(tempDisc);
+						disciplina.add(tempDisc2);
+
+					} else if (temp[3].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], "a", false, 0);
+						disciplina.add(tempDisc);
+					} else if (temp[4].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], "a", false, 1);
+						disciplina.add(tempDisc);
 					}
-					else if (temp[3].equalsIgnoreCase("X"))
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), false, 0));
-					else if (temp[4].equalsIgnoreCase("X"))
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), false, 1));
+					if (temp.length == 6 && temp[5].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], "a", false, 4);
+						disciplina.add(tempDisc);
+					}
 				} else if (temp[2].equalsIgnoreCase("Team")) {
-					if (temp[5].equalsIgnoreCase("X"))
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), true, 4));
-					else if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")){
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), true, 2));
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), true, 3));
-						}
-					else if (temp[3].equalsIgnoreCase("X"))
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), true, 0));
-					else if (temp[4].equalsIgnoreCase("X"))
-						disciplina.add(new Disciplina(temp[1], new Modalidade(temp[0]), true, 1));
+					if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], temp[0], true, 2);
+						tempDisc2 = new Disciplina(temp[1], temp[0], true, 3);
+						disciplina.add(tempDisc);
+						disciplina.add(tempDisc2);
+					} else if (temp[3].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], temp[0], true, 0);
+						disciplina.add(tempDisc);
+					} else if (temp[4].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], temp[0], true, 1);
+						disciplina.add(tempDisc);
+					}
+					if (temp.length == 6 && temp[5].equalsIgnoreCase("X")) {
+						tempDisc = new Disciplina(temp[1], temp[0], true, 4);
+						disciplina.add(tempDisc);
+					}
 				}
+
+				System.out.println(temp[0]);
 
 				boolean controlModal = false;
-				boolean controlProv = false;
+				boolean controlDisc = false;
+				boolean controlDisc1 = false;
+				if (tempDisc2.getNome().equals("teste"))
+					controlDisc1 = true;
+				int i = 0;
 
-				for (int i = 0; i < modalidades.size(); i++) {
-					for (int j = 0; j < temp.length; j++) {
-						if (modalidades.get(i).getNome().equalsIgnoreCase(temp[0]))
-					 if (modalidades.get(i).getDisc().get(j).getNome().equalsIgnoreCase(temp[1]))
+				for (; !controlModal && i < modalidades.size(); i++) {
+					for (int j = 0; j < modalidades.get(i).getDisc().size(); j++) {
+						if (modalidades.get(i).getNome().equalsIgnoreCase(temp[0])) {
+							controlModal = true;
+							if (modalidades.get(i).getDisc().get(j).equals(tempDisc))
+								controlDisc = true;
+							if (modalidades.get(i).getDisc().get(j).equals(tempDisc) && controlDisc1 == false)
+								controlDisc1 = true;
+						}
 					}
-					
+
 				}
+				if (!controlModal) {
+					modalidades.add(new Modalidade(temp[0]));
+				}
+				if (!controlDisc && modalidades.size() == 0) {
+					modalidades.get(i).getDisc().add(tempDisc);
+				} else
+					modalidades.get(i - 1).getDisc().add(tempDisc);
+
+				if (!controlDisc1 && modalidades.size() == 0) {
+					modalidades.get(i).getDisc().add(tempDisc2);
+				} else
+					modalidades.get(i - 1).getDisc().add(tempDisc2);
 
 			}
 			in.close();
@@ -143,6 +181,7 @@ public class Csv extends JComponent implements Accessible {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			exc.printStackTrace();
 		}
 
 	}

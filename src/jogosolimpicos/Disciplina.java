@@ -2,18 +2,22 @@ package jogosolimpicos;
 
 public class Disciplina {
 
-	private Modalidade mod;
+	private String mod;
 	private String nome;
 	private boolean tipoDisc; // true = coletivo false = individual
 	private int genero; // 0 = masculino 1 = feminino 2 = both sem mixed masc
 						// 3 = both sem mixed fem 4 = mixed
 
-	public Disciplina(String nome, Modalidade modalidade, boolean tipoDisc, int genero) {
+	public Disciplina(String nome, String modalidade, boolean tipoDisc, int genero) {
 
 		setNome(nome);
-		setModalidade(mod);
+		setModalidade(modalidade);
 		setTipoDisc(tipoDisc);
 		setGenero(genero);
+	}
+
+	public Disciplina() {
+
 	}
 
 	public void setGenero(int genero) {
@@ -47,12 +51,12 @@ public class Disciplina {
 		return nome;
 	}
 
-	public Modalidade getModalidade() {
+	public String getModalidade() {
 
 		return mod;
 	}
 
-	public void setModalidade(Modalidade mod) {
+	public void setModalidade(String mod) {
 
 		this.mod = mod;
 
@@ -63,8 +67,12 @@ public class Disciplina {
 		return String.format("%s", nome);
 	}
 
+	public String toStringTest() {
+		return String.format("%s - %s - %s - %d", mod, nome, tipoDisc, genero);
+	}
+
 	public boolean equals(Disciplina disc) {
-		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.mod.getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.genero == disc.getGenero());
+		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.getModalidade().equalsIgnoreCase(disc.getModalidade()) && this.genero == disc.getGenero());
 	}
 
 }

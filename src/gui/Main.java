@@ -9,6 +9,7 @@ public class Main {
 	private static ListaLigada<Pais> paises = new ListaLigada<Pais>();
 	private static ListaLigada<Modalidade> modalidades = new ListaLigada<Modalidade>();
 	private static ListaLigada<Prova> provas = new ListaLigada<Prova>();
+	private static ListaLigada<Disciplina> disciplinas = new ListaLigada<Disciplina>();
 	public static Teste i = new Teste("Teste");
 
 	public static ListaLigada<Modalidade> getModalidades() {
@@ -29,6 +30,10 @@ public class Main {
 
 	public static void main(String[] args) {
 
+	}
+
+	public static ListaLigada<Disciplina> getDisciplinas() {
+		return disciplinas;
 	}
 
 }

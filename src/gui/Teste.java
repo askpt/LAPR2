@@ -62,6 +62,36 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
+		menuItem = new JMenuItem("Import Disciplines", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				csv.importDisc(Teste.this, Main.getDisciplinas(), Main.getModalidades());
+			}
+		});
+
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("List Disciplines", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				for (int i = 0; i < Main.getDisciplinas().size(); i++) {
+					System.out.println(Main.getDisciplinas().get(i).toStringTest());
+				}
+
+				for (int i = 0; i < Main.getModalidades().size(); i++) {
+					System.out.println(Main.getModalidades().get(i).toStringTest());
+				}
+
+			}
+		});
+
+		menu.add(menuItem);
+
 		setJMenuBar(menuBar);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
