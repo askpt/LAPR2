@@ -389,15 +389,15 @@ public class Csv extends JComponent implements Accessible {
 				String nomeModal = modalidades.get(i).getNome();
 				String nomeDisc = "";
 				String tipo = "";
-				String men = "";
-				String women = "";
-				String mixed = "";
 				String typeClass = "";
 				String order = "";
 
 				ListaLigada<Disciplina> discTemp = modalidades.get(i).getDisc();
 				for (int j = 0; j < discTemp.size(); j++) {
 					nomeDisc = discTemp.get(j).getNome();
+					String men = "";
+					String women = "";
+					String mixed = "";
 					if (discTemp.get(j).getTipoMod())
 						tipo = "Team";
 					else
@@ -416,23 +416,23 @@ public class Csv extends JComponent implements Accessible {
 						typeClass = "rank";
 					if (discTemp.get(j).getGenero() == 0)
 						men = "X";
-					if (discTemp.get(j).getGenero() == 1)
+					else if (discTemp.get(j).getGenero() == 1)
 						women = "X";
-					if (discTemp.get(j).getGenero() == 2)
+					else if (discTemp.get(j).getGenero() == 2)
 						mixed = "X";
 
-					for (int k = j; k < discTemp.size(); k++) {
+					for (int k = j + 1; k < discTemp.size(); k++) {
 						if (discTemp.get(j).equals(discTemp.get(k))) {
 							if (discTemp.get(k).getGenero() == 0)
 								men = "X";
-							if (discTemp.get(k).getGenero() == 1)
+							else if (discTemp.get(k).getGenero() == 1)
 								women = "X";
-							if (discTemp.get(k).getGenero() == 2)
+							else if (discTemp.get(k).getGenero() == 2)
 								mixed = "X";
 							discTemp.remove(k);
+							k--;
 						}
 					}
-					// discTemp.remove(j);
 					out.format("%s;%s;%s;%s;%s;%s;%s;%s\n", nomeModal, nomeDisc, tipo, men, women, mixed, typeClass, order);
 				}
 
