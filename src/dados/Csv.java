@@ -118,8 +118,8 @@ public class Csv extends JComponent implements Accessible {
 			in2.nextLine();
 			while (in2.hasNextLine()) {
 				String temp[] = in2.nextLine().split(";");
-				Disciplina tempDisc = new Disciplina();
-				Disciplina tempDisc2 = new Disciplina();
+				Disciplina tempDisc = new Disciplina("temp");
+				Disciplina tempDisc2 = new Disciplina("temp");
 				int i = 0;
 
 				for (; i < modalidades.size(); i++) {
@@ -130,40 +130,231 @@ public class Csv extends JComponent implements Accessible {
 				if (temp[2].equalsIgnoreCase("Individual")) {
 
 					if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2);
-						tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3);
-						disciplina.add(tempDisc);
-						disciplina.add(tempDisc2);
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, true, 0);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, true, 1);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, true, 2);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, true, 3);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, false, 0);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, false, 1);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, false, 2);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 2, false, 3);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), false, 3, false, 3);
+							}
+
+						}
 
 					} else if (temp[3].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0);
-						disciplina.add(tempDisc);
+
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 0, false, 3);
+							}
+
+						}
+
 					} else if (temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1);
-						disciplina.add(tempDisc);
+
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 1, false, 3);
+							}
+
+						}
 					}
 					if (temp.length == 6 && temp[5].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4);
-						disciplina.add(tempDisc);
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), false, 4, false, 3);
+							}
+
+						}
 					}
 				} else if (temp[2].equalsIgnoreCase("Team")) {
 					if (temp[3].equalsIgnoreCase("X") && temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2);
-						tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3);
-						disciplina.add(tempDisc);
-						disciplina.add(tempDisc2);
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, true, 0);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, true, 1);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, true, 2);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, true, 3);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, false, 0);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, false, 1);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, false, 2);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 2, false, 3);
+								tempDisc2 = new Disciplina(temp[1], modalidades.get(i), true, 3, false, 3);
+							}
+
+						}
+
 					} else if (temp[3].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0);
-						disciplina.add(tempDisc);
+
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 0, false, 3);
+							}
+
+						}
+
 					} else if (temp[4].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1);
-						disciplina.add(tempDisc);
+
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 1, false, 3);
+							}
+
+						}
 					}
 					if (temp.length == 6 && temp[5].equalsIgnoreCase("X")) {
-						tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4);
-						disciplina.add(tempDisc);
+						if (temp[7].equalsIgnoreCase("H")) {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, true, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, true, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, true, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, true, 3);
+							}
+
+						} else {
+							if (temp[6].equalsIgnoreCase("m, ft")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, false, 0);
+							} else if (temp[6].equalsIgnoreCase("time")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, false, 1);
+							} else if (temp[6].equalsIgnoreCase("points")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, false, 2);
+							} else if (temp[6].equalsIgnoreCase("rank")) {
+								tempDisc = new Disciplina(temp[1], modalidades.get(i), true, 4, false, 3);
+							}
+
+						}
 					}
 				}
+
+				disciplina.add(tempDisc);
+				if (!tempDisc2.getNome().equals("temp"))
+					disciplina.add(tempDisc2);
 			}
 			in2.close();
 			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);

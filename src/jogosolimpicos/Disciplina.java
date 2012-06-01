@@ -20,7 +20,8 @@ public class Disciplina {
 		setOrdenacao(ordenacao);
 	}
 
-	public Disciplina() {
+	public Disciplina(String nome) {
+		setNome(nome);
 		setGenero(-1);
 	}
 
@@ -67,19 +68,6 @@ public class Disciplina {
 
 	}
 
-	public String toString() {
-
-		return String.format("%s", nome);
-	}
-
-	public String toStringTest() {
-		return String.format("%s - %s - %s - %d", mod, nome, tipoDisc, genero);
-	}
-
-	public boolean equals(Disciplina disc) {
-		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.getModalidade().equals(disc.getModalidade()) && this.genero == disc.getGenero());
-	}
-
 	public boolean isOrdenacao() {
 		return ordenacao;
 	}
@@ -94,6 +82,19 @@ public class Disciplina {
 
 	public void setTipoClass(int tipoClass) {
 		this.tipoClass = tipoClass;
+	}
+
+	public String toString() {
+
+		return String.format("%s", nome);
+	}
+
+	public String toStringTest() {
+		return String.format("%s - %s - %s - %d - %d - %s", mod, nome, tipoDisc, genero, tipoClass, ordenacao);
+	}
+
+	public boolean equals(Disciplina disc) {
+		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.getModalidade().equals(disc.getModalidade()) && this.genero == disc.getGenero());
 	}
 
 }
