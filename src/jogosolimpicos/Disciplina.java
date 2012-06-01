@@ -5,8 +5,7 @@ public class Disciplina {
 	private Modalidade mod;
 	private String nome;
 	private boolean tipoDisc; // true = coletivo false = individual
-	private int genero; // 0 = masculino 1 = feminino 2 = both sem mixed masc
-						// 3 = both sem mixed fem 4 = mixed
+	private int genero; // 0 = masculino 1 = feminino 3 = mixed
 	private boolean ordenacao; // true = maior false = menor
 	private int tipoClass; // 0 - distancia 1 = tempo 2 = pontos 3 = rank
 
@@ -94,7 +93,7 @@ public class Disciplina {
 	}
 
 	public boolean equals(Disciplina disc) {
-		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.getModalidade().equals(disc.getModalidade()) && this.genero == disc.getGenero());
+		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.genero == disc.getGenero() && this.ordenacao == disc.getOrdenacao() && this.tipoClass == disc.getTipoClass());
 	}
 
 }

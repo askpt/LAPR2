@@ -73,6 +73,19 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
+		menuItem = new JMenuItem("Export Disciplines", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				csv.exportDisciplina(Teste.this, Main.getModalidades());
+
+			}
+		});
+
+		menu.add(menuItem);
+
 		menuItem = new JMenuItem("List Disciplines", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
