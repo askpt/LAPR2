@@ -1,17 +1,39 @@
 package jogosolimpicos;
 
-import listaligada.*;
-
 public class Disciplina {
 
 	private Modalidade mod;
 	private String nome;
-	private ListaLigada<Prova> provas;
+	private boolean tipoDisc;
+	private int genero;
 
-	public Disciplina(String nome, Modalidade modalidade) {
+	public Disciplina(String nome, Modalidade modalidade, boolean tipoDisc, int genero) {
 
 		setNome(nome);
 		setModalidade(mod);
+		setTipoDisc(tipoDisc);
+		setGenero(genero);
+	}
+
+	public void setGenero(int genero) {
+
+		this.genero = genero;
+	}
+
+	public void setTipoDisc(boolean tipoDisc) {
+
+		this.tipoDisc = tipoDisc;
+
+	}
+
+	public int getGenero() {
+
+		return genero;
+	}
+
+	public boolean getTipoMod() {
+
+		return tipoDisc;
 	}
 
 	public void setNome(String nome) {
@@ -38,10 +60,6 @@ public class Disciplina {
 	public String toString() {
 
 		return String.format("%s", nome);
-	}
-
-	public ListaLigada<Prova> getProvas() {
-		return provas;
 	}
 
 }

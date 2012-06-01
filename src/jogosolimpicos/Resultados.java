@@ -4,10 +4,10 @@ package jogosolimpicos;
 public class Resultados implements Comparable {
 
 	@SuppressWarnings("unused")
-	private Atleta atleta; // TODO WTF IS THIS?!?
+	private int idAtleta;
 	private float resultado;
 
-	public Resultados(Atleta atleta, float resultado) {
+	public Resultados(int idAtleta, float resultado) {
 
 	}
 
