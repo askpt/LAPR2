@@ -68,7 +68,7 @@ public class Disciplina {
 
 	}
 
-	public boolean isOrdenacao() {
+	public boolean getOrdenacao() {
 		return ordenacao;
 	}
 

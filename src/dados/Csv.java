@@ -368,6 +368,59 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	public void exportDisciplina(Component janela, ListaLigada<Modalidade> modalidades) {
+
+		try {
+			JFileChooser fc = new JFileChooser();
+
+			fc.setFileFilter(new CsvFilter());
+			int returnVal = fc.showSaveDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+			File ficheiro = fc.getSelectedFile();
+			Formatter out = new Formatter(ficheiro + ".csv");
+			out.format("Sport;Discipline;Type;Men;Women;Mixed;Type;Order\n");
+			for (int i = 0; i < modalidades.size(); i++) {
+				String nomeModal = modalidades.get(i).getNome();
+				String nomeDisc = null;
+				String tipo = null;
+				String men = null;
+				String women = null;
+				String mixed = null;
+				String typeClass = null;
+				String order = null;
+				for (int j = 0; j < modalidades.get(i).getDisc().size(); j++) {
+					nomeDisc = modalidades.get(i).getDisc().get(j).getNome();
+					if (modalidades.get(i).getDisc().get(j).getTipoMod())
+						tipo = "Team";
+					else
+						tipo = "Individual";
+					if (modalidades.get(i).getDisc().get(j).getOrdenacao())
+						order = "H";
+					else
+						order = "L";
+					if (modalidades.get(i).getDisc().get(j).getTipoClass() == 0)
+						typeClass = "m, ft";
+					else if (modalidades.get(i).getDisc().get(j).getTipoClass() == 1)
+						typeClass = "time";
+					else if (modalidades.get(i).getDisc().get(j).getTipoClass() == 2)
+						typeClass = "points";
+					else if (modalidades.get(i).getDisc().get(j).getTipoClass() == 3)
+						typeClass = "rank";
+
+				}
+
+				out.format("%s;%s ;%s;%s;%s;%s;%s;%s\n", nomeModal, nomeDisc, tipo, men, women, mixed, typeClass, order);
+			}
+			out.close();
+			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
+
+		} catch (FileNotFoundException exc) {
+			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
 	@SuppressWarnings("unused")
 	public void importProvas(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Prova> provas) {
 		// TODO falta acabar
