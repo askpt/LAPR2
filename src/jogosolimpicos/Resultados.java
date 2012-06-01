@@ -1,43 +1,49 @@
+
 package jogosolimpicos;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings ("rawtypes" )
 public class Resultados implements Comparable {
 
-	@SuppressWarnings("unused")
-	private int idAtleta;
-	private float resultado;
+	@SuppressWarnings ("unused" )
+	// private int idAtleta;
+	private float	resultado;
 
-	public Resultados(int idAtleta, float resultado) {
+	public Resultados( float resultado ) {
 
-		setIdAtleta(idAtleta);
-		setResultados(resultado);
+		setResultados( resultado );
 
 	}
 
-	public void setIdAtleta(int idAtleta) {
-		this.idAtleta = idAtleta;
-	}
-
-	public int getIdAtleta() {
-
-		return idAtleta;
-	}
+	/**
+	 * public void setIdAtleta(int idAtleta) {
+	 * this.idAtleta = idAtleta;
+	 * }
+	 * 
+	 * public int getIdAtleta() {
+	 * 
+	 * return idAtleta;
+	 * }
+	 */
 
 	public float getResultado() {
+
 		return resultado;
 	}
 
-	public void setResultados(float resultado) {
+	public void setResultados( float resultado ) {
+
 		this.resultado = resultado;
 	}
 
 	@Override
-	public int compareTo(Object outro) {
-		return (int) (this.getResultado() - ((Resultados) outro).getResultado());
+	public int compareTo( Object outro ) {
+
+		return ( int ) ( this.getResultado() - ( ( Resultados ) outro ).getResultado() );
 	}
 
 	@Override
 	public String toString() {
-		return String.format("%.2f", resultado);
+
+		return String.format( "%.2f" , resultado );
 	}
 }
