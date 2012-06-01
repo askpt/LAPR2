@@ -31,6 +31,7 @@ public class Modalidade {
 	public String toString() {
 
 		return String.format("%s", this.nome);
+
 	}
 
 	public String toStringTest() {

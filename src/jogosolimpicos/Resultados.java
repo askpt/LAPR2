@@ -9,6 +9,18 @@ public class Resultados implements Comparable {
 
 	public Resultados(int idAtleta, float resultado) {
 
+		setIdAtleta(idAtleta);
+		setResultados(resultado);
+
+	}
+
+	public void setIdAtleta(int idAtleta) {
+		this.idAtleta = idAtleta;
+	}
+
+	public int getIdAtleta() {
+
+		return idAtleta;
 	}
 
 	public float getResultado() {

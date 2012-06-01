@@ -24,7 +24,7 @@ public class ProvaDistancia extends Prova {
 		return distancia;
 	}
 
-	public void ordenarDes() {
+	public void ordenar() {
 		for (int i = 0; i < resultado.size() - 1; i++) {
 			for (int j = i; j < resultado.size(); j++) {
 				if (resultado.get(i).compareTo(resultado.get(j)) < 0) {
@@ -34,6 +34,17 @@ public class ProvaDistancia extends Prova {
 				}
 			}
 		}
+	}
+
+	public void atribuirMedalhasAtleta(ListaLigada<Atleta> atleta, ListaLigada<Pais> pais) {
+
+		int atletaOuro = resultado.get(0).getIdAtleta();
+		int atletaPrata = resultado.get(1).getIdAtleta();
+		int atletaBronze = resultado.get(2).getIdAtleta();
+		int iOuro = 0;
+		int iPrata = 0;
+		int iBronze = 0;
+
 	}
 
 }

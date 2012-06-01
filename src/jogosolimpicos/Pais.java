@@ -11,7 +11,6 @@ public class Pais implements Comparable {
 	private String codigoPais;
 	private String nomePais;
 	private Medalhas medalha;
-	private ListaLigada<Medalhas> medalhas = new ListaLigada<Medalhas>();
 	private ListaLigada<Medalhas> medalProva = new ListaLigada<Medalhas>();
 
 	/**
@@ -91,7 +90,7 @@ public class Pais implements Comparable {
 
 	public ListaLigada<Medalhas> getMedalModal() {
 
-		return medalhas;
+		return medalProva;
 	}
 
 	@Override

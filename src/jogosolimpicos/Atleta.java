@@ -11,17 +11,22 @@ public class Atleta {
 	private Pais pais;
 	private Modalidade mod;
 	private ListaLigada<Prova> provas = new ListaLigada<Prova>();
+	private boolean equipa = false;
+	private Medalhas medalha;
 
-	public Atleta(String nome, Modalidade mod, Pais pais, Prova prova) {
+	public Atleta(String nome, Modalidade mod, Pais pais, Prova prova, boolean equipa) {
 
 		setID();
 		setNome(nome);
 		setModalidade(mod);
 		setPais(pais);
 		addProva(prova);
+		setEquipa(equipa);
+		medalha = new Medalhas();
 	}
 
-	// public Atleta( String nome , Modalidade mod , Pais pais , ListaLigada <
+	// public Atleta( String nome , Modalidade mod , Pais pais , ListaLigada
+	// <
 	// Prova > provas ) {
 	//
 	// setID();
@@ -84,7 +89,12 @@ public class Atleta {
 		}
 	}
 
-	public void setID() {
+	public int getID() {
+
+		return numid;
+	}
+
+	private void setID() {
 
 		this.numid = ++num;
 	}
@@ -102,6 +112,21 @@ public class Atleta {
 	public void setModalidade(Modalidade mod) {
 
 		this.mod = mod;
+	}
+
+	public void setEquipa(boolean equipa) {
+		this.equipa = equipa;
+
+	}
+
+	public void setMedalha(Medalhas medalha) {
+
+		this.medalha = medalha;
+	}
+
+	public Medalhas getMedalha() {
+
+		return medalha;
 	}
 
 }
