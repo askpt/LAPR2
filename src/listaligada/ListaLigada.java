@@ -1,3 +1,4 @@
+
 package listaligada;
 
 /**
@@ -8,17 +9,19 @@ package listaligada;
  * 
  */
 
-public class ListaLigada<E> {
-	private No<E> cabeca = null;
-	private No<E> cauda = null;
-	private No<E> temp = null;
-	private int contador = 0;
+public class ListaLigada < E > {
+
+	private No < E >	cabeca	= null;
+	private No < E >	cauda	= null;
+	private No < E >	temp		= null;
+	private int		contador	= 0;
 
 	/**
 	 * Constructor of the Linked List. Initializes the instance of the Linked
 	 * List to null and the counter to zero.
 	 */
 	public ListaLigada() {
+
 	}
 
 	/**
@@ -28,6 +31,7 @@ public class ListaLigada<E> {
 	 */
 
 	public int size() {
+
 		return contador;
 	}
 
@@ -35,86 +39,121 @@ public class ListaLigada<E> {
 	 * Method to add an element to the end of the Linked List.
 	 * 
 	 * @param elemento
-	 *               element to be added to Linked List.
+	 *             element to be added to Linked List.
 	 */
 
-	public void add(E elemento) {
-		if (cabeca == null) {
-			cabeca = cauda = new No<E>();
+	public void add( E elemento ) {
+
+		if ( cabeca == null ) {
+			cabeca = cauda = new No < E >();
 			cabeca.elemento = elemento;
 			cauda = cabeca;
 		} else {
-			cauda.proximo = new No<E>();
+			cauda.proximo = new No < E >();
 			cauda = cauda.proximo;
 			cauda.elemento = elemento;
 		}
-		contador++;
+		contador++ ;
 	}
 
-	public E set(int index, E elemento) {
+	/**
+	 * Method to edit the element at the specified index.
+	 * 
+	 * @param index
+	 *             index of the element to edit
+	 * @param element
+	 *             the new value of the element
+	 * @return the element previously at the specified index
+	 * @throws IndexOutOfBoundsException
+	 */
+	public E set( int index , E elemento ) {
 
-		verificarIndex(index);
-		No<E> x = no(index);
+		verificarIndex( index );
+		No < E > x = no( index );
 		E anterior = x.elemento;
 		x.elemento = elemento;
 		return anterior;
 	}
 
-	No<E> no(int index) {
-		if (index < (size() >> 1)) {
-			No<E> x = cabeca;
-			for (int i = 0; i < index; i++) {
+	/**
+	 * Method that returns the Node at the specified index.
+	 * 
+	 * @param index
+	 *             index of the element in order to get its node
+	 * @return the node that corresponds to the index passed as parameter
+	 */
+	No < E > no( int index ) {
+
+		if ( index < ( size() >> 1 ) ) {
+			No < E > x = cabeca;
+			for ( int i = 0 ; i < index ; i++ ) {
 				x = x.proximo;
 			}
 			return x;
 		} else {
-			No<E> x = cauda;
-			for (int i = size() - 1; i > index; i--) {
+			No < E > x = cauda;
+			for ( int i = size() - 1 ; i > index ; i-- ) {
 				x = x.anterior;
 			}
 			return x;
 		}
 	}
 
-	private void verificarIndex(int index) {
-		if (!indexExiste(index)) {
-			throw new IndexOutOfBoundsException("Index: " + index + "Size: " + size());
-		}
+	private void verificarIndex( int index ) {
+
+		if ( ! indexExiste( index ) ) { throw new IndexOutOfBoundsException( "Index: " + index + "Size: " + size() ); }
 	}
 
-	private boolean indexExiste(int index) {
+	private boolean indexExiste( int index ) {
+
 		return index >= 0 && index < size();
+	}
+
+	/**
+	 * Method that returns an array containing all the elements in the ListaLigada
+	 * 
+	 * @return an array resulting of the conversion from ListaLigada
+	 */
+	public Object[] toArray() {
+
+		Object[] array = new Object[ size() ];
+		int i = 0;
+		for ( No < E > x = cabeca ; x != null ; x = x.proximo ) {
+			array[ i++ ] = x.elemento;
+		}
+		return array;
 	}
 
 	/**
 	 * Method to add an element to a specific index of the Linked List.
 	 * 
 	 * @param index
-	 *               index of the Linked List, where the element will be
-	 *               added.
+	 *             index of the Linked List, where the element will be
+	 *             added.
 	 * @param elemento
-	 *               element to be added to Linked List.
+	 *             element to be added to Linked List.
 	 */
-	public void add(int index, E elemento) {
-		if (index == size()) {
-			add(elemento);
+	public void add( int index , E elemento ) {
+
+		if ( index == size() ) {
+			add( elemento );
 			return;
-		} else if (index == 0) {
-			No<E> temp = new No<E>();
+		} else if ( index == 0 ) {
+			No < E > temp = new No < E >();
 			temp.elemento = elemento;
 			temp.proximo = cabeca;
 			cabeca.anterior = temp;
 			cabeca = temp;
-			contador++;
+			contador++ ;
 			return;
 		}
 		temp = cabeca;
-		for (int i = 0; i < index - 1; i++) {
-			No<E> no = new No<E>();
+		for ( int i = 0 ; i < index - 1 ; i++ ) {
+			No < E > no = new No < E >();
 			no.elemento = elemento;
 			no.proximo = temp.proximo;
 			temp.proximo = no;
-			contador++;
+			contador++ ;
 		}
 	}
 
@@ -122,15 +161,16 @@ public class ListaLigada<E> {
 	 * Method to get the element in the specific index in the Linked List.
 	 * 
 	 * @param index
-	 *               index of the Linked List.
+	 *             index of the Linked List.
 	 * @return element of the Linked List in the index position.
 	 */
 
-	public E get(int index) {
-		assert (index >= 0 && index < size());
+	public E get( int index ) {
+
+		assert ( index >= 0 && index < size() );
 
 		temp = cabeca;
-		for (int i = 0; i < index; i++) {
+		for ( int i = 0 ; i < index ; i++ ) {
 			temp = temp.proximo;
 		}
 
@@ -141,20 +181,20 @@ public class ListaLigada<E> {
 	 * Method to get the index of certain element in the Linked List.
 	 * 
 	 * @param elem
-	 *               element of the Linked List
+	 *             element of the Linked List
 	 * @return index of element or -1 if that element wasn't found.
 	 */
 
-	public int indexOf(E elem) {
+	public int indexOf( E elem ) {
+
 		temp = cabeca;
 		int i = 0;
 
-		for (; !(temp.elemento).equals(elem) && temp != null; i++) {
+		for ( ; ! ( temp.elemento ).equals( elem ) && temp != null ; i++ ) {
 			temp = temp.proximo;
 		}
 
-		if (i == size())
-			return -1;
+		if ( i == size() ) return - 1;
 		return i;
 	}
 
@@ -165,43 +205,45 @@ public class ListaLigada<E> {
 	 */
 
 	public boolean isEmpty() {
-		return (cabeca == null && cauda == null);
+
+		return ( cabeca == null && cauda == null );
 	}
 
 	/**
 	 * Method to element a node in the specific index in Linked List.
 	 * 
 	 * @param index
-	 *               index of element to be removed.
+	 *             index of element to be removed.
 	 * @return the element removed
 	 */
 
-	public E remove(int index) {
-		assert (index >= 0 && index < size());
+	public E remove( int index ) {
+
+		assert ( index >= 0 && index < size() );
 		temp = cabeca;
 
-		if (index == 0) {
+		if ( index == 0 ) {
 			E elem = cabeca.elemento;
 			cabeca = cabeca.proximo;
-			contador--;
+			contador-- ;
 
 			return elem;
-		} else if (index == size()) {
+		} else if ( index == size() ) {
 			E elem = cauda.elemento;
 			cauda = cauda.anterior;
-			contador--;
+			contador-- ;
 
 			return elem;
 		}
 
-		for (int i = 0; i < index - 1; i++) {
+		for ( int i = 0 ; i < index - 1 ; i++ ) {
 			temp = temp.proximo;
 		}
-		No<E> dois = temp.proximo;
+		No < E > dois = temp.proximo;
 		temp.proximo = dois.proximo;
 		E elem = dois.elemento;
 		dois = null;
-		contador--;
+		contador-- ;
 
 		return elem;
 	}
@@ -210,12 +252,13 @@ public class ListaLigada<E> {
 	 * Method to check if the element is in the Linked List.
 	 * 
 	 * @param elem
-	 *               element to be found
+	 *             element to be found
 	 * @return true if exists
 	 */
 
-	public boolean contains(E elem) {
-		return (indexOf(elem) >= 0);
+	public boolean contains( E elem ) {
+
+		return ( indexOf( elem ) >= 0 );
 	}
 
 }
