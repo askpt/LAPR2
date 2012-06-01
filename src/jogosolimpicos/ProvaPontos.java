@@ -1,12 +1,24 @@
-
 package jogosolimpicos;
 
 public class ProvaPontos extends Prova {
 
-	public ProvaPontos( Disciplina disc , JogosOlimpicos jogos ) {
+	private float ponto;
 
-		super( disc , jogos );
-		// TODO Auto-generated constructor stub
+	public ProvaPontos(Disciplina disc, JogosOlimpicos jogos, float ponto) {
+
+		super(disc, jogos);
+		setPonto(ponto);
+
+	}
+
+	public void setPonto(float ponto) {
+
+		this.ponto = ponto;
+	}
+
+	public float getPonto() {
+
+		return ponto;
 	}
 
 }

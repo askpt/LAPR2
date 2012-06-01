@@ -35,7 +35,7 @@ public class ListaLigada<E> {
 	 * Method to add an element to the end of the Linked List.
 	 * 
 	 * @param elemento
-	 *            element to be added to Linked List.
+	 *               element to be added to Linked List.
 	 */
 
 	public void add(E elemento) {
@@ -51,13 +51,49 @@ public class ListaLigada<E> {
 		contador++;
 	}
 
+	public E set(int index, E elemento) {
+
+		verificarIndex(index);
+		No<E> x = no(index);
+		E anterior = x.elemento;
+		x.elemento = elemento;
+		return anterior;
+	}
+
+	No<E> no(int index) {
+		if (index < (size() >> 1)) {
+			No<E> x = cabeca;
+			for (int i = 0; i < index; i++) {
+				x = x.proximo;
+			}
+			return x;
+		} else {
+			No<E> x = cauda;
+			for (int i = size() - 1; i > index; i--) {
+				x = x.anterior;
+			}
+			return x;
+		}
+	}
+
+	private void verificarIndex(int index) {
+		if (!indexExiste(index)) {
+			throw new IndexOutOfBoundsException("Index: " + index + "Size: " + size());
+		}
+	}
+
+	private boolean indexExiste(int index) {
+		return index >= 0 && index < size();
+	}
+
 	/**
 	 * Method to add an element to a specific index of the Linked List.
 	 * 
 	 * @param index
-	 *            index of the Linked List, where the element will be added.
+	 *               index of the Linked List, where the element will be
+	 *               added.
 	 * @param elemento
-	 *            element to be added to Linked List.
+	 *               element to be added to Linked List.
 	 */
 	public void add(int index, E elemento) {
 		if (index == size()) {
@@ -86,7 +122,7 @@ public class ListaLigada<E> {
 	 * Method to get the element in the specific index in the Linked List.
 	 * 
 	 * @param index
-	 *            index of the Linked List.
+	 *               index of the Linked List.
 	 * @return element of the Linked List in the index position.
 	 */
 
@@ -105,7 +141,7 @@ public class ListaLigada<E> {
 	 * Method to get the index of certain element in the Linked List.
 	 * 
 	 * @param elem
-	 *            element of the Linked List
+	 *               element of the Linked List
 	 * @return index of element or -1 if that element wasn't found.
 	 */
 
@@ -136,7 +172,7 @@ public class ListaLigada<E> {
 	 * Method to element a node in the specific index in Linked List.
 	 * 
 	 * @param index
-	 *            index of element to be removed.
+	 *               index of element to be removed.
 	 * @return the element removed
 	 */
 
@@ -174,7 +210,7 @@ public class ListaLigada<E> {
 	 * Method to check if the element is in the Linked List.
 	 * 
 	 * @param elem
-	 *            element to be found
+	 *               element to be found
 	 * @return true if exists
 	 */
 

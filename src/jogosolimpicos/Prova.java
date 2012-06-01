@@ -1,15 +1,14 @@
-
 package jogosolimpicos;
 
 public class Prova {
 
-	private Disciplina		disc;
-	private JogosOlimpicos	jogos;
+	private Disciplina disc;
+	private JogosOlimpicos jogos;
 
-	public Prova( Disciplina disc , JogosOlimpicos jogos ) {
+	public Prova(Disciplina disc, JogosOlimpicos jogos) {
 
-		setDisciplina( disc );
-		setJogosOlimpicos( jogos );
+		setDisciplina(disc);
+		setJogosOlimpicos(jogos);
 
 	}
 
@@ -26,17 +25,17 @@ public class Prova {
 
 	public String toString() {
 
-		return String.format( "%s, %s" , disc.getNome() , jogos.toString() );
+		return String.format("%s, %s", disc.getNome(), jogos.toString());
 	}
 
 	// SETTERS
 
-	public void setJogosOlimpicos( JogosOlimpicos jogos ) {
+	public void setJogosOlimpicos(JogosOlimpicos jogos) {
 
 		this.jogos = jogos;
 	}
 
-	private void setDisciplina( Disciplina disc ) {
+	public void setDisciplina(Disciplina disc) {
 
 		this.disc = disc;
 
