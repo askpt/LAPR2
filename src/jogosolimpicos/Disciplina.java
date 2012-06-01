@@ -4,8 +4,9 @@ public class Disciplina {
 
 	private Modalidade mod;
 	private String nome;
-	private boolean tipoDisc;
-	private int genero;
+	private boolean tipoDisc; // true = coletivo false = individual
+	private int genero; // 0 = masculino 1 = feminino 2 = both sem mixed masc
+						// 3 = both sem mixed fem 4 = mixed
 
 	public Disciplina(String nome, Modalidade modalidade, boolean tipoDisc, int genero) {
 
@@ -60,6 +61,10 @@ public class Disciplina {
 	public String toString() {
 
 		return String.format("%s", nome);
+	}
+
+	public boolean equals(Disciplina disc) {
+		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.tipoDisc == disc.getTipoMod() && this.mod.getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.genero == disc.getGenero());
 	}
 
 }
