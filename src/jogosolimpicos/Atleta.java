@@ -16,7 +16,7 @@ public class Atleta {
 	private Medalhas				medalha;
 
 	public Atleta( String nome , Modalidade mod , Pais pais , ProvaInd prova , boolean equipa ) {
-
+		//
 		setID();
 		setNome( nome );
 		setModalidade( mod );
