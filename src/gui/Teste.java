@@ -2,9 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import dados.*;
 
 @SuppressWarnings("serial")
@@ -14,6 +12,8 @@ public class Teste extends JFrame {
 
 		super(titulo);
 		setLayout(new BorderLayout());
+
+		Imagens img = new Imagens();
 
 		JMenuBar menuBar;
 		JMenu menu;
@@ -106,6 +106,11 @@ public class Teste extends JFrame {
 		menu.add(menuItem);
 
 		setJMenuBar(menuBar);
+
+		JLabel label = new JLabel(new ImageIcon(img.constrution));
+		label.setEnabled(false);
+		label.setDisabledIcon(new ImageIcon(img.constrution));
+		add(label);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(400, 300);
