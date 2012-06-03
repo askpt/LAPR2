@@ -480,22 +480,69 @@ public class Csv extends JComponent implements Accessible {
 
 			int i = 0;
 
+			boolean testModal = false;
 			for (; i < modalidades.size(); i++) {
 				if (modalidade.equals(modalidades.get(i).getNome())) {
+					testModal = true;
 					break;
 				}
 			}
 
-			Scanner in = new Scanner(ficheiro);
+			if (!testModal) {
+				JOptionPane.showMessageDialog(janela, "Sport not found!\nPlease import: " + modalidade + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 
-			if (!in.hasNextLine()) {
+			Scanner inTest = new Scanner(ficheiro);
+
+			if (!inTest.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 
+			while (inTest.hasNextLine()) {
+				String test[] = inTest.nextLine().split(";");
+				if (test[0].equalsIgnoreCase("Individual ") || test[0].equalsIgnoreCase("Team "))
+					;
+				else if (test[0].equals(null))
+					;
+				else {
+					boolean testeDisc = false;
+					for (int j = 0; j < modalidades.get(i).getDisc().size(); j++) {
+						if (test[0].equalsIgnoreCase(modalidades.get(i).getDisc().get(j).getNome()))
+							testeDisc = true;
+					}
+					if (!testeDisc) {
+						JOptionPane.showMessageDialog(janela, "Discipline not found!\nPlease import: " + test[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+						return;
+					}
+
+				}
+
+			}
+
+			Scanner in = new Scanner(ficheiro);
+
 			while (in.hasNextLine()) {
-				String temp[] = in.nextLine().split(" ;");
-				if (!temp[0].isEmpty()) {
+				String temp[] = in.nextLine().split(";");
+				if (temp[0].isEmpty()) {
+					if (!tipoDisc) {
+						// Atleta
+						String[] atl = temp[1].split(", ");
+						String nomeAtl = atl[0];
+						String codPais = atl[1];
+						String resul = temp[2];
+					} else {
+						// team
+						String[] team = temp[1].split(" (");
+						String codPais = team[0];
+						String[] atletasTemp = team[1].split(", ");
+						ListaLigada<String> nomeAtletas = new ListaLigada<String>();
+						for (int k = 0; k < atletasTemp.length; k++) {
+							nomeAtletas.add(atletasTemp[k]);
+						}
+						String resul = temp[2];
+					}
 
 				} else if (temp[0].equalsIgnoreCase("Individual ")) {
 					tipoDisc = false;
@@ -510,7 +557,27 @@ public class Csv extends JComponent implements Accessible {
 						if (nomeDisc.equalsIgnoreCase(modalidades.get(i).getDisc().get(j).getNome()) && codGenero == modalidades.get(i).getDisc().get(j).getGenero())
 							break;
 					}
-					tipoClass = modalidades.get(i).getDisc().get(j).getTipoClass();
+					tipoClass = modalidades.get(i).getDisc().get(j).getTipoClass(); // tipo
+																					// class
+
+					if (!tipoDisc) {
+						// Atleta
+						String[] atl = temp[1].split(", ");
+						String nomeAtl = atl[0];
+						String codPais = atl[1];
+						String resul = temp[2];
+					} else {
+						// team
+						String[] team = temp[1].split(" (");
+						String codPais = team[0];
+						String[] atletasTemp = team[1].split(", ");
+						ListaLigada<String> nomeAtletas = new ListaLigada<String>();
+						for (int k = 0; k < atletasTemp.length; k++) {
+							nomeAtletas.add(atletasTemp[k]);
+						}
+						String resul = temp[2];
+
+					}
 
 				}
 
