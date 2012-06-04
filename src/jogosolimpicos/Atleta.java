@@ -8,37 +8,17 @@ public class Atleta {
 	private int numid;
 	private static int num;
 	private Pais pais;
-	private Modalidade mod;
-	private ListaLigada<ProvaInd> provas = new ListaLigada<ProvaInd>();
-	private boolean equipa = false;
 	private Medalhas medalha;
 
-	public Atleta(String nome, Modalidade mod, Pais pais, ProvaInd prova, boolean equipa) {
+	public Atleta(String nome, Pais pais) {
 		//
 		setID();
 		setNome(nome);
-		setModalidade(mod);
 		setPais(pais);
-		addProva(prova);
-		setEquipa(equipa);
 		medalha = new Medalhas();
 	}
 
 	// GETTERS
-
-	public void setProvas(ListaLigada<ProvaInd> provas) {
-
-		for (int i = 0; i < this.provas.size(); i++) {
-			if (!this.provas.contains(provas.get(i))) {
-				this.provas.add(provas.get(i));
-			}
-		}
-	}
-
-	public Modalidade getModalidade() {
-
-		return mod;
-	}
 
 	public String getNome() {
 
@@ -50,24 +30,12 @@ public class Atleta {
 		return pais;
 	}
 
-	public ListaLigada<ProvaInd> getProvas() {
-
-		return provas;
-	}
-
 	public String toString() {
 
 		return String.format("%d: %s - %s", numid, nome, pais);
 	}
 
 	// SETTERS
-
-	public void addProva(ProvaInd prova) {
-
-		if (!provas.contains(prova)) {
-			provas.add(prova);
-		}
-	}
 
 	public int getID() {
 
@@ -87,17 +55,6 @@ public class Atleta {
 	public void setPais(Pais pais) {
 
 		this.pais = pais;
-	}
-
-	public void setModalidade(Modalidade mod) {
-
-		this.mod = mod;
-	}
-
-	public void setEquipa(boolean equipa) {
-
-		this.equipa = equipa;
-
 	}
 
 	public void setMedalha(Medalhas medalha) {

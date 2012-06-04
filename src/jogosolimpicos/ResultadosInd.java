@@ -1,14 +1,13 @@
-
 package jogosolimpicos;
 
 public class ResultadosInd extends Resultados {
 
-	private Atleta	atleta;
+	private Atleta atleta;
 
-	public ResultadosInd( Atleta atleta , float resultado ) {
+	public ResultadosInd(Atleta atleta, float resultado) {
 
-		super( resultado );
-		setAtleta( atleta );
+		super(resultado);
+		setAtleta(atleta);
 
 	}
 
@@ -20,11 +19,11 @@ public class ResultadosInd extends Resultados {
 
 	public String toString() {
 
-		return String.format( "%s" , atleta.toString() ) + super.toString();
+		return String.format("%s", atleta.toString()) + super.toString();
 	}
 
 	// SETTERS
-	public void setAtleta( Atleta atleta ) {
+	public void setAtleta(Atleta atleta) {
 
 		this.atleta = atleta;
 	}

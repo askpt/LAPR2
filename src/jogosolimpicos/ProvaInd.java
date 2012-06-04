@@ -1,58 +1,49 @@
-
 package jogosolimpicos;
 
 import listaligada.*;
 
-public class ProvaInd {
+public class ProvaInd extends Prova {
 
-	private Disciplina					disc;
-	private JogosOlimpicos				jogos;
-	private ListaLigada < ResultadosInd >	resultadosInd	= new ListaLigada < ResultadosInd >();
+	private ListaLigada<ResultadosInd> resultados = new ListaLigada<ResultadosInd>();
+	private String resulTemp;
 
-	public ProvaInd( Disciplina disc , JogosOlimpicos jogos ) {
+	public ProvaInd(Disciplina disc, JogosOlimpicos jogos) {
 
-		setDisciplina( disc );
-		setJogosOlimpicos( jogos );
-
+		super(disc, jogos);
 	}
 
 	// GETTERS
-	public JogosOlimpicos getJogosOlimpicos() {
 
-		return jogos;
-	}
+	public ListaLigada<ResultadosInd> getResultados() {
 
-	public Disciplina getDisciplina() {
-
-		return disc;
-	}
-
-	public ListaLigada < ResultadosInd > getResultadosInd() {
-
-		return resultadosInd;
+		return resultados;
 	}
 
 	public String toString() {
 
-		return String.format( "%s, %s" , disc.getNome() , jogos );
+		return super.toString();
 	}
 
 	// SETTERS
 
-	public void setJogosOlimpicos( JogosOlimpicos jogos ) {
+	public void setResultadosInd(ListaLigada<ResultadosInd> resultadosInd) {
 
-		this.jogos = jogos;
+		this.resultados = resultadosInd;
 	}
 
-	public void setDisciplina( Disciplina disc ) {
+	private void convertTempo(Atleta atleta) {
 
-		this.disc = disc;
+		if (resulTemp.matches("^[0-9]{2}:[0-9]{2}:[0-9]{2}$")) {
+			String temp[] = resulTemp.split(":");
+			resultados.add(new ResultadosInd(atleta, Float.parseFloat(temp[0]) * 3600 + Float.parseFloat(temp[1]) * 60 + Float.parseFloat(temp[2])));
+		} else if (resulTemp.matches("^[0-9]{1,2}:[0-9]{2}(.[0-9]{1,})?$")) {
+			String temp[] = resulTemp.split(":");
+			resultados.add(new ResultadosInd(atleta, Float.parseFloat(temp[0]) * 60 + Float.parseFloat(temp[1])));
 
-	}
+		} else {
+			resultados.add(new ResultadosInd(atleta, Float.parseFloat(resulTemp)));
+		}
 
-	public void setResultadosInd( ListaLigada < ResultadosInd > resultadosInd ) {
-
-		this.resultadosInd = resultadosInd;
 	}
 
 }

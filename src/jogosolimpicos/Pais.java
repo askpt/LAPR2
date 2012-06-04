@@ -24,6 +24,7 @@ public class Pais implements Comparable {
 	 */
 
 	public Pais(String codigoPais, String nomePais) {
+
 		setCodigoPais(codigoPais);
 		setNomePais(nomePais);
 		setMedalha();
