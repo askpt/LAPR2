@@ -603,11 +603,47 @@ public class Csv extends JComponent implements Accessible {
 					// class
 
 					if (!tipoDisc) {
-						// Atleta
+						boolean existeAtleta = false;
 						String[] atl = temp[1].split(", ");
-						String nomeAtl = atl[0];
-						String codPais = atl[1];
-						String resul = temp[2];
+
+						int itAtleta = 0;
+						for (; itAtleta < atletas.size(); itAtleta++) {
+							if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atl[0]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atl[1])) {
+								existeAtleta = true;
+								break;
+							}
+
+						}
+
+						if (!existeAtleta) {
+							int itPais = 0;
+							for (; itPais < paises.size(); itPais++) {
+								if (atl[1].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+									break;
+								}
+							}
+
+							atletas.add(new Atleta(atl[0], paises.get(itPais)));
+
+						}
+						itProva = 0;
+
+						for (; itProva < provas.size(); itProva++) {
+							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano)
+								break;
+						}
+
+						if (itProva == provas.size()) {
+							if (tipoDisc == false) {
+								provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
+							} else {
+								provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
+							}
+						}
+
+						if (provas.get(itProva) instanceof ProvaInd)
+							((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
+
 					} else {
 						// team
 						String[] team = temp[1].split(" (");
