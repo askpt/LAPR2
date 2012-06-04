@@ -3,7 +3,6 @@ package dadosTest;
 import static org.junit.Assert.*;
 import listaligada.*;
 import jogosolimpicos.*;
-import junit.extensions.TestDecorator;
 
 import org.junit.Test;
 import dados.*;

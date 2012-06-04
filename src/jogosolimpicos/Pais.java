@@ -6,6 +6,7 @@ import listaligada.ListaLigada;
  * Main class of the country.
  * 
  */
+@SuppressWarnings("rawtypes")
 public class Pais implements Comparable {
 
 	private String codigoPais;
@@ -17,10 +18,10 @@ public class Pais implements Comparable {
 	 * Main constructor of the class country.
 	 * 
 	 * @param codigoPais
-	 *               a string of the country's code with the IOC standart.
-	 *               Ex.: "POR"
+	 *            a string of the country's code with the IOC standart. Ex.:
+	 *            "POR"
 	 * @param nomePais
-	 *               name of the country. Ex.: "Portugal"
+	 *            name of the country. Ex.: "Portugal"
 	 */
 
 	public Pais(String codigoPais, String nomePais) {
@@ -43,7 +44,7 @@ public class Pais implements Comparable {
 	 * Set the country's code.
 	 * 
 	 * @param codigoPais
-	 *               country's code with the IOC standart. Ex.: "POR"
+	 *            country's code with the IOC standart. Ex.: "POR"
 	 */
 
 	public void setCodigoPais(String codigoPais) {
@@ -64,7 +65,7 @@ public class Pais implements Comparable {
 	 * Set the country's name.
 	 * 
 	 * @param nomePais
-	 *               the name of the country.
+	 *            the name of the country.
 	 */
 
 	public void setNomePais(String nomePais) {

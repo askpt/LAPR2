@@ -2,9 +2,9 @@ package jogosolimpicos;
 
 import listaligada.*;
 
-public abstract class ProvaCol extends Prova {
+public class ProvaCol extends Prova {
 
-	private ListaLigada<ResultadosCol> resultadosCol = new ListaLigada<ResultadosCol>();
+	private ListaLigada<ResultadosCol> resultados = new ListaLigada<ResultadosCol>();
 
 	public ProvaCol(Disciplina disc, JogosOlimpicos jogos) {
 
@@ -14,9 +14,9 @@ public abstract class ProvaCol extends Prova {
 
 	// GETTERS
 
-	public ListaLigada<ResultadosCol> getResultadosCol() {
+	public ListaLigada<ResultadosCol> getResultados() {
 
-		return resultadosCol;
+		return resultados;
 	}
 
 	public String toString() {
@@ -26,9 +26,9 @@ public abstract class ProvaCol extends Prova {
 
 	// SETTERS
 
-	public void setResultadosCol(ListaLigada<ResultadosCol> resultadosCol) {
+	public void setResultados(ListaLigada<ResultadosCol> resultados) {
 
-		this.resultadosCol = resultadosCol;
+		this.resultados = resultados;
 	}
 
 }

@@ -1,7 +1,5 @@
 package jogosolimpicos;
 
-import listaligada.*;
-
 public class Atleta {
 
 	private String nome;
