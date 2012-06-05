@@ -801,28 +801,28 @@ public class Csv extends JComponent implements Accessible {
 			out.format("Team ;;Value\n");
 			for (int i = 0; i < modalidades.get(itModal).getDisc().size(); i++) {
 				if (modalidades.get(itModal).getDisc().get(i).getTipoMod())
-					out.format(modalidades.get(itModal).getDisc().get(i).getNome());
-				for (int j = 0; j < Main.getProvas().size(); j++) {
+					for (int j = 0; j < Main.getProvas().size(); j++) {
 
-					if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
+						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
-						if (provas.get(j) instanceof ProvaCol) {
+							if (provas.get(j) instanceof ProvaCol) {
+								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
 
-							for (int k = 0; k < ((ProvaCol) provas.get(j)).getResultados().size(); k++) {
-								out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + "(");
-								for (int l = 0; l < ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size(); l++) {
-									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome() + ", ");
-									if (l == ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1)
-										out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome());
+								for (int k = 0; k < ((ProvaCol) provas.get(j)).getResultados().size(); k++) {
+									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + "(");
+									for (int l = 0; l < ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size(); l++) {
+										out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome() + ", ");
+										if (l == ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1)
+											out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome());
+									}
+
+									out.format(");");
+									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getResulTemp() + "\n");
 								}
-
-								out.format(");");
-								out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getResulTemp() + "\n");
 							}
-						}
 
+						}
 					}
-				}
 			}
 
 			out.close();
