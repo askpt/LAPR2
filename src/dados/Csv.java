@@ -36,7 +36,7 @@ public class Csv extends JComponent implements Accessible {
 
 			in.nextLine();
 			while (in.hasNextLine()) {
-				String temp[] = in.nextLine().split(" ;");
+				String temp[] = in.nextLine().split(";");
 				paises.add(new Pais(temp[0], temp[1]));
 			}
 			in.close();
@@ -449,8 +449,7 @@ public class Csv extends JComponent implements Accessible {
 	}
 
 	@SuppressWarnings("unused")
-	public void importResultados(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas) {
-		// TODO Adicionar ListasLigadas em condições
+	public void importResultados(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas) {
 		try {
 
 			JFileChooser fc = new JFileChooser();
@@ -462,7 +461,7 @@ public class Csv extends JComponent implements Accessible {
 			File ficheiro = fc.getSelectedFile();
 
 			int ponto = ficheiro.getName().lastIndexOf(".");
-			String[] tempPrin = ficheiro.getName().substring(0, ponto - 1).split("_");
+			String[] tempPrin = ficheiro.getName().substring(0, ponto).split("_");
 			int ano = Integer.parseInt(tempPrin[0]);
 			String modalidade = tempPrin[1];
 			String genero = tempPrin[2];
@@ -505,7 +504,7 @@ public class Csv extends JComponent implements Accessible {
 			while (inTest.hasNextLine()) {
 				String test[] = inTest.nextLine().split(";");
 				if (test[0].equalsIgnoreCase("Individual ") || test[0].equalsIgnoreCase("Team ")) {
-				} else if (test[0].equals(null)) {
+				} else if (test[0].equals("")) {
 				} else {
 					boolean testeDisc = false;
 					for (int j = 0; j < modalidades.get(itModal).getDisc().size(); j++) {
@@ -513,7 +512,7 @@ public class Csv extends JComponent implements Accessible {
 							testeDisc = true;
 					}
 					if (!testeDisc) {
-						JOptionPane.showMessageDialog(janela, "Discipline not found!\nPlease import: " + test[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + test[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
@@ -522,24 +521,24 @@ public class Csv extends JComponent implements Accessible {
 			}
 
 			Scanner in = new Scanner(ficheiro);
-
 			while (in.hasNextLine()) {
+
 				String temp[] = in.nextLine().split(";");
-				if (temp[0].isEmpty()) {
+				if (temp[0].equals("")) {
 					if (!tipoDisc) {
-						boolean existeAtleta = false;
+
 						String[] atl = temp[1].split(", ");
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
 							if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atl[0]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atl[1])) {
-								existeAtleta = true;
+
 								break;
 							}
 
 						}
 
-						if (!existeAtleta) {
+						if (itAtleta == atletas.size()) {
 							int itPais = 0;
 							for (; itPais < paises.size(); itPais++) {
 								if (atl[1].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
@@ -547,9 +546,56 @@ public class Csv extends JComponent implements Accessible {
 								}
 							}
 
+							if (itPais == paises.size()) {
+								JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + atl[1] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+								return;
+							}
+
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
 
 						}
+
+						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
+
+					} else {
+						String[] team = temp[1].split("\\(");
+
+						boolean existeAtletas = false;
+
+						int itPais = 0;
+						for (; itPais < paises.size(); itPais++) {
+							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+								break;
+							}
+						}
+
+						if (itPais == paises.size()) {
+							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+
+						boolean existeAtleta = false;
+
+						equipas.add(new Equipa(paises.get(itPais)));
+						String[] atletasTemp = team[1].split(", ");
+						for (int i = 0; i < atletasTemp.length; i++) {
+							int itAtleta = 0;
+							for (; itAtleta < atletas.size(); itAtleta++) {
+								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atletasTemp[i])) {
+									existeAtleta = true;
+									break;
+								}
+
+							}
+
+							if (!existeAtleta) {
+
+								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
+
+							}
+							equipas.get(equipas.size() - 1).addAtleta(atletas.get(itAtleta));
+						}
+
 						itProva = 0;
 
 						for (; itProva < provas.size(); itProva++) {
@@ -558,32 +604,12 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
-							if (tipoDisc == false) {
-								provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
-							} else {
-								provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
-							}
+							provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
 						}
 
-						if (provas.get(itProva) instanceof ProvaInd)
-							((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
+						if (provas.get(itProva) instanceof ProvaCol)
+							((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
 
-						// Atleta
-						// String[] atl = temp[1].split(", ");
-						// String nomeAtl = atl[0];
-						// String codPais = atl[1];
-						// String resul = temp[2];
-					} else {
-						// team
-						String[] team = temp[1].split(" (");
-						String codPais = team[0];
-						String[] atletasTemp = team[1].split(", ");
-						ListaLigada<String> nomeAtletas = new ListaLigada<String>();
-						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll(")", "");
-						for (int k = 0; k < atletasTemp.length; k++) {
-							nomeAtletas.add(atletasTemp[k]);
-						}
-						String resul = temp[2];
 					}
 
 				} else if (temp[0].equalsIgnoreCase("Individual ")) {
@@ -595,7 +621,7 @@ public class Csv extends JComponent implements Accessible {
 				} else {
 					nomeDisc = temp[0];
 					itDisc = 0;
-					for (; itModal < modalidades.get(itModal).getDisc().size(); itModal++) {
+					for (; itDisc < modalidades.get(itModal).getDisc().size(); itDisc++) {
 						if (nomeDisc.equalsIgnoreCase(modalidades.get(itModal).getDisc().get(itDisc).getNome()) && codGenero == modalidades.get(itModal).getDisc().get(itDisc).getGenero())
 							break;
 					}
@@ -623,9 +649,15 @@ public class Csv extends JComponent implements Accessible {
 								}
 							}
 
+							if (itPais == paises.size()) {
+								JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + atl[1] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+								return;
+							}
+
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
 
 						}
+
 						itProva = 0;
 
 						for (; itProva < provas.size(); itProva++) {
@@ -634,27 +666,53 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
-							if (tipoDisc == false) {
-								provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
-							} else {
-								provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
-							}
+							provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
 						}
 
 						if (provas.get(itProva) instanceof ProvaInd)
 							((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
 
 					} else {
-						// team
-						String[] team = temp[1].split(" (");
-						String codPais = team[0];
-						String[] atletasTemp = team[1].split(", ");
-						ListaLigada<String> nomeAtletas = new ListaLigada<String>();
-						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll(")", "");
-						for (int k = 0; k < atletasTemp.length; k++) {
-							nomeAtletas.add(atletasTemp[k]);
+						String[] team = temp[1].split("\\(");
+
+						boolean existeAtletas = false;
+
+						int itPais = 0;
+						for (; itPais < paises.size(); itPais++) {
+							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+								break;
+							}
 						}
-						String resul = temp[2];
+
+						if (itPais == paises.size()) {
+							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+							return;
+						}
+
+						boolean existeAtleta = false;
+
+						equipas.add(new Equipa(paises.get(itPais)));
+						String[] atletasTemp = team[1].split(", ");
+						for (int i = 0; i < atletasTemp.length; i++) {
+							int itAtleta = 0;
+							for (; itAtleta < atletas.size(); itAtleta++) {
+								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atletasTemp[i])) {
+									existeAtleta = true;
+									break;
+								}
+
+							}
+
+							if (!existeAtleta) {
+
+								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
+
+							}
+							equipas.get(equipas.size() - 1).addAtleta(atletas.get(itAtleta));
+						}
+
+						if (provas.get(itProva) instanceof ProvaCol)
+							((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
 
 					}
 

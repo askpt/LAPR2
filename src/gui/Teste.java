@@ -62,7 +62,7 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Import Disciplines", 'L');
+		menuItem = new JMenuItem("Import Competitions", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -73,7 +73,7 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Export Disciplines", 'L');
+		menuItem = new JMenuItem("Export Competitions", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -86,7 +86,7 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("List Disciplines", 'L');
+		menuItem = new JMenuItem("List Competitions", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
@@ -100,6 +100,19 @@ public class Teste extends JFrame {
 					System.out.println(Main.getModalidades().get(i).toStringTest());
 				}
 
+			}
+		});
+
+		menu.add(menuItem);
+
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Import Results", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
 			}
 		});
 

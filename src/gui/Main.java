@@ -8,8 +8,10 @@ public class Main {
 	private static ListaLigada<Atleta> atleta = new ListaLigada<Atleta>();
 	private static ListaLigada<Pais> paises = new ListaLigada<Pais>();
 	private static ListaLigada<Modalidade> modalidades = new ListaLigada<Modalidade>();
-	private static ListaLigada<ProvaInd> provas = new ListaLigada<ProvaInd>();
+	private static ListaLigada<Prova> provas = new ListaLigada<Prova>();
 	private static ListaLigada<Disciplina> disciplinas = new ListaLigada<Disciplina>();
+	private static ListaLigada<Equipa> equipas = new ListaLigada<Equipa>();
+
 	public static Teste i = new Teste("Teste");
 
 	public static ListaLigada<Modalidade> getModalidades() {
@@ -24,7 +26,7 @@ public class Main {
 		return atleta;
 	}
 
-	public static ListaLigada<ProvaInd> getProvas() {
+	public static ListaLigada<Prova> getProvas() {
 		return provas;
 	}
 
@@ -34,6 +36,10 @@ public class Main {
 
 	public static ListaLigada<Disciplina> getDisciplinas() {
 		return disciplinas;
+	}
+
+	public static ListaLigada<Equipa> getEquipas() {
+		return equipas;
 	}
 
 }
