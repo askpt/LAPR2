@@ -3,6 +3,7 @@ package gui;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
+import java.net.*;
 
 import javax.imageio.*;
 import javax.swing.*;
@@ -10,7 +11,7 @@ import javax.swing.*;
 public class Painel extends JPanel {
 
 	// imagem que carrega por defeito
-	String imagem = "images/bg/background.png";
+	String imagem = "bin/Imagens/background.png";
 
 	public Painel() {
 		super();
@@ -19,6 +20,15 @@ public class Painel extends JPanel {
 	public Painel(String image) {
 		super();
 		this.imagem = image;
+	}
+
+	public Painel(URL url) {
+		String temp = url.getPath();
+		System.out.println(temp);
+		String[] temparray = temp.split("/");
+		imagem = temparray[temparray.length - 3] + "/"
+				+ temparray[temparray.length - 2] + "/"
+				+ temparray[temparray.length - 1];
 	}
 
 	public Painel(LayoutManager layout) {

@@ -2,19 +2,20 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
 public class JanelaPrincipal extends JFrame {
 
-	public JanelaPrincipal() {
+	public JanelaPrincipal() throws URISyntaxException {
 
 		super("Olympic Games Application");
-
-		Botao btn1 = new Botao("images/buttons/appconfig.png");
-		Botao btn2 = new Botao("images/buttons/gamesconfig.png");
-		Botao btn3 = new Botao("images/buttons/exitapp.png");
+		Imagens img = new Imagens();
+		Botao btn1 = new Botao(img.appconfig);
+		Botao btn2 = new Botao(img.gamesconfig);
+		Botao btn3 = new Botao(img.exitapp);
 
 		Painel panel = new Painel(new FlowLayout(FlowLayout.RIGHT, 100, 120));
 

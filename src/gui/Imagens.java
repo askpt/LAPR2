@@ -6,11 +6,11 @@ public class Imagens {
 	ClassLoader classLoader = getClass().getClassLoader();
 
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
-	URL bg = classLoader.getResource("images/bg/background.png");
+	URL bg = classLoader.getResource("Imagens/background.png");
 
 	// buttons
-	URL appconfig = classLoader.getResource("images/buttons/appconfig.png");
-	URL gamesconfig = classLoader.getResource("images/buttons/gamesconfig.png");
-	URL exitapp = classLoader.getResource("images/buttons/exitapp.png");
+	URL appconfig = classLoader.getResource("Imagens/appconfig.png");
+	URL gamesconfig = classLoader.getResource("Imagens/gamesconfig.png");
+	URL exitapp = classLoader.getResource("Imagens/exitapp.png");
 
 }

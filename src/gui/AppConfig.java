@@ -11,8 +11,8 @@ public class AppConfig extends JFrame {
 
 		getContentPane().add(jtp);
 
-		Painel imp = new Painel("images/a.png");
-		Painel exp = new Painel("images/b.png");
+		Painel imp = new Painel("images/import.png");
+		Painel exp = new Painel("images/export.png");
 		Painel add = new Painel("images/add.png");
 		Painel edit = new Painel("images/edit.png");
 		Painel remove = new Painel("images/remove.png");
