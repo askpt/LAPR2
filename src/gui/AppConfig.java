@@ -38,14 +38,14 @@ public class AppConfig extends JFrame {
 		setVisible(v);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				fechar();
+				close();
 			}
 		});
 	}
 
-	private void fechar() {
-		String[] opcoes = { "Sim", "Nao" };
-		if (JOptionPane.showOptionDialog(this, "Fechar janela?", "Jogos Olimpicos", 0, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
+	private void close() {
+		String[] opt = { "Yes", "No" };
+		if (JOptionPane.showOptionDialog(this, "Close windows?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, null, opt, opt[0]) == 0) {
 			dispose();
 		}
 	}

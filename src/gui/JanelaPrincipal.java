@@ -14,7 +14,30 @@ public class JanelaPrincipal extends JFrame {
 	public JanelaPrincipal() throws URISyntaxException {
 
 		super("Olympic Games Application");
+		addButtons();
+		setProperties(640, 480, 0, true);
 
+	}
+
+	private void close() {
+		String[] opt = { "Yes", "No" };
+		if (JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img.exit), opt, opt[0]) == 0) {
+			dispose();
+		}
+	}
+
+	private void setProperties(int w, int h, int opcao, boolean v) {
+		setSize(w, h);
+		setDefaultCloseOperation(opcao);
+		setVisible(v);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				close();
+			}
+		});
+	}
+
+	private void addButtons() {
 		// Buttons
 		Botao btn1 = new Botao(img.appconfig);
 		Botao btn2 = new Botao(img.gamesconfig);
@@ -50,7 +73,7 @@ public class JanelaPrincipal extends JFrame {
 		btn3.setBorder(emptyBorder);
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				fechar();
+				close();
 			}
 		});
 
@@ -58,27 +81,6 @@ public class JanelaPrincipal extends JFrame {
 		panelbtn.add(btn2);
 		panelbtn.add(btn3);
 		add(panel, BorderLayout.CENTER);
-
-		setProperties(640, 480, 0, true);
-
-	}
-
-	private void fechar() {
-		String[] opcoes = { "Sim", "Nao" };
-		if (JOptionPane.showOptionDialog(this, "Deseja mesmo sair?", "Jogos Olimpicos", 0, JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img.exit), opcoes, opcoes[0]) == 0) {
-			dispose();
-		}
-	}
-
-	private void setProperties(int w, int h, int opcao, boolean v) {
-		setSize(w, h);
-		setDefaultCloseOperation(opcao);
-		setVisible(v);
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				fechar();
-			}
-		});
 	}
 
 }
