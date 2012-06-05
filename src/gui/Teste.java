@@ -2,9 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
-
 import dados.*;
 import jogosolimpicos.*;
 
@@ -70,8 +68,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importDisc(Teste.this, Main.getDisciplinas(),
-						Main.getModalidades());
+				csv.importDisc(Teste.this, Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
 
@@ -97,13 +94,11 @@ public class Teste extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				for (int i = 0; i < Main.getDisciplinas().size(); i++) {
-					System.out.println(Main.getDisciplinas().get(i)
-							.toStringTest());
+					System.out.println(Main.getDisciplinas().get(i).toStringTest());
 				}
 
 				for (int i = 0; i < Main.getModalidades().size(); i++) {
-					System.out.println(Main.getModalidades().get(i)
-							.toStringTest());
+					System.out.println(Main.getModalidades().get(i).toStringTest());
 				}
 
 			}
@@ -116,9 +111,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(Teste.this, Main.getAtleta(),
-						Main.getModalidades(), Main.getPaises(),
-						Main.getProvas(), Main.getEquipas());
+				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
 			}
 		});
 
@@ -156,22 +149,33 @@ public class Teste extends JFrame {
 
 				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
 					if (Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
-						System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
-					for (int j = 0; j < Main.getProvas().size(); j++) {
+						for (int j = 0; j < Main.getProvas().size(); j++) {
 
-						if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
+							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
-							if (Main.getProvas().get(j).getDisciplina().getTipoMod()) {
+								if (Main.getProvas().get(j) instanceof ProvaCol) {
+									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
 
-								for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
-									System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+									for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
+										System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+									}
 								}
-							}
 
+							}
 						}
-					}
 				}
 
+			}
+		});
+
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Export Results", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				csv.exportResultados(Teste.this, Main.getModalidades(), Main.getProvas(), "Gymnastics", 1, 2008);
 			}
 		});
 
