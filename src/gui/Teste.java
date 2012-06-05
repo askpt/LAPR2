@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import dados.*;
 import jogosolimpicos.*;
 
@@ -68,7 +70,8 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importDisc(Teste.this, Main.getDisciplinas(), Main.getModalidades());
+				csv.importDisc(Teste.this, Main.getDisciplinas(),
+						Main.getModalidades());
 			}
 		});
 
@@ -94,11 +97,13 @@ public class Teste extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				for (int i = 0; i < Main.getDisciplinas().size(); i++) {
-					System.out.println(Main.getDisciplinas().get(i).toStringTest());
+					System.out.println(Main.getDisciplinas().get(i)
+							.toStringTest());
 				}
 
 				for (int i = 0; i < Main.getModalidades().size(); i++) {
-					System.out.println(Main.getModalidades().get(i).toStringTest());
+					System.out.println(Main.getModalidades().get(i)
+							.toStringTest());
 				}
 
 			}
@@ -111,7 +116,9 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
+				csv.importResultados(Teste.this, Main.getAtleta(),
+						Main.getModalidades(), Main.getPaises(),
+						Main.getProvas(), Main.getEquipas());
 			}
 		});
 
