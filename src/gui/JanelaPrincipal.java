@@ -9,10 +9,11 @@ import javax.swing.border.*;
 
 public class JanelaPrincipal extends JFrame {
 
+	private Imagens img = new Imagens();
+
 	public JanelaPrincipal() throws URISyntaxException {
 
 		super("Olympic Games Application");
-		Imagens img = new Imagens();
 		Botao btn1 = new Botao(img.appconfig);
 		Botao btn2 = new Botao(img.gamesconfig);
 		Botao btn3 = new Botao(img.exitapp);
@@ -37,20 +38,38 @@ public class JanelaPrincipal extends JFrame {
 		btn2.setBorder(emptyBorder);
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("aa");
 			}
 		});
 
 		btn3.setContentAreaFilled(false);
 		btn3.setBorder(emptyBorder);
+		btn3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				fechar();
+			}
+		});
 
 		panelbtn.add(btn1);
 		panelbtn.add(btn2);
 		panelbtn.add(btn3);
-
 		add(panel, BorderLayout.CENTER);
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				fechar();
+			}
+		});
+
 		setSize(640, 480);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setVisible(true);
 	}
+
+	private void fechar() {
+		String[] opcoes = { "Sim", "Nao" };
+		if (JOptionPane.showOptionDialog(this, "Deseja mesmo sair?", "Jogos Olimpicos", 0, JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img.exit), opcoes, opcoes[0]) == 0) {
+			dispose();
+		}
+	}
+
 }

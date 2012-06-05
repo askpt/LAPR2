@@ -23,9 +23,7 @@ public class Botao extends JButton {
 		try {
 			String temp = url.getPath();
 			String[] temparray = temp.split("/");
-			temp = temparray[temparray.length - 3] + "/"
-					+ temparray[temparray.length - 2] + "/"
-					+ temparray[temparray.length - 1];
+			temp = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
 			image = ImageIO.read(new File(temp));
 		} catch (IOException e) {
 		}

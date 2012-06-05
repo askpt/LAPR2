@@ -7,6 +7,7 @@ public class Imagens {
 
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
 	URL bg = classLoader.getResource("Imagens/background.png");
+	URL exit = classLoader.getResource("Imagens/exit.png");
 
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");
