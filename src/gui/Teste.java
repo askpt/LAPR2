@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import dados.*;
+import jogosolimpicos.*;
 
 @SuppressWarnings("serial")
 public class Teste extends JFrame {
@@ -105,14 +106,65 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
-		menu.add(menuItem);
-
 		menuItem = new JMenuItem("Import Results", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
+			}
+		});
+
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("List Results", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int itModal = 0;
+
+				for (; itModal < Main.getModalidades().size(); itModal++) {
+					if (Main.getModalidades().get(itModal).getNome().equals("Gymnastics"))
+						break;
+				}
+
+				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
+					if (!Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
+						for (int j = 0; j < Main.getProvas().size(); j++) {
+
+							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
+
+								if (Main.getProvas().get(j) instanceof ProvaInd) {
+
+									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
+									for (int k = 0; k < ((ProvaInd) Main.getProvas().get(j)).getResultados().size(); k++) {
+										System.out.println(((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getAtleta().getNome() + " : " + ((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+									}
+								}
+
+							}
+						}
+				}
+
+				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
+					if (Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
+						System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
+					for (int j = 0; j < Main.getProvas().size(); j++) {
+
+						if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
+
+							if (Main.getProvas().get(j).getDisciplina().getTipoMod()) {
+
+								for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
+									System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+								}
+							}
+
+						}
+					}
+				}
+
 			}
 		});
 

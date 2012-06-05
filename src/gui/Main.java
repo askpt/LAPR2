@@ -1,5 +1,7 @@
 package gui;
 
+import java.net.URISyntaxException;
+
 import jogosolimpicos.*;
 import listaligada.*;
 
@@ -31,7 +33,12 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
+		try {
+			JanelaPrincipal teste = new JanelaPrincipal();
+		} catch (URISyntaxException e) {
 
+			e.printStackTrace();
+		}
 	}
 
 	public static ListaLigada<Disciplina> getDisciplinas() {
