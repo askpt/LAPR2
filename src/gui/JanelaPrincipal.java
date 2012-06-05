@@ -29,12 +29,18 @@ public class JanelaPrincipal extends JFrame {
 		btn1.setBorder(emptyBorder);
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("aaaaaaaaa");
 				AppConfig b = new AppConfig();
 			}
 		});
 
 		btn2.setContentAreaFilled(false);
 		btn2.setBorder(emptyBorder);
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("aa");
+			}
+		});
 
 		btn3.setContentAreaFilled(false);
 		btn3.setBorder(emptyBorder);
