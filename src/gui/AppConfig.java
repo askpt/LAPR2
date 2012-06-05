@@ -11,49 +11,80 @@ import dados.*;
 
 public class AppConfig extends JFrame {
 
-	private Botao expCountry, expCountryHtml, expDisc, expDiscHtml, expResu,
-			expResuHtml, impCountry, impCountryHtml, impDisc, impDiscHtml,
-			impResu, impResuHtml;
-
+	private Botao expCountry, expCountryHtml, expDisc, expDiscHtml, expResu, expResuHtml, impCountry, impCountryHtml, impDisc, impDiscHtml, impResu, impResuHtml;
+	private Painel imp, exp, add, edit, remove;
 	private JPanel p1;
-	Imagens img = new Imagens();
+
+	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
+	private JTabbedPane jtp = new JTabbedPane();
 
 	public AppConfig() {
+
 		setTitle("Application Configuration");
-		JTabbedPane jtp = new JTabbedPane();
+
+		addPaineis();
+		addTabs();
+		criarImport();
+		criarExport();
+		setProperties(400, 400, 0, true);
+
+	}
+
+	private void setProperties(int w, int h, int opcao, boolean v) {
+		setSize(w, h);
+		setDefaultCloseOperation(opcao);
+		setVisible(v);
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				fechar();
+			}
+		});
+	}
+
+	private void fechar() {
+		String[] opcoes = { "Sim", "Nao" };
+		if (JOptionPane.showOptionDialog(this, "Fechar janela?", "Jogos Olimpicos", 0, JOptionPane.INFORMATION_MESSAGE, null, opcoes, opcoes[0]) == 0) {
+			dispose();
+		}
+	}
+
+	private void addTabs() {
+
 		getContentPane().add(jtp);
 
-		// Panels
-		Painel imp = new Painel(img.imp);
-		Painel exp = new Painel(img.exp);
-		Painel add = new Painel(img.add);
-		Painel edit = new Painel(img.edit);
-		Painel remove = new Painel(img.remove);
-
-		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
-		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
-
-		criarImport();
-		imp.add(p1);
-		criarExport();
-		exp.add(p1);
-
+		// Tabs
 		jtp.addTab("Import", imp);
 		jtp.addTab("Export", exp);
 		jtp.addTab("Add", add);
 		jtp.addTab("Edit", edit);
 		jtp.addTab("Remove", remove);
 
-		setSize(400, 400);
-		setVisible(true);
-
 	}
 
-	public void criarImport() {
+	private void addPaineis() {
+
+		// Panels
+		imp = new Painel(img.imp);
+		exp = new Painel(img.exp);
+		add = new Painel(img.add);
+		edit = new Painel(img.edit);
+		remove = new Painel(img.remove);
+
+		imp.setOpaque(false);
+		exp.setOpaque(false);
+		add.setOpaque(false);
+		edit.setOpaque(false);
+		remove.setOpaque(false);
+	}
+
+	private void criarImport() {
 
 		p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p1.setOpaque(false);
+		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
 		// Countries
 		impCountry = new Botao(img.impCountry);
 		impCountry.setContentAreaFilled(false);
@@ -74,8 +105,7 @@ public class AppConfig extends JFrame {
 		impDisc.setBorder(emptyBorder);
 		impDisc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importDisc(AppConfig.this, Main.getDisciplinas(),
-						Main.getModalidades());
+				csv.importDisc(AppConfig.this, Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
 
@@ -89,9 +119,7 @@ public class AppConfig extends JFrame {
 		impResu.setBorder(emptyBorder);
 		impResu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(AppConfig.this, Main.getAtleta(),
-						Main.getModalidades(), Main.getPaises(),
-						Main.getProvas(), Main.getEquipas());
+				csv.importResultados(AppConfig.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
 			}
 		});
 
@@ -105,11 +133,15 @@ public class AppConfig extends JFrame {
 		p1.add(impDiscHtml);
 		p1.add(impResu);
 		p1.add(impResuHtml);
+		imp.add(p1);
 	}
 
-	public void criarExport() {
+	private void criarExport() {
 
 		p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p1.setOpaque(false);
+		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
 		// Countries
 		expCountry = new Botao(img.expCountry);
 		expCountry.setContentAreaFilled(false);
@@ -147,48 +179,21 @@ public class AppConfig extends JFrame {
 				int itModal = 0;
 
 				for (; itModal < Main.getModalidades().size(); itModal++) {
-					if (Main.getModalidades().get(itModal).getNome()
-							.equals("Gymnastics"))
+					if (Main.getModalidades().get(itModal).getNome().equals("Gymnastics"))
 						break;
 				}
 
-				for (int i = 0; i < Main.getModalidades().get(itModal)
-						.getDisc().size(); i++) {
-					if (!Main.getModalidades().get(itModal).getDisc().get(i)
-							.getTipoMod())
+				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
+					if (!Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
 						for (int j = 0; j < Main.getProvas().size(); j++) {
 
-							if (Main.getModalidades()
-									.get(itModal)
-									.getDisc()
-									.get(i)
-									.getNome()
-									.equals(Main.getProvas().get(j)
-											.getDisciplina().getNome())
-									&& Main.getModalidades()
-											.get(itModal)
-											.getNome()
-											.equals(Main.getProvas().get(j)
-													.getDisciplina()
-													.getModalidade().getNome())) {
+							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
 								if (Main.getProvas().get(j) instanceof ProvaInd) {
 
-									System.out.println(Main.getModalidades()
-											.get(itModal).getDisc().get(i)
-											.getNome());
-									for (int k = 0; k < ((ProvaInd) Main
-											.getProvas().get(j))
-											.getResultados().size(); k++) {
-										System.out.println(((ProvaInd) Main
-												.getProvas().get(j))
-												.getResultados().get(k)
-												.getAtleta().getNome()
-												+ " : "
-												+ ((ProvaInd) Main.getProvas()
-														.get(j))
-														.getResultados().get(k)
-														.getResulTemp());
+									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
+									for (int k = 0; k < ((ProvaInd) Main.getProvas().get(j)).getResultados().size(); k++) {
+										System.out.println(((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getAtleta().getNome() + " : " + ((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
 									}
 								}
 
@@ -196,42 +201,17 @@ public class AppConfig extends JFrame {
 						}
 				}
 
-				for (int i = 0; i < Main.getModalidades().get(itModal)
-						.getDisc().size(); i++) {
-					if (Main.getModalidades().get(itModal).getDisc().get(i)
-							.getTipoMod())
-						System.out.println(Main.getModalidades().get(itModal)
-								.getDisc().get(i).getNome());
+				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
+					if (Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
+						System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
 					for (int j = 0; j < Main.getProvas().size(); j++) {
 
-						if (Main.getModalidades()
-								.get(itModal)
-								.getDisc()
-								.get(i)
-								.getNome()
-								.equals(Main.getProvas().get(j).getDisciplina()
-										.getNome())
-								&& Main.getModalidades()
-										.get(itModal)
-										.getNome()
-										.equals(Main.getProvas().get(j)
-												.getDisciplina()
-												.getModalidade().getNome())) {
+						if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
-							if (Main.getProvas().get(j).getDisciplina()
-									.getTipoMod()) {
+							if (Main.getProvas().get(j).getDisciplina().getTipoMod()) {
 
-								for (int k = 0; k < ((ProvaCol) Main
-										.getProvas().get(j)).getResultados()
-										.size(); k++) {
-									System.out.println(((ProvaCol) Main
-											.getProvas().get(j))
-											.getResultados().get(k).getEquipa()
-											.getPais().getCodigoPais()
-											+ " : "
-											+ ((ProvaCol) Main.getProvas().get(
-													j)).getResultados().get(k)
-													.getResulTemp());
+								for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
+									System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
 								}
 							}
 
@@ -252,5 +232,6 @@ public class AppConfig extends JFrame {
 		p1.add(expDiscHtml);
 		p1.add(expResu);
 		p1.add(expResuHtml);
+		exp.add(p1);
 	}
 }
