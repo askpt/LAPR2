@@ -42,6 +42,7 @@ public class Imagens {
 	URL addJO = classLoader.getResource("Imagens/addJO.png");
 	URL addDis = classLoader.getResource("Imagens/addDisc.png");
 	URL addSpo = classLoader.getResource("Imagens/addSpo.png");
+	URL addEv = classLoader.getResource("Imagens/addEv.png");
 
 	// edit
 
@@ -50,6 +51,7 @@ public class Imagens {
 	URL editJO = classLoader.getResource("Imagens/editJO.png");
 	URL editDis = classLoader.getResource("Imagens/editDisc.png");
 	URL editSpo = classLoader.getResource("Imagens/editSpo.png");
+	URL editEv = classLoader.getResource("Imagens/editEv.png");
 
 	// remove
 
@@ -58,12 +60,20 @@ public class Imagens {
 	URL removeJO = classLoader.getResource("Imagens/removeJO.png");
 	URL removeDis = classLoader.getResource("Imagens/removeDisc.png");
 	URL removeSpo = classLoader.getResource("Imagens/removeSpo.png");
+	URL removeEv = classLoader.getResource("Imagens/removeEv.png");
+
+	// register
+
+	URL regAt = classLoader.getResource("Imagens/regAtTeam.png");
+	URL regRe = classLoader.getResource("Imagens/regResult.png");
+	URL regReTeam = classLoader.getResource("Imagens/regTresult.png");
 
 	// ok,clear, +
 
 	URL ok = classLoader.getResource("Imagens/ok.png");
 	URL clear = classLoader.getResource("Imagens/cancel.png");
 	URL mais = classLoader.getResource("Imagens/+.png");
+	URL menos = classLoader.getResource("Imagens/no.png");
 
 	// panels
 	URL imp = classLoader.getResource("Imagens/import.png");
@@ -71,5 +81,6 @@ public class Imagens {
 	URL add = classLoader.getResource("Imagens/add.png");
 	URL edit = classLoader.getResource("Imagens/edit.png");
 	URL remove = classLoader.getResource("Imagens/remove.png");
+	URL reg = classLoader.getResource("Imagens/reg.png");
 
 }

@@ -11,7 +11,7 @@ import dados.*;
 
 public class AppConfig extends JFrame {
 
-	private Painel imp, exp, add, edit, remove;
+	private Painel imp, exp, add, edit, remove, reg;
 
 	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
@@ -29,6 +29,7 @@ public class AppConfig extends JFrame {
 		addAdds();
 		addEdits();
 		addRemoves();
+		addRegs();
 		setProperties(400, 400, 1, true);
 
 	}
@@ -53,6 +54,7 @@ public class AppConfig extends JFrame {
 		jtp.addTab("Add", add);
 		jtp.addTab("Edit", edit);
 		jtp.addTab("Remove", remove);
+		jtp.addTab("Register", reg);
 
 	}
 
@@ -64,12 +66,14 @@ public class AppConfig extends JFrame {
 		add = new Painel(img.add);
 		edit = new Painel(img.edit);
 		remove = new Painel(img.remove);
+		reg = new Painel(img.reg);
 
 		imp.setOpaque(false);
 		exp.setOpaque(false);
 		add.setOpaque(false);
 		edit.setOpaque(false);
 		remove.setOpaque(false);
+		reg.setOpaque(false);
 	}
 
 	private void addImports() {
@@ -233,13 +237,13 @@ public class AppConfig extends JFrame {
 		p1.setOpaque(false);
 		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
-		Botao addAth = new Botao(img.addAth);
-		addAth.setContentAreaFilled(false);
-		addAth.setBorder(emptyBorder);
-		addAth.addActionListener(new ActionListener() {
+		Botao addJO = new Botao(img.addJO);
+		addJO.setContentAreaFilled(false);
+		addJO.setBorder(emptyBorder);
+		addJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddDados a = new AddDados();
-				a.setSelectedIndex(4);
+				a.setSelectedIndex(0);
 			}
 		});
 
@@ -273,21 +277,32 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao addJO = new Botao(img.addJO);
-		addJO.setContentAreaFilled(false);
-		addJO.setBorder(emptyBorder);
-		addJO.addActionListener(new ActionListener() {
+		Botao addEv = new Botao(img.addEv);
+		addEv.setContentAreaFilled(false);
+		addEv.setBorder(emptyBorder);
+		addEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddDados a = new AddDados();
-				a.setSelectedIndex(0);
+				a.setSelectedIndex(4);
 			}
 		});
 
-		p1.add(addAth);
+		Botao addAth = new Botao(img.addAth);
+		addAth.setContentAreaFilled(false);
+		addAth.setBorder(emptyBorder);
+		addAth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(5);
+			}
+		});
+
+		p1.add(addJO);
 		p1.add(addCo);
 		p1.add(addDis);
 		p1.add(addSpo);
-		p1.add(addJO);
+		p1.add(addEv);
+		p1.add(addAth);
 		add.add(p1);
 
 	}
@@ -298,31 +313,72 @@ public class AppConfig extends JFrame {
 		p1.setOpaque(false);
 		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
-		Botao editAth = new Botao(img.editAth);
-		editAth.setContentAreaFilled(false);
-		editAth.setBorder(emptyBorder);
+		Botao editJO = new Botao(img.editJO);
+		editJO.setContentAreaFilled(false);
+		editJO.setBorder(emptyBorder);
+		editJO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(0);
+			}
+		});
 
 		Botao editCo = new Botao(img.editCo);
 		editCo.setContentAreaFilled(false);
 		editCo.setBorder(emptyBorder);
+		editCo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(1);
+			}
+		});
 
 		Botao editDis = new Botao(img.editDis);
 		editDis.setContentAreaFilled(false);
 		editDis.setBorder(emptyBorder);
+		editDis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(2);
+			}
+		});
 
 		Botao editSpo = new Botao(img.editSpo);
 		editSpo.setContentAreaFilled(false);
 		editSpo.setBorder(emptyBorder);
+		editSpo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(3);
+			}
+		});
 
-		Botao editJO = new Botao(img.editJO);
-		editJO.setContentAreaFilled(false);
-		editJO.setBorder(emptyBorder);
+		Botao editEv = new Botao(img.editEv);
+		editEv.setContentAreaFilled(false);
+		editEv.setBorder(emptyBorder);
+		editEv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(4);
+			}
+		});
 
-		p1.add(editAth);
+		Botao editAth = new Botao(img.editAth);
+		editAth.setContentAreaFilled(false);
+		editAth.setBorder(emptyBorder);
+		editAth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(5);
+			}
+		});
+
+		p1.add(editJO);
 		p1.add(editCo);
 		p1.add(editDis);
 		p1.add(editSpo);
-		p1.add(editJO);
+		p1.add(editEv);
+		p1.add(editAth);
 		edit.add(p1);
 	}
 
@@ -332,32 +388,150 @@ public class AppConfig extends JFrame {
 		p1.setOpaque(false);
 		remove.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
-		Botao removeAth = new Botao(img.removeAth);
-		removeAth.setContentAreaFilled(false);
-		removeAth.setBorder(emptyBorder);
+		Botao removeJO = new Botao(img.removeJO);
+		removeJO.setContentAreaFilled(false);
+		removeJO.setBorder(emptyBorder);
+		removeJO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(0);
+			}
+		});
 
 		Botao removeCo = new Botao(img.removeCo);
 		removeCo.setContentAreaFilled(false);
 		removeCo.setBorder(emptyBorder);
+		removeCo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(1);
+			}
+		});
 
 		Botao removeDis = new Botao(img.removeDis);
 		removeDis.setContentAreaFilled(false);
 		removeDis.setBorder(emptyBorder);
+		removeDis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(2);
+			}
+		});
 
 		Botao removeSpo = new Botao(img.removeSpo);
 		removeSpo.setContentAreaFilled(false);
 		removeSpo.setBorder(emptyBorder);
+		removeSpo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(3);
+			}
+		});
 
-		Botao removeJO = new Botao(img.removeJO);
-		removeJO.setContentAreaFilled(false);
-		removeJO.setBorder(emptyBorder);
+		Botao removeEv = new Botao(img.removeEv);
+		removeEv.setContentAreaFilled(false);
+		removeEv.setBorder(emptyBorder);
+		removeEv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(4);
+			}
+		});
 
-		p1.add(removeAth);
+		Botao removeAth = new Botao(img.removeAth);
+		removeAth.setContentAreaFilled(false);
+		removeAth.setBorder(emptyBorder);
+		removeAth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(5);
+			}
+		});
+
+		p1.add(removeJO);
 		p1.add(removeCo);
 		p1.add(removeDis);
 		p1.add(removeSpo);
-		p1.add(removeJO);
+		p1.add(removeEv);
+		p1.add(removeAth);
 		remove.add(p1);
 	}
 
+	private void addRegs() {
+		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p1.setOpaque(false);
+		reg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
+		Botao regAtToTeam = new Botao(img.regAt);
+		regAtToTeam.setContentAreaFilled(false);
+		regAtToTeam.setToolTipText("Add athlete to a team.");
+		regAtToTeam.setBorder(emptyBorder);
+		regAtToTeam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(0);
+			}
+		});
+
+		Botao regResult = new Botao(img.regRe);
+		regResult.setContentAreaFilled(false);
+		regResult.setToolTipText("Register athlete's result.");
+		regResult.setBorder(emptyBorder);
+		regResult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(1);
+			}
+		});
+
+		Botao regResultTeam = new Botao(img.regReTeam);
+		regResultTeam.setContentAreaFilled(false);
+		regResultTeam.setToolTipText("Registar team's result.");
+		regResultTeam.setBorder(emptyBorder);
+		regResultTeam.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(2);
+			}
+		});
+
+		Botao removeSpo = new Botao(img.removeSpo);
+		removeSpo.setContentAreaFilled(false);
+		removeSpo.setBorder(emptyBorder);
+		removeSpo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(3);
+			}
+		});
+
+		Botao removeEv = new Botao(img.removeEv);
+		removeEv.setContentAreaFilled(false);
+		removeEv.setBorder(emptyBorder);
+		removeEv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(4);
+			}
+		});
+
+		Botao removeAth = new Botao(img.removeAth);
+		removeAth.setContentAreaFilled(false);
+		removeAth.setBorder(emptyBorder);
+		removeAth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RemDados a = new RemDados();
+				a.setSelectedIndex(5);
+			}
+		});
+
+		p1.add(regAtToTeam);
+		p1.add(regResult);
+		p1.add(regResultTeam);
+		p1.add(removeSpo);
+		p1.add(removeEv);
+		p1.add(removeAth);
+		reg.add(p1);
+
+	}
 }

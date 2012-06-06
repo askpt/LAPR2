@@ -48,8 +48,8 @@ public class AddDados extends JFrame {
 		jtp.addTab("Country", new ImageIcon(img.mais), co);
 		jtp.addTab("Discipline", new ImageIcon(img.mais), di);
 		jtp.addTab("Sport", new ImageIcon(img.mais), spo);
-		jtp.addTab("Athlete", new ImageIcon(img.mais), at);
 		jtp.addTab("Events", new ImageIcon(img.mais), ev);
+		jtp.addTab("Athlete", new ImageIcon(img.mais), at);
 
 	}
 
