@@ -468,7 +468,7 @@ public class AppConfig extends JFrame {
 		regAtToTeam.setBorder(emptyBorder);
 		regAtToTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
+				AddRegs a = new AddRegs();
 				a.setSelectedIndex(0);
 			}
 		});
