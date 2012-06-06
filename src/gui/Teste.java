@@ -111,7 +111,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
+				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
 			}
 		});
 

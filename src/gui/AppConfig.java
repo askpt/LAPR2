@@ -119,7 +119,7 @@ public class AppConfig extends JFrame {
 		impResu.setBorder(emptyBorder);
 		impResu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(AppConfig.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas());
+				csv.importResultados(AppConfig.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
 			}
 		});
 

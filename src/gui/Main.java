@@ -13,6 +13,7 @@ public class Main {
 	private static ListaLigada<Prova> provas = new ListaLigada<Prova>();
 	private static ListaLigada<Disciplina> disciplinas = new ListaLigada<Disciplina>();
 	private static ListaLigada<Equipa> equipas = new ListaLigada<Equipa>();
+	private static ListaLigada<JogosOlimpicos> jogos = new ListaLigada<JogosOlimpicos>();
 
 	public static Teste i = new Teste("Teste");
 
@@ -47,6 +48,10 @@ public class Main {
 
 	public static ListaLigada<Equipa> getEquipas() {
 		return equipas;
+	}
+
+	public static ListaLigada<JogosOlimpicos> getJogos() {
+		return jogos;
 	}
 
 }

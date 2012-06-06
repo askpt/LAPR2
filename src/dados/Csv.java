@@ -103,7 +103,8 @@ public class Csv extends JComponent implements Accessible {
 				return;
 			}
 
-			// Disciplina(String nome, Modalidade modalidade, boolean tipoDisc,
+			// Disciplina(String nome, Modalidade modalidade, boolean
+			// tipoDisc,
 			// int genero)
 
 			// import modalidades
@@ -460,7 +461,7 @@ public class Csv extends JComponent implements Accessible {
 	}
 
 	@SuppressWarnings("unused")
-	public void importResultados(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas) {
+	public void importResultados(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
 		try {
 
 			JFileChooser fc = new JFileChooser();
@@ -474,11 +475,24 @@ public class Csv extends JComponent implements Accessible {
 			int ponto = ficheiro.getName().lastIndexOf(".");
 			String[] tempPrin = ficheiro.getName().substring(0, ponto).split("_");
 			int ano = Integer.parseInt(tempPrin[0]);
+			int itJogos = 0;
+			for (; itJogos < jogos.size(); itJogos++) {
+				if (jogos.get(itJogos).getAno() == ano) {
+					break;
+				}
+			}
+
+			if (itJogos == jogos.size()) {
+				jogos.add(new JogosOlimpicos(ano));
+			}
+
 			String modalidade = tempPrin[1];
 			String genero = tempPrin[2];
 			int codGenero = -1; // 0 = masc 1= fem 2= mixed
-			boolean tipoDisc = false; // false = individual true = coletivo
-			int tipoClass = -1; // 0 - distancia 1 = tempo 2 = pontos 3 = rank
+			boolean tipoDisc = false; // false = individual true =
+							// coletivo
+			int tipoClass = -1; // 0 - distancia 1 = tempo 2 = pontos 3
+						// = rank
 			String nomeDisc;
 			int itDisc = 0;
 			int itProva = 0;
@@ -665,7 +679,7 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
-							provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
+							provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), jogos.get(itJogos)));
 						}
 
 						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
@@ -718,7 +732,7 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
-							provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), new JogosOlimpicos(ano)));
+							provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), jogos.get(itJogos)));
 						}
 
 						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
