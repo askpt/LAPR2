@@ -21,6 +21,7 @@ public class AddDados extends JFrame {
 		addPaineis();
 		addTabs();
 		addEdition();
+		addCountry();
 		setProperties(600, 400, 1, true);
 	}
 
@@ -67,11 +68,13 @@ public class AddDados extends JFrame {
 		p1.setBackground(new Color(158, 193, 213));
 		jo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
-		JPanel panel1 = new JPanel(new BorderLayout());
+		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
-
-		panel1.add(new JLabel("Ano:     "), BorderLayout.WEST);
+		JLabel a = new JLabel("Olympic Games");
+		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		panel1.add(a, BorderLayout.NORTH);
+		panel1.add(new JLabel("Year:  "), BorderLayout.WEST);
 		JTextField txtAno = new JTextField(20);
 		txtAno.setToolTipText("Year of the Olympic Games Edition.");
 		panel1.add(txtAno, BorderLayout.CENTER);
@@ -80,7 +83,7 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("Cidade:  "), BorderLayout.WEST);
+		panel2.add(new JLabel("   City:  "), BorderLayout.WEST);
 		JTextField txtCidade = new JTextField(20);
 		txtCidade.setToolTipText("City of the Olympic Games Edition.");
 		panel2.add(txtCidade, BorderLayout.CENTER);
@@ -98,6 +101,47 @@ public class AddDados extends JFrame {
 		p1.add(panel2, BorderLayout.CENTER);
 		p1.add(panel3, BorderLayout.SOUTH);
 		jo.add(p1);
+
+	}
+
+	private void addCountry() {
+		JPanel p1 = new JPanel(new BorderLayout(10, 10));
+		p1.setBackground(new Color(158, 193, 213));
+		co.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
+		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
+		panel1.setOpaque(false);
+		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
+		JLabel a = new JLabel("Country");
+		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		panel1.add(a, BorderLayout.NORTH);
+		panel1.add(new JLabel("Name: "), BorderLayout.WEST);
+		JTextField txtAno = new JTextField(20);
+		txtAno.setToolTipText("Country's name.");
+		panel1.add(txtAno, BorderLayout.CENTER);
+
+		JPanel panel2 = new JPanel(new BorderLayout());
+		panel2.setOpaque(false);
+		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		panel2.add(new JLabel("  Code:  "), BorderLayout.WEST);
+		JTextField txtCidade = new JTextField(20);
+		txtCidade.setToolTipText("Country's code.");
+		panel2.add(txtCidade, BorderLayout.CENTER);
+
+		JPanel panel3 = new JPanel();
+		panel3.setOpaque(false);
+		Botao ok = new Botao(img.ok);
+		ok.setContentAreaFilled(false);
+		Botao clear = new Botao(img.clear);
+		clear.setContentAreaFilled(false);
+		panel3.add(ok);
+		panel3.add(clear);
+
+		p1.add(panel1, BorderLayout.NORTH);
+		p1.add(panel2, BorderLayout.CENTER);
+		p1.add(panel3, BorderLayout.SOUTH);
+		co.add(p1);
 
 	}
 }
