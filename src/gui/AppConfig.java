@@ -28,6 +28,7 @@ public class AppConfig extends JFrame {
 		addTabs();
 		criarImport();
 		criarExport();
+		criarAdds();
 		setProperties(400, 400, 0, true);
 
 	}
@@ -233,5 +234,39 @@ public class AppConfig extends JFrame {
 		p1.add(expResu);
 		p1.add(expResuHtml);
 		exp.add(p1);
+	}
+
+	private void criarAdds() {
+		p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p1.setOpaque(false);
+		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
+		Botao addAth = new Botao(img.addAth);
+		addAth.setContentAreaFilled(false);
+		addAth.setBorder(emptyBorder);
+
+		Botao addCo = new Botao(img.addCo);
+		addCo.setContentAreaFilled(false);
+		addCo.setBorder(emptyBorder);
+
+		Botao addDis = new Botao(img.addDis);
+		addDis.setContentAreaFilled(false);
+		addDis.setBorder(emptyBorder);
+
+		Botao addSpo = new Botao(img.addSpo);
+		addSpo.setContentAreaFilled(false);
+		addSpo.setBorder(emptyBorder);
+
+		Botao addJO = new Botao(img.addJO);
+		addJO.setContentAreaFilled(false);
+		addJO.setBorder(emptyBorder);
+
+		p1.add(addAth);
+		p1.add(addCo);
+		p1.add(addDis);
+		p1.add(addSpo);
+		p1.add(addJO);
+		add.add(p1);
+
 	}
 }

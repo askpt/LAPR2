@@ -34,6 +34,14 @@ public class Imagens {
 	URL impResu = classLoader.getResource("Imagens/importresu.png");
 	URL impResuHtml = classLoader.getResource("Imagens/importresuHtml.png");
 
+	// add
+
+	URL addAth = classLoader.getResource("Imagens/addAth.png");
+	URL addCo = classLoader.getResource("Imagens/addCo.png");
+	URL addJO = classLoader.getResource("Imagens/addJO.png");
+	URL addDis = classLoader.getResource("Imagens/addDisc.png");
+	URL addSpo = classLoader.getResource("Imagens/addSpo.png");
+
 	// panels
 	URL imp = classLoader.getResource("Imagens/import.png");
 	URL exp = classLoader.getResource("Imagens/export.png");
