@@ -11,9 +11,7 @@ import dados.*;
 
 public class AppConfig extends JFrame {
 
-	private Botao expCountry, expCountryHtml, expDisc, expDiscHtml, expResu, expResuHtml, impCountry, impCountryHtml, impDisc, impDiscHtml, impResu, impResuHtml;
 	private Painel imp, exp, add, edit, remove;
-	private JPanel p1;
 
 	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
@@ -26,29 +24,23 @@ public class AppConfig extends JFrame {
 
 		addPaineis();
 		addTabs();
-		criarImport();
-		criarExport();
-		criarAdds();
-		setProperties(400, 400, 0, true);
+		addImports();
+		addExports();
+		addAdds();
+		addEdits();
+		addRemoves();
+		setProperties(400, 400, 1, true);
 
 	}
 
-	private void setProperties(int w, int h, int opcao, boolean v) {
+	private void setProperties(int w, int h, int opcao, boolean visible) {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
-		setVisible(v);
+		setVisible(visible);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				close();
 			}
 		});
-	}
-
-	private void close() {
-		String[] opt = { "Yes", "No" };
-		if (JOptionPane.showOptionDialog(this, "Close window?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, null, opt, opt[0]) == 0) {
-			dispose();
-		}
 	}
 
 	private void addTabs() {
@@ -80,14 +72,14 @@ public class AppConfig extends JFrame {
 		remove.setOpaque(false);
 	}
 
-	private void criarImport() {
+	private void addImports() {
 
-		p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p1.setOpaque(false);
 		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		// Countries
-		impCountry = new Botao(img.impCountry);
+		Botao impCountry = new Botao(img.impCountry);
 		impCountry.setContentAreaFilled(false);
 		impCountry.setBorder(emptyBorder);
 		impCountry.addActionListener(new ActionListener() {
@@ -96,12 +88,12 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		impCountryHtml = new Botao(img.impCountryHtml);
+		Botao impCountryHtml = new Botao(img.impCountryHtml);
 		impCountryHtml.setContentAreaFilled(false);
 		impCountryHtml.setBorder(emptyBorder);
 
 		// Disciplines
-		impDisc = new Botao(img.impDisc);
+		Botao impDisc = new Botao(img.impDisc);
 		impDisc.setContentAreaFilled(false);
 		impDisc.setBorder(emptyBorder);
 		impDisc.addActionListener(new ActionListener() {
@@ -110,12 +102,12 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		impDiscHtml = new Botao(img.impDiscHtml);
+		Botao impDiscHtml = new Botao(img.impDiscHtml);
 		impDiscHtml.setContentAreaFilled(false);
 		impDiscHtml.setBorder(emptyBorder);
 
 		// Results
-		impResu = new Botao(img.impResu);
+		Botao impResu = new Botao(img.impResu);
 		impResu.setContentAreaFilled(false);
 		impResu.setBorder(emptyBorder);
 		impResu.addActionListener(new ActionListener() {
@@ -124,7 +116,7 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		impResuHtml = new Botao(img.impResuHtml);
+		Botao impResuHtml = new Botao(img.impResuHtml);
 		impResuHtml.setContentAreaFilled(false);
 		impResuHtml.setBorder(emptyBorder);
 
@@ -137,14 +129,14 @@ public class AppConfig extends JFrame {
 		imp.add(p1);
 	}
 
-	private void criarExport() {
+	private void addExports() {
 
-		p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p1.setOpaque(false);
 		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		// Countries
-		expCountry = new Botao(img.expCountry);
+		Botao expCountry = new Botao(img.expCountry);
 		expCountry.setContentAreaFilled(false);
 		expCountry.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
@@ -153,12 +145,12 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		expCountryHtml = new Botao(img.expCountryHtml);
+		Botao expCountryHtml = new Botao(img.expCountryHtml);
 		expCountryHtml.setContentAreaFilled(false);
 		expCountryHtml.setBorder(emptyBorder);
 
 		// Disciplines
-		expDisc = new Botao(img.expDisc);
+		Botao expDisc = new Botao(img.expDisc);
 		expDisc.setContentAreaFilled(false);
 		expDisc.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
@@ -167,12 +159,12 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		expDiscHtml = new Botao(img.expDiscHtml);
+		Botao expDiscHtml = new Botao(img.expDiscHtml);
 		expDiscHtml.setContentAreaFilled(false);
 		expDiscHtml.setBorder(emptyBorder);
 
 		// Results
-		expResu = new Botao(img.expResu);
+		Botao expResu = new Botao(img.expResu);
 		expResu.setContentAreaFilled(false);
 		expResu.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
@@ -223,7 +215,7 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		expResuHtml = new Botao(img.expResuHtml);
+		Botao expResuHtml = new Botao(img.expResuHtml);
 		expResuHtml.setContentAreaFilled(false);
 		expResuHtml.setBorder(emptyBorder);
 
@@ -236,30 +228,60 @@ public class AppConfig extends JFrame {
 		exp.add(p1);
 	}
 
-	private void criarAdds() {
-		p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+	private void addAdds() {
+		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p1.setOpaque(false);
 		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		Botao addAth = new Botao(img.addAth);
 		addAth.setContentAreaFilled(false);
 		addAth.setBorder(emptyBorder);
+		addAth.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(4);
+			}
+		});
 
 		Botao addCo = new Botao(img.addCo);
 		addCo.setContentAreaFilled(false);
 		addCo.setBorder(emptyBorder);
+		addCo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(1);
+			}
+		});
 
 		Botao addDis = new Botao(img.addDis);
 		addDis.setContentAreaFilled(false);
 		addDis.setBorder(emptyBorder);
+		addDis.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(2);
+			}
+		});
 
 		Botao addSpo = new Botao(img.addSpo);
 		addSpo.setContentAreaFilled(false);
 		addSpo.setBorder(emptyBorder);
+		addSpo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(3);
+			}
+		});
 
 		Botao addJO = new Botao(img.addJO);
 		addJO.setContentAreaFilled(false);
 		addJO.setBorder(emptyBorder);
+		addJO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddDados a = new AddDados();
+				a.setSelectedIndex(0);
+			}
+		});
 
 		p1.add(addAth);
 		p1.add(addCo);
@@ -269,4 +291,73 @@ public class AppConfig extends JFrame {
 		add.add(p1);
 
 	}
+
+	private void addEdits() {
+
+		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p1.setOpaque(false);
+		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
+		Botao editAth = new Botao(img.editAth);
+		editAth.setContentAreaFilled(false);
+		editAth.setBorder(emptyBorder);
+
+		Botao editCo = new Botao(img.editCo);
+		editCo.setContentAreaFilled(false);
+		editCo.setBorder(emptyBorder);
+
+		Botao editDis = new Botao(img.editDis);
+		editDis.setContentAreaFilled(false);
+		editDis.setBorder(emptyBorder);
+
+		Botao editSpo = new Botao(img.editSpo);
+		editSpo.setContentAreaFilled(false);
+		editSpo.setBorder(emptyBorder);
+
+		Botao editJO = new Botao(img.editJO);
+		editJO.setContentAreaFilled(false);
+		editJO.setBorder(emptyBorder);
+
+		p1.add(editAth);
+		p1.add(editCo);
+		p1.add(editDis);
+		p1.add(editSpo);
+		p1.add(editJO);
+		edit.add(p1);
+	}
+
+	private void addRemoves() {
+
+		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p1.setOpaque(false);
+		remove.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
+		Botao removeAth = new Botao(img.removeAth);
+		removeAth.setContentAreaFilled(false);
+		removeAth.setBorder(emptyBorder);
+
+		Botao removeCo = new Botao(img.removeCo);
+		removeCo.setContentAreaFilled(false);
+		removeCo.setBorder(emptyBorder);
+
+		Botao removeDis = new Botao(img.removeDis);
+		removeDis.setContentAreaFilled(false);
+		removeDis.setBorder(emptyBorder);
+
+		Botao removeSpo = new Botao(img.removeSpo);
+		removeSpo.setContentAreaFilled(false);
+		removeSpo.setBorder(emptyBorder);
+
+		Botao removeJO = new Botao(img.removeJO);
+		removeJO.setContentAreaFilled(false);
+		removeJO.setBorder(emptyBorder);
+
+		p1.add(removeAth);
+		p1.add(removeCo);
+		p1.add(removeDis);
+		p1.add(removeSpo);
+		p1.add(removeJO);
+		remove.add(p1);
+	}
+
 }

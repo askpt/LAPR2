@@ -7,6 +7,7 @@ public class Imagens {
 
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
 	URL bg = classLoader.getResource("Imagens/background.png");
+	URL bg2 = classLoader.getResource("Imagens/bg2.png");
 	URL exit = classLoader.getResource("Imagens/exit.png");
 
 	// buttons
@@ -41,6 +42,28 @@ public class Imagens {
 	URL addJO = classLoader.getResource("Imagens/addJO.png");
 	URL addDis = classLoader.getResource("Imagens/addDisc.png");
 	URL addSpo = classLoader.getResource("Imagens/addSpo.png");
+
+	// edit
+
+	URL editAth = classLoader.getResource("Imagens/editAth.png");
+	URL editCo = classLoader.getResource("Imagens/editCo.png");
+	URL editJO = classLoader.getResource("Imagens/editJO.png");
+	URL editDis = classLoader.getResource("Imagens/editDisc.png");
+	URL editSpo = classLoader.getResource("Imagens/editSpo.png");
+
+	// remove
+
+	URL removeAth = classLoader.getResource("Imagens/removeAth.png");
+	URL removeCo = classLoader.getResource("Imagens/removeCo.png");
+	URL removeJO = classLoader.getResource("Imagens/removeJO.png");
+	URL removeDis = classLoader.getResource("Imagens/removeDisc.png");
+	URL removeSpo = classLoader.getResource("Imagens/removeSpo.png");
+
+	// ok,clear, +
+
+	URL ok = classLoader.getResource("Imagens/ok.png");
+	URL clear = classLoader.getResource("Imagens/cancel.png");
+	URL mais = classLoader.getResource("Imagens/+.png");
 
 	// panels
 	URL imp = classLoader.getResource("Imagens/import.png");

@@ -25,9 +25,7 @@ public class Painel extends JPanel {
 	public Painel(URL url) {
 		String temp = url.getPath();
 		String[] temparray = temp.split("/");
-		imagem = temparray[temparray.length - 3] + "/"
-				+ temparray[temparray.length - 2] + "/"
-				+ temparray[temparray.length - 1];
+		imagem = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
 	}
 
 	public Painel(LayoutManager layout) {
