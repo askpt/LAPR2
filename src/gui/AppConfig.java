@@ -45,7 +45,7 @@ public class AppConfig extends JFrame {
 
 	private void close() {
 		String[] opt = { "Yes", "No" };
-		if (JOptionPane.showOptionDialog(this, "Close windows?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, null, opt, opt[0]) == 0) {
+		if (JOptionPane.showOptionDialog(this, "Close window?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, null, opt, opt[0]) == 0) {
 			dispose();
 		}
 	}
