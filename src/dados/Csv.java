@@ -1,6 +1,6 @@
 package dados;
 
-import gui.Main;
+import gui.*;
 
 import java.awt.*;
 import java.io.*;
@@ -585,11 +585,11 @@ public class Csv extends JComponent implements Accessible {
 							return;
 						}
 
-						boolean existeAtleta = false;
-
 						equipas.add(new Equipa(paises.get(itPais)));
 						String[] atletasTemp = team[1].split(", ");
+						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
 						for (int i = 0; i < atletasTemp.length; i++) {
+							boolean existeAtleta = false;
 							int itAtleta = 0;
 							for (; itAtleta < atletas.size(); itAtleta++) {
 								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atletasTemp[i])) {
@@ -687,12 +687,13 @@ public class Csv extends JComponent implements Accessible {
 							return;
 						}
 
-						boolean existeAtleta = false;
-
 						equipas.add(new Equipa(paises.get(itPais)));
 						String[] atletasTemp = team[1].split(", ");
+						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
+
 						for (int i = 0; i < atletasTemp.length; i++) {
 							int itAtleta = 0;
+							boolean existeAtleta = false;
 							for (; itAtleta < atletas.size(); itAtleta++) {
 								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atletasTemp[i])) {
 									existeAtleta = true;
@@ -700,7 +701,6 @@ public class Csv extends JComponent implements Accessible {
 								}
 
 							}
-
 							if (!existeAtleta) {
 
 								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
@@ -806,17 +806,16 @@ public class Csv extends JComponent implements Accessible {
 						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
 							if (provas.get(j) instanceof ProvaCol) {
-								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
+								out.format(modalidades.get(itModal).getDisc().get(i).getNome() + ";");
 
 								for (int k = 0; k < ((ProvaCol) provas.get(j)).getResultados().size(); k++) {
 									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + "(");
-									for (int l = 0; l < ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size(); l++) {
+									for (int l = 0; l < ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1; l++) {
 										out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome() + ", ");
-										if (l == ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1)
-											out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome());
 									}
+									int index = ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1;
+									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(index).getNome() + ");");
 
-									out.format(");");
 									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getResulTemp() + "\n");
 								}
 							}
