@@ -67,7 +67,7 @@ public class AddRegs extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Add athlete to this team");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name:  "), BorderLayout.WEST);
 		JTextField txtName = new JTextField(20);
@@ -107,7 +107,7 @@ public class AddRegs extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Register individual result");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Athlete:  "), BorderLayout.WEST);
 		JComboBox cmbAt = new JComboBox();

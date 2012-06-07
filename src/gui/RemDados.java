@@ -117,7 +117,7 @@ public class RemDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel(nome);
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		JComboBox b = new JComboBox();
 		b.setToolTipText(tooltip);

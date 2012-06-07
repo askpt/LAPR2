@@ -80,7 +80,7 @@ public class AddDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Olympic Games");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Year:  "), BorderLayout.WEST);
 		JTextField txtAno = new JTextField(20);
@@ -121,7 +121,7 @@ public class AddDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Country");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name: "), BorderLayout.WEST);
 		JTextField txtAno = new JTextField(20);
@@ -162,7 +162,7 @@ public class AddDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Discipline");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name:  "), BorderLayout.WEST);
 		JTextField txtAno = new JTextField(20);
@@ -192,7 +192,7 @@ public class AddDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Sport");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name:    "), BorderLayout.WEST);
 		JComboBox cmbDiscipline = new JComboBox();
@@ -232,7 +232,7 @@ public class AddDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Event");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name:  "), BorderLayout.WEST);
 		JTextField txtName = new JTextField(20);
@@ -272,7 +272,7 @@ public class AddDados extends JFrame {
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Athlete");
-		a.setFont((new Font("Courier New", Font.BOLD, 14)));
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name:      "), BorderLayout.WEST);
 		JTextField txtName = new JTextField(20);
