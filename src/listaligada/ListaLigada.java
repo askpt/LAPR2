@@ -81,7 +81,7 @@ public class ListaLigada<E> {
 	 *            index of the element in order to get its node
 	 * @return the node that corresponds to the index passed as parameter
 	 */
-	No<E> no(int index) {
+	public No<E> no(int index) {
 
 		if (index < (size() >> 1)) {
 			No<E> x = cabeca;
@@ -152,7 +152,7 @@ public class ListaLigada<E> {
 			return;
 		}
 		temp = cabeca;
-		for (int i = 0; i < index - 1; i++) {
+		for (int i = 0; i < index; i++) {
 			No<E> no = new No<E>();
 			no.elemento = elemento;
 			no.proximo = temp.proximo;
