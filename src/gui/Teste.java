@@ -181,6 +181,17 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
+		menuItem = new JMenuItem("Import Provas", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				csv.importProvas(Teste.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
+			}
+		});
+
+		menu.add(menuItem);
+
 		setJMenuBar(menuBar);
 
 		JLabel label = new JLabel(new ImageIcon(img.constrution));

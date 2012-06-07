@@ -43,12 +43,12 @@ public class Csv extends JComponent implements Accessible {
 				if (temp[0].endsWith(" "))
 					temp[0] = temp[0].substring(0, temp[0].length() - 1);
 				if (temp[0].startsWith(" "))
-					temp[0] = temp[0].substring(0);
+					temp[0] = temp[0].substring(1);
 				temp[1] = temp[1].replaceAll("  ", " ");
 				if (temp[1].endsWith(" "))
 					temp[1] = temp[1].substring(0, temp[1].length() - 1);
 				if (temp[1].startsWith(" "))
-					temp[1] = temp[1].substring(0);
+					temp[1] = temp[1].substring(1);
 
 				paises.add(new Pais(temp[0], temp[1]));
 			}
@@ -134,7 +134,7 @@ public class Csv extends JComponent implements Accessible {
 					if (tempModal[0].endsWith(" "))
 						tempModal[0] = tempModal[0].substring(0, tempModal[0].length() - 1);
 					if (tempModal[0].startsWith(" "))
-						tempModal[0] = tempModal[0].substring(0);
+						tempModal[0] = tempModal[0].substring(1);
 					modalidades.add(new Modalidade(tempModal[0]));
 				}
 			}
@@ -149,7 +149,7 @@ public class Csv extends JComponent implements Accessible {
 				if (temp[1].endsWith(" "))
 					temp[1] = temp[1].substring(0, temp[1].length() - 1);
 				if (temp[1].startsWith(" "))
-					temp[1] = temp[1].substring(0);
+					temp[1] = temp[1].substring(1);
 
 				Disciplina tempDisc = new Disciplina("temp");
 				Disciplina tempDisc2 = new Disciplina("temp");
@@ -507,6 +507,8 @@ public class Csv extends JComponent implements Accessible {
 
 			if (itJogos == jogos.size()) {
 				jogos.add(new JogosOlimpicos(ano));
+
+				// TODO add return not found
 			}
 
 			String modalidade = tempPrin[1];
@@ -529,10 +531,8 @@ public class Csv extends JComponent implements Accessible {
 
 			int itModal = 0;
 
-			boolean testModal = false;
 			for (; itModal < modalidades.size(); itModal++) {
 				if (modalidade.equals(modalidades.get(itModal).getNome())) {
-					testModal = true;
 					break;
 				}
 			}
@@ -555,7 +555,7 @@ public class Csv extends JComponent implements Accessible {
 				if (test[0].endsWith(" "))
 					test[0] = test[0].substring(0, test[0].length() - 1);
 				if (test[0].startsWith(" "))
-					test[0] = test[0].substring(0);
+					test[0] = test[0].substring(1);
 				if (test[0].equalsIgnoreCase("Individual") || test[0].equalsIgnoreCase("Team")) {
 				} else if (test[0].equals("")) {
 				} else {
@@ -585,13 +585,13 @@ public class Csv extends JComponent implements Accessible {
 						if (atl[0].endsWith(" "))
 							atl[0] = atl[0].substring(0, atl[0].length() - 1);
 						if (atl[0].startsWith(" "))
-							atl[0] = atl[0].substring(0);
+							atl[0] = atl[0].substring(1);
 
 						atl[1] = atl[1].replaceAll("  ", " ");
 						if (atl[1].endsWith(" "))
 							atl[1] = atl[1].substring(0, atl[1].length() - 1);
 						if (atl[1].startsWith(" "))
-							atl[1] = atl[1].substring(0);
+							atl[1] = atl[1].substring(1);
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
@@ -618,7 +618,6 @@ public class Csv extends JComponent implements Accessible {
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
 
 						}
-
 						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
 
 					} else {
@@ -630,7 +629,7 @@ public class Csv extends JComponent implements Accessible {
 						if (team[0].endsWith(" "))
 							team[0] = team[0].substring(0, team[0].length() - 1);
 						if (team[0].startsWith(" "))
-							team[0] = team[0].substring(0);
+							team[0] = team[0].substring(1);
 
 						int itPais = 0;
 						for (; itPais < paises.size(); itPais++) {
@@ -681,7 +680,7 @@ public class Csv extends JComponent implements Accessible {
 					if (nomeDisc.endsWith(" "))
 						nomeDisc = nomeDisc.substring(0, nomeDisc.length() - 1);
 					if (nomeDisc.startsWith(" "))
-						nomeDisc = nomeDisc.substring(0);
+						nomeDisc = nomeDisc.substring(1);
 
 					itDisc = 0;
 					for (; itDisc < modalidades.get(itModal).getDisc().size(); itDisc++) {
@@ -699,13 +698,13 @@ public class Csv extends JComponent implements Accessible {
 						if (atl[0].endsWith(" "))
 							atl[0] = atl[0].substring(0, atl[0].length() - 1);
 						if (atl[0].startsWith(" "))
-							atl[0] = atl[0].substring(0);
+							atl[0] = atl[0].substring(1);
 
 						atl[1] = atl[1].replaceAll("  ", " ");
 						if (atl[1].endsWith(" "))
 							atl[1] = atl[1].substring(0, atl[1].length() - 1);
 						if (atl[1].startsWith(" "))
-							atl[1] = atl[1].substring(0);
+							atl[1] = atl[1].substring(1);
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
@@ -757,7 +756,7 @@ public class Csv extends JComponent implements Accessible {
 						if (team[0].endsWith(" "))
 							team[0] = team[0].substring(0, team[0].length() - 1);
 						if (team[0].startsWith(" "))
-							team[0] = team[0].substring(0);
+							team[0] = team[0].substring(1);
 
 						int itPais = 0;
 						for (; itPais < paises.size(); itPais++) {
@@ -915,6 +914,161 @@ public class Csv extends JComponent implements Accessible {
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+		}
+
+	}
+
+	public void importProvas(Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
+
+		try {
+
+			JFileChooser fc = new JFileChooser();
+			fc.addChoosableFileFilter(new CsvFilter());
+			fc.setAcceptAllFileFilterUsed(false);
+			int returnVal = fc.showOpenDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+
+			File ficheiro = fc.getSelectedFile();
+
+			String file[] = ficheiro.getName().split("_");
+			file[3] = file[3].replaceAll(".csv", "");
+			int ano = Integer.parseInt(file[3]);
+
+			jogos.add(new JogosOlimpicos(ano));
+
+			Scanner inTest = new Scanner(ficheiro);
+
+			if (!inTest.hasNextLine()) {
+				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			inTest.nextLine();
+			while (inTest.hasNextLine()) {
+				String test[] = inTest.nextLine().split(";");
+				test[0] = test[0].replaceAll("  ", " ");
+				if (test[0].endsWith(" "))
+					test[0] = test[0].substring(0, test[0].length() - 1);
+				if (test[0].startsWith(" "))
+					test[0] = test[0].substring(1);
+				test[1] = test[1].replaceAll("  ", " ");
+				if (test[1].endsWith(" "))
+					test[1] = test[1].substring(0, test[1].length() - 1);
+				if (test[1].startsWith(" "))
+					test[1] = test[1].substring(1);
+
+				int iTest = 0;
+				for (; iTest < modalidades.size(); iTest++) {
+					if (modalidades.get(iTest).getNome().equalsIgnoreCase(test[0]))
+						break;
+				}
+
+				if (iTest == modalidades.size()) {
+					JOptionPane.showMessageDialog(janela, "Sport not found!\nPlease import: " + test[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				iTest = 0;
+				for (; iTest < disciplinas.size(); iTest++) {
+					if (disciplinas.get(iTest).getNome().equalsIgnoreCase(test[1]))
+						break;
+				}
+
+				if (iTest == disciplinas.size()) {
+					JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + test[1] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+			inTest.close();
+
+			Scanner in = new Scanner(ficheiro);
+			in.nextLine();
+			int cont = 2;
+			while (in.hasNextLine()) {
+				System.out.println(cont++);
+				String temp[] = in.nextLine().split(";");
+				temp[0] = temp[0].replaceAll("  ", " ");
+				if (temp[0].endsWith(" "))
+					temp[0] = temp[0].substring(0, temp[0].length() - 1);
+				if (temp[0].startsWith(" "))
+					temp[0] = temp[0].substring(1);
+
+				temp[1] = temp[1].replaceAll("  ", " ");
+				if (temp[1].endsWith(" "))
+					temp[1] = temp[1].substring(0, temp[1].length() - 1);
+				if (temp[1].startsWith(" "))
+					temp[1] = temp[1].substring(1);
+
+				boolean tipoProva = false; // TODO corrigir isto!
+
+				for (int i = 0; i < provas.size(); i++) {
+					if (disciplinas.get(i).getTipoMod() && disciplinas.get(i).getNome().equalsIgnoreCase(temp[1])) {
+						tipoProva = true;
+					}
+				}
+
+				int itModal = 0;
+				for (; itModal < modalidades.size(); itModal++) {
+					if (temp[0].equals(modalidades.get(itModal).getNome())) {
+						break;
+					}
+				}
+
+				if (temp[2].equalsIgnoreCase("x")) {
+					if (!tipoProva) {
+						int itDisc = 0;
+						for (; itDisc < disciplinas.size(); itDisc++) {
+							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 0 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
+								break;
+						}
+
+						provas.add(new ProvaInd(disciplinas.get(itDisc), jogos.get(jogos.size() - 1)));
+
+					} else {
+						int itDisc = 0;
+						for (; itDisc < disciplinas.size(); itDisc++) {
+							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 0 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
+								break;
+						}
+
+						System.out.println(modalidades.get(itModal).getDisc().size() + " - " + itDisc);
+
+						provas.add(new ProvaCol(disciplinas.get(itDisc), jogos.get(jogos.size() - 1)));
+
+					}
+
+				}
+				if (temp.length == 4 && temp[3].equalsIgnoreCase("x")) {
+					if (!tipoProva) {
+						int itDisc = 0;
+						for (; itDisc < disciplinas.size(); itDisc++) {
+							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
+								break;
+						}
+
+						provas.add(new ProvaInd(disciplinas.get(itDisc), jogos.get(jogos.size() - 1)));
+
+					} else {
+						int itDisc = 0;
+						for (; itDisc < disciplinas.size(); itDisc++) {
+							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
+								break;
+						}
+
+						provas.add(new ProvaCol(disciplinas.get(itDisc), jogos.get(jogos.size() - 1)));
+
+					}
+				}
+
+			}
+			in.close();
+			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+
+		} catch (FileNotFoundException exc) {
+			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+		} catch (ArrayIndexOutOfBoundsException exc) {
+			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			exc.printStackTrace();
 		}
 
 	}
