@@ -39,6 +39,17 @@ public class Csv extends JComponent implements Accessible {
 			in.nextLine();
 			while (in.hasNextLine()) {
 				String temp[] = in.nextLine().split(";");
+				temp[0] = temp[0].replaceAll("  ", " ");
+				if (temp[0].endsWith(" "))
+					temp[0] = temp[0].substring(0, temp[0].length() - 1);
+				if (temp[0].startsWith(" "))
+					temp[0] = temp[0].substring(0);
+				temp[1] = temp[1].replaceAll("  ", " ");
+				if (temp[1].endsWith(" "))
+					temp[1] = temp[1].substring(0, temp[1].length() - 1);
+				if (temp[1].startsWith(" "))
+					temp[1] = temp[1].substring(0);
+
 				paises.add(new Pais(temp[0], temp[1]));
 			}
 			in.close();
@@ -118,8 +129,14 @@ public class Csv extends JComponent implements Accessible {
 						temModal = true;
 				}
 
-				if (!temModal)
+				if (!temModal) {
+					tempModal[0] = tempModal[0].replaceAll("  ", " ");
+					if (tempModal[0].endsWith(" "))
+						tempModal[0] = tempModal[0].substring(0, tempModal[0].length() - 1);
+					if (tempModal[0].startsWith(" "))
+						tempModal[0] = tempModal[0].substring(0);
 					modalidades.add(new Modalidade(tempModal[0]));
+				}
 			}
 			in.close();
 
@@ -128,6 +145,12 @@ public class Csv extends JComponent implements Accessible {
 			in2.nextLine();
 			while (in2.hasNextLine()) {
 				String temp[] = in2.nextLine().split(";");
+				temp[1] = temp[1].replaceAll("  ", " ");
+				if (temp[1].endsWith(" "))
+					temp[1] = temp[1].substring(0, temp[1].length() - 1);
+				if (temp[1].startsWith(" "))
+					temp[1] = temp[1].substring(0);
+
 				Disciplina tempDisc = new Disciplina("temp");
 				Disciplina tempDisc2 = new Disciplina("temp");
 				int i = 0;
@@ -490,9 +513,9 @@ public class Csv extends JComponent implements Accessible {
 			String genero = tempPrin[2];
 			int codGenero = -1; // 0 = masc 1= fem 2= mixed
 			boolean tipoDisc = false; // false = individual true =
-							// coletivo
+			// coletivo
 			int tipoClass = -1; // 0 - distancia 1 = tempo 2 = pontos 3
-						// = rank
+			// = rank
 			String nomeDisc;
 			int itDisc = 0;
 			int itProva = 0;
@@ -528,7 +551,12 @@ public class Csv extends JComponent implements Accessible {
 
 			while (inTest.hasNextLine()) {
 				String test[] = inTest.nextLine().split(";");
-				if (test[0].equalsIgnoreCase("Individual ") || test[0].equalsIgnoreCase("Team ")) {
+				test[0] = test[0].replaceAll("  ", " ");
+				if (test[0].endsWith(" "))
+					test[0] = test[0].substring(0, test[0].length() - 1);
+				if (test[0].startsWith(" "))
+					test[0] = test[0].substring(0);
+				if (test[0].equalsIgnoreCase("Individual") || test[0].equalsIgnoreCase("Team")) {
 				} else if (test[0].equals("")) {
 				} else {
 					boolean testeDisc = false;
@@ -553,6 +581,17 @@ public class Csv extends JComponent implements Accessible {
 					if (!tipoDisc) {
 
 						String[] atl = temp[1].split(", ");
+						atl[0] = atl[0].replaceAll("  ", " ");
+						if (atl[0].endsWith(" "))
+							atl[0] = atl[0].substring(0, atl[0].length() - 1);
+						if (atl[0].startsWith(" "))
+							atl[0] = atl[0].substring(0);
+
+						atl[1] = atl[1].replaceAll("  ", " ");
+						if (atl[1].endsWith(" "))
+							atl[1] = atl[1].substring(0, atl[1].length() - 1);
+						if (atl[1].startsWith(" "))
+							atl[1] = atl[1].substring(0);
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
@@ -587,6 +626,12 @@ public class Csv extends JComponent implements Accessible {
 
 						boolean existeAtletas = false;
 
+						team[0] = team[0].replaceAll("  ", " ");
+						if (team[0].endsWith(" "))
+							team[0] = team[0].substring(0, team[0].length() - 1);
+						if (team[0].startsWith(" "))
+							team[0] = team[0].substring(0);
+
 						int itPais = 0;
 						for (; itPais < paises.size(); itPais++) {
 							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
@@ -606,7 +651,7 @@ public class Csv extends JComponent implements Accessible {
 							boolean existeAtleta = false;
 							int itAtleta = 0;
 							for (; itAtleta < atletas.size(); itAtleta++) {
-								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atletasTemp[i])) {
+								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(team[0])) {
 									existeAtleta = true;
 									break;
 								}
@@ -632,6 +677,12 @@ public class Csv extends JComponent implements Accessible {
 					tipoDisc = true;
 				} else {
 					nomeDisc = temp[0];
+					nomeDisc = nomeDisc.replaceAll("  ", " ");
+					if (nomeDisc.endsWith(" "))
+						nomeDisc = nomeDisc.substring(0, nomeDisc.length() - 1);
+					if (nomeDisc.startsWith(" "))
+						nomeDisc = nomeDisc.substring(0);
+
 					itDisc = 0;
 					for (; itDisc < modalidades.get(itModal).getDisc().size(); itDisc++) {
 						if (nomeDisc.equalsIgnoreCase(modalidades.get(itModal).getDisc().get(itDisc).getNome()) && codGenero == modalidades.get(itModal).getDisc().get(itDisc).getGenero())
@@ -643,6 +694,18 @@ public class Csv extends JComponent implements Accessible {
 					if (!tipoDisc) {
 						boolean existeAtleta = false;
 						String[] atl = temp[1].split(", ");
+
+						atl[0] = atl[0].replaceAll("  ", " ");
+						if (atl[0].endsWith(" "))
+							atl[0] = atl[0].substring(0, atl[0].length() - 1);
+						if (atl[0].startsWith(" "))
+							atl[0] = atl[0].substring(0);
+
+						atl[1] = atl[1].replaceAll("  ", " ");
+						if (atl[1].endsWith(" "))
+							atl[1] = atl[1].substring(0, atl[1].length() - 1);
+						if (atl[1].startsWith(" "))
+							atl[1] = atl[1].substring(0);
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
@@ -679,6 +742,7 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
+							System.out.println("Erro!"); // TODO rem
 							provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), jogos.get(itJogos)));
 						}
 
@@ -688,6 +752,12 @@ public class Csv extends JComponent implements Accessible {
 						String[] team = temp[1].split("\\(");
 
 						boolean existeAtletas = false;
+
+						team[0] = team[0].replaceAll("  ", " ");
+						if (team[0].endsWith(" "))
+							team[0] = team[0].substring(0, team[0].length() - 1);
+						if (team[0].startsWith(" "))
+							team[0] = team[0].substring(0);
 
 						int itPais = 0;
 						for (; itPais < paises.size(); itPais++) {
@@ -709,7 +779,7 @@ public class Csv extends JComponent implements Accessible {
 							int itAtleta = 0;
 							boolean existeAtleta = false;
 							for (; itAtleta < atletas.size(); itAtleta++) {
-								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atletasTemp[i])) {
+								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(team[0])) {
 									existeAtleta = true;
 									break;
 								}
@@ -732,6 +802,8 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
+							System.out.println("Erro"); // TODO Remove
+
 							provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), jogos.get(itJogos)));
 						}
 
