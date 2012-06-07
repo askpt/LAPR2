@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import dados.*;
 import jogosolimpicos.*;
+import listaligada.ListaLigada;
 
 @SuppressWarnings("serial")
 public class Teste extends JFrame {
@@ -129,18 +130,22 @@ public class Teste extends JFrame {
 						break;
 				}
 
+				ListaLigada<Prova> provas = Main.getProvas();
+
 				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
 					if (!Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
-						for (int j = 0; j < Main.getProvas().size(); j++) {
+						for (int j = 0; j < provas.size(); j++) {
 
-							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
+							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(provas.get(j).getDisciplina().getModalidade().getNome())) {
 
-								if (Main.getProvas().get(j) instanceof ProvaInd) {
+								if (provas.get(j) instanceof ProvaInd) {
 
 									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
 									for (int k = 0; k < ((ProvaInd) Main.getProvas().get(j)).getResultados().size(); k++) {
 										System.out.println(((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getAtleta().getNome() + " : " + ((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
 									}
+									provas.remove(j);
+									j--;
 								}
 
 							}
@@ -159,6 +164,8 @@ public class Teste extends JFrame {
 									for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
 										System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
 									}
+									provas.remove(j);
+									j--;
 								}
 
 							}
@@ -192,6 +199,16 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
+		menuItem = new JMenuItem("Export Results", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				csv.exportProvas(Teste.this, Main.getProvas(), 2008);
+			}
+		});
+
+		menu.add(menuItem);
 		setJMenuBar(menuBar);
 
 		JLabel label = new JLabel(new ImageIcon(img.constrution));

@@ -864,20 +864,24 @@ public class Csv extends JComponent implements Accessible {
 					break;
 			}
 
+			ListaLigada<Prova> provasTemp = provas;
+
 			for (int i = 0; i < modalidades.get(itModal).getDisc().size(); i++) {
 				if (!modalidades.get(itModal).getDisc().get(i).getTipoMod())
-					for (int j = 0; j < provas.size(); j++) {
+					for (int j = 0; j < provasTemp.size(); j++) {
 
-						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(provas.get(j).getDisciplina().getModalidade().getNome())) {
+						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(provasTemp.get(j).getDisciplina().getModalidade().getNome())) {
 
-							if (provas.get(j) instanceof ProvaInd) {
+							if (provasTemp.get(j) instanceof ProvaInd) {
 
 								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
-								for (int k = 0; k < ((ProvaInd) provas.get(j)).getResultados().size(); k++) {
-									out.format(";" + ((ProvaInd) provas.get(j)).getResultados().get(k).getAtleta().getNome() + ", ");
-									out.format(((ProvaInd) provas.get(j)).getResultados().get(k).getAtleta().getPais().getCodigoPais() + ";");
-									out.format(((ProvaInd) provas.get(j)).getResultados().get(k).getResulTemp() + "\n");
+								for (int k = 0; k < ((ProvaInd) provasTemp.get(j)).getResultados().size(); k++) {
+									out.format(";" + ((ProvaInd) provasTemp.get(j)).getResultados().get(k).getAtleta().getNome() + ", ");
+									out.format(((ProvaInd) provasTemp.get(j)).getResultados().get(k).getAtleta().getPais().getCodigoPais() + ";");
+									out.format(((ProvaInd) provasTemp.get(j)).getResultados().get(k).getResulTemp() + "\n");
 								}
+								provasTemp.remove(j);
+								j--;
 							}
 
 						}
@@ -888,21 +892,22 @@ public class Csv extends JComponent implements Accessible {
 				if (modalidades.get(itModal).getDisc().get(i).getTipoMod())
 					for (int j = 0; j < Main.getProvas().size(); j++) {
 
-						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
+						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(provasTemp.get(j).getDisciplina().getModalidade().getNome())) {
 
-							if (provas.get(j) instanceof ProvaCol) {
-								out.format(modalidades.get(itModal).getDisc().get(i).getNome() + ";");
+							if (provasTemp.get(j) instanceof ProvaCol) {
+								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
 
-								for (int k = 0; k < ((ProvaCol) provas.get(j)).getResultados().size(); k++) {
-									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + "(");
-									for (int l = 0; l < ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1; l++) {
-										out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome() + ", ");
+								for (int k = 0; k < ((ProvaCol) provasTemp.get(j)).getResultados().size(); k++) {
+									out.format(";" + ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + "(");
+									for (int l = 0; l < ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1; l++) {
+										out.format(((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome() + ", ");
 									}
-									int index = ((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1;
-									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getEquipa().getAtleta().get(index).getNome() + ");");
-
-									out.format(((ProvaCol) provas.get(j)).getResultados().get(k).getResulTemp() + "\n");
+									int index = ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1;
+									out.format(((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getAtleta().get(index).getNome() + ");");
+									out.format(((ProvaCol) provasTemp.get(j)).getResultados().get(k).getResulTemp() + "\n");
 								}
+								provasTemp.remove(j);
+								j--;
 							}
 
 						}
@@ -1069,6 +1074,63 @@ public class Csv extends JComponent implements Accessible {
 		} catch (ArrayIndexOutOfBoundsException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 			exc.printStackTrace();
+		}
+
+	}
+
+	public void exportProvas(Component janela, ListaLigada<Prova> provas, int ano) {
+
+		// TODO finish
+		if (provas.isEmpty()) {
+			JOptionPane.showMessageDialog(janela, "File is empty!", "Export File", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		try {
+			JFileChooser fc = new JFileChooser();
+
+			fc.setFileFilter(new CsvFilter());
+			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			int returnVal = fc.showSaveDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+			File ficheiro = fc.getSelectedFile();
+			Formatter out = new Formatter(ficheiro + "\\IOC_SPORTS_OG_" + ano);
+			ListaLigada<Prova> provaTemp = new ListaLigada<Prova>();
+			out.format("Sport;Discipline;Men;Women\n");
+			for (int i = 0; i < provaTemp.size(); i++) {
+				if (provaTemp.get(i).getJogosOlimpicos().getAno() != ano)
+					provaTemp.remove(i);
+			}
+
+			for (int j = 0; j < provaTemp.size(); j++) {
+				String nomeDisc = provaTemp.get(j).getDisciplina().getNome();
+				String modalidade = provaTemp.get(j).getDisciplina().getModalidade().getNome();
+				String men = "";
+				String women = "";
+
+				if (provaTemp.get(j).getDisciplina().getGenero() == 0)
+					men = "X";
+				else if (provaTemp.get(j).getDisciplina().getGenero() == 1)
+					women = "X";
+
+				for (int k = j + 1; k < provaTemp.size(); k++) {
+					if (provaTemp.get(j).equals(provaTemp.get(k))) {
+						if (provaTemp.get(k).getDisciplina().getGenero() == 0)
+							men = "X";
+						else if (provaTemp.get(k).getDisciplina().getGenero() == 1)
+							women = "X";
+						provaTemp.remove(k);
+						k--;
+					}
+				}
+				out.format("%s;%s;%s;%s\n", modalidade, nomeDisc, men, women);
+			}
+			out.close();
+			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
+
+		} catch (FileNotFoundException exc) {
+			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}

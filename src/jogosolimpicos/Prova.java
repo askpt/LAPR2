@@ -36,4 +36,8 @@ public abstract class Prova {
 		return String.format("%s - %s", jogos, disc.getNome());
 	}
 
+	public boolean equals(Disciplina disc) {
+		return (this.disc.getNome().equalsIgnoreCase(disc.getNome()) && this.disc.getModalidade().getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.disc.getTipoMod() == disc.getTipoMod());
+	}
+
 }
