@@ -65,7 +65,6 @@ public class Csv extends JComponent implements Accessible {
 								int ano = Integer.parseInt(anos[j]);
 
 								paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
-								System.out.println(code[0] + ":" + ano);
 							} else if (anos[j].matches("^[0-9]{4}(S){1}$")) {
 								anos[j] = anos[j].replaceAll("S", "");
 								int ano = Integer.parseInt(anos[j]);
@@ -117,6 +116,8 @@ public class Csv extends JComponent implements Accessible {
 		} catch (ArrayIndexOutOfBoundsException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 			exc.printStackTrace();
+		} catch (NumberFormatException exc) {
+			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -468,6 +469,8 @@ public class Csv extends JComponent implements Accessible {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+		} catch (NumberFormatException exc) {
+			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -573,9 +576,9 @@ public class Csv extends JComponent implements Accessible {
 			}
 
 			if (itJogos == jogos.size()) {
-				jogos.add(new JogosOlimpicos(ano));
-
-				// TODO add return not found
+				JOptionPane.showMessageDialog(janela, "Year not found!\nPlease import: " + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+				return;
+				// jogos.add(new JogosOlimpicos(ano));
 			}
 
 			String modalidade = tempPrin[1];
@@ -808,8 +811,8 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
-							System.out.println("Erro!"); // TODO rem
-							provas.add(new ProvaInd(modalidades.get(itModal).getDisc().get(itDisc), jogos.get(itJogos)));
+							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+							return;
 						}
 
 						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
@@ -868,9 +871,8 @@ public class Csv extends JComponent implements Accessible {
 						}
 
 						if (itProva == provas.size()) {
-							System.out.println("Erro"); // TODO Remove
-
-							provas.add(new ProvaCol(modalidades.get(itModal).getDisc().get(itDisc), jogos.get(itJogos)));
+							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+							return;
 						}
 
 						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
@@ -886,6 +888,8 @@ public class Csv extends JComponent implements Accessible {
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException exc) {
+			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+		} catch (NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
@@ -1055,9 +1059,7 @@ public class Csv extends JComponent implements Accessible {
 
 			Scanner in = new Scanner(ficheiro);
 			in.nextLine();
-			int cont = 2;
 			while (in.hasNextLine()) {
-				System.out.println(cont++);
 				String temp[] = in.nextLine().split(";");
 				temp[0] = temp[0].replaceAll("  ", " ");
 				if (temp[0].endsWith(" "))
@@ -1071,11 +1073,12 @@ public class Csv extends JComponent implements Accessible {
 				if (temp[1].startsWith(" "))
 					temp[1] = temp[1].substring(1);
 
-				boolean tipoProva = false; // TODO corrigir isto!
+				boolean tipoProva = false;
 
-				for (int i = 0; i < provas.size(); i++) {
-					if (disciplinas.get(i).getTipoMod() && disciplinas.get(i).getNome().equalsIgnoreCase(temp[1])) {
-						tipoProva = true;
+				for (int i = 0; i < disciplinas.size(); i++) {
+					if (disciplinas.get(i).getNome().equalsIgnoreCase(temp[1])) {
+						tipoProva = disciplinas.get(i).getTipoMod();
+						break;
 					}
 				}
 
@@ -1103,8 +1106,6 @@ public class Csv extends JComponent implements Accessible {
 								break;
 						}
 
-						System.out.println(modalidades.get(itModal).getDisc().size() + " - " + itDisc);
-
 						provas.add(new ProvaCol(disciplinas.get(itDisc), jogos.get(jogos.size() - 1)));
 
 					}
@@ -1126,7 +1127,6 @@ public class Csv extends JComponent implements Accessible {
 							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
 								break;
 						}
-
 						provas.add(new ProvaCol(disciplinas.get(itDisc), jogos.get(jogos.size() - 1)));
 
 					}
@@ -1140,7 +1140,8 @@ public class Csv extends JComponent implements Accessible {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-			exc.printStackTrace();
+		} catch (NumberFormatException exc) {
+			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -1162,12 +1163,13 @@ public class Csv extends JComponent implements Accessible {
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
 			File ficheiro = fc.getSelectedFile();
-			Formatter out = new Formatter(ficheiro + "\\IOC_SPORTS_OG_" + ano);
-			ListaLigada<Prova> provaTemp = new ListaLigada<Prova>();
+			Formatter out = new Formatter(ficheiro + "\\IOC_Sports_OG_" + ano + ".csv");
+			ListaLigada<Prova> provaTemp = provas;
 			out.format("Sport;Discipline;Men;Women\n");
 			for (int i = 0; i < provaTemp.size(); i++) {
-				if (provaTemp.get(i).getJogosOlimpicos().getAno() != ano)
+				if (provaTemp.get(i).getJogosOlimpicos().getAno() != ano) {
 					provaTemp.remove(i);
+				}
 			}
 
 			for (int j = 0; j < provaTemp.size(); j++) {

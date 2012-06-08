@@ -38,7 +38,7 @@ public class Pais {
 	 */
 	public String getCodigoPais(int ano) {
 		for (int i = 0; i < this.codigos.size(); i++) {
-			if (this.codigos.get(i).getAnoInicio() <= ano && this.codigos.get(i).getAnoFim() <= ano) {
+			if (this.codigos.get(i).getAnoInicio() <= ano && this.codigos.get(i).getAnoFim() >= ano) {
 				return this.codigos.get(i).getCodigo();
 			}
 		}

@@ -199,7 +199,7 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Export Results", 'L');
+		menuItem = new JMenuItem("Export Provas", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
