@@ -17,6 +17,9 @@ public class AppConfig extends JFrame {
 	private final Csv csv = new Csv();
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	private JTabbedPane jtp = new JTabbedPane();
+	private AddDados a;
+	private RemDados r;
+	private AddRegs re;
 
 	public AppConfig() {
 
@@ -173,49 +176,7 @@ public class AppConfig extends JFrame {
 		expResu.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int itModal = 0;
-
-				for (; itModal < Main.getModalidades().size(); itModal++) {
-					if (Main.getModalidades().get(itModal).getNome().equals("Gymnastics"))
-						break;
-				}
-
-				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
-					if (!Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
-						for (int j = 0; j < Main.getProvas().size(); j++) {
-
-							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
-
-								if (Main.getProvas().get(j) instanceof ProvaInd) {
-
-									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
-									for (int k = 0; k < ((ProvaInd) Main.getProvas().get(j)).getResultados().size(); k++) {
-										System.out.println(((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getAtleta().getNome() + " : " + ((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
-									}
-								}
-
-							}
-						}
-				}
-
-				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
-					if (Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
-						System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
-					for (int j = 0; j < Main.getProvas().size(); j++) {
-
-						if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
-
-							if (Main.getProvas().get(j).getDisciplina().getTipoMod()) {
-
-								for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
-									System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
-								}
-							}
-
-						}
-					}
-				}
-
+				csv.exportResultados(AppConfig.this, Main.getModalidades(), Main.getProvas(), "Gymnastics", 1, 2008);
 			}
 		});
 
@@ -242,8 +203,15 @@ public class AppConfig extends JFrame {
 		addJO.setBorder(emptyBorder);
 		addJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(0);
+				if(a!=null){
+					a.setSelectedIndex(0);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(0);
+				}
+				
+				
 			}
 		});
 
@@ -252,9 +220,15 @@ public class AppConfig extends JFrame {
 		addCo.setBorder(emptyBorder);
 		addCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(1);
+				if(a!=null){
+					a.setSelectedIndex(1);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(1);
+				}
 			}
+			
 		});
 
 		Botao addDis = new Botao(img.addDis);
@@ -262,8 +236,13 @@ public class AppConfig extends JFrame {
 		addDis.setBorder(emptyBorder);
 		addDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(2);
+				if(a!=null){
+					a.setSelectedIndex(2);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(2);
+				}
 			}
 		});
 
@@ -272,8 +251,13 @@ public class AppConfig extends JFrame {
 		addSpo.setBorder(emptyBorder);
 		addSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(3);
+				if(a!=null){
+					a.setSelectedIndex(3);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(3);
+				}
 			}
 		});
 
@@ -282,8 +266,13 @@ public class AppConfig extends JFrame {
 		addEv.setBorder(emptyBorder);
 		addEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(4);
+				if(a!=null){
+					a.setSelectedIndex(4);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(4);
+				}
 			}
 		});
 
@@ -292,8 +281,13 @@ public class AppConfig extends JFrame {
 		addAth.setBorder(emptyBorder);
 		addAth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(5);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -318,8 +312,13 @@ public class AppConfig extends JFrame {
 		editJO.setBorder(emptyBorder);
 		editJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(0);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -328,8 +327,13 @@ public class AppConfig extends JFrame {
 		editCo.setBorder(emptyBorder);
 		editCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(1);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -338,8 +342,13 @@ public class AppConfig extends JFrame {
 		editDis.setBorder(emptyBorder);
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(2);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -348,8 +357,13 @@ public class AppConfig extends JFrame {
 		editSpo.setBorder(emptyBorder);
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(3);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -358,8 +372,13 @@ public class AppConfig extends JFrame {
 		editEv.setBorder(emptyBorder);
 		editEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(4);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -368,8 +387,13 @@ public class AppConfig extends JFrame {
 		editAth.setBorder(emptyBorder);
 		editAth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddDados a = new AddDados();
-				a.setSelectedIndex(5);
+				if(a!=null){
+					a.setSelectedIndex(5);
+					a.setVisible(true);
+				}else {
+					a = new AddDados();
+					a.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -393,8 +417,13 @@ public class AppConfig extends JFrame {
 		removeJO.setBorder(emptyBorder);
 		removeJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(0);
+				if(r!=null){
+					r.setSelectedIndex(0);
+					r.setVisible(true);
+				}else {
+					r = new RemDados();
+					r.setSelectedIndex(0);
+				}
 			}
 		});
 
@@ -403,8 +432,13 @@ public class AppConfig extends JFrame {
 		removeCo.setBorder(emptyBorder);
 		removeCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(1);
+				if(r!=null){
+					r.setSelectedIndex(1);
+					r.setVisible(true);
+				}else {
+					r = new RemDados();
+					r.setSelectedIndex(1);
+				}
 			}
 		});
 
@@ -413,8 +447,13 @@ public class AppConfig extends JFrame {
 		removeDis.setBorder(emptyBorder);
 		removeDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(2);
+				if(r!=null){
+					r.setSelectedIndex(2);
+					r.setVisible(true);
+				}else {
+					r = new RemDados();
+					r.setSelectedIndex(2);
+				}
 			}
 		});
 
@@ -423,8 +462,13 @@ public class AppConfig extends JFrame {
 		removeSpo.setBorder(emptyBorder);
 		removeSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(3);
+				if(r!=null){
+					r.setSelectedIndex(3);
+					r.setVisible(true);
+				}else {
+					r = new RemDados();
+					r.setSelectedIndex(3);
+				}
 			}
 		});
 
@@ -433,8 +477,13 @@ public class AppConfig extends JFrame {
 		removeEv.setBorder(emptyBorder);
 		removeEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(4);
+				if(r!=null){
+					r.setSelectedIndex(4);
+					r.setVisible(true);
+				}else {
+					r = new RemDados();
+					r.setSelectedIndex(4);
+				}
 			}
 		});
 
@@ -443,8 +492,13 @@ public class AppConfig extends JFrame {
 		removeAth.setBorder(emptyBorder);
 		removeAth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(5);
+				if(r!=null){
+					r.setSelectedIndex(5);
+					r.setVisible(true);
+				}else {
+					r = new RemDados();
+					r.setSelectedIndex(5);
+				}
 			}
 		});
 
@@ -468,8 +522,13 @@ public class AppConfig extends JFrame {
 		regAtToTeam.setBorder(emptyBorder);
 		regAtToTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddRegs a = new AddRegs();
-				a.setSelectedIndex(0);
+				if(re!=null){
+					re.setSelectedIndex(0);
+					re.setVisible(true);
+				}else {
+					re = new AddRegs();
+					re.setSelectedIndex(0);
+				}
 			}
 		});
 
@@ -479,8 +538,13 @@ public class AppConfig extends JFrame {
 		regResult.setBorder(emptyBorder);
 		regResult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(1);
+				if(re!=null){
+					re.setSelectedIndex(1);
+					re.setVisible(true);
+				}else {
+					re = new AddRegs();
+					re.setSelectedIndex(1);
+				}
 			}
 		});
 
@@ -490,47 +554,20 @@ public class AppConfig extends JFrame {
 		regResultTeam.setBorder(emptyBorder);
 		regResultTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(2);
+				if(re!=null){
+					re.setSelectedIndex(2);
+					re.setVisible(true);
+				}else {
+					re = new AddRegs();
+					re.setSelectedIndex(2);
+				}
 			}
 		});
 
-		Botao removeSpo = new Botao(img.removeSpo);
-		removeSpo.setContentAreaFilled(false);
-		removeSpo.setBorder(emptyBorder);
-		removeSpo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(3);
-			}
-		});
-
-		Botao removeEv = new Botao(img.removeEv);
-		removeEv.setContentAreaFilled(false);
-		removeEv.setBorder(emptyBorder);
-		removeEv.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(4);
-			}
-		});
-
-		Botao removeAth = new Botao(img.removeAth);
-		removeAth.setContentAreaFilled(false);
-		removeAth.setBorder(emptyBorder);
-		removeAth.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RemDados a = new RemDados();
-				a.setSelectedIndex(5);
-			}
-		});
-
+		
 		p1.add(regAtToTeam);
 		p1.add(regResult);
 		p1.add(regResultTeam);
-		p1.add(removeSpo);
-		p1.add(removeEv);
-		p1.add(removeAth);
 		reg.add(p1);
 
 	}
