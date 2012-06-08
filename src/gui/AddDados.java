@@ -134,7 +134,7 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("  Code:  "), BorderLayout.WEST);
+		panel2.add(new JLabel("    Code:  "), BorderLayout.WEST);
 		JTextField txtCidade = new JTextField(20);
 		txtCidade.setToolTipText("Country's code.");
 		panel2.add(txtCidade, BorderLayout.CENTER);
@@ -240,9 +240,7 @@ public class AddDados extends JFrame {
 		
 		clear.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == clear){
 				txtName.setText("");
-				}
 		}
 	});
 
@@ -264,7 +262,7 @@ public class AddDados extends JFrame {
 		JLabel a = new JLabel("Sport");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Name:    "), BorderLayout.WEST);
+		panel1.add(new JLabel(" Name:    "), BorderLayout.WEST);
 		JTextField txtSpo = new JTextField(20);
 		txtSpo.setToolTipText("Discipline whose this sport belongs");
 		panel1.add(txtSpo, BorderLayout.CENTER);
@@ -343,7 +341,7 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("  Country:  "), BorderLayout.WEST);
+		panel2.add(new JLabel("   Country:  "), BorderLayout.WEST);
 		JComboBox cmbEdition = new JComboBox();
 		cmbEdition.setToolTipText("Athlete's country.");
 		panel2.add(cmbEdition, BorderLayout.CENTER);

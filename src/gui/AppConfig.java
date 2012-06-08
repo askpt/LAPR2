@@ -33,7 +33,7 @@ public class AppConfig extends JFrame {
 		addEdits();
 		addRemoves();
 		addRegs();
-		setProperties(400, 400, 1, true);
+		setProperties(600, 400, 1, true);
 
 	}
 
@@ -64,12 +64,12 @@ public class AppConfig extends JFrame {
 	private void addPaineis() {
 
 		// Panels
-		imp = new Painel(img.imp);
-		exp = new Painel(img.exp);
-		add = new Painel(img.add);
-		edit = new Painel(img.edit);
-		remove = new Painel(img.remove);
-		reg = new Painel(img.reg);
+		imp = new Painel(img.bg3);
+		exp = new Painel(img.bg3);
+		add = new Painel(img.bg3);
+		edit = new Painel(img.bg3);
+		remove = new Painel(img.bg3);
+		reg = new Painel(img.bg3);
 
 		imp.setOpaque(false);
 		exp.setOpaque(false);
@@ -194,7 +194,9 @@ public class AppConfig extends JFrame {
 	}
 
 	private void addAdds() {
-		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new GridLayout(3, 2, 10, 10));
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
@@ -303,7 +305,9 @@ public class AppConfig extends JFrame {
 
 	private void addEdits() {
 
-		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new GridLayout(3, 2, 10, 10));
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
@@ -408,7 +412,9 @@ public class AppConfig extends JFrame {
 
 	private void addRemoves() {
 
-		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new GridLayout(3, 2, 10, 10));
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		remove.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
@@ -512,9 +518,11 @@ public class AppConfig extends JFrame {
 	}
 
 	private void addRegs() {
-		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new GridLayout(3, 2, 10, 10));
 		p1.setOpaque(false);
 		reg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 
 		Botao regAtToTeam = new Botao(img.regAt);
 		regAtToTeam.setContentAreaFilled(false);
@@ -564,7 +572,7 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		
+
 		p1.add(regAtToTeam);
 		p1.add(regResult);
 		p1.add(regResultTeam);

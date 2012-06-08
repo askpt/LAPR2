@@ -8,8 +8,10 @@ public class Imagens {
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
 	URL bg = classLoader.getResource("Imagens/background.png");
 	URL bg2 = classLoader.getResource("Imagens/bg2.png");
+	URL bg3 = classLoader.getResource("Imagens/bg3.png");
+	URL bg4 = classLoader.getResource("Imagens/bg4.png");
 	URL exit = classLoader.getResource("Imagens/exit.png");
-
+	
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");
 	URL gamesconfig = classLoader.getResource("Imagens/gamesconfig.png");
@@ -37,41 +39,41 @@ public class Imagens {
 
 	// add
 
-	URL addAth = classLoader.getResource("Imagens/addAth.png");
-	URL addCo = classLoader.getResource("Imagens/addCo.png");
-	URL addJO = classLoader.getResource("Imagens/addJO.png");
-	URL addDis = classLoader.getResource("Imagens/addDisc.png");
-	URL addSpo = classLoader.getResource("Imagens/addSpo.png");
-	URL addEv = classLoader.getResource("Imagens/addEv.png");
+	URL addAth = classLoader.getResource("Imagens/btn8.png");
+	URL addCo = classLoader.getResource("Imagens/btn5.png");
+	URL addJO = classLoader.getResource("Imagens/btn4.png");
+	URL addDis = classLoader.getResource("Imagens/btn9.png");
+	URL addSpo = classLoader.getResource("Imagens/btn6.png");
+	URL addEv = classLoader.getResource("Imagens/btn7.png");
 
 	// edit
 
-	URL editAth = classLoader.getResource("Imagens/editAth.png");
-	URL editCo = classLoader.getResource("Imagens/editCo.png");
-	URL editJO = classLoader.getResource("Imagens/editJO.png");
-	URL editDis = classLoader.getResource("Imagens/editDisc.png");
-	URL editSpo = classLoader.getResource("Imagens/editSpo.png");
-	URL editEv = classLoader.getResource("Imagens/editEv.png");
+	URL editAth = classLoader.getResource("Imagens/btn18.png");
+	URL editCo = classLoader.getResource("Imagens/btn21.png");
+	URL editJO = classLoader.getResource("Imagens/btn17.png");
+	URL editDis = classLoader.getResource("Imagens/btn22.png");
+	URL editSpo = classLoader.getResource("Imagens/btn19.png");
+	URL editEv = classLoader.getResource("Imagens/btn20.png");
 
 	// remove
 
-	URL removeAth = classLoader.getResource("Imagens/removeAth.png");
-	URL removeCo = classLoader.getResource("Imagens/removeCo.png");
-	URL removeJO = classLoader.getResource("Imagens/removeJO.png");
-	URL removeDis = classLoader.getResource("Imagens/removeDisc.png");
-	URL removeSpo = classLoader.getResource("Imagens/removeSpo.png");
-	URL removeEv = classLoader.getResource("Imagens/removeEv.png");
+	URL removeAth = classLoader.getResource("Imagens/btn14.png");
+	URL removeCo = classLoader.getResource("Imagens/btn12.png");
+	URL removeJO = classLoader.getResource("Imagens/btn16.png");
+	URL removeDis = classLoader.getResource("Imagens/btn10.png");
+	URL removeSpo = classLoader.getResource("Imagens/btn11.png");
+	URL removeEv = classLoader.getResource("Imagens/btn15.png");
 
 	// register
 
-	URL regAt = classLoader.getResource("Imagens/regAtTeam.png");
-	URL regRe = classLoader.getResource("Imagens/regResult.png");
-	URL regReTeam = classLoader.getResource("Imagens/regTresult.png");
+	URL regAt = classLoader.getResource("Imagens/btn1.png");
+	URL regRe = classLoader.getResource("Imagens/btn2.png");
+	URL regReTeam = classLoader.getResource("Imagens/btn3.png");
 
 	// ok,clear, +
 
-	URL ok = classLoader.getResource("Imagens/ok.png");
-	URL clear = classLoader.getResource("Imagens/cancel.png");
+	URL ok = classLoader.getResource("Imagens/btn23.png");
+	URL clear = classLoader.getResource("Imagens/btn24.png");
 	URL mais = classLoader.getResource("Imagens/+.png");
 	URL menos = classLoader.getResource("Imagens/no.png");
 
