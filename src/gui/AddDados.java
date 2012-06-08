@@ -30,7 +30,7 @@ public class AddDados extends JFrame {
 		addEvent();
 		addAthlete();
 
-		setProperties(600, 400, 1, true);
+		setProperties(600, 480, 1, true);
 	}
 
 	private void setProperties(int w, int h, int opcao, boolean visible) {
@@ -47,12 +47,12 @@ public class AddDados extends JFrame {
 
 		getContentPane().add(jtp);
 		// Tabs
-		jtp.addTab("Edition", new ImageIcon(img.mais), jo);
-		jtp.addTab("Country", new ImageIcon(img.mais), co);
-		jtp.addTab("Discipline", new ImageIcon(img.mais), di);
-		jtp.addTab("Sport", new ImageIcon(img.mais), spo);
-		jtp.addTab("Events", new ImageIcon(img.mais), ev);
-		jtp.addTab("Athlete", new ImageIcon(img.mais), at);
+		jtp.addTab("Edition", jo);
+		jtp.addTab("Country", co);
+		jtp.addTab("Discipline", di);
+		jtp.addTab("Sport", spo);
+		jtp.addTab("Events", ev);
+		jtp.addTab("Athlete",  at);
 
 	}
 
@@ -83,7 +83,7 @@ public class AddDados extends JFrame {
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
 		panel1.setOpaque(false);
-		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
+		panel1.setBorder(new EmptyBorder(20, 10, 0, 10));
 		JLabel a = new JLabel("Olympic Games");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		a.setForeground(Color.white);
@@ -125,8 +125,10 @@ public class AddDados extends JFrame {
 	}
 
 	private void addCountry() {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(new EmptyBorder(20,20,20,20));
+		p1.setOpaque(false);
 		co.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
@@ -134,8 +136,11 @@ public class AddDados extends JFrame {
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Country");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Name: "), BorderLayout.WEST);
+		JLabel b = new JLabel("Name: ");
+		b.setForeground(Color.white);
+		panel1.add(b,BorderLayout.WEST);
 		JTextField txtAno = new JTextField(20);
 		txtAno.setToolTipText("Country's name.");
 		panel1.add(txtAno, BorderLayout.CENTER);
@@ -144,7 +149,9 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("    Code:  "), BorderLayout.WEST);
+		JLabel c = new JLabel("    Code:  ");
+		c.setForeground(Color.white);
+		panel2.add(c, BorderLayout.WEST);
 		JTextField txtCidade = new JTextField(20);
 		txtCidade.setToolTipText("Country's code.");
 		panel2.add(txtCidade, BorderLayout.CENTER);
@@ -153,7 +160,9 @@ public class AddDados extends JFrame {
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);
@@ -168,25 +177,32 @@ public class AddDados extends JFrame {
 	private void addDiscipline() {
 		di.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 		
-		JPanel panel = new JPanel(new GridLayout(5,1));
-		panel.setBackground(new Color(158, 193, 213));
+		Painel panel = new Painel(img.bg4);
+		panel.setLayout(new GridLayout(5,1));
+		panel.setBorder(new EmptyBorder(20,20,20,20));
+		panel.setOpaque(false);
 
 		JPanel panel1 = new JPanel(new BorderLayout());
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Discipline");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Name:  "),BorderLayout.WEST);
+		JLabel b = new JLabel("Name:  ");
+		b.setForeground(Color.white);
+		panel1.add(b, BorderLayout.WEST);
 		final JTextField txtName = new JTextField(20);
 		txtName.setToolTipText("Discipline's name");
 		panel1.add(txtName, BorderLayout.CENTER);
 		panel.add(panel1);
 		
 		JPanel panel6 = new JPanel(new BorderLayout());
-		panel6.setBorder(new EmptyBorder(15, 10, 0, 10));
+		panel6.setBorder(new EmptyBorder(25, 2, 0, 10));
 		panel6.setOpaque(false);
-		panel6.add(new JLabel("  Sport:  "), BorderLayout.WEST);
+		JLabel c = new JLabel("  Sport:  ");
+		c.setForeground(Color.white);
+		panel6.add(c, BorderLayout.WEST);
 		final JComboBox cmbDiscipline = new JComboBox();
 		cmbDiscipline.setToolTipText("Discipline's Sport.");
 		panel6.add(cmbDiscipline, BorderLayout.CENTER);
@@ -198,14 +214,20 @@ public class AddDados extends JFrame {
 		panel2.setBorder(new EmptyBorder(10, 10, 0, 10));
 		ButtonGroup btngrp = new ButtonGroup();
 		JRadioButton rbDistancia = new JRadioButton("Distance", true);
+		
 		JRadioButton rbTempo = new JRadioButton("Time", false);
 		JRadioButton rbPontos = new JRadioButton("Points", false);
 		JRadioButton rbRank = new JRadioButton("Rank", false);
 		
+		
 		rbDistancia.setOpaque(false);
+		rbDistancia.setForeground(Color.white);
 		rbTempo.setOpaque(false);
+		rbTempo.setForeground(Color.white);
 		rbPontos.setOpaque(false);
+		rbPontos.setForeground(Color.white);
 		rbRank.setOpaque(false);
+		rbRank.setForeground(Color.white);
 
 		btngrp.add(rbDistancia);
 		btngrp.add(rbTempo);
@@ -226,8 +248,11 @@ public class AddDados extends JFrame {
 		JRadioButton rbMi = new JRadioButton("Mixed", false);
 
 		rbM.setOpaque(false);
+		rbM.setForeground(Color.white);
 		rbF.setOpaque(false);
+		rbF.setForeground(Color.white);
 		rbMi.setOpaque(false);
+		rbMi.setForeground(Color.white);
 
 		btngrp.add(rbM);
 		btngrp.add(rbF);
@@ -243,7 +268,9 @@ public class AddDados extends JFrame {
 		panel5.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
-		final Botao clear = new Botao(img.clear);
+		ok.setBorderPainted(false);
+		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel5.add(ok);
 		panel5.add(clear);
@@ -262,8 +289,10 @@ public class AddDados extends JFrame {
 	}
 
 	private void addSport() {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(new EmptyBorder(20,20,20,20));
+		p1.setOpaque(false);
 		spo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
@@ -271,8 +300,11 @@ public class AddDados extends JFrame {
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Sport");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel(" Name:    "), BorderLayout.WEST);
+		JLabel b = new JLabel("Name:    ");
+		b.setForeground(Color.white);
+		panel1.add(b, BorderLayout.WEST);
 		JTextField txtSpo = new JTextField(20);
 		txtSpo.setToolTipText("Discipline whose this sport belongs");
 		panel1.add(txtSpo, BorderLayout.CENTER);
@@ -281,7 +313,9 @@ public class AddDados extends JFrame {
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);
@@ -292,8 +326,10 @@ public class AddDados extends JFrame {
 	}
 
 	private void addEvent() {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(new EmptyBorder(20,20,20,20));
+		p1.setOpaque(false);
 		ev.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
@@ -301,17 +337,21 @@ public class AddDados extends JFrame {
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Event");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Sport:     "), BorderLayout.WEST);
+		JLabel b = new JLabel("Sport:  ");
+		b.setForeground(Color.white);
+		panel1.add(b, BorderLayout.WEST);
 		JComboBox cmbDiscipline = new JComboBox();
 		cmbDiscipline.setToolTipText("Event's name");
 		panel1.add(cmbDiscipline, BorderLayout.CENTER);
 
 		JPanel panel2 = new JPanel(new BorderLayout());
 		panel2.setOpaque(false);
-		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("    Edition:  "), BorderLayout.WEST);
+		JLabel c = new JLabel("   Edition:  ");
+		c.setForeground(Color.white);
+		panel2.add(c,BorderLayout.WEST);
 		JComboBox cmbEdition = new JComboBox();
 		cmbEdition.setToolTipText("Edition whose this event belongs.");
 		panel2.add(cmbEdition, BorderLayout.CENTER);
@@ -320,7 +360,9 @@ public class AddDados extends JFrame {
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);
@@ -332,8 +374,10 @@ public class AddDados extends JFrame {
 	}
 
 	private void addAthlete() {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(new EmptyBorder(20,20,20,20));
+		p1.setOpaque(false);
 		at.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
@@ -341,8 +385,11 @@ public class AddDados extends JFrame {
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Athlete");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Name:      "), BorderLayout.WEST);
+		JLabel b = new JLabel("Name:     ");
+		b.setForeground(Color.white);
+		panel1.add(b, BorderLayout.WEST);
 		JTextField txtName = new JTextField(20);
 		txtName.setToolTipText("Athlete's name");
 		panel1.add(txtName, BorderLayout.CENTER);
@@ -351,7 +398,9 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("   Country:  "), BorderLayout.WEST);
+		JLabel c = new JLabel("   Country:  ");
+		c.setForeground(Color.white);
+		panel2.add(c,BorderLayout.WEST);
 		JComboBox cmbEdition = new JComboBox();
 		cmbEdition.setToolTipText("Athlete's country.");
 		panel2.add(cmbEdition, BorderLayout.CENTER);
@@ -360,7 +409,9 @@ public class AddDados extends JFrame {
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);
