@@ -14,7 +14,8 @@ import listaligada.*;
 
 public class HTML {
 
-	public void exportPais(Component janela, int anoInicio, int anoFim) throws FileNotFoundException {
+	public void exportPais(Component janela, int anoInicio, int anoFim)
+			throws FileNotFoundException {
 
 		if (!Main.getPaises().isEmpty()) {
 
@@ -26,8 +27,8 @@ public class HTML {
 			File ficheiro = fc.getSelectedFile();
 			Formatter fout = new Formatter(ficheiro + ".html");
 			corpoInicio(fout);
-			ListaLigada auxAtletas = Main.getAtleta();
 			ListaLigada<Prova> provaTemp = Main.getProvas();
+			ListaLigada<Pais> paisTemp = Main.getPaises();
 			for (int i = anoInicio; i < anoFim; i += 4) {
 				for (int j = 0; j < provaTemp.size(); j++) {
 					if (provaTemp.get(j).getJogosOlimpicos().getAno() != i) {
@@ -36,11 +37,18 @@ public class HTML {
 					}
 				}
 				for (int j = 0; j < provaTemp.size(); j++) {
-
+					if (provaTemp.get(j) instanceof ProvaInd && !((ProvaInd) provaTemp.get(j)).getResultados().isEmpty()) {
+						provaTemp.get(j).ordenar();
+						
+					}else if(provaTemp.get(j) instanceof ProvaCol && !((ProvaCol) provaTemp.get(j)).getResultados().isEmpty()){
+						provaTemp.get(j).ordenar();
+					}	
 				}
 			}
 		} else {
-			JOptionPane.showMessageDialog(janela, "Não existem países para exportar", "Export", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela,
+					"Não existem países para exportar", "Export",
+					JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 	}
