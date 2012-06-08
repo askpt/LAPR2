@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.text.StyledEditorKit.ForegroundAction;
 
 import dados.*;
 
@@ -58,12 +59,12 @@ public class AddDados extends JFrame {
 	private void addPaineis() {
 
 		// Panels
-		jo = new Painel(img.bg2);
-		co = new Painel(img.bg2);
-		di = new Painel(img.bg2);
-		spo = new Painel(img.bg2);
-		at = new Painel(img.bg2);
-		ev = new Painel(img.bg2);
+		jo = new Painel(img.bg3);
+		co = new Painel(img.bg3);
+		di = new Painel(img.bg3);
+		spo = new Painel(img.bg3);
+		at = new Painel(img.bg3);
+		ev = new Painel(img.bg3);
 
 		jo.setOpaque(false);
 		co.setOpaque(false);
@@ -74,8 +75,10 @@ public class AddDados extends JFrame {
 	}
 
 	private void addEdition() {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(new EmptyBorder(20,20,20,20));
+		p1.setOpaque(false);
 		jo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
@@ -83,8 +86,11 @@ public class AddDados extends JFrame {
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Olympic Games");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Year:  "), BorderLayout.WEST);
+		JLabel b = new JLabel("Year:  ");
+		b.setForeground(Color.white);
+		panel1.add(b, BorderLayout.WEST);
 		JTextField txtAno = new JTextField(20);
 		txtAno.setToolTipText("Year of the Olympic Games Edition.");
 		panel1.add(txtAno, BorderLayout.CENTER);
@@ -93,7 +99,9 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("   City:  "), BorderLayout.WEST);
+		JLabel c = new JLabel("    City:  ");
+		c.setForeground(Color.white);
+		panel2.add(c,BorderLayout.WEST);
 		JTextField txtCidade = new JTextField(20);
 		txtCidade.setToolTipText("City of the Olympic Games Edition.");
 		panel2.add(txtCidade, BorderLayout.CENTER);
@@ -102,7 +110,9 @@ public class AddDados extends JFrame {
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);

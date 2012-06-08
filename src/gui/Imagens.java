@@ -72,8 +72,8 @@ public class Imagens {
 
 	// ok,clear, +
 
-	URL ok = classLoader.getResource("Imagens/btn23.png");
-	URL clear = classLoader.getResource("Imagens/btn24.png");
+	URL ok = classLoader.getResource("Imagens/btn25.png");
+	URL clear = classLoader.getResource("Imagens/btn26.png");
 	URL mais = classLoader.getResource("Imagens/+.png");
 	URL menos = classLoader.getResource("Imagens/no.png");
 
