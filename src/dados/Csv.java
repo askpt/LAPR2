@@ -1148,7 +1148,6 @@ public class Csv extends JComponent implements Accessible {
 
 	public void exportProvas(Component janela, ListaLigada<Prova> provas, int ano) {
 
-		// TODO finish
 		if (provas.isEmpty()) {
 			JOptionPane.showMessageDialog(janela, "File is empty!", "Export File", JOptionPane.ERROR_MESSAGE);
 			return;

@@ -209,6 +209,21 @@ public class Teste extends JFrame {
 		});
 
 		menu.add(menuItem);
+
+		JMenu listar = new JMenu("Listar");
+
+		menuItem = new JMenuItem("Listar", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TesteListagens.listarMedalhas(Main.getPaises(), Main.getProvas(), 2008, 2008);
+			}
+		});
+
+		listar.add(menuItem);
+		menuBar.add(listar);
+
 		setJMenuBar(menuBar);
 
 		JLabel label = new JLabel(new ImageIcon(img.constrution));

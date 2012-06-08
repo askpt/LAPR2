@@ -69,9 +69,9 @@ public class ListaLigada<E> {
 
 		verificarIndex(index);
 		No<E> x = no(index);
-		E anterior = x.elemento;
+		E valAnt = x.elemento;
 		x.elemento = elemento;
-		return anterior;
+		return valAnt;
 	}
 
 	/**

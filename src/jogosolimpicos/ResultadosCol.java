@@ -1,5 +1,6 @@
 package jogosolimpicos;
 
+@SuppressWarnings("rawtypes")
 public class ResultadosCol implements Comparable {
 
 	private Equipa equipa;

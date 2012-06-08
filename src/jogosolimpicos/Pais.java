@@ -6,7 +6,8 @@ import listaligada.ListaLigada;
  * Main class of the country.
  * 
  */
-public class Pais {
+@SuppressWarnings("rawtypes")
+public class Pais implements Comparable {
 
 	private String codigoPais;
 	private String nomePais;
@@ -107,5 +108,22 @@ public class Pais {
 	@Override
 	public String toString() {
 		return String.format("%s - %s", codigoPais, nomePais);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if (o instanceof Pais) {
+			Pais that = (Pais) o;
+			if (this.getMedalha().getOuro() != that.getMedalha().getOuro()) {
+				return (this.getMedalha().getOuro() - that.getMedalha().getOuro());
+			} else if (this.getMedalha().getPrata() != that.getMedalha().getPrata()) {
+				return (this.getMedalha().getPrata() - that.getMedalha().getPrata());
+			} else if (this.getMedalha().getBronze() != that.getMedalha().getBronze()) {
+				return (this.getMedalha().getBronze() - that.getMedalha().getBronze());
+			} else {
+				return (this.getNomePais().compareTo(that.getNomePais()));
+			}
+		}
+		return 0;
 	}
 }
