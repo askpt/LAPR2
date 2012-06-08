@@ -1,15 +1,26 @@
 package gui;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.plaf.TabbedPaneUI;
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
-import jogosolimpicos.*;
-import dados.*;
+import dados.Csv;
 
 public class AppConfig extends JFrame {
 
@@ -60,7 +71,7 @@ public class AppConfig extends JFrame {
 		jtp.addTab("Edit", edit);
 		jtp.addTab("Remove", remove);
 		jtp.addTab("Register", reg);
-		jtp.setBackground(new Color(61,71,78));
+		jtp.setBackground(new Color(61, 71, 78));
 		jtp.setForeground(Color.WHITE);
 	}
 
@@ -89,16 +100,14 @@ public class AppConfig extends JFrame {
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
-	
-		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
-		
+
 		JLabel lb = new JLabel("     Import:");
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
-
-
 
 		// Countries
 		Botao impCountry = new Botao(img.impCountry);
@@ -110,7 +119,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-
 		// Disciplines
 		Botao impDisc = new Botao(img.impDisc);
 		impDisc.setContentAreaFilled(false);
@@ -120,7 +128,6 @@ public class AppConfig extends JFrame {
 				csv.importDisc(AppConfig.this, Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
-
 
 		// Results
 		Botao impResu = new Botao(img.impResu);
@@ -132,12 +139,11 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-
 		p2.add(impCountry);
 		p2.add(impDisc);
 		p2.add(impResu);
-		p1.add(lb,BorderLayout.NORTH);
-		p1.add(p2,BorderLayout.SOUTH);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
 		imp.add(p1);
 	}
 
@@ -148,15 +154,14 @@ public class AppConfig extends JFrame {
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
-	
-		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
-		
+
 		JLabel lb = new JLabel("     Export:");
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
-
 
 		// Countries
 		Botao expCountry = new Botao(img.expCountry);
@@ -206,8 +211,8 @@ public class AppConfig extends JFrame {
 		p2.add(expDiscHtml);
 		p2.add(expResu);
 		p2.add(expResuHtml);
-		p1.add(lb,BorderLayout.NORTH);
-		p1.add(p2,BorderLayout.SOUTH);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
 		exp.add(p1);
 	}
 
@@ -217,11 +222,11 @@ public class AppConfig extends JFrame {
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
-	
-		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
-		
+
 		JLabel lb = new JLabel("     Add:");
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
@@ -231,15 +236,14 @@ public class AppConfig extends JFrame {
 		addJO.setBorder(emptyBorder);
 		addJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				if (a != null) {
 					a.setSelectedIndex(0);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(0);
 				}
-				
-				
+
 			}
 		});
 
@@ -248,15 +252,15 @@ public class AppConfig extends JFrame {
 		addCo.setBorder(emptyBorder);
 		addCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				if (a != null) {
 					a.setSelectedIndex(1);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(1);
 				}
 			}
-			
+
 		});
 
 		Botao addDis = new Botao(img.addDis);
@@ -264,10 +268,10 @@ public class AppConfig extends JFrame {
 		addDis.setBorder(emptyBorder);
 		addDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				if (a != null) {
 					a.setSelectedIndex(2);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(2);
 				}
@@ -279,10 +283,10 @@ public class AppConfig extends JFrame {
 		addSpo.setBorder(emptyBorder);
 		addSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				if (a != null) {
 					a.setSelectedIndex(3);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(3);
 				}
@@ -294,10 +298,10 @@ public class AppConfig extends JFrame {
 		addEv.setBorder(emptyBorder);
 		addEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				if (a != null) {
 					a.setSelectedIndex(4);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(4);
 				}
@@ -309,10 +313,10 @@ public class AppConfig extends JFrame {
 		addAth.setBorder(emptyBorder);
 		addAth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -325,8 +329,8 @@ public class AppConfig extends JFrame {
 		p2.add(addSpo);
 		p2.add(addEv);
 		p2.add(addAth);
-		p1.add(lb,BorderLayout.NORTH);
-		p1.add(p2,BorderLayout.SOUTH);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
 		add.add(p1);
 
 	}
@@ -338,11 +342,11 @@ public class AppConfig extends JFrame {
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
-	
-		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
-		
+
 		JLabel lb = new JLabel("     Edit:");
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
@@ -351,10 +355,23 @@ public class AppConfig extends JFrame {
 		editJO.setBorder(emptyBorder);
 		editJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				// FIXME: array so para testes
+				// if ( !Main.getJogos().isEmpty()){}
+				String[] edition = { "Barcelona, 1992", "London, 2012" };
+				// JogosOlimpicos jo = (JogosOlimpicos) ...
+				String b = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the Edition you want to modify:", "Edit Olympic Games Edition", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.calendar), edition, edition[0]);
+				/*
+				 * boolean valido = true; for(int i = 0; i < Main.getProvas();
+				 * i++{ if(jo.getCidade().equals(Main.gerProvas().get(i).
+				 * getJogosOlimpicos.getCidade()){ TODO: Mensagem de erro a
+				 * informar que nao pode editar esta edicao dos jogos, pois ha
+				 * provas registadas nela valido = false; break; } }
+				 */
+				// if (valido){}
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -366,10 +383,13 @@ public class AppConfig extends JFrame {
 		editCo.setBorder(emptyBorder);
 		editCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				// FIXME:
+				String[] atletas = { "Portugal", "Espanha", "Franca" };
+				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the country:", "Edit Country", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.flag), atletas, atletas[0]);
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -381,10 +401,13 @@ public class AppConfig extends JFrame {
 		editDis.setBorder(emptyBorder);
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				// FIXME:
+				String[] atletas = { "Bolt", "Boltas", "Boltes" };
+				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the discipline:", "Edit Discipline", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -396,10 +419,13 @@ public class AppConfig extends JFrame {
 		editSpo.setBorder(emptyBorder);
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				// FIXME:
+				String[] atletas = { "Bolt", "Boltas", "Boltes" };
+				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the sport:", "Edit Sport", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -411,10 +437,13 @@ public class AppConfig extends JFrame {
 		editEv.setBorder(emptyBorder);
 		editEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				// FIXME:
+				String[] atletas = { "Bolt", "Boltas", "Boltes" };
+				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the event:", "Edit Event", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.event), atletas, atletas[0]);
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -426,10 +455,15 @@ public class AppConfig extends JFrame {
 		editAth.setBorder(emptyBorder);
 		editAth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(a!=null){
+				// FIXME: Lista de atletas
+				String[] atletas = { "Bolt", "Boltas", "Boltes" };
+				if (atletas.length > 0) {
+					String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the athlete:", "Edit Athlete", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.user), atletas, atletas[0]);
+				}
+				if (a != null) {
 					a.setSelectedIndex(5);
 					a.setVisible(true);
-				}else {
+				} else {
 					a = new AddDados();
 					a.setSelectedIndex(5);
 				}
@@ -442,8 +476,8 @@ public class AppConfig extends JFrame {
 		p2.add(editSpo);
 		p2.add(editEv);
 		p2.add(editAth);
-		p1.add(lb,BorderLayout.NORTH);
-		p1.add(p2,BorderLayout.SOUTH);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
 		edit.add(p1);
 	}
 
@@ -454,11 +488,11 @@ public class AppConfig extends JFrame {
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		remove.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
-	
-		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
-		
+
 		JLabel lb = new JLabel("     Remove:");
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
@@ -468,10 +502,10 @@ public class AppConfig extends JFrame {
 		removeJO.setBorder(emptyBorder);
 		removeJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(r!=null){
+				if (r != null) {
 					r.setSelectedIndex(0);
 					r.setVisible(true);
-				}else {
+				} else {
 					r = new RemDados();
 					r.setSelectedIndex(0);
 				}
@@ -483,10 +517,10 @@ public class AppConfig extends JFrame {
 		removeCo.setBorder(emptyBorder);
 		removeCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(r!=null){
+				if (r != null) {
 					r.setSelectedIndex(1);
 					r.setVisible(true);
-				}else {
+				} else {
 					r = new RemDados();
 					r.setSelectedIndex(1);
 				}
@@ -498,10 +532,10 @@ public class AppConfig extends JFrame {
 		removeDis.setBorder(emptyBorder);
 		removeDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(r!=null){
+				if (r != null) {
 					r.setSelectedIndex(2);
 					r.setVisible(true);
-				}else {
+				} else {
 					r = new RemDados();
 					r.setSelectedIndex(2);
 				}
@@ -513,10 +547,10 @@ public class AppConfig extends JFrame {
 		removeSpo.setBorder(emptyBorder);
 		removeSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(r!=null){
+				if (r != null) {
 					r.setSelectedIndex(3);
 					r.setVisible(true);
-				}else {
+				} else {
 					r = new RemDados();
 					r.setSelectedIndex(3);
 				}
@@ -528,10 +562,10 @@ public class AppConfig extends JFrame {
 		removeEv.setBorder(emptyBorder);
 		removeEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(r!=null){
+				if (r != null) {
 					r.setSelectedIndex(4);
 					r.setVisible(true);
-				}else {
+				} else {
 					r = new RemDados();
 					r.setSelectedIndex(4);
 				}
@@ -543,10 +577,10 @@ public class AppConfig extends JFrame {
 		removeAth.setBorder(emptyBorder);
 		removeAth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(r!=null){
+				if (r != null) {
 					r.setSelectedIndex(5);
 					r.setVisible(true);
-				}else {
+				} else {
 					r = new RemDados();
 					r.setSelectedIndex(5);
 				}
@@ -559,8 +593,8 @@ public class AppConfig extends JFrame {
 		p2.add(removeSpo);
 		p2.add(removeEv);
 		p2.add(removeAth);
-		p1.add(lb,BorderLayout.NORTH);
-		p1.add(p2,BorderLayout.SOUTH);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
 		remove.add(p1);
 	}
 
@@ -570,25 +604,25 @@ public class AppConfig extends JFrame {
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		reg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
-	
-		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
-		
+
 		JLabel lb = new JLabel("     Register:");
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
-		
+
 		Botao regAtToTeam = new Botao(img.regAt);
 		regAtToTeam.setContentAreaFilled(false);
 		regAtToTeam.setToolTipText("Add athlete to a team.");
 		regAtToTeam.setBorder(emptyBorder);
 		regAtToTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(re!=null){
+				if (re != null) {
 					re.setSelectedIndex(0);
 					re.setVisible(true);
-				}else {
+				} else {
 					re = new AddRegs();
 					re.setSelectedIndex(0);
 				}
@@ -601,10 +635,10 @@ public class AppConfig extends JFrame {
 		regResult.setBorder(emptyBorder);
 		regResult.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(re!=null){
+				if (re != null) {
 					re.setSelectedIndex(1);
 					re.setVisible(true);
-				}else {
+				} else {
 					re = new AddRegs();
 					re.setSelectedIndex(1);
 				}
@@ -617,22 +651,21 @@ public class AppConfig extends JFrame {
 		regResultTeam.setBorder(emptyBorder);
 		regResultTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(re!=null){
+				if (re != null) {
 					re.setSelectedIndex(2);
 					re.setVisible(true);
-				}else {
+				} else {
 					re = new AddRegs();
 					re.setSelectedIndex(2);
 				}
 			}
 		});
 
-
 		p2.add(regAtToTeam);
 		p2.add(regResult);
 		p2.add(regResultTeam);
-		p1.add(lb,BorderLayout.NORTH);
-		p1.add(p2,BorderLayout.SOUTH);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
 		reg.add(p1);
 
 	}

@@ -1,6 +1,6 @@
 package gui;
 
-import java.net.*;
+import java.net.URL;
 
 public class Imagens {
 	ClassLoader classLoader = getClass().getClassLoader();
@@ -11,7 +11,7 @@ public class Imagens {
 	URL bg3 = classLoader.getResource("Imagens/bg3.png");
 	URL bg4 = classLoader.getResource("Imagens/bg4.png");
 	URL exit = classLoader.getResource("Imagens/exit.png");
-	
+
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");
 	URL gamesconfig = classLoader.getResource("Imagens/gamesconfig.png");
@@ -81,5 +81,12 @@ public class Imagens {
 	URL edit = classLoader.getResource("Imagens/edit.png");
 	URL remove = classLoader.getResource("Imagens/remove.png");
 	URL reg = classLoader.getResource("Imagens/reg.png");
+
+	// JOption icons
+	URL calendar = classLoader.getResource("Imagens/calendar.png");
+	URL user = classLoader.getResource("Imagens/user.png");
+	URL flag = classLoader.getResource("Imagens/flag.png");
+	URL sport = classLoader.getResource("Imagens/sport.png");
+	URL event = classLoader.getResource("Imagens/event.png");
 
 }
