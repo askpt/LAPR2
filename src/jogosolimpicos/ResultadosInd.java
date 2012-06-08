@@ -80,6 +80,11 @@ public class ResultadosInd {
 		this.resulTemp = resulTemp;
 	}
 
+	public int compareTo(Object o) {
+
+		return (int) (this.getResultado() - ((ResultadosInd) o).getResultado());
+	}
+
 	public String getResulTemp() {
 		return resulTemp;
 	}

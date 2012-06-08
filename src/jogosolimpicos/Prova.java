@@ -36,8 +36,10 @@ public abstract class Prova {
 		return String.format("%s - %s", jogos, disc.getNome());
 	}
 
-	public boolean equals(Disciplina disc) {
-		return (this.disc.getNome().equalsIgnoreCase(disc.getNome()) && this.disc.getModalidade().getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.disc.getTipoMod() == disc.getTipoMod());
+	public boolean equals(Prova disc) {
+		return (this.disc.getNome().equalsIgnoreCase(disc.getDisciplina().getNome()) && this.disc.getModalidade().getNome().equalsIgnoreCase(disc.getDisciplina().getModalidade().getNome()) && this.disc.getTipoMod() == disc.getDisciplina().getTipoMod());
 	}
+
+	public abstract void ordenar();
 
 }

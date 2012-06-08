@@ -1,6 +1,6 @@
 package jogosolimpicos;
 
-public class ResultadosCol {
+public class ResultadosCol implements Comparable {
 
 	private Equipa equipa;
 	private String resulTemp;
@@ -78,6 +78,11 @@ public class ResultadosCol {
 
 	public void setResulTemp(String resulTemp) {
 		this.resulTemp = resulTemp;
+	}
+
+	public int compareTo(Object o) {
+
+		return (int) (this.getResultado() - ((ResultadosCol) o).getResultado());
 	}
 
 	public String getResulTemp() {
