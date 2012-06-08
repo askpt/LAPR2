@@ -18,57 +18,54 @@ public class Imagens {
 	URL exitapp = classLoader.getResource("Imagens/exitapp.png");
 
 	// exports
-	URL expCountry = classLoader.getResource("Imagens/exportbtn.png");
-	URL expCountryHtml = classLoader.getResource("Imagens/exportCounHtml.png");
+	URL expCountry = classLoader.getResource("Imagens/exportCo.png");
+	URL expCountryHtml = classLoader.getResource("Imagens/exportCoH.png");
 
-	URL expDisc = classLoader.getResource("Imagens/exportDisci.png");
-	URL expDiscHtml = classLoader.getResource("Imagens/expDisciHtml.png");
+	URL expDisc = classLoader.getResource("Imagens/exportDi.png");
+	URL expDiscHtml = classLoader.getResource("Imagens/exportDiH.png");
 
-	URL expResu = classLoader.getResource("Imagens/expResu.png");
-	URL expResuHtml = classLoader.getResource("Imagens/expResuHtml.png");
+	URL expResu = classLoader.getResource("Imagens/exportRe.png");
+	URL expResuHtml = classLoader.getResource("Imagens/exportReH.png");
 
 	// imports
-	URL impCountry = classLoader.getResource("Imagens/importbtn.png");
-	URL impCountryHtml = classLoader.getResource("Imagens/importbtnhtml.png");
+	URL impCountry = classLoader.getResource("Imagens/importCo.png");
 
-	URL impDisc = classLoader.getResource("Imagens/importDisci.png");
-	URL impDiscHtml = classLoader.getResource("Imagens/importDisciHtml.png");
+	URL impDisc = classLoader.getResource("Imagens/importDi.png");
 
-	URL impResu = classLoader.getResource("Imagens/importresu.png");
-	URL impResuHtml = classLoader.getResource("Imagens/importresuHtml.png");
+	URL impResu = classLoader.getResource("Imagens/importRe.png");
 
 	// add
 
-	URL addAth = classLoader.getResource("Imagens/btn8.png");
-	URL addCo = classLoader.getResource("Imagens/btn5.png");
-	URL addJO = classLoader.getResource("Imagens/btn4.png");
-	URL addDis = classLoader.getResource("Imagens/btn9.png");
-	URL addSpo = classLoader.getResource("Imagens/btn6.png");
-	URL addEv = classLoader.getResource("Imagens/btn7.png");
+	URL addAth = classLoader.getResource("Imagens/addAT.png");
+	URL addCo = classLoader.getResource("Imagens/addCO.png");
+	URL addJO = classLoader.getResource("Imagens/addGE.png");
+	URL addDis = classLoader.getResource("Imagens/addDI.png");
+	URL addSpo = classLoader.getResource("Imagens/addSP.png");
+	URL addEv = classLoader.getResource("Imagens/addEV.png");
 
 	// edit
 
-	URL editAth = classLoader.getResource("Imagens/btn18.png");
-	URL editCo = classLoader.getResource("Imagens/btn21.png");
-	URL editJO = classLoader.getResource("Imagens/btn17.png");
-	URL editDis = classLoader.getResource("Imagens/btn22.png");
-	URL editSpo = classLoader.getResource("Imagens/btn19.png");
-	URL editEv = classLoader.getResource("Imagens/btn20.png");
+	URL editAth = classLoader.getResource("Imagens/editAT.png");
+	URL editCo = classLoader.getResource("Imagens/editCO.png");
+	URL editJO = classLoader.getResource("Imagens/editGE.png");
+	URL editDis = classLoader.getResource("Imagens/editDI.png");
+	URL editSpo = classLoader.getResource("Imagens/editSP.png");
+	URL editEv = classLoader.getResource("Imagens/editEV.png");
 
 	// remove
 
-	URL removeAth = classLoader.getResource("Imagens/btn14.png");
-	URL removeCo = classLoader.getResource("Imagens/btn12.png");
-	URL removeJO = classLoader.getResource("Imagens/btn16.png");
-	URL removeDis = classLoader.getResource("Imagens/btn10.png");
-	URL removeSpo = classLoader.getResource("Imagens/btn11.png");
-	URL removeEv = classLoader.getResource("Imagens/btn15.png");
+	URL removeAth = classLoader.getResource("Imagens/removeAT.png");
+	URL removeCo = classLoader.getResource("Imagens/removeCO.png");
+	URL removeJO = classLoader.getResource("Imagens/removeGE.png");
+	URL removeDis = classLoader.getResource("Imagens/removeDI.png");
+	URL removeSpo = classLoader.getResource("Imagens/removeSP.png");
+	URL removeEv = classLoader.getResource("Imagens/removeEV.png");
 
 	// register
 
-	URL regAt = classLoader.getResource("Imagens/btn1.png");
-	URL regRe = classLoader.getResource("Imagens/btn2.png");
-	URL regReTeam = classLoader.getResource("Imagens/btn3.png");
+	URL regAt = classLoader.getResource("Imagens/aatt.png");
+	URL regRe = classLoader.getResource("Imagens/rar.png");
+	URL regReTeam = classLoader.getResource("Imagens/rtr.png");
 
 	// ok,clear, +
 

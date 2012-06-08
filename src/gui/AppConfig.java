@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.plaf.TabbedPaneUI;
+import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
 
 import jogosolimpicos.*;
 import dados.*;
@@ -58,7 +60,8 @@ public class AppConfig extends JFrame {
 		jtp.addTab("Edit", edit);
 		jtp.addTab("Remove", remove);
 		jtp.addTab("Register", reg);
-
+		jtp.setBackground(new Color(61,71,78));
+		jtp.setForeground(Color.WHITE);
 	}
 
 	private void addPaineis() {
@@ -81,9 +84,21 @@ public class AppConfig extends JFrame {
 
 	private void addImports() {
 
-		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
-		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+	
+		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+		
+		JLabel lb = new JLabel("     Import:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
+
+
 
 		// Countries
 		Botao impCountry = new Botao(img.impCountry);
@@ -95,9 +110,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao impCountryHtml = new Botao(img.impCountryHtml);
-		impCountryHtml.setContentAreaFilled(false);
-		impCountryHtml.setBorder(emptyBorder);
 
 		// Disciplines
 		Botao impDisc = new Botao(img.impDisc);
@@ -109,9 +121,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao impDiscHtml = new Botao(img.impDiscHtml);
-		impDiscHtml.setContentAreaFilled(false);
-		impDiscHtml.setBorder(emptyBorder);
 
 		// Results
 		Botao impResu = new Botao(img.impResu);
@@ -123,24 +132,31 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao impResuHtml = new Botao(img.impResuHtml);
-		impResuHtml.setContentAreaFilled(false);
-		impResuHtml.setBorder(emptyBorder);
 
-		p1.add(impCountry);
-		p1.add(impCountryHtml);
-		p1.add(impDisc);
-		p1.add(impDiscHtml);
-		p1.add(impResu);
-		p1.add(impResuHtml);
+		p2.add(impCountry);
+		p2.add(impDisc);
+		p2.add(impResu);
+		p1.add(lb,BorderLayout.NORTH);
+		p1.add(p2,BorderLayout.SOUTH);
 		imp.add(p1);
 	}
 
 	private void addExports() {
 
-		JPanel p1 = new JPanel(new GridLayout(3, 2, 10, 10));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
-		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+	
+		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+		
+		JLabel lb = new JLabel("     Export:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
+
 
 		// Countries
 		Botao expCountry = new Botao(img.expCountry);
@@ -184,21 +200,31 @@ public class AppConfig extends JFrame {
 		expResuHtml.setContentAreaFilled(false);
 		expResuHtml.setBorder(emptyBorder);
 
-		p1.add(expCountry);
-		p1.add(expCountryHtml);
-		p1.add(expDisc);
-		p1.add(expDiscHtml);
-		p1.add(expResu);
-		p1.add(expResuHtml);
+		p2.add(expCountry);
+		p2.add(expCountryHtml);
+		p2.add(expDisc);
+		p2.add(expDiscHtml);
+		p2.add(expResu);
+		p2.add(expResuHtml);
+		p1.add(lb,BorderLayout.NORTH);
+		p1.add(p2,BorderLayout.SOUTH);
 		exp.add(p1);
 	}
 
 	private void addAdds() {
 		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new GridLayout(3, 2, 10, 10));
+		p1.setLayout(new BorderLayout());
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
-		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+	
+		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+		
+		JLabel lb = new JLabel("     Add:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
 
 		Botao addJO = new Botao(img.addJO);
 		addJO.setContentAreaFilled(false);
@@ -293,12 +319,14 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		p1.add(addJO);
-		p1.add(addCo);
-		p1.add(addDis);
-		p1.add(addSpo);
-		p1.add(addEv);
-		p1.add(addAth);
+		p2.add(addJO);
+		p2.add(addCo);
+		p2.add(addDis);
+		p2.add(addSpo);
+		p2.add(addEv);
+		p2.add(addAth);
+		p1.add(lb,BorderLayout.NORTH);
+		p1.add(p2,BorderLayout.SOUTH);
 		add.add(p1);
 
 	}
@@ -306,11 +334,18 @@ public class AppConfig extends JFrame {
 	private void addEdits() {
 
 		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new GridLayout(3, 2, 10, 10));
+		p1.setLayout(new BorderLayout());
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
-		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
-
+		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+	
+		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+		
+		JLabel lb = new JLabel("     Edit:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
 		Botao editJO = new Botao(img.editJO);
 		editJO.setContentAreaFilled(false);
 		editJO.setBorder(emptyBorder);
@@ -401,22 +436,32 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		p1.add(editJO);
-		p1.add(editCo);
-		p1.add(editDis);
-		p1.add(editSpo);
-		p1.add(editEv);
-		p1.add(editAth);
+		p2.add(editJO);
+		p2.add(editCo);
+		p2.add(editDis);
+		p2.add(editSpo);
+		p2.add(editEv);
+		p2.add(editAth);
+		p1.add(lb,BorderLayout.NORTH);
+		p1.add(p2,BorderLayout.SOUTH);
 		edit.add(p1);
 	}
 
 	private void addRemoves() {
 
 		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new GridLayout(3, 2, 10, 10));
+		p1.setLayout(new BorderLayout());
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
-		remove.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		remove.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+	
+		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+		
+		JLabel lb = new JLabel("     Remove:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
 
 		Botao removeJO = new Botao(img.removeJO);
 		removeJO.setContentAreaFilled(false);
@@ -508,22 +553,32 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		p1.add(removeJO);
-		p1.add(removeCo);
-		p1.add(removeDis);
-		p1.add(removeSpo);
-		p1.add(removeEv);
-		p1.add(removeAth);
+		p2.add(removeJO);
+		p2.add(removeCo);
+		p2.add(removeDis);
+		p2.add(removeSpo);
+		p2.add(removeEv);
+		p2.add(removeAth);
+		p1.add(lb,BorderLayout.NORTH);
+		p1.add(p2,BorderLayout.SOUTH);
 		remove.add(p1);
 	}
 
 	private void addRegs() {
 		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new GridLayout(3, 2, 10, 10));
-		p1.setOpaque(false);
-		reg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		p1.setLayout(new BorderLayout());
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
-
+		p1.setOpaque(false);
+		reg.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+	
+		JPanel p2 = new JPanel(new GridLayout(3,2,10,10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+		
+		JLabel lb = new JLabel("     Register:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
+		
 		Botao regAtToTeam = new Botao(img.regAt);
 		regAtToTeam.setContentAreaFilled(false);
 		regAtToTeam.setToolTipText("Add athlete to a team.");
@@ -558,7 +613,7 @@ public class AppConfig extends JFrame {
 
 		Botao regResultTeam = new Botao(img.regReTeam);
 		regResultTeam.setContentAreaFilled(false);
-		regResultTeam.setToolTipText("Registar team's result.");
+		regResultTeam.setToolTipText("Register team's result.");
 		regResultTeam.setBorder(emptyBorder);
 		regResultTeam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -573,9 +628,11 @@ public class AppConfig extends JFrame {
 		});
 
 
-		p1.add(regAtToTeam);
-		p1.add(regResult);
-		p1.add(regResultTeam);
+		p2.add(regAtToTeam);
+		p2.add(regResult);
+		p2.add(regResultTeam);
+		p1.add(lb,BorderLayout.NORTH);
+		p1.add(p2,BorderLayout.SOUTH);
 		reg.add(p1);
 
 	}
