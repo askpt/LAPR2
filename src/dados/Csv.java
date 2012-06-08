@@ -35,7 +35,6 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-
 			in.nextLine();
 			while (in.hasNextLine()) {
 				String temp[] = in.nextLine().split(";");
@@ -51,6 +50,64 @@ public class Csv extends JComponent implements Accessible {
 					temp[1] = temp[1].substring(1);
 
 				paises.add(new Pais(temp[0], temp[1]));
+
+				if (temp.length == 3) {
+					int index = paises.size() - 1;
+					temp[2] = temp[2].replaceAll(" ", "");
+					String[] codes = temp[2].split("\\)");
+
+					for (int i = 0; i < codes.length; i++) {
+						String[] code = codes[i].split("\\(");
+						String[] anos = code[1].split(",");
+						for (int j = 0; j < anos.length; j++) {
+
+							if (anos[j].matches("^[0-9]{4}$")) {
+								int ano = Integer.parseInt(anos[j]);
+
+								paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
+								System.out.println(code[0] + ":" + ano);
+							} else if (anos[j].matches("^[0-9]{4}(S){1}$")) {
+								anos[j] = anos[j].replaceAll("S", "");
+								int ano = Integer.parseInt(anos[j]);
+								paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
+							} else if (anos[j].matches("^[0-9]{4}(_){1}[0-9]{4}$")) {
+								String[] anosTemp = anos[j].split("_");
+								int anoInicio = Integer.parseInt(anosTemp[0]);
+								int anoFim = Integer.parseInt(anosTemp[1]);
+								paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
+							} else if (anos[j].matches("^[0-9]{4}(S|W){0,1}_[0-9]{4}(S|W){0,1}$")) {
+								String[] anosTemp = anos[j].split("_");
+								int anoInicio = 0;
+								int anoFim = 0;
+								if (anosTemp[0].matches("^[0-9]{4}(W){1}")) {
+									anosTemp[0] = anosTemp[0].replaceAll("W", "");
+									anoInicio = Integer.parseInt(anosTemp[0]);
+									anoInicio++;
+								} else if (anosTemp[0].matches("^[0-9]{4}(S){1}")) {
+									anosTemp[1] = anosTemp[0].replaceAll("S", "");
+									anoInicio = Integer.parseInt(anosTemp[0]);
+								} else if (anosTemp[0].matches("^[0-9]{4}")) {
+									anoInicio = Integer.parseInt(anosTemp[0]);
+								}
+								if (anosTemp[1].matches("^[0-9]{4}(W){1}")) {
+									anosTemp[1] = anosTemp[1].replaceAll("W", "");
+									anoFim = Integer.parseInt(anosTemp[1]);
+									anoFim++;
+								} else if (anosTemp[1].matches("^[0-9]{4}(S){1}")) {
+									anosTemp[1] = anosTemp[1].replaceAll("S", "");
+									anoFim = Integer.parseInt(anosTemp[1]);
+								} else if (anosTemp[1].matches("^[0-9]{4}")) {
+									anoFim = Integer.parseInt(anosTemp[1]);
+								}
+								paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
+							} else if (anos[j].matches("^[0-9]{4}(W){1}$")) {
+							}
+
+						}
+
+					}
+				}
+
 			}
 			in.close();
 			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
@@ -59,6 +116,7 @@ public class Csv extends JComponent implements Accessible {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			exc.printStackTrace();
 		}
 
 	}
@@ -81,7 +139,16 @@ public class Csv extends JComponent implements Accessible {
 			Formatter out = new Formatter(ficheiro + ".csv");
 			out.format("Code ;Nation (NOC) ;\n");
 			for (int i = 0; i < paises.size(); i++) {
-				out.format("%s ;%s ;\n", paises.get(i).getCodigoPais(), paises.get(i).getNomePais());
+				out.format("%s ;%s ;", paises.get(i).getCodigoPais(0), paises.get(i).getNomePais());
+				for (int j = 0; j < paises.get(i).getCodigos().size(); j++) {
+					if (paises.get(i).getCodigos().get(j).getAnoInicio() == paises.get(i).getCodigos().get(j).getAnoFim()) {
+						out.format("%s (%d), ", paises.get(i).getCodigos().get(j).getCodigo(), paises.get(i).getCodigos().get(j).getAnoInicio());
+					} else {
+						out.format("%s (%d_%d), ", paises.get(i).getCodigos().get(j).getCodigo(), paises.get(i).getCodigos().get(j).getAnoInicio(), paises.get(i).getCodigos().get(j).getAnoFim());
+
+					}
+				}
+				out.format("\n");
 			}
 			out.close();
 			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
@@ -595,7 +662,7 @@ public class Csv extends JComponent implements Accessible {
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
-							if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atl[0]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atl[1])) {
+							if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atl[0]) && atletas.get(itAtleta).getPais().getCodigoPais(ano).equalsIgnoreCase(atl[1])) {
 
 								break;
 							}
@@ -605,7 +672,7 @@ public class Csv extends JComponent implements Accessible {
 						if (itAtleta == atletas.size()) {
 							int itPais = 0;
 							for (; itPais < paises.size(); itPais++) {
-								if (atl[1].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+								if (atl[1].equalsIgnoreCase(paises.get(itPais).getCodigoPais(ano))) {
 									break;
 								}
 							}
@@ -633,7 +700,7 @@ public class Csv extends JComponent implements Accessible {
 
 						int itPais = 0;
 						for (; itPais < paises.size(); itPais++) {
-							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais(ano))) {
 								break;
 							}
 						}
@@ -650,7 +717,7 @@ public class Csv extends JComponent implements Accessible {
 							boolean existeAtleta = false;
 							int itAtleta = 0;
 							for (; itAtleta < atletas.size(); itAtleta++) {
-								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(team[0])) {
+								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais(ano).equalsIgnoreCase(team[0])) {
 									existeAtleta = true;
 									break;
 								}
@@ -708,7 +775,7 @@ public class Csv extends JComponent implements Accessible {
 
 						int itAtleta = 0;
 						for (; itAtleta < atletas.size(); itAtleta++) {
-							if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atl[0]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(atl[1])) {
+							if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atl[0]) && atletas.get(itAtleta).getPais().getCodigoPais(ano).equalsIgnoreCase(atl[1])) {
 								existeAtleta = true;
 								break;
 							}
@@ -718,7 +785,7 @@ public class Csv extends JComponent implements Accessible {
 						if (!existeAtleta) {
 							int itPais = 0;
 							for (; itPais < paises.size(); itPais++) {
-								if (atl[1].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+								if (atl[1].equalsIgnoreCase(paises.get(itPais).getCodigoPais(ano))) {
 									break;
 								}
 							}
@@ -760,7 +827,7 @@ public class Csv extends JComponent implements Accessible {
 
 						int itPais = 0;
 						for (; itPais < paises.size(); itPais++) {
-							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais())) {
+							if (team[0].equalsIgnoreCase(paises.get(itPais).getCodigoPais(ano))) {
 								break;
 							}
 						}
@@ -778,7 +845,7 @@ public class Csv extends JComponent implements Accessible {
 							int itAtleta = 0;
 							boolean existeAtleta = false;
 							for (; itAtleta < atletas.size(); itAtleta++) {
-								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais().equalsIgnoreCase(team[0])) {
+								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais(ano).equalsIgnoreCase(team[0])) {
 									existeAtleta = true;
 									break;
 								}
@@ -877,7 +944,7 @@ public class Csv extends JComponent implements Accessible {
 								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
 								for (int k = 0; k < ((ProvaInd) provasTemp.get(j)).getResultados().size(); k++) {
 									out.format(";" + ((ProvaInd) provasTemp.get(j)).getResultados().get(k).getAtleta().getNome() + ", ");
-									out.format(((ProvaInd) provasTemp.get(j)).getResultados().get(k).getAtleta().getPais().getCodigoPais() + ";");
+									out.format(((ProvaInd) provasTemp.get(j)).getResultados().get(k).getAtleta().getPais().getCodigoPais(ano) + ";");
 									out.format(((ProvaInd) provasTemp.get(j)).getResultados().get(k).getResulTemp() + "\n");
 								}
 								provasTemp.remove(j);
@@ -898,7 +965,7 @@ public class Csv extends JComponent implements Accessible {
 								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
 
 								for (int k = 0; k < ((ProvaCol) provasTemp.get(j)).getResultados().size(); k++) {
-									out.format(";" + ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + "(");
+									out.format(";" + ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais(ano) + "(");
 									for (int l = 0; l < ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getAtleta().size() - 1; l++) {
 										out.format(((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getAtleta().get(l).getNome() + ", ");
 									}

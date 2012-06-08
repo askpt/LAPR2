@@ -1,7 +1,7 @@
 package listaligadaTest;
 
 import static org.junit.Assert.*;
-import listaligada.ListaLigada;
+import listaligada.*;
 
 import org.junit.Test;
 

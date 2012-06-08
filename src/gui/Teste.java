@@ -162,7 +162,7 @@ public class Teste extends JFrame {
 									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome());
 
 									for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
-										System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais() + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+										System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais(2008) + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
 									}
 									provas.remove(j);
 									j--;

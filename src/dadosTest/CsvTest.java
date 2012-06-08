@@ -24,7 +24,7 @@ public class CsvTest {
 		csv.importPais(new Teste("Test"), testeList);
 
 		for (int i = 0; i < testeList.size(); i++) {
-			if (!esperadoList.get(i).getCodigoPais().equals(testeList.get(i).getCodigoPais()) || !esperadoList.get(i).getNomePais().equals(testeList.get(i).getNomePais()))
+			if (!esperadoList.get(i).getCodigoPais(0).equals(testeList.get(i).getCodigoPais(0)) || !esperadoList.get(i).getNomePais().equals(testeList.get(i).getNomePais()))
 				teste = false;
 		}
 
@@ -46,7 +46,7 @@ public class CsvTest {
 		ListaLigada<Pais> testList = new ListaLigada<Pais>();
 		csv.importPais(new Teste("Test"), testList);
 		for (int i = 0; i < testList.size(); i++) {
-			if (!esperadoList.get(i).getCodigoPais().equals(testList.get(i).getCodigoPais()) || !esperadoList.get(i).getNomePais().equals(testList.get(i).getNomePais()))
+			if (!esperadoList.get(i).getCodigoPais(0).equals(testList.get(i).getCodigoPais(0)) || !esperadoList.get(i).getNomePais().equals(testList.get(i).getNomePais()))
 				teste = false;
 		}
 
