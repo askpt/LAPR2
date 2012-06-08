@@ -34,7 +34,7 @@ public class ProvaInd extends Prova {
 	public void ordenar() {
 		if (super.getDisciplina().getOrdenacao()) {
 			for (int i = 0; i < resultados.size() - 1; i++) {
-				for (int j = 0; j < resultados.size(); j++) {
+				for (int j = i + 1; j < resultados.size(); j++) {
 					if (resultados.get(i).compareTo(resultados.get(j)) < 0) {
 						Object obj = resultados.get(j);
 						resultados.set(j, resultados.get(i));
@@ -44,7 +44,7 @@ public class ProvaInd extends Prova {
 			}
 		} else {
 			for (int i = 0; i < resultados.size(); i++) {
-				for (int j = 0; j < resultados.size(); j++) {
+				for (int j = i + 1; j < resultados.size(); j++) {
 					if (resultados.get(i).compareTo(resultados.get(j)) > 0) {
 						Object obj = resultados.get(j);
 						resultados.set(j, resultados.get(i));

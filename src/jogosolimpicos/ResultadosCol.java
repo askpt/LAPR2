@@ -83,7 +83,7 @@ public class ResultadosCol implements Comparable {
 
 	public int compareTo(Object o) {
 
-		return (int) (this.getResultado() - ((ResultadosCol) o).getResultado());
+		return (int) (this.getResultado() * 10000 - ((ResultadosCol) o).getResultado() * 10000);
 	}
 
 	public String getResulTemp() {

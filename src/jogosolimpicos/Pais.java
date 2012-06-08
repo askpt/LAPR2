@@ -121,7 +121,7 @@ public class Pais implements Comparable {
 			} else if (this.getMedalha().getBronze() != that.getMedalha().getBronze()) {
 				return (this.getMedalha().getBronze() - that.getMedalha().getBronze());
 			} else {
-				return (this.getNomePais().compareTo(that.getNomePais()));
+				return (that.getNomePais().compareTo(this.getNomePais()));
 			}
 		}
 		return 0;

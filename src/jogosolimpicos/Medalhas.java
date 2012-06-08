@@ -7,7 +7,6 @@ package jogosolimpicos;
 public class Medalhas {
 
 	private int ouro, prata, bronze;
-	private String modalidade;
 
 	/**
 	 * Main constructor of class medals. Initializes the gold, silver and
@@ -17,11 +16,6 @@ public class Medalhas {
 		this.ouro = 0;
 		this.prata = 0;
 		this.bronze = 0;
-	}
-
-	public String getModalidade() {
-
-		return modalidade;
 	}
 
 	/**

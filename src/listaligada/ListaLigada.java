@@ -83,19 +83,14 @@ public class ListaLigada<E> {
 	 */
 	public No<E> no(int index) {
 
-		if (index < (size() >> 1)) {
-			No<E> x = cabeca;
+		No<E> x = cabeca;
+		if (index < size()) {
 			for (int i = 0; i < index; i++) {
 				x = x.proximo;
 			}
-			return x;
-		} else {
-			No<E> x = cauda;
-			for (int i = size() - 1; i > index; i--) {
-				x = x.anterior;
-			}
-			return x;
-		}
+		} 
+		return x;
+
 	}
 
 	private void verificarIndex(int index) {

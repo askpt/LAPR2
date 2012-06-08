@@ -82,7 +82,7 @@ public class ResultadosInd {
 
 	public int compareTo(Object o) {
 
-		return (int) (this.getResultado() - ((ResultadosInd) o).getResultado());
+		return (int) (this.getResultado() * 10000 - ((ResultadosInd) o).getResultado() * 10000);
 	}
 
 	public String getResulTemp() {
