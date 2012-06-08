@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -14,7 +16,7 @@ public class AddDados extends JFrame {
 	private final Csv csv = new Csv();
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	private JTabbedPane jtp = new JTabbedPane();
-
+	
 	public AddDados() {
 		super("Add Info");
 
@@ -39,7 +41,7 @@ public class AddDados extends JFrame {
 	public void setSelectedIndex(int i) {
 		jtp.setSelectedIndex(i);
 	}
-
+	
 	private void addTabs() {
 
 		getContentPane().add(jtp);
@@ -154,33 +156,101 @@ public class AddDados extends JFrame {
 	}
 
 	private void addDiscipline() {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
 		di.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		
+		JPanel panel = new JPanel(new GridLayout(5,1));
+		panel.setBackground(new Color(158, 193, 213));
 
-		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
+		JPanel panel1 = new JPanel(new BorderLayout());
 		panel1.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel("Discipline");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Name:  "), BorderLayout.WEST);
-		JTextField txtAno = new JTextField(20);
-		txtAno.setToolTipText("Discipline's name");
-		panel1.add(txtAno, BorderLayout.CENTER);
+		panel1.add(new JLabel("Name:  "),BorderLayout.WEST);
+		final JTextField txtName = new JTextField(20);
+		txtName.setToolTipText("Discipline's name");
+		panel1.add(txtName, BorderLayout.CENTER);
+		panel.add(panel1);
+		
+		JPanel panel6 = new JPanel(new BorderLayout());
+		panel6.setBorder(new EmptyBorder(15, 10, 0, 10));
+		panel6.setOpaque(false);
+		panel6.add(new JLabel("  Sport:  "), BorderLayout.WEST);
+		final JComboBox cmbDiscipline = new JComboBox();
+		cmbDiscipline.setToolTipText("Discipline's Sport.");
+		panel6.add(cmbDiscipline, BorderLayout.CENTER);
+		panel.add(panel6);
+		
 
-		JPanel panel3 = new JPanel();
-		panel3.setOpaque(false);
+		JPanel panel2 = new JPanel();
+		panel2.setOpaque(false);
+		panel2.setBorder(new EmptyBorder(10, 10, 0, 10));
+		ButtonGroup btngrp = new ButtonGroup();
+		JRadioButton rbDistancia = new JRadioButton("Distance", true);
+		JRadioButton rbTempo = new JRadioButton("Time", false);
+		JRadioButton rbPontos = new JRadioButton("Points", false);
+		JRadioButton rbRank = new JRadioButton("Rank", false);
+		
+		rbDistancia.setOpaque(false);
+		rbTempo.setOpaque(false);
+		rbPontos.setOpaque(false);
+		rbRank.setOpaque(false);
+
+		btngrp.add(rbDistancia);
+		btngrp.add(rbTempo);
+		btngrp.add(rbPontos);
+		btngrp.add(rbRank);
+
+		panel2.add(rbDistancia);
+		panel2.add(rbTempo);
+		panel2.add(rbPontos);
+		panel2.add(rbRank);
+		panel.add(panel2);
+		
+		JPanel panel4 = new JPanel();
+		panel4.setOpaque(false);
+		ButtonGroup btngrp2 = new ButtonGroup();
+		JRadioButton rbM = new JRadioButton("Male", true);
+		JRadioButton rbF = new JRadioButton("Female", false);
+		JRadioButton rbMi = new JRadioButton("Mixed", false);
+
+		rbM.setOpaque(false);
+		rbF.setOpaque(false);
+		rbMi.setOpaque(false);
+
+		btngrp.add(rbM);
+		btngrp.add(rbF);
+		btngrp.add(rbMi);
+
+		panel4.add(rbM);
+		panel4.add(rbF);
+		panel4.add(rbMi);
+		panel.add(panel4);
+		
+
+		JPanel panel5 = new JPanel();
+		panel5.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
-		Botao clear = new Botao(img.clear);
+		final Botao clear = new Botao(img.clear);
 		clear.setContentAreaFilled(false);
-		panel3.add(ok);
-		panel3.add(clear);
+		panel5.add(ok);
+		panel5.add(clear);
+		
+		clear.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == clear){
+				txtName.setText("");
+				}
+		}
+	});
 
-		p1.add(panel1, BorderLayout.NORTH);
-		p1.add(panel3, BorderLayout.SOUTH);
-		di.add(p1);
+		panel.add(panel5);
+		
+		
+
+		di.add(panel);
 	}
 
 	private void addSport() {
@@ -195,18 +265,9 @@ public class AddDados extends JFrame {
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
 		panel1.add(new JLabel("Name:    "), BorderLayout.WEST);
-		JComboBox cmbDiscipline = new JComboBox();
-		cmbDiscipline.setToolTipText("Discipline whose this sport belongs");
-		panel1.add(cmbDiscipline, BorderLayout.CENTER);
-
-		JPanel panel2 = new JPanel(new BorderLayout());
-		panel2.setOpaque(false);
-		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
-
-		panel2.add(new JLabel("  Edition:  "), BorderLayout.WEST);
-		JComboBox cmbEdition = new JComboBox();
-		cmbEdition.setToolTipText("Sport's edition.");
-		panel2.add(cmbEdition, BorderLayout.CENTER);
+		JTextField txtSpo = new JTextField(20);
+		txtSpo.setToolTipText("Discipline whose this sport belongs");
+		panel1.add(txtSpo, BorderLayout.CENTER);
 
 		JPanel panel3 = new JPanel();
 		panel3.setOpaque(false);
@@ -217,8 +278,7 @@ public class AddDados extends JFrame {
 		panel3.add(ok);
 		panel3.add(clear);
 
-		p1.add(panel1, BorderLayout.NORTH);
-		p1.add(panel2, BorderLayout.CENTER);
+		p1.add(panel1, BorderLayout.CENTER);
 		p1.add(panel3, BorderLayout.SOUTH);
 		spo.add(p1);
 	}
@@ -234,18 +294,18 @@ public class AddDados extends JFrame {
 		JLabel a = new JLabel("Event");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		panel1.add(a, BorderLayout.NORTH);
-		panel1.add(new JLabel("Name:  "), BorderLayout.WEST);
-		JTextField txtName = new JTextField(20);
-		txtName.setToolTipText("Event's name");
-		panel1.add(txtName, BorderLayout.CENTER);
+		panel1.add(new JLabel("Sport:     "), BorderLayout.WEST);
+		JComboBox cmbDiscipline = new JComboBox();
+		cmbDiscipline.setToolTipText("Event's name");
+		panel1.add(cmbDiscipline, BorderLayout.CENTER);
 
 		JPanel panel2 = new JPanel(new BorderLayout());
 		panel2.setOpaque(false);
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		panel2.add(new JLabel("  Sport:  "), BorderLayout.WEST);
+		panel2.add(new JLabel("    Edition:  "), BorderLayout.WEST);
 		JComboBox cmbEdition = new JComboBox();
-		cmbEdition.setToolTipText("Sport whose this event belongs.");
+		cmbEdition.setToolTipText("Edition whose this event belongs.");
 		panel2.add(cmbEdition, BorderLayout.CENTER);
 
 		JPanel panel3 = new JPanel();

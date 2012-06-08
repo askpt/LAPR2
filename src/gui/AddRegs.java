@@ -146,7 +146,6 @@ public class AddRegs extends JFrame {
 
 		JPanel panel3 = new JPanel(new BorderLayout(0, 10));
 		panel3.setOpaque(false);
-		// panel4.setOpaque(false);
 		panel3.add(new JLabel("  Result:  "), BorderLayout.WEST);
 		JTextField txtResult = new JTextField(20);
 		txtResult.setToolTipText("Athlete's result");
