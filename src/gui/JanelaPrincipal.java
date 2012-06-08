@@ -40,17 +40,21 @@ public class JanelaPrincipal extends JFrame {
 	private void addButtons() {
 		// Buttons
 		Botao btn1 = new Botao(img.appconfig);
-		Botao btn2 = new Botao(img.gamesconfig);
 		Botao btn3 = new Botao(img.exitapp);
 
 		// Panels
-		Painel panel = new Painel(new FlowLayout(FlowLayout.RIGHT, 100, 120));
-		JPanel panelbtn = new JPanel(new GridLayout(3, 1, 10, 10));
+		Painel panel = new Painel(new FlowLayout(FlowLayout.RIGHT, 55, 120));
+		Painel panelbtn = new Painel(img.bg4);
+		panelbtn.setLayout(new GridLayout(3, 1, 10, 10));
+		panelbtn.setBorder(new EmptyBorder(20,20,30,20));
 		panelbtn.setOpaque(false);
-		// panelbtn.setBackground(new Color(0, 122, 133));
 		panel.add(panelbtn);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
 
+		JLabel lb = new JLabel("Menu");
+		lb.setFont(new Font("Arial", Font.BOLD, 14));
+		lb.setForeground(Color.white);
+		
 		// appconfig
 		btn1.setContentAreaFilled(false);
 		btn1.setBorder(emptyBorder);
@@ -60,13 +64,6 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 
-		// gamesconfig
-		btn2.setContentAreaFilled(false);
-		btn2.setBorder(emptyBorder);
-		btn2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 
 		// exitapp
 		btn3.setContentAreaFilled(false);
@@ -77,8 +74,8 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 
+		panelbtn.add(lb);
 		panelbtn.add(btn1);
-		panelbtn.add(btn2);
 		panelbtn.add(btn3);
 		add(panel, BorderLayout.CENTER);
 	}

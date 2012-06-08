@@ -15,7 +15,7 @@ public class Imagens {
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");
 	URL gamesconfig = classLoader.getResource("Imagens/gamesconfig.png");
-	URL exitapp = classLoader.getResource("Imagens/exitapp.png");
+	URL exitapp = classLoader.getResource("Imagens/exitM.png");
 
 	// exports
 	URL expCountry = classLoader.getResource("Imagens/exportCo.png");
