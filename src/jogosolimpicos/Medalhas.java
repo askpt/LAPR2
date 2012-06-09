@@ -3,14 +3,22 @@ package jogosolimpicos;
 import java.io.*;
 
 /**
- * Class of the management of the medals.
+ * Main class of the management of the medals.
  */
 
 @SuppressWarnings("serial")
 public class Medalhas implements Serializable {
-
+	/**
+	 * Gold medals
+	 */
 	private int ouro;
+	/**
+	 * Silver medals
+	 */
 	private int prata;
+	/**
+	 * Bronze medals
+	 */
 	private int bronze;
 
 	/**
@@ -18,17 +26,8 @@ public class Medalhas implements Serializable {
 	 * medals to zero.
 	 */
 	public Medalhas() {
-		/**
-		 * Gold medals
-		 */
 		this.ouro = 0;
-		/**
-		 * Silver medals
-		 */
 		this.prata = 0;
-		/**
-		 * Bronze medals
-		 */
 		this.bronze = 0;
 	}
 
