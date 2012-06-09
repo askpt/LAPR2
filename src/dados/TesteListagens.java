@@ -21,7 +21,7 @@ public class TesteListagens {
 				if (provaTemp.get(j).getJogosOlimpicos().getAno() < anoInicio || provaTemp.get(j).getJogosOlimpicos().getAno() > anoFim) {
 					provaTemp.remove(j);
 					j--;
-				} else if (provaTemp.get(j) instanceof ProvaInd && !((ProvaInd) provaTemp.get(j)).getResultados().isEmpty()) {
+				} else if (provaTemp.get(j).getJogosOlimpicos().getAno() == i && provaTemp.get(j) instanceof ProvaInd && !((ProvaInd) provaTemp.get(j)).getResultados().isEmpty()) {
 					provaTemp.get(j).ordenar();
 
 					int itInicioOuro = 0;
@@ -77,7 +77,7 @@ public class TesteListagens {
 					provaTemp.remove(j);
 					j--;
 
-				} else if (provaTemp.get(j) instanceof ProvaCol && !((ProvaCol) provaTemp.get(j)).getResultados().isEmpty()) {
+				} else if (provaTemp.get(j).getJogosOlimpicos().getAno() == i && provaTemp.get(j) instanceof ProvaCol && !((ProvaCol) provaTemp.get(j)).getResultados().isEmpty()) {
 					provaTemp.get(j).ordenar();
 
 					int itInicioOuro = 0;

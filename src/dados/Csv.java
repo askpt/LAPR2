@@ -869,7 +869,7 @@ public class Csv extends JComponent implements Accessible {
 						itProva = 0;
 
 						for (; itProva < provas.size(); itProva++) {
-							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().equals(nomeDisc) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc) {
+							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().equalsIgnoreCase(nomeDisc) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
 								break;
 							}
 						}
