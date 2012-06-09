@@ -24,7 +24,7 @@ import dados.Csv;
 
 public class AppConfig extends JFrame {
 
-	private Painel imp, exp, add, edit, remove, reg;
+	private Painel imp, exp, add, edit, remove, reg, list;
 
 	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
@@ -46,6 +46,7 @@ public class AppConfig extends JFrame {
 		addEdits();
 		addRemoves();
 		addRegs();
+		addList();
 		setProperties(600, 400, 1, true);
 
 	}
@@ -71,6 +72,7 @@ public class AppConfig extends JFrame {
 		jtp.addTab("Edit", edit);
 		jtp.addTab("Remove", remove);
 		jtp.addTab("Register", reg);
+		jtp.addTab("List", list);
 		jtp.setBackground(new Color(61, 71, 78));
 		jtp.setForeground(Color.WHITE);
 	}
@@ -84,6 +86,7 @@ public class AppConfig extends JFrame {
 		edit = new Painel(img.bg3);
 		remove = new Painel(img.bg3);
 		reg = new Painel(img.bg3);
+		list = new Painel(img.bg3);
 
 		imp.setOpaque(false);
 		exp.setOpaque(false);
@@ -91,6 +94,39 @@ public class AppConfig extends JFrame {
 		edit.setOpaque(false);
 		remove.setOpaque(false);
 		reg.setOpaque(false);
+		list.setOpaque(false);
+	}
+
+	private void addList() {
+
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p1.setOpaque(false);
+		list.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+
+		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
+		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p2.setOpaque(false);
+
+		JLabel lb = new JLabel("     Statistics and Listings:");
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		lb.setForeground(Color.white);
+
+		Botao impCountry = new Botao(img.impCountry);
+		impCountry.setContentAreaFilled(false);
+		impCountry.setBorder(emptyBorder);
+		impCountry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddList a = new AddList();
+			}
+		});
+
+		p2.add(impCountry);
+		p1.add(lb, BorderLayout.NORTH);
+		p1.add(p2, BorderLayout.SOUTH);
+		list.add(p1);
+
 	}
 
 	private void addImports() {
@@ -236,6 +272,7 @@ public class AppConfig extends JFrame {
 		addJO.setBorder(emptyBorder);
 		addJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CardLayoutExp b = new CardLayoutExp();
 				if (a != null) {
 					a.setSelectedIndex(0);
 					a.setVisible(true);
