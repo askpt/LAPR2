@@ -368,13 +368,7 @@ public class AppConfig extends JFrame {
 				 * provas registadas nela valido = false; break; } }
 				 */
 				// if (valido){}
-				if (a != null) {
-					a.setSelectedIndex(5);
-					a.setVisible(true);
-				} else {
-					a = new AddDados();
-					a.setSelectedIndex(5);
-				}
+
 			}
 		});
 
@@ -386,13 +380,7 @@ public class AppConfig extends JFrame {
 				// FIXME:
 				String[] atletas = { "Portugal", "Espanha", "Franca" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the country:", "Edit Country", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.flag), atletas, atletas[0]);
-				if (a != null) {
-					a.setSelectedIndex(5);
-					a.setVisible(true);
-				} else {
-					a = new AddDados();
-					a.setSelectedIndex(5);
-				}
+
 			}
 		});
 
@@ -404,13 +392,7 @@ public class AppConfig extends JFrame {
 				// FIXME:
 				String[] atletas = { "Bolt", "Boltas", "Boltes" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the discipline:", "Edit Discipline", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
-				if (a != null) {
-					a.setSelectedIndex(5);
-					a.setVisible(true);
-				} else {
-					a = new AddDados();
-					a.setSelectedIndex(5);
-				}
+
 			}
 		});
 
@@ -422,13 +404,7 @@ public class AppConfig extends JFrame {
 				// FIXME:
 				String[] atletas = { "Bolt", "Boltas", "Boltes" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the sport:", "Edit Sport", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
-				if (a != null) {
-					a.setSelectedIndex(5);
-					a.setVisible(true);
-				} else {
-					a = new AddDados();
-					a.setSelectedIndex(5);
-				}
+
 			}
 		});
 
@@ -440,13 +416,7 @@ public class AppConfig extends JFrame {
 				// FIXME:
 				String[] atletas = { "Bolt", "Boltas", "Boltes" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the event:", "Edit Event", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.event), atletas, atletas[0]);
-				if (a != null) {
-					a.setSelectedIndex(5);
-					a.setVisible(true);
-				} else {
-					a = new AddDados();
-					a.setSelectedIndex(5);
-				}
+
 			}
 		});
 
@@ -460,13 +430,7 @@ public class AppConfig extends JFrame {
 				if (atletas.length > 0) {
 					String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the athlete:", "Edit Athlete", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.user), atletas, atletas[0]);
 				}
-				if (a != null) {
-					a.setSelectedIndex(5);
-					a.setVisible(true);
-				} else {
-					a = new AddDados();
-					a.setSelectedIndex(5);
-				}
+
 			}
 		});
 

@@ -1,11 +1,21 @@
 package gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
-import dados.*;
+import dados.Csv;
 
 public class RemDados extends JFrame {
 	private Painel jo, co, di, spo, at, ev;
@@ -44,24 +54,24 @@ public class RemDados extends JFrame {
 
 		getContentPane().add(jtp);
 		// Tabs
-		jtp.addTab("Edition", new ImageIcon(img.menos), jo);
-		jtp.addTab("Country", new ImageIcon(img.menos), co);
-		jtp.addTab("Discipline", new ImageIcon(img.menos), di);
-		jtp.addTab("Sport", new ImageIcon(img.menos), spo);
-		jtp.addTab("Athlete", new ImageIcon(img.menos), at);
-		jtp.addTab("Events", new ImageIcon(img.menos), ev);
+		jtp.addTab("Edition", new ImageIcon(), jo);
+		jtp.addTab("Country", new ImageIcon(), co);
+		jtp.addTab("Discipline", new ImageIcon(), di);
+		jtp.addTab("Sport", new ImageIcon(), spo);
+		jtp.addTab("Athlete", new ImageIcon(), at);
+		jtp.addTab("Events", new ImageIcon(), ev);
 
 	}
 
 	private void addPaineis() {
 
 		// Panels
-		jo = new Painel(img.bg2);
-		co = new Painel(img.bg2);
-		di = new Painel(img.bg2);
-		spo = new Painel(img.bg2);
-		at = new Painel(img.bg2);
-		ev = new Painel(img.bg2);
+		jo = new Painel(img.bg3);
+		co = new Painel(img.bg3);
+		di = new Painel(img.bg3);
+		spo = new Painel(img.bg3);
+		at = new Painel(img.bg3);
+		ev = new Painel(img.bg3);
 
 		jo.setOpaque(false);
 		co.setOpaque(false);
@@ -109,8 +119,10 @@ public class RemDados extends JFrame {
 	}
 
 	private void remove(String nome, String tooltip, Painel p) {
-		JPanel p1 = new JPanel(new BorderLayout(10, 10));
-		p1.setBackground(new Color(158, 193, 213));
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout(10, 10));
+		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p1.setOpaque(false);
 		p.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
@@ -118,6 +130,7 @@ public class RemDados extends JFrame {
 		panel1.setBorder(new EmptyBorder(10, 10, 0, 10));
 		JLabel a = new JLabel(nome);
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
 		panel1.add(a, BorderLayout.NORTH);
 		JComboBox b = new JComboBox();
 		b.setToolTipText(tooltip);
@@ -127,7 +140,9 @@ public class RemDados extends JFrame {
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
 		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);
