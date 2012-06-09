@@ -57,4 +57,10 @@ public class ProvaCol extends Prova {
 
 	}
 
+	@Override
+	public String toStringTest() {
+		return String.format("Coletivo, %s, %d, %d", this.getDisciplina().getNome(), this.getDisciplina().getGenero(), this.getJogosOlimpicos().getAno());
+
+	}
+
 }

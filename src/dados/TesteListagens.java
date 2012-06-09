@@ -18,33 +18,11 @@ public class TesteListagens {
 
 		for (int i = anoInicio; i <= anoFim; i += 4) {
 			for (int j = 0; j < provaTemp.size(); j++) {
-				if (provaTemp.get(j).getJogosOlimpicos().getAno() != i) {
+				if (provaTemp.get(j).getJogosOlimpicos().getAno() < anoInicio || provaTemp.get(j).getJogosOlimpicos().getAno() > anoFim) {
 					provaTemp.remove(j);
 					j--;
 				} else if (provaTemp.get(j) instanceof ProvaInd && !((ProvaInd) provaTemp.get(j)).getResultados().isEmpty()) {
 					provaTemp.get(j).ordenar();
-
-					// for (int m = 0; m < paisesTemp.size(); m++) {
-					// if (((ProvaInd)
-					// provaTemp.get(j)).getResultados().get(0).getAtleta().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i)))
-					// {
-					// paisesTemp.get(m).getMedalha().addOuro();
-					// }
-					// }
-					// for (int m = 0; m < paisesTemp.size(); m++) {
-					// if (((ProvaInd)
-					// provaTemp.get(j)).getResultados().get(1).getAtleta().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i)))
-					// {
-					// paisesTemp.get(m).getMedalha().addPrata();
-					// }
-					// }
-					// for (int m = 0; m < paisesTemp.size(); m++) {
-					// if (((ProvaInd)
-					// provaTemp.get(j)).getResultados().get(2).getAtleta().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i)))
-					// {
-					// paisesTemp.get(m).getMedalha().addBronze();
-					// }
-					// }
 
 					int itInicioOuro = 0;
 					int itFimOuro = 0;
@@ -66,7 +44,7 @@ public class TesteListagens {
 						}
 					}
 					int itInicioBronze = itFimPrata + 1;
-					int itFimBronze = 0;
+					int itFimBronze = itInicioBronze;
 					for (int l = itInicioBronze + 1; l < ((ProvaInd) provaTemp.get(j)).getResultados().size(); l++) {
 						temp = ((ProvaInd) provaTemp.get(j)).getResultados().get(itInicioBronze).getResultado();
 						if (temp != ((ProvaInd) provaTemp.get(j)).getResultados().get(l).getResultado()) {
@@ -75,52 +53,32 @@ public class TesteListagens {
 						}
 					}
 
-					for (int l = itInicioOuro; l <= itFimOuro; l++) {
+					for (int l = itInicioOuro; itFimOuro < ((ProvaInd) provaTemp.get(j)).getResultados().size() && l <= itFimOuro; l++) {
 						for (int m = 0; m < paisesTemp.size(); m++) {
 							if (((ProvaInd) provaTemp.get(j)).getResultados().get(l).getAtleta().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i))) {
 								paisesTemp.get(m).getMedalha().addOuro();
 							}
 						}
 					}
-					for (int l = itInicioPrata; l <= itFimPrata; l++) {
+					for (int l = itInicioPrata; itFimPrata < ((ProvaInd) provaTemp.get(j)).getResultados().size() && l <= itFimPrata; l++) {
 						for (int m = 0; m < paisesTemp.size(); m++) {
 							if (((ProvaInd) provaTemp.get(j)).getResultados().get(l).getAtleta().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i))) {
 								paisesTemp.get(m).getMedalha().addPrata();
 							}
 						}
 					}
-					for (int l = itInicioBronze; l <= itFimBronze; l++) {
+					for (int l = itInicioBronze; itFimBronze < ((ProvaInd) provaTemp.get(j)).getResultados().size() && l <= itFimBronze; l++) {
 						for (int m = 0; m < paisesTemp.size(); m++) {
 							if (((ProvaInd) provaTemp.get(j)).getResultados().get(l).getAtleta().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i))) {
 								paisesTemp.get(m).getMedalha().addBronze();
 							}
 						}
 					}
+					provaTemp.remove(j);
+					j--;
 
 				} else if (provaTemp.get(j) instanceof ProvaCol && !((ProvaCol) provaTemp.get(j)).getResultados().isEmpty()) {
 					provaTemp.get(j).ordenar();
-
-					// for (int m = 0; m < paisesTemp.size(); m++) {
-					// if (((ProvaCol)
-					// provaTemp.get(j)).getResultados().get(0).getEquipa().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i)))
-					// {
-					// paisesTemp.get(m).getMedalha().addOuro();
-					// }
-					// }
-					// for (int m = 0; m < paisesTemp.size(); m++) {
-					// if (((ProvaCol)
-					// provaTemp.get(j)).getResultados().get(1).getEquipa().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i)))
-					// {
-					// paisesTemp.get(m).getMedalha().addPrata();
-					// }
-					// }
-					// for (int m = 0; m < paisesTemp.size(); m++) {
-					// if (((ProvaCol)
-					// provaTemp.get(j)).getResultados().get(2).getEquipa().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i)))
-					// {
-					// paisesTemp.get(m).getMedalha().addBronze();
-					// }
-					// }
 
 					int itInicioOuro = 0;
 					int itFimOuro = 0;
@@ -142,7 +100,7 @@ public class TesteListagens {
 						}
 					}
 					int itInicioBronze = itFimPrata + 1;
-					int itFimBronze = 0;
+					int itFimBronze = itInicioBronze;
 					for (int l = itInicioBronze + 1; l < ((ProvaCol) provaTemp.get(j)).getResultados().size(); l++) {
 						temp = ((ProvaCol) provaTemp.get(j)).getResultados().get(itInicioBronze).getResultado();
 						if (temp != ((ProvaCol) provaTemp.get(j)).getResultados().get(l).getResultado()) {
@@ -151,27 +109,29 @@ public class TesteListagens {
 						}
 					}
 
-					for (int l = itInicioOuro; l <= itFimOuro; l++) {
+					for (int l = itInicioOuro; itFimOuro < ((ProvaCol) provaTemp.get(j)).getResultados().size() && l <= itFimOuro; l++) {
 						for (int m = 0; m < paisesTemp.size(); m++) {
 							if (((ProvaCol) provaTemp.get(j)).getResultados().get(l).getEquipa().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i))) {
 								paisesTemp.get(m).getMedalha().addOuro();
 							}
 						}
 					}
-					for (int l = itInicioPrata; l <= itFimPrata; l++) {
+					for (int l = itInicioPrata; itFimPrata < ((ProvaCol) provaTemp.get(j)).getResultados().size() && l <= itFimPrata; l++) {
 						for (int m = 0; m < paisesTemp.size(); m++) {
 							if (((ProvaCol) provaTemp.get(j)).getResultados().get(l).getEquipa().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i))) {
 								paisesTemp.get(m).getMedalha().addPrata();
 							}
 						}
 					}
-					for (int l = itInicioBronze; l <= itFimBronze; l++) {
+					for (int l = itInicioBronze; itFimBronze < ((ProvaCol) provaTemp.get(j)).getResultados().size() && l <= itFimBronze; l++) {
 						for (int m = 0; m < paisesTemp.size(); m++) {
 							if (((ProvaCol) provaTemp.get(j)).getResultados().get(l).getEquipa().getPais().getCodigoPais(i).equalsIgnoreCase(paisesTemp.get(m).getCodigoPais(i))) {
 								paisesTemp.get(m).getMedalha().addBronze();
 							}
 						}
 					}
+					provaTemp.remove(j);
+					j--;
 
 				}
 			}
@@ -188,7 +148,7 @@ public class TesteListagens {
 		}
 
 		for (int i = 0; i < 10; i++) {
-			System.out.println(paisesTemp.get(i).getNomePais() + ":" + paisesTemp.get(i).getMedalha().toString());
+			System.out.println((i + 1) + " - " + paisesTemp.get(i).getNomePais() + ":" + paisesTemp.get(i).getMedalha().toString());
 		}
 	}
 }

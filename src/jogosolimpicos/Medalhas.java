@@ -9,8 +9,8 @@ public class Medalhas {
 	private int ouro, prata, bronze;
 
 	/**
-	 * Main constructor of class medals. Initializes the gold, silver and
-	 * bronze medals to zero.
+	 * Main constructor of class medals. Initializes the gold, silver and bronze
+	 * medals to zero.
 	 */
 	public Medalhas() {
 		this.ouro = 0;
@@ -81,7 +81,7 @@ public class Medalhas {
 	 */
 	@Override
 	public String toString() {
-		return String.format("Gold: %d\nSilver: %d\nBronze: %d\n", this.ouro, this.prata, this.bronze);
+		return String.format("Gold: %d Silver: %d Bronze: %d", this.ouro, this.prata, this.bronze);
 	}
 
 }

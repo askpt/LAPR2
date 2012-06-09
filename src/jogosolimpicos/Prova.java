@@ -42,4 +42,6 @@ public abstract class Prova {
 
 	public abstract void ordenar();
 
+	public abstract String toStringTest();
+
 }

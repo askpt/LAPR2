@@ -210,6 +210,21 @@ public class Teste extends JFrame {
 
 		menu.add(menuItem);
 
+		menuItem = new JMenuItem("List Provas", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				for (int i = 0; i < Main.getProvas().size(); i++) {
+					System.out.println(Main.getProvas().get(i).toStringTest());
+				}
+
+			}
+		});
+
+		menu.add(menuItem);
+
 		JMenu listar = new JMenu("Listar");
 
 		menuItem = new JMenuItem("Listar", 'L');
@@ -217,7 +232,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TesteListagens.listarMedalhas(Main.getPaises(), Main.getProvas(), 2008, 2008);
+				TesteListagens.listarMedalhas(Main.getPaises(), Main.getProvas(), 1996, 2008);
 			}
 		});
 

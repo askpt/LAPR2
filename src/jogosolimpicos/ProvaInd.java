@@ -56,4 +56,10 @@ public class ProvaInd extends Prova {
 
 	}
 
+	@Override
+	public String toStringTest() {
+		return String.format("Individual, %s, %d, %d", this.getDisciplina().getNome(), this.getDisciplina().getGenero(), this.getJogosOlimpicos().getAno());
+
+	}
+
 }
