@@ -9,15 +9,26 @@ import java.io.*;
 @SuppressWarnings("serial")
 public class Medalhas implements Serializable {
 
-	private int ouro, prata, bronze;
+	private int ouro;
+	private int prata;
+	private int bronze;
 
 	/**
 	 * Main constructor of class medals. Initializes the gold, silver and bronze
 	 * medals to zero.
 	 */
 	public Medalhas() {
+		/**
+		 * Gold medals
+		 */
 		this.ouro = 0;
+		/**
+		 * Silver medals
+		 */
 		this.prata = 0;
+		/**
+		 * Bronze medals
+		 */
 		this.bronze = 0;
 	}
 
@@ -76,11 +87,9 @@ public class Medalhas implements Serializable {
 	}
 
 	/**
-	 * @return returns a String in this format: "Gold: gold medals
-	 *         <p>
-	 *         Silver: silver medals
-	 *         <p>
-	 *         Bronze: bronze medals"
+	 * @return returns a String in this format:
+	 *         "Gold: goldMedals Silver: silverMedals Bronze: bronzeMedals".
+	 *         Eg:"Gold: 12 Silver: 23 Bronze: 11".
 	 */
 	@Override
 	public String toString() {

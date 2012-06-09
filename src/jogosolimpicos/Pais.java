@@ -9,18 +9,32 @@ import listaligada.*;
  */
 @SuppressWarnings({ "rawtypes", "serial" })
 public class Pais implements Comparable, Serializable {
-
+	/**
+	 * the current IOC code
+	 */
 	private String codigoPais;
+	/**
+	 * name of the country
+	 */
 	private String nomePais;
+	/**
+	 * medals of the country
+	 * 
+	 * @see Medalha medal details
+	 */
 	private Medalhas medalha;
+	/**
+	 * the historical of the IOC codes for this country
+	 * 
+	 * @see CodigosPais historical details
+	 */
 	private ListaLigada<CodigosPais> codigos;
 
 	/**
 	 * Main constructor of the class country.
 	 * 
 	 * @param codigoPais
-	 *            a string of the country's code with the IOC standart. Ex.:
-	 *            "POR"
+	 *            a string of the country's code with the IOC code. Eg.: "POR"
 	 * @param nomePais
 	 *            name of the country. Ex.: "Portugal"
 	 */
@@ -92,12 +106,18 @@ public class Pais implements Comparable, Serializable {
 	 * Get the country's medals.
 	 * 
 	 * @return the medals of the country.
+	 * @see Medalhas medal details.
 	 */
 
 	public Medalhas getMedalha() {
 		return this.medalha;
 	}
 
+	/**
+	 * Get the historical of the IOC codes for this country.
+	 * 
+	 * @return the historical of the codes
+	 */
 	public ListaLigada<CodigosPais> getCodigos() {
 		return this.codigos;
 	}
@@ -111,6 +131,19 @@ public class Pais implements Comparable, Serializable {
 		return String.format("%s - %s", codigoPais, nomePais);
 	}
 
+	/**
+	 * @param o
+	 *            Object to be compared.
+	 * @return the difference between the gold medals if doesn't equals. If
+	 *         equals, returns the silver medals' difference. If all medals are
+	 *         equal, return the value 0 if the name of country is equal to this
+	 *         country; a value less than 0 if this name is lexicographically
+	 *         less than the name argument; and a value greater than 0 if this
+	 *         name is lexicographically greater than the name argument.
+	 * @see Medalhas Medals details.
+	 * @see java.lang.String#compareTo(java.lang.String) Name of country's
+	 *      comparison.
+	 */
 	@Override
 	public int compareTo(Object o) {
 		if (o instanceof Pais) {

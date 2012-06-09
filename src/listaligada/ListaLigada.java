@@ -9,10 +9,21 @@ package listaligada;
  */
 
 public class ListaLigada<E> {
-
+	/**
+	 * head of the linked list
+	 */
 	private No<E> cabeca = null;
+	/**
+	 * tail of the linked list
+	 */
 	private No<E> cauda = null;
+	/**
+	 * temporary node of the linked list
+	 */
 	private No<E> temp = null;
+	/**
+	 * size of the linked list
+	 */
 	private int contador = 0;
 
 	/**
@@ -60,7 +71,7 @@ public class ListaLigada<E> {
 	 * 
 	 * @param index
 	 *            index of the element to edit
-	 * @param element
+	 * @param elemento
 	 *            the new value of the element
 	 * @return the element previously at the specified index
 	 * @throws IndexOutOfBoundsException
@@ -88,10 +99,18 @@ public class ListaLigada<E> {
 			for (int i = 0; i < index; i++) {
 				x = x.proximo;
 			}
-		} 
+		}
 		return x;
 
 	}
+
+	/**
+	 * Method to verify if the index is in the linked list
+	 * 
+	 * @param index
+	 *            index to be verified
+	 * @throws IndexOutOfBoundsException
+	 */
 
 	private void verificarIndex(int index) {
 
@@ -99,6 +118,14 @@ public class ListaLigada<E> {
 			throw new IndexOutOfBoundsException("Index: " + index + "Size: " + size());
 		}
 	}
+
+	/**
+	 * Method to verify if the index is in the linked list
+	 * 
+	 * @param index
+	 *            index to be verified
+	 * @return true if exists
+	 */
 
 	private boolean indexExiste(int index) {
 
