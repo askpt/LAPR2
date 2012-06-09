@@ -151,7 +151,7 @@ public class ResultadosCol implements Comparable, Serializable {
 	}
 
 	/**
-	 * @param o
+	 * @param obj
 	 *            Object to be compared.
 	 * @return the difference between this result and that result.
 	 */

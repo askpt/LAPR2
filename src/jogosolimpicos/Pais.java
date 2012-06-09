@@ -20,7 +20,7 @@ public class Pais implements Comparable, Serializable {
 	/**
 	 * medals of the country
 	 * 
-	 * @see Medalha medal details
+	 * @see Medalhas medal details
 	 */
 	private Medalhas medalha;
 	/**
