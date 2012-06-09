@@ -1,6 +1,9 @@
 package jogosolimpicos;
 
-public abstract class Prova {
+import java.io.*;
+
+@SuppressWarnings("serial")
+public abstract class Prova implements Serializable {
 
 	private Disciplina disc;
 	private JogosOlimpicos jogos;

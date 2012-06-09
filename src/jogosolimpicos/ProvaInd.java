@@ -1,8 +1,10 @@
 package jogosolimpicos;
 
+import java.io.*;
 import listaligada.*;
 
-public class ProvaInd extends Prova {
+@SuppressWarnings("serial")
+public class ProvaInd extends Prova implements Serializable {
 
 	private ListaLigada<ResultadosInd> resultados = new ListaLigada<ResultadosInd>();
 

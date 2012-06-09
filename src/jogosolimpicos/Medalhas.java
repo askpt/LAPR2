@@ -1,10 +1,13 @@
 package jogosolimpicos;
 
+import java.io.*;
+
 /**
  * Class of the management of the medals.
  */
 
-public class Medalhas {
+@SuppressWarnings("serial")
+public class Medalhas implements Serializable {
 
 	private int ouro, prata, bronze;
 

@@ -1,6 +1,9 @@
 package jogosolimpicos;
 
-public class ResultadosInd {
+import java.io.*;
+
+@SuppressWarnings("serial")
+public class ResultadosInd implements Serializable {
 
 	private Atleta atleta;
 	private String resulTemp;

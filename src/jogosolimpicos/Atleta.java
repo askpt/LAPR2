@@ -1,6 +1,9 @@
 package jogosolimpicos;
 
-public class Atleta {
+import java.io.*;
+
+@SuppressWarnings({ "rawtypes", "serial" })
+public class Atleta implements Comparable, Serializable {
 
 	private String nome;
 	private int numid;
@@ -65,6 +68,7 @@ public class Atleta {
 		return medalha;
 	}
 
+	@Override
 	public int compareTo(Object o) {
 		if (o instanceof Atleta) {
 			Atleta that = (Atleta) o;

@@ -1,6 +1,9 @@
 package jogosolimpicos;
 
-public class Disciplina {
+import java.io.*;
+
+@SuppressWarnings("serial")
+public class Disciplina implements Serializable {
 
 	private Modalidade mod;
 	private String nome;

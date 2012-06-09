@@ -1,6 +1,9 @@
 package jogosolimpicos;
 
-public class JogosOlimpicos {
+import java.io.*;
+
+@SuppressWarnings("serial")
+public class JogosOlimpicos implements Serializable {
 
 	private int ano;
 	private String cidade;

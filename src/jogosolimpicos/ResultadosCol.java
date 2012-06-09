@@ -1,7 +1,9 @@
 package jogosolimpicos;
 
-@SuppressWarnings("rawtypes")
-public class ResultadosCol implements Comparable {
+import java.io.*;
+
+@SuppressWarnings({ "rawtypes", "serial" })
+public class ResultadosCol implements Comparable, Serializable {
 
 	private Equipa equipa;
 	private String resulTemp;

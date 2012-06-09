@@ -1,8 +1,10 @@
 package jogosolimpicos;
 
+import java.io.*;
 import listaligada.*;
 
-public class Equipa {
+@SuppressWarnings("serial")
+public class Equipa implements Serializable {
 
 	private int numid;
 	private static int num;

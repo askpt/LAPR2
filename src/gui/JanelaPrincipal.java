@@ -22,6 +22,7 @@ public class JanelaPrincipal extends JFrame {
 	private void close() {
 		String[] opt = { "Yes", "No" };
 		if (JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img.exit), opt, opt[0]) == 0) {
+			Main.gravarEstado();
 			dispose();
 		}
 	}
@@ -46,7 +47,7 @@ public class JanelaPrincipal extends JFrame {
 		Painel panel = new Painel(new FlowLayout(FlowLayout.RIGHT, 55, 120));
 		Painel panelbtn = new Painel(img.bg4);
 		panelbtn.setLayout(new GridLayout(3, 1, 10, 10));
-		panelbtn.setBorder(new EmptyBorder(20,20,30,20));
+		panelbtn.setBorder(new EmptyBorder(20, 20, 30, 20));
 		panelbtn.setOpaque(false);
 		panel.add(panelbtn);
 		Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -54,7 +55,7 @@ public class JanelaPrincipal extends JFrame {
 		JLabel lb = new JLabel("Menu");
 		lb.setFont(new Font("Arial", Font.BOLD, 14));
 		lb.setForeground(Color.white);
-		
+
 		// appconfig
 		btn1.setContentAreaFilled(false);
 		btn1.setBorder(emptyBorder);
@@ -63,7 +64,6 @@ public class JanelaPrincipal extends JFrame {
 				AppConfig b = new AppConfig();
 			}
 		});
-
 
 		// exitapp
 		btn3.setContentAreaFilled(false);

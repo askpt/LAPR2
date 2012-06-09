@@ -1,8 +1,10 @@
 package jogosolimpicos;
 
+import java.io.*;
 import listaligada.*;
 
-public class Modalidade {
+@SuppressWarnings("serial")
+public class Modalidade implements Serializable {
 
 	private String nome;
 	private ListaLigada<Disciplina> disc;

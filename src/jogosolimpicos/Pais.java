@@ -1,13 +1,14 @@
 package jogosolimpicos;
 
-import listaligada.ListaLigada;
+import java.io.*;
+import listaligada.*;
 
 /**
  * Main class of the country.
  * 
  */
-@SuppressWarnings("rawtypes")
-public class Pais implements Comparable {
+@SuppressWarnings({ "rawtypes", "serial" })
+public class Pais implements Comparable, Serializable {
 
 	private String codigoPais;
 	private String nomePais;

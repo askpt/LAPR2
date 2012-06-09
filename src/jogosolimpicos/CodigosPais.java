@@ -1,6 +1,9 @@
 package jogosolimpicos;
 
-public class CodigosPais {
+import java.io.*;
+
+@SuppressWarnings("serial")
+public class CodigosPais implements Serializable {
 
 	private int anoInicio;
 	private int anoFim;
