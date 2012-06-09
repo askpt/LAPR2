@@ -65,4 +65,20 @@ public class Atleta {
 		return medalha;
 	}
 
+	public int compareTo(Object o) {
+		if (o instanceof Atleta) {
+			Atleta that = (Atleta) o;
+			if (this.getMedalha().getOuro() != that.getMedalha().getOuro()) {
+				return (this.getMedalha().getOuro() - that.getMedalha().getOuro());
+			} else if (this.getMedalha().getPrata() != that.getMedalha().getPrata()) {
+				return (this.getMedalha().getPrata() - that.getMedalha().getPrata());
+			} else if (this.getMedalha().getBronze() != that.getMedalha().getBronze()) {
+				return (this.getMedalha().getBronze() - that.getMedalha().getBronze());
+			} else {
+				return (that.getNome().compareTo(this.getNome()));
+			}
+		}
+		return 0;
+	}
+
 }

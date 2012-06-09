@@ -227,12 +227,22 @@ public class Teste extends JFrame {
 
 		JMenu listar = new JMenu("Listar");
 
-		menuItem = new JMenuItem("Listar", 'L');
+		menuItem = new JMenuItem("Listar Paises", 'L');
 		menuItem.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TesteListagens.listarMedalhas(Main.getPaises(), Main.getProvas(), 1996, 2008);
+				TesteListagens.listarMedalhasPais(Main.getPaises(), Main.getProvas(), 1996, 2008, null, null);
+			}
+		});
+
+		listar.add(menuItem);
+		menuItem = new JMenuItem("Listar Atletas", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TesteListagens.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), 1996, 2008, null, null);
 			}
 		});
 

@@ -92,8 +92,14 @@ public class Disciplina {
 		return String.format("%s - %s - %s - %d - %d - %s", mod, nome, tipoDisc, genero, tipoClass, ordenacao);
 	}
 
-	public boolean equals(Disciplina disc) {
-		return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.mod.getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.tipoDisc == disc.getTipoMod());
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj instanceof Disciplina) {
+			Disciplina disc = (Disciplina) obj;
+			return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.mod.getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.tipoDisc == disc.getTipoMod() && this.genero == disc.getGenero());
+		}
+		return false;
 	}
 
 }
