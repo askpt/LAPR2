@@ -1,6 +1,6 @@
 package gui;
 
-import java.net.URL;
+import java.net.*;
 
 public class Imagens {
 	ClassLoader classLoader = getClass().getClassLoader();
@@ -103,17 +103,25 @@ public class Imagens {
 
 	URL ca = classLoader.getResource("Imagens/comparativeA.png");
 	URL ca_o = classLoader.getResource("Imagens/comparativeAover.png");
+	URL rn = classLoader.getResource("Imagens/rankingN.png");
+	URL rn_o = classLoader.getResource("Imagens/rankingNOver.png");
+	URL ra = classLoader.getResource("Imagens/rankingA.png");
+	URL ra_o = classLoader.getResource("Imagens/RankingAOver.png");
 
 	// actions
 
 	URL ok = classLoader.getResource("Imagens/btn25.png");
+	URL ok_o = classLoader.getResource("Imagens/btn25Over.png");
 	URL clear = classLoader.getResource("Imagens/btn26.png");
+	URL clear_o = classLoader.getResource("Imagens/btn26Over.png");
 	URL add1 = classLoader.getResource("Imagens/add.png");
 	URL add1_o = classLoader.getResource("Imagens/addOver.png");
 	URL remove1 = classLoader.getResource("Imagens/remove.png");
 	URL remove1_o = classLoader.getResource("Imagens/removeOver.png");
 	URL getResults = classLoader.getResource("Imagens/getResults.png");
 	URL getResults_o = classLoader.getResource("Imagens/getResultsOver.png");
+	URL back = classLoader.getResource("Imagens/back.png");
+	URL back_o = classLoader.getResource("Imagens/backOver.png");
 
 	// panels
 	URL imp = classLoader.getResource("Imagens/import.png");

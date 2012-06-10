@@ -1,26 +1,12 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
-import dados.Csv;
+import dados.*;
 
 public class AppConfig extends JFrame {
 
@@ -33,6 +19,7 @@ public class AppConfig extends JFrame {
 	private AddDados a;
 	private RemDados r;
 	private AddRegs re;
+	private AddList al;
 
 	public AppConfig() {
 
@@ -119,11 +106,51 @@ public class AppConfig extends JFrame {
 		compAnalysis.setBorder(emptyBorder);
 		compAnalysis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddList a = new AddList();
+				if (al != null) {
+					al.setSelectedIndex(0);
+					al.setVisible(true);
+				} else {
+					al = new AddList();
+					al.setSelectedIndex(0);
+				}
+			}
+		});
+
+		Botao rankP = new Botao(img.rn);
+		rankP.setBotaoRollOver(img.rn_o);
+		rankP.setContentAreaFilled(false);
+		rankP.setBorder(emptyBorder);
+		rankP.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (al != null) {
+					al.setSelectedIndex(1);
+					al.setVisible(true);
+				} else {
+					al = new AddList();
+					al.setSelectedIndex(1);
+				}
+			}
+		});
+
+		Botao rankA = new Botao(img.ra);
+		rankA.setBotaoRollOver(img.ra_o);
+		rankA.setContentAreaFilled(false);
+		rankA.setBorder(emptyBorder);
+		rankA.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (al != null) {
+					al.setSelectedIndex(2);
+					al.setVisible(true);
+				} else {
+					al = new AddList();
+					al.setSelectedIndex(2);
+				}
 			}
 		});
 
 		p2.add(compAnalysis);
+		p2.add(rankP);
+		p2.add(rankA);
 		p1.add(lb, BorderLayout.NORTH);
 		p1.add(p2, BorderLayout.SOUTH);
 		list.add(p1);

@@ -1,34 +1,17 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
-import jogosolimpicos.Listagem;
-import jogosolimpicos.Pais;
-import listaligada.ListaLigada;
-import dados.Csv;
+import jogosolimpicos.*;
+import listaligada.*;
+import dados.*;
 
 public class AddList extends JFrame {
-	private Painel ca, co, di, spo, at, ev;
+	private Painel ca, nr, ar, spo, at, ev;
 
 	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
@@ -40,7 +23,11 @@ public class AddList extends JFrame {
 	private Botao reduce1 = new Botao(img.remove1);
 	private Botao getResults = new Botao(img.getResults);
 	private CardLayout cl = new CardLayout(10, 10);
+	private CardLayout cl1 = new CardLayout(10, 10);
+	private CardLayout cl2 = new CardLayout(10, 10);
 	private JPanel card = new JPanel(cl);
+	private JPanel card1 = new JPanel(cl1);
+	private JPanel card2 = new JPanel(cl2);
 
 	public AddList() {
 		super("Statistics & Listings");
@@ -48,6 +35,8 @@ public class AddList extends JFrame {
 		addPaineis();
 		addTabs();
 		addCA();
+		addHistoricoPaises();
+		addHistoricoAtletas();
 
 		setProperties(680, 520, 1, true);
 	}
@@ -67,8 +56,8 @@ public class AddList extends JFrame {
 		getContentPane().add(jtp);
 		// Tabs
 		jtp.addTab("Comparative analysis", ca);
-		jtp.addTab("Country", co);
-		jtp.addTab("Discipline", di);
+		jtp.addTab("Ranking (Nation)", nr);
+		jtp.addTab("Ranking (Athlete)", ar);
 		jtp.addTab("Sport", spo);
 		jtp.addTab("Events", ev);
 		jtp.addTab("Athlete", at);
@@ -79,15 +68,15 @@ public class AddList extends JFrame {
 
 		// Panels
 		ca = new Painel(img.bg3);
-		co = new Painel(img.bg3);
-		di = new Painel(img.bg3);
+		nr = new Painel(img.bg3);
+		ar = new Painel(img.bg3);
 		spo = new Painel(img.bg3);
 		at = new Painel(img.bg3);
 		ev = new Painel(img.bg3);
 
 		ca.setOpaque(false);
-		co.setOpaque(false);
-		di.setOpaque(false);
+		nr.setOpaque(false);
+		ar.setOpaque(false);
 		spo.setOpaque(false);
 		at.setOpaque(false);
 		ev.setOpaque(false);
@@ -134,7 +123,7 @@ public class AddList extends JFrame {
 		JLabel country1_1 = new JLabel("Country 1:  ");
 		country1_1.setForeground(Color.white);
 		p1_1.add(country1_1, BorderLayout.WEST);
-		final JComboBox cmb1_1 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb1_1 = new JComboBox<Object>(Main.getPaises().toArray());
 		cmb1_1.setToolTipText("1st Country.");
 		p1_1.add(cmb1_1, BorderLayout.CENTER);
 
@@ -145,7 +134,7 @@ public class AddList extends JFrame {
 		JLabel country2_1 = new JLabel("Country 2:  ");
 		country2_1.setForeground(Color.white);
 		p2_1.add(country2_1, BorderLayout.WEST);
-		final JComboBox cmb2_1 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb2_1 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb2_1.setSelectedIndex(1);
 		cmb2_1.setToolTipText("2nd Country");
@@ -165,7 +154,7 @@ public class AddList extends JFrame {
 		JLabel country1_2 = new JLabel("Country 1:  ");
 		country1_2.setForeground(Color.white);
 		p1_2.add(country1_2, BorderLayout.WEST);
-		final JComboBox cmb1_2 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb1_2 = new JComboBox<Object>(Main.getPaises().toArray());
 		cmb1_2.setToolTipText("1st Country.");
 		p1_2.add(cmb1_2, BorderLayout.CENTER);
 
@@ -176,7 +165,7 @@ public class AddList extends JFrame {
 		JLabel country2_2 = new JLabel("Country 2:  ");
 		country2_2.setForeground(Color.white);
 		p2_2.add(country2_2, BorderLayout.WEST);
-		final JComboBox cmb2_2 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb2_2 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb2_2.setSelectedIndex(1);
 		cmb2_2.setToolTipText("2nd Country");
@@ -189,7 +178,7 @@ public class AddList extends JFrame {
 		JLabel country3_2 = new JLabel("Country 3:  ");
 		country3_2.setForeground(Color.white);
 		p3_2.add(country3_2, BorderLayout.WEST);
-		final JComboBox cmb3_2 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb3_2 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb3_2.setSelectedIndex(2);
 		cmb3_2.setToolTipText("3rd Country");
@@ -210,7 +199,7 @@ public class AddList extends JFrame {
 		JLabel country1_3 = new JLabel("Country 1:  ");
 		country1_3.setForeground(Color.white);
 		p1_3.add(country1_3, BorderLayout.WEST);
-		final JComboBox cmb1_3 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb1_3 = new JComboBox<Object>(Main.getPaises().toArray());
 		cmb1_3.setToolTipText("1st Country.");
 		p1_3.add(cmb1_3, BorderLayout.CENTER);
 
@@ -221,7 +210,7 @@ public class AddList extends JFrame {
 		JLabel country2_3 = new JLabel("Country 2:  ");
 		country2_3.setForeground(Color.white);
 		p2_3.add(country2_3, BorderLayout.WEST);
-		final JComboBox cmb2_3 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb2_3 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb2_3.setSelectedIndex(1);
 		cmb2_3.setToolTipText("2nd Country.");
@@ -234,7 +223,7 @@ public class AddList extends JFrame {
 		JLabel country3_3 = new JLabel("Country 3:  ");
 		country3_3.setForeground(Color.white);
 		p3_3.add(country3_3, BorderLayout.WEST);
-		final JComboBox cmb3_3 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb3_3 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb3_3.setSelectedIndex(2);
 		cmb3_3.setToolTipText("3rd Country");
@@ -247,7 +236,7 @@ public class AddList extends JFrame {
 		JLabel country4_3 = new JLabel("Country 4:  ");
 		country4_3.setForeground(Color.white);
 		p4_3.add(country4_3, BorderLayout.WEST);
-		final JComboBox cmb4_3 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb4_3 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb4_3.setSelectedIndex(3);
 		cmb4_3.setToolTipText("4th Country");
@@ -269,7 +258,7 @@ public class AddList extends JFrame {
 		JLabel country1_4 = new JLabel("Country 1:  ");
 		country1_4.setForeground(Color.white);
 		p1_4.add(country1_4, BorderLayout.WEST);
-		final JComboBox cmb1_4 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb1_4 = new JComboBox<Object>(Main.getPaises().toArray());
 		cmb1_4.setToolTipText("1st Country.");
 		p1_4.add(cmb1_4, BorderLayout.CENTER);
 
@@ -280,7 +269,7 @@ public class AddList extends JFrame {
 		JLabel country2_4 = new JLabel("Country 2:  ");
 		country2_4.setForeground(Color.white);
 		p2_4.add(country2_4, BorderLayout.WEST);
-		final JComboBox cmb2_4 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb2_4 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb2_4.setSelectedIndex(1);
 		cmb2_4.setToolTipText("2nd Country");
@@ -293,7 +282,7 @@ public class AddList extends JFrame {
 		JLabel country3_4 = new JLabel("Country 3:  ");
 		country3_4.setForeground(Color.white);
 		p3_4.add(country3_4, BorderLayout.WEST);
-		final JComboBox cmb3_4 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb3_4 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb3_4.setSelectedIndex(2);
 		cmb3_3.setToolTipText("3rd Country");
@@ -306,7 +295,7 @@ public class AddList extends JFrame {
 		JLabel country4_4 = new JLabel("Country 4:  ");
 		country4_4.setForeground(Color.white);
 		p4_4.add(country4_4, BorderLayout.WEST);
-		final JComboBox cmb4_4 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb4_4 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb4_4.setSelectedIndex(3);
 		cmb4_4.setToolTipText("4th Country");
@@ -319,7 +308,7 @@ public class AddList extends JFrame {
 		JLabel country5_4 = new JLabel("Country 5:  ");
 		country5_4.setForeground(Color.white);
 		p5_4.add(country5_4, BorderLayout.WEST);
-		final JComboBox cmb5_4 = new JComboBox(Main.getPaises().toArray());
+		final JComboBox<Object> cmb5_4 = new JComboBox<Object>(Main.getPaises().toArray());
 		if (!isEmptyPaises())
 			cmb5_4.setSelectedIndex(4);
 		cmb5_4.setToolTipText("5th Country");
@@ -375,7 +364,9 @@ public class AddList extends JFrame {
 				// b.createAndShowGui(a);
 
 				if (index + 4 == 5) {
-					if (cmb2_1.getSelectedItem() == cmb1_2.getSelectedItem()) {
+					if (cmb2_1.getSelectedItem() == null || cmb1_2.getSelectedItem() == null) {
+						JOptionPane.showMessageDialog(null, "Choose the desired countries!");
+					} else if (cmb2_1.getSelectedItem() == cmb1_2.getSelectedItem()) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_1.getSelectedItem();
@@ -450,6 +441,179 @@ public class AddList extends JFrame {
 
 	}
 
+	private void addHistoricoPaises() {
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(10, 10, 10, 10));
+		p1.setOpaque(false);
+		nr.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+
+		card1.setOpaque(false);
+
+		JPanel pTitulo = new JPanel();
+		pTitulo.setOpaque(false);
+		JLabel a = new JLabel("Nation's ranking historical between two editions");
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
+		pTitulo.add(a);
+
+		JPanel p1_1 = new JPanel(new BorderLayout());
+
+		p1_1.setOpaque(false);
+		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country1_1 = new JLabel(" Begin:  ");
+		country1_1.setForeground(Color.white);
+		p1_1.add(country1_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb1_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb1_1.setToolTipText("Begin of the historical you want to consult.");
+		p1_1.add(cmb1_1, BorderLayout.CENTER);
+
+		JPanel p2_1 = new JPanel(new BorderLayout());
+		p2_1.setOpaque(false);
+		p2_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country2_1 = new JLabel("  End:    ");
+		country2_1.setForeground(Color.white);
+		p2_1.add(country2_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb2_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb2_1.setToolTipText("End of the historical you want to consult");
+		p2_1.add(cmb2_1, BorderLayout.CENTER);
+
+		JPanel opcao1 = new JPanel(new GridLayout(2, 1, 0, 0));
+		opcao1.setOpaque(false);
+		opcao1.setBorder(new EmptyBorder(30, 0, 30, 0));
+		opcao1.add(p1_1);
+		opcao1.add(p2_1);
+
+		card1.add(opcao1, "1");
+
+		JPanel pButn = new JPanel();
+		pButn.setOpaque(false);
+		Botao ok = new Botao(img.ok, img.ok_o);
+		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
+		Botao voltar = new Botao(img.back, img.back_o);
+		voltar.setContentAreaFilled(false);
+		voltar.setBorderPainted(false);
+		pButn.add(ok);
+		pButn.add(voltar);
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				ListaLigada<Pais> p = Listagem.listarMedalhasPais(Main.getPaises(), Main.getProvas(), ano_inicio, ano_fim, null, null);
+				String pais = "Nation";
+				JPanel tabela1 = createTablePaisAtleta(p, pais);
+				card1.add(tabela1, "2");
+				cl1.show(card1, "2");
+
+			}
+		});
+
+		voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl1.show(card1, "1");
+
+			}
+		});
+
+		p1.add(pTitulo, BorderLayout.NORTH);
+		p1.add(card1, BorderLayout.CENTER);
+		p1.add(pButn, BorderLayout.SOUTH);
+		nr.add(p1);
+
+	}
+
+	private void addHistoricoAtletas() {
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(10, 10, 10, 10));
+		p1.setOpaque(false);
+		ar.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+
+		card2.setOpaque(false);
+
+		JPanel pTitulo = new JPanel();
+		pTitulo.setOpaque(false);
+		JLabel a = new JLabel("Athlete's ranking historical between two editions");
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
+		pTitulo.add(a);
+
+		JPanel p1_1 = new JPanel(new BorderLayout());
+
+		p1_1.setOpaque(false);
+		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country1_1 = new JLabel(" Begin:  ");
+		country1_1.setForeground(Color.white);
+		p1_1.add(country1_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb1_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb1_1.setToolTipText("Begin of the historical you want to consult.");
+		p1_1.add(cmb1_1, BorderLayout.CENTER);
+
+		JPanel p2_1 = new JPanel(new BorderLayout());
+		p2_1.setOpaque(false);
+		p2_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country2_1 = new JLabel("  End:    ");
+		country2_1.setForeground(Color.white);
+		p2_1.add(country2_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb2_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb2_1.setToolTipText("End of the historical you want to consult");
+		p2_1.add(cmb2_1, BorderLayout.CENTER);
+
+		JPanel opcao1 = new JPanel(new GridLayout(2, 1, 0, 0));
+		opcao1.setOpaque(false);
+		opcao1.setBorder(new EmptyBorder(30, 0, 30, 0));
+		opcao1.add(p1_1);
+		opcao1.add(p2_1);
+
+		card2.add(opcao1, "1");
+
+		JPanel pButn = new JPanel();
+		pButn.setOpaque(false);
+		Botao ok = new Botao(img.ok, img.ok_o);
+		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
+		Botao voltar = new Botao(img.back, img.back_o);
+		voltar.setContentAreaFilled(false);
+		voltar.setBorderPainted(false);
+		pButn.add(ok);
+		pButn.add(voltar);
+
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, null, null);
+				String atleta = "Athlete";
+				JPanel tabela1 = createTablePaisAtleta(a, atleta);
+				card2.add(tabela1, "2");
+				cl2.show(card2, "2");
+
+			}
+		});
+
+		voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl2.show(card2, "1");
+
+			}
+		});
+
+		p1.add(pTitulo, BorderLayout.NORTH);
+		p1.add(card2, BorderLayout.CENTER);
+		p1.add(pButn, BorderLayout.SOUTH);
+		ar.add(p1);
+
+	}
+
 	private boolean isEmptyPaises() {
 		return Main.getPaises().isEmpty();
 	}
@@ -461,6 +625,39 @@ public class AddList extends JFrame {
 			}
 		}
 		return -1;
+	}
+
+	private JPanel createTablePaisAtleta(ListaLigada<?> p, String tipo) {
+		JPanel pTabela = new JPanel(new FlowLayout());
+		pTabela.setOpaque(false);
+		String[] col = { tipo, "# Gold", "# Silver", "# Bronze" };
+		Object[][] linhas = new Object[p.size()][col.length];
+		Object[] aux = new Object[4];
+		for (int j = 0; j < p.size(); j++) {
+			if (tipo.equals("Nation")) {
+				aux[0] = ((Pais) p.get(j)).getNomePais();
+				aux[1] = ((Pais) p.get(j)).getMedalha().getOuro();
+				aux[2] = ((Pais) p.get(j)).getMedalha().getPrata();
+				aux[3] = ((Pais) p.get(j)).getMedalha().getBronze();
+			} else {
+				aux[0] = ((Atleta) p.get(j)).getNome();
+				aux[1] = ((Atleta) p.get(j)).getMedalha().getOuro();
+				aux[2] = ((Atleta) p.get(j)).getMedalha().getPrata();
+				aux[3] = ((Atleta) p.get(j)).getMedalha().getBronze();
+			}
+			for (int k = 0; k < col.length; k++) {
+				linhas[j][k] = aux[k];
+			}
+		}
+		final JTable table = new JTable(linhas, col);
+		table.setFont(new Font("Arial", Font.PLAIN, 9));
+		table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+		table.setFillsViewportHeight(true);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		pTabela.add(scrollPane);
+
+		return pTabela;
 	}
 
 	private JPanel createTable(int[] i) {
