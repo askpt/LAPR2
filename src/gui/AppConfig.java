@@ -113,16 +113,17 @@ public class AppConfig extends JFrame {
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
 
-		Botao impCountry = new Botao(img.impCountry);
-		impCountry.setContentAreaFilled(false);
-		impCountry.setBorder(emptyBorder);
-		impCountry.addActionListener(new ActionListener() {
+		Botao compAnalysis = new Botao(img.ca);
+		compAnalysis.setBotaoRollOver(img.ca_o);
+		compAnalysis.setContentAreaFilled(false);
+		compAnalysis.setBorder(emptyBorder);
+		compAnalysis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddList a = new AddList();
 			}
 		});
 
-		p2.add(impCountry);
+		p2.add(compAnalysis);
 		p1.add(lb, BorderLayout.NORTH);
 		p1.add(p2, BorderLayout.SOUTH);
 		list.add(p1);
@@ -147,6 +148,7 @@ public class AppConfig extends JFrame {
 
 		// Countries
 		Botao impCountry = new Botao(img.impCountry);
+		impCountry.setBotaoRollOver(img.impCountry_o);
 		impCountry.setContentAreaFilled(false);
 		impCountry.setBorder(emptyBorder);
 		impCountry.addActionListener(new ActionListener() {
@@ -157,6 +159,7 @@ public class AppConfig extends JFrame {
 
 		// Disciplines
 		Botao impDisc = new Botao(img.impDisc);
+		impDisc.setBotaoRollOver(img.impDisc_o);
 		impDisc.setContentAreaFilled(false);
 		impDisc.setBorder(emptyBorder);
 		impDisc.addActionListener(new ActionListener() {
@@ -167,6 +170,7 @@ public class AppConfig extends JFrame {
 
 		// Results
 		Botao impResu = new Botao(img.impResu);
+		impResu.setBotaoRollOver(img.impResu_o);
 		impResu.setContentAreaFilled(false);
 		impResu.setBorder(emptyBorder);
 		impResu.addActionListener(new ActionListener() {
@@ -201,6 +205,7 @@ public class AppConfig extends JFrame {
 
 		// Countries
 		Botao expCountry = new Botao(img.expCountry);
+		expCountry.setBotaoRollOver(img.expCountry_o);
 		expCountry.setContentAreaFilled(false);
 		expCountry.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
@@ -210,11 +215,13 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao expCountryHtml = new Botao(img.expCountryHtml);
+		expCountryHtml.setBotaoRollOver(img.expCountryHtml_o);
 		expCountryHtml.setContentAreaFilled(false);
 		expCountryHtml.setBorder(emptyBorder);
 
 		// Disciplines
 		Botao expDisc = new Botao(img.expDisc);
+		expDisc.setBotaoRollOver(img.expDisc_o);
 		expDisc.setContentAreaFilled(false);
 		expDisc.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
@@ -224,11 +231,13 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao expDiscHtml = new Botao(img.expDiscHtml);
+		expDiscHtml.setBotaoRollOver(img.expDiscHtml_o);
 		expDiscHtml.setContentAreaFilled(false);
 		expDiscHtml.setBorder(emptyBorder);
 
 		// Results
 		Botao expResu = new Botao(img.expResu);
+		expResu.setBotaoRollOver(img.expResu_o);
 		expResu.setContentAreaFilled(false);
 		expResu.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
@@ -238,6 +247,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao expResuHtml = new Botao(img.expResuHtml);
+		expResuHtml.setBotaoRollOver(img.expResuHtml_o);
 		expResuHtml.setContentAreaFilled(false);
 		expResuHtml.setBorder(emptyBorder);
 
@@ -268,11 +278,11 @@ public class AppConfig extends JFrame {
 		lb.setForeground(Color.white);
 
 		Botao addJO = new Botao(img.addJO);
+		addJO.setBotaoRollOver(img.addJO_o);
 		addJO.setContentAreaFilled(false);
 		addJO.setBorder(emptyBorder);
 		addJO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CardLayoutExp b = new CardLayoutExp();
 				if (a != null) {
 					a.setSelectedIndex(0);
 					a.setVisible(true);
@@ -285,6 +295,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao addCo = new Botao(img.addCo);
+		addCo.setBotaoRollOver(img.addCo_o);
 		addCo.setContentAreaFilled(false);
 		addCo.setBorder(emptyBorder);
 		addCo.addActionListener(new ActionListener() {
@@ -301,6 +312,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao addDis = new Botao(img.addDis);
+		addDis.setBotaoRollOver(img.addDis_o);
 		addDis.setContentAreaFilled(false);
 		addDis.setBorder(emptyBorder);
 		addDis.addActionListener(new ActionListener() {
@@ -316,6 +328,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao addSpo = new Botao(img.addSpo);
+		addSpo.setBotaoRollOver(img.addSpo_o);
 		addSpo.setContentAreaFilled(false);
 		addSpo.setBorder(emptyBorder);
 		addSpo.addActionListener(new ActionListener() {
@@ -331,6 +344,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao addEv = new Botao(img.addEv);
+		addEv.setBotaoRollOver(img.addEv_o);
 		addEv.setContentAreaFilled(false);
 		addEv.setBorder(emptyBorder);
 		addEv.addActionListener(new ActionListener() {
@@ -346,6 +360,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao addAth = new Botao(img.addAth);
+		addAth.setBotaoRollOver(img.addAth_o);
 		addAth.setContentAreaFilled(false);
 		addAth.setBorder(emptyBorder);
 		addAth.addActionListener(new ActionListener() {
@@ -388,6 +403,7 @@ public class AppConfig extends JFrame {
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
 		lb.setForeground(Color.white);
 		Botao editJO = new Botao(img.editJO);
+		editJO.setBotaoRollOver(img.editJO_o);
 		editJO.setContentAreaFilled(false);
 		editJO.setBorder(emptyBorder);
 		editJO.addActionListener(new ActionListener() {
@@ -410,6 +426,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao editCo = new Botao(img.editCo);
+		editCo.setBotaoRollOver(img.editCo_o);
 		editCo.setContentAreaFilled(false);
 		editCo.setBorder(emptyBorder);
 		editCo.addActionListener(new ActionListener() {
@@ -422,6 +439,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao editDis = new Botao(img.editDis);
+		editDis.setBotaoRollOver(img.editDis_o);
 		editDis.setContentAreaFilled(false);
 		editDis.setBorder(emptyBorder);
 		editDis.addActionListener(new ActionListener() {
@@ -434,6 +452,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao editSpo = new Botao(img.editSpo);
+		editSpo.setBotaoRollOver(img.editSpo_o);
 		editSpo.setContentAreaFilled(false);
 		editSpo.setBorder(emptyBorder);
 		editSpo.addActionListener(new ActionListener() {
@@ -446,6 +465,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao editEv = new Botao(img.editEv);
+		editEv.setBotaoRollOver(img.editEv_o);
 		editEv.setContentAreaFilled(false);
 		editEv.setBorder(emptyBorder);
 		editEv.addActionListener(new ActionListener() {
@@ -458,6 +478,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao editAth = new Botao(img.editAth);
+		editAth.setBotaoRollOver(img.editAth_o);
 		editAth.setContentAreaFilled(false);
 		editAth.setBorder(emptyBorder);
 		editAth.addActionListener(new ActionListener() {
@@ -499,6 +520,7 @@ public class AppConfig extends JFrame {
 		lb.setForeground(Color.white);
 
 		Botao removeJO = new Botao(img.removeJO);
+		removeJO.setBotaoRollOver(img.removeJO_o);
 		removeJO.setContentAreaFilled(false);
 		removeJO.setBorder(emptyBorder);
 		removeJO.addActionListener(new ActionListener() {
@@ -514,6 +536,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao removeCo = new Botao(img.removeCo);
+		removeCo.setBotaoRollOver(img.removeCo_o);
 		removeCo.setContentAreaFilled(false);
 		removeCo.setBorder(emptyBorder);
 		removeCo.addActionListener(new ActionListener() {
@@ -529,6 +552,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao removeDis = new Botao(img.removeDis);
+		removeDis.setBotaoRollOver(img.removeDis_o);
 		removeDis.setContentAreaFilled(false);
 		removeDis.setBorder(emptyBorder);
 		removeDis.addActionListener(new ActionListener() {
@@ -544,6 +568,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao removeSpo = new Botao(img.removeSpo);
+		removeSpo.setBotaoRollOver(img.removeSpo_o);
 		removeSpo.setContentAreaFilled(false);
 		removeSpo.setBorder(emptyBorder);
 		removeSpo.addActionListener(new ActionListener() {
@@ -559,6 +584,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao removeEv = new Botao(img.removeEv);
+		removeEv.setBotaoRollOver(img.removeEv_o);
 		removeEv.setContentAreaFilled(false);
 		removeEv.setBorder(emptyBorder);
 		removeEv.addActionListener(new ActionListener() {
@@ -574,6 +600,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao removeAth = new Botao(img.removeAth);
+		removeAth.setBotaoRollOver(img.removeAth_o);
 		removeAth.setContentAreaFilled(false);
 		removeAth.setBorder(emptyBorder);
 		removeAth.addActionListener(new ActionListener() {
@@ -615,6 +642,7 @@ public class AppConfig extends JFrame {
 		lb.setForeground(Color.white);
 
 		Botao regAtToTeam = new Botao(img.regAt);
+		regAtToTeam.setBotaoRollOver(img.regAt_o);
 		regAtToTeam.setContentAreaFilled(false);
 		regAtToTeam.setToolTipText("Add athlete to a team.");
 		regAtToTeam.setBorder(emptyBorder);
@@ -631,6 +659,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao regResult = new Botao(img.regRe);
+		regResult.setBotaoRollOver(img.regRe_o);
 		regResult.setContentAreaFilled(false);
 		regResult.setToolTipText("Register athlete's result.");
 		regResult.setBorder(emptyBorder);
@@ -647,6 +676,7 @@ public class AppConfig extends JFrame {
 		});
 
 		Botao regResultTeam = new Botao(img.regReTeam);
+		regResultTeam.setBotaoRollOver(img.regReTeam_o);
 		regResultTeam.setContentAreaFilled(false);
 		regResultTeam.setToolTipText("Register team's result.");
 		regResultTeam.setBorder(emptyBorder);

@@ -1,16 +1,20 @@
 package gui;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
-import java.net.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
-import javax.imageio.*;
-import javax.swing.*;
+import javax.imageio.ImageIO;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
 
 public class Botao extends JButton {
 
-	BufferedImage image;
+	private BufferedImage image, imageRollOver;
+	private boolean hasRollOver = false;
 
 	public Botao(String botao) {
 		try {
@@ -29,10 +33,42 @@ public class Botao extends JButton {
 		}
 	}
 
+	public Botao(URL url, URL urlRollOver) {
+		try {
+			String temp = url.getPath();
+			String[] temparray = temp.split("/");
+			temp = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
+			image = ImageIO.read(new File(temp));
+			temp = urlRollOver.getPath();
+			temparray = temp.split("/");
+			temp = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
+			imageRollOver = ImageIO.read(new File(temp));
+			hasRollOver = true;
+		} catch (IOException e) {
+		}
+	}
+
+	public void setBotaoRollOver(URL urlRollOver) {
+		try {
+			String temp = urlRollOver.getPath();
+			String[] temparray = temp.split("/");
+			temp = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
+			imageRollOver = ImageIO.read(new File(temp));
+			hasRollOver = true;
+		} catch (IOException e) {
+		}
+	}
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(image, 0, 0, null);
+		ButtonModel model = getModel();
+		if (hasRollOver) {
+			if (model.isRollover()) {
+				g.drawImage(imageRollOver, 0, 0, null);
+			}
+		}
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,10 +15,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import listaligada.ListaLigada;
 import dados.Csv;
 
 public class AddList extends JFrame {
@@ -29,6 +33,9 @@ public class AddList extends JFrame {
 	private JTabbedPane jtp = new JTabbedPane();
 	private int index = 1;
 	private final int MAX = 4, MIN = 1;
+	private Botao add1 = new Botao(img.add1);
+	private Botao reduce1 = new Botao(img.remove1);
+	private Botao getResults = new Botao(img.getResults);
 
 	public AddList() {
 		super("Add List");
@@ -37,7 +44,7 @@ public class AddList extends JFrame {
 		addTabs();
 		addCA();
 
-		setProperties(600, 520, 1, true);
+		setProperties(680, 520, 1, true);
 	}
 
 	private void setProperties(int w, int h, int opcao, boolean visible) {
@@ -85,11 +92,11 @@ public class AddList extends JFrame {
 
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
+		p1.setBorder(new EmptyBorder(10, 10, 10, 10));
 		p1.setOpaque(false);
-		ca.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		ca.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
 
-		final CardLayout cl = new CardLayout(15, 15);
+		final CardLayout cl = new CardLayout(10, 10);
 		final JPanel card = new JPanel(cl);
 		card.setOpaque(false);
 
@@ -102,20 +109,24 @@ public class AddList extends JFrame {
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
-		final Botao add1 = new Botao(img.ok);
+		add1.setBotaoRollOver(img.add1_o);
 		add1.setContentAreaFilled(false);
 		add1.setBorderPainted(false);
-		final Botao reduce1 = new Botao(img.clear);
+		reduce1.setBotaoRollOver(img.remove1_o);
 		reduce1.setBorderPainted(false);
 		reduce1.setContentAreaFilled(false);
+		getResults.setBotaoRollOver(img.getResults_o);
+		getResults.setBorderPainted(false);
+		getResults.setContentAreaFilled(false);
 		pButn.add(add1);
 		pButn.add(reduce1);
+		pButn.add(getResults);
 
 		// PARA 2 PAISES
 		JPanel p1_1 = new JPanel(new BorderLayout());
 
 		p1_1.setOpaque(false);
-		p1_1.setBorder(new EmptyBorder(0, 10, 10, 10));
+		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
 		JLabel country1_1 = new JLabel("Country 1:  ");
 		country1_1.setForeground(Color.white);
@@ -136,7 +147,7 @@ public class AddList extends JFrame {
 		p2_1.add(cmb2_1, BorderLayout.CENTER);
 
 		JPanel opcao1 = new JPanel(new GridLayout(2, 1, 0, 0));
-		opcao1.setBorder(new EmptyBorder(60, 0, 60, 0));
+		opcao1.setBorder(new EmptyBorder(90, 0, 90, 0));
 		opcao1.setOpaque(false);
 		opcao1.add(p1_1);
 		opcao1.add(p2_1);
@@ -177,6 +188,7 @@ public class AddList extends JFrame {
 
 		JPanel opcao2 = new JPanel(new GridLayout(3, 1, 0, 0));
 		opcao2.setOpaque(false);
+		opcao2.setBorder(new EmptyBorder(70, 0, 70, 0));
 		opcao2.add(p1_2);
 		opcao2.add(p2_2);
 		opcao2.add(p3_2);
@@ -228,6 +240,7 @@ public class AddList extends JFrame {
 
 		JPanel opcao3 = new JPanel(new GridLayout(4, 1, 0, 0));
 		opcao3.setOpaque(false);
+		opcao3.setBorder(new EmptyBorder(60, 0, 60, 0));
 		opcao3.add(p1_3);
 		opcao3.add(p2_3);
 		opcao3.add(p3_3);
@@ -291,16 +304,43 @@ public class AddList extends JFrame {
 
 		JPanel opcao4 = new JPanel(new GridLayout(5, 1, 0, 0));
 		opcao4.setOpaque(false);
+		opcao4.setBorder(new EmptyBorder(30, 0, 30, 0));
 		opcao4.add(p1_4);
 		opcao4.add(p2_4);
 		opcao4.add(p3_4);
 		opcao4.add(p4_4);
 		opcao4.add(p5_4);
 
+		// Tabela 1
+		String[] col = { "Country", "# Participations", "# Disciplines played", "Medals(O,S,B)", "# Medals average" };
+		Object[][] lin = { { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) } };
+		JPanel tabela1 = createTable(col, lin);
+
+		// Tabela 2
+		String[] col2 = { "Country", "# Participations", "# Disciplines played", "Medals(O,S,B)", "# Medals average" };
+		Object[][] lin2 = { { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) } };
+		JPanel tabela2 = createTable(col2, lin2);
+
+		// Tabela 3
+		String[] col3 = { "Country", "# Participations", "# Disciplines played", "Medals(O,S,B)", "# Medals average" };
+		Object[][] lin3 = { { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) },
+				{ "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) } };
+		JPanel tabela3 = createTable(col3, lin3);
+
+		// Tabela 4
+		String[] col4 = { "Country", "# Participations", "# Disciplines played", "Medals(O,S,B)", "# Medals average" };
+		Object[][] lin4 = { { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) },
+				{ "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) }, { "Portugal", new Integer(5), new Integer(3), new Integer(1), new Integer(2), new Integer(3) } };
+		JPanel tabela4 = createTable(col4, lin4);
+
 		card.add(opcao1, "1");
 		card.add(opcao2, "2");
 		card.add(opcao3, "3");
 		card.add(opcao4, "4");
+		card.add(tabela1, "5");
+		card.add(tabela2, "6");
+		card.add(tabela3, "7");
+		card.add(tabela4, "8");
 
 		add1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -328,11 +368,37 @@ public class AddList extends JFrame {
 			}
 		});
 
+		getResults.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaLigada<Integer> a = new ListaLigada<Integer>();
+				for (int i = 1; i < 6; i++) {
+					a.add(i);
+				}
+				// GraficoLinhas b = new GraficoLinhas(a);
+				// b.createAndShowGui(a);
+				cl.show(card, "" + (index + 4));
+			}
+		});
+
 		p1.add(pTitulo, BorderLayout.NORTH);
 		p1.add(card, BorderLayout.CENTER);
 		p1.add(pButn, BorderLayout.SOUTH);
 		ca.add(p1);
 
+	}
+
+	private JPanel createTable(String[] colunas, Object[][] linhas) {
+		JPanel pTabela = new JPanel(new FlowLayout());
+		pTabela.setOpaque(false);
+		final JTable table = new JTable(linhas, colunas);
+		table.setFont(new Font("Arial", Font.PLAIN, 9));
+		table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+		table.setFillsViewportHeight(true);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		pTabela.add(scrollPane);
+
+		return pTabela;
 	}
 
 }
