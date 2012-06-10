@@ -11,7 +11,7 @@ import listaligada.*;
 import dados.*;
 
 public class AddList extends JFrame {
-	private Painel ca, nr, ar, rd, re, at;
+	private Painel ca, nr, ar, rd, me;
 
 	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
@@ -26,10 +26,12 @@ public class AddList extends JFrame {
 	private CardLayout cl1 = new CardLayout(10, 10);
 	private CardLayout cl2 = new CardLayout(10, 10);
 	private CardLayout cl3 = new CardLayout(10, 10);
+	private CardLayout cl4 = new CardLayout(10, 10);
 	private JPanel card = new JPanel(cl);
 	private JPanel card1 = new JPanel(cl1);
 	private JPanel card2 = new JPanel(cl2);
 	private JPanel card3 = new JPanel(cl3);
+	private JPanel card4 = new JPanel(cl4);
 
 	public AddList() {
 		super("Statistics & Listings");
@@ -40,6 +42,7 @@ public class AddList extends JFrame {
 		addHistoricoPaises();
 		addHistoricoAtletas();
 		addHistoricoDiscipline();
+		addHistoricoSport();
 
 		setProperties(680, 520, 1, true);
 	}
@@ -62,8 +65,7 @@ public class AddList extends JFrame {
 		jtp.addTab("Ranking (Nation)", nr);
 		jtp.addTab("Ranking (Athlete)", ar);
 		jtp.addTab("Ranking (Discipline)", rd);
-		jtp.addTab("Ranking (Event)", re);
-		jtp.addTab("Athlete", at);
+		jtp.addTab("Ranking (Sport)", me);
 
 	}
 
@@ -74,15 +76,13 @@ public class AddList extends JFrame {
 		nr = new Painel(img.bg3);
 		ar = new Painel(img.bg3);
 		rd = new Painel(img.bg3);
-		re = new Painel(img.bg3);
-		at = new Painel(img.bg3);
+		me = new Painel(img.bg3);
 
 		ca.setOpaque(false);
 		nr.setOpaque(false);
 		ar.setOpaque(false);
 		rd.setOpaque(false);
-		re.setOpaque(false);
-		at.setOpaque(false);
+		me.setOpaque(false);
 	}
 
 	private void addCA() {
@@ -499,9 +499,28 @@ public class AddList extends JFrame {
 		Botao voltar = new Botao(img.back, img.back_o);
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
+		Botao all = new Botao(img.back, img.back_o);
+		all.setContentAreaFilled(false);
+		all.setBorderPainted(false);
 		pButn.add(ok);
+		pButn.add(all);
 		pButn.add(voltar);
 		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				ListaLigada<Pais> p = Listagem.listarMedalhasPais(Main.getPaises(), Main.getProvas(), ano_inicio, ano_fim, null, null);
+				String pais = "Nation";
+				JPanel tabela1 = createTablePaisAtleta(p, pais);
+				card1.add(tabela1, "2");
+				cl1.show(card1, "2");
+
+			}
+		});
+
+		all.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
 				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
@@ -633,6 +652,77 @@ public class AddList extends JFrame {
 		a.setForeground(Color.white);
 		pTitulo.add(a);
 
+		JPanel p3_1 = new JPanel(new BorderLayout());
+		p3_1.setOpaque(false);
+		p3_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel disc = new JLabel("  Discipline:       ");
+		disc.setForeground(Color.white);
+		p3_1.add(disc, BorderLayout.WEST);
+		final JComboBox<Object> cmbdis = new JComboBox<Object>(Main.getDisciplinas().toArray());
+		cmbdis.setToolTipText("Discipline you want to consult");
+		p3_1.add(cmbdis, BorderLayout.CENTER);
+
+		JPanel opcao1 = new JPanel(new GridLayout(3, 1, 0, 0));
+		opcao1.setOpaque(false);
+		opcao1.setBorder(new EmptyBorder(30, 0, 30, 0));
+		opcao1.add(p3_1);
+
+		card3.add(opcao1, "1");
+
+		JPanel pButn = new JPanel();
+		pButn.setOpaque(false);
+		Botao ok = new Botao(img.ok, img.ok_o);
+		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
+		Botao voltar = new Botao(img.back, img.back_o);
+		voltar.setContentAreaFilled(false);
+		voltar.setBorderPainted(false);
+		pButn.add(ok);
+		pButn.add(voltar);
+
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Disciplina d = (Disciplina) cmbdis.getSelectedItem();
+				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), Main.getJogos().get(0).getAno(), Main.getJogos().get(Main.getJogos().size() - 1).getAno(), null, d);
+				String titulo = d.getNome();
+				JPanel tabela1 = createTablePaisAtleta(a, titulo);
+				card3.add(tabela1, "2");
+				cl3.show(card3, "2");
+
+			}
+		});
+
+		voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl3.show(card3, "1");
+
+			}
+		});
+
+		p1.add(pTitulo, BorderLayout.NORTH);
+		p1.add(card3, BorderLayout.CENTER);
+		p1.add(pButn, BorderLayout.SOUTH);
+		rd.add(p1);
+
+	}
+
+	private void addHistoricoSport() {
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(10, 10, 10, 10));
+		p1.setOpaque(false);
+		me.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+
+		card4.setOpaque(false);
+
+		JPanel pTitulo = new JPanel();
+		pTitulo.setOpaque(false);
+		JLabel a = new JLabel("Sport's ranking historical between two editions");
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
+		pTitulo.add(a);
+
 		JPanel p1_1 = new JPanel(new BorderLayout());
 
 		p1_1.setOpaque(false);
@@ -660,12 +750,12 @@ public class AddList extends JFrame {
 		p3_1.setOpaque(false);
 		p3_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		JLabel disc = new JLabel("  Discipline:       ");
-		disc.setForeground(Color.white);
-		p3_1.add(disc, BorderLayout.WEST);
-		final JComboBox<Object> cmbdis = new JComboBox<Object>(Main.getDisciplinas().toArray());
-		cmbdis.setToolTipText("Discipline you want to consult");
-		p3_1.add(cmbdis, BorderLayout.CENTER);
+		JLabel sport = new JLabel("  Sport:               ");
+		sport.setForeground(Color.white);
+		p3_1.add(sport, BorderLayout.WEST);
+		final JComboBox<Object> cmbSp = new JComboBox<Object>(Main.getModalidades().toArray());
+		cmbSp.setToolTipText("Sport you want to consult");
+		p3_1.add(cmbSp, BorderLayout.CENTER);
 
 		JPanel opcao1 = new JPanel(new GridLayout(3, 1, 0, 0));
 		opcao1.setOpaque(false);
@@ -674,7 +764,7 @@ public class AddList extends JFrame {
 		opcao1.add(p2_1);
 		opcao1.add(p3_1);
 
-		card3.add(opcao1, "1");
+		card4.add(opcao1, "1");
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
@@ -693,27 +783,27 @@ public class AddList extends JFrame {
 				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
 				int ano_inicio = jogos_inicio.getAno();
 				int ano_fim = jogos_fim.getAno();
-				Disciplina d = (Disciplina) cmbdis.getSelectedItem();
-				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, null, d);
-				String titulo = d.getNome();
+				Modalidade m = (Modalidade) cmbSp.getSelectedItem();
+				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, m.getNome(), null);
+				String titulo = m.getNome();
 				JPanel tabela1 = createTablePaisAtleta(a, titulo);
-				card3.add(tabela1, "2");
-				cl3.show(card3, "2");
+				card4.add(tabela1, "2");
+				cl4.show(card4, "2");
 
 			}
 		});
 
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cl3.show(card3, "1");
+				cl4.show(card4, "1");
 
 			}
 		});
 
 		p1.add(pTitulo, BorderLayout.NORTH);
-		p1.add(card3, BorderLayout.CENTER);
+		p1.add(card4, BorderLayout.CENTER);
 		p1.add(pButn, BorderLayout.SOUTH);
-		rd.add(p1);
+		me.add(p1);
 
 	}
 
@@ -731,10 +821,11 @@ public class AddList extends JFrame {
 	}
 
 	private JPanel createTableDiscipline(ListaLigada<Atleta> a, String tit) {
-		JPanel pTabela = new JPanel(new FlowLayout());
+		JPanel pTabela = new JPanel(new GridLayout(2, 1));
 		JLabel titulo = new JLabel(tit);
 		titulo.setFont((new Font("Arial", Font.BOLD, 14)));
 		titulo.setForeground(Color.white);
+		pTabela.add(titulo);
 		pTabela.setOpaque(false);
 		final int TOP = 10;
 		String[] col = { "Athlete", "# Gold", "# Silver", "# Bronze" };
@@ -755,7 +846,6 @@ public class AddList extends JFrame {
 		table.setFillsViewportHeight(true);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		pTabela.add(titulo);
 		pTabela.add(scrollPane);
 
 		return pTabela;
