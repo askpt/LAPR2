@@ -1,6 +1,6 @@
 package jogosolimpicos;
 
-import listaligada.*;
+import listaligada.ListaLigada;
 
 public class Listagem {
 
@@ -344,25 +344,25 @@ public class Listagem {
 		return atletasTemp;
 	}
 
-	public static float[] estatisticaPais(Pais pais, ListaLigada<Prova> provas, ListaLigada<Pais> paises) {
-		float valores[] = new float[7];
-		float valTemp[] = new float[4];
+	public static Object[] estatisticaPais(Pais pais, ListaLigada<Prova> provas, ListaLigada<Pais> paises) {
+		Object valores[] = new Object[7];
+		int valTemp[] = new int[4];
 
 		valores[0] = jogosParticipou(pais, provas);
 		valores[1] = disciplinasParticipou(pais, provas);
 		valTemp = medalhasGanhasRank(pais, paises, provas, 0, 9999, null, null);
-		valores[2] = valTemp[0];
-		valores[3] = valTemp[1];
-		valores[4] = valTemp[2];
-		valores[5] = valTemp[3];
-		valores[6] = (valores[2] + valores[3] + valores[4]) / valores[0];
+		valores[2] = (valTemp[0]);
+		valores[3] = (valTemp[1]);
+		valores[4] = (valTemp[2]);
+		valores[5] = (valTemp[3]);
+		valores[6] = (int) valores[0] != 0 ? ((int) valores[2] + (int) valores[3] + (int) valores[4]) / (int) valores[0] : 0;
 
 		return valores;
 	}
 
-	private static float[] medalhasGanhasRank(Pais pais, ListaLigada<Pais> paises, ListaLigada<Prova> provas, int anoInicio, int anoFim, String modalidade, Disciplina disciplina) {
+	private static int[] medalhasGanhasRank(Pais pais, ListaLigada<Pais> paises, ListaLigada<Prova> provas, int anoInicio, int anoFim, String modalidade, Disciplina disciplina) {
 		ListaLigada<Pais> paisesTemp = listarMedalhasPais(paises, provas, anoInicio, anoFim, modalidade, disciplina);
-		float valTemp[] = new float[4];
+		int valTemp[] = new int[4];
 
 		int itPais = 0;
 		for (; itPais < paisesTemp.size(); itPais++) {
@@ -379,7 +379,7 @@ public class Listagem {
 		return valTemp;
 	}
 
-	private static float disciplinasParticipou(Pais pais, ListaLigada<Prova> provas) {
+	private static int disciplinasParticipou(Pais pais, ListaLigada<Prova> provas) {
 		ListaLigada<Disciplina> discTemp = new ListaLigada<Disciplina>();
 
 		for (int i = 0; i < provas.size(); i++) {
@@ -406,7 +406,7 @@ public class Listagem {
 		return discTemp.size();
 	}
 
-	private static float jogosParticipou(Pais pais, ListaLigada<Prova> provas) {
+	private static int jogosParticipou(Pais pais, ListaLigada<Prova> provas) {
 
 		ListaLigada<JogosOlimpicos> jogosTemp = new ListaLigada<JogosOlimpicos>();
 
