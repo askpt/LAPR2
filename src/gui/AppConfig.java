@@ -165,7 +165,7 @@ public class AppConfig extends JFrame {
 		p1.setOpaque(false);
 		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
 
-		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
+		JPanel p2 = new JPanel(new GridLayout(4, 2, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
 
@@ -206,8 +206,20 @@ public class AppConfig extends JFrame {
 			}
 		});
 
+		// Events
+		Botao impEv = new Botao(img.impEv);
+		impEv.setBotaoRollOver(img.impEv_o);
+		impEv.setContentAreaFilled(false);
+		impEv.setBorder(emptyBorder);
+		impEv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				csv.importProvas(AppConfig.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
+			}
+		});
+
 		p2.add(impCountry);
 		p2.add(impDisc);
+		p2.add(impEv);
 		p2.add(impResu);
 		p1.add(lb, BorderLayout.NORTH);
 		p1.add(p2, BorderLayout.SOUTH);

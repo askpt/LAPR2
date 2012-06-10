@@ -11,7 +11,7 @@ import listaligada.*;
 import dados.*;
 
 public class AddList extends JFrame {
-	private Painel ca, nr, ar, spo, at, ev;
+	private Painel ca, nr, ar, rd, re, at;
 
 	private Imagens img = new Imagens();
 	private final Csv csv = new Csv();
@@ -25,9 +25,11 @@ public class AddList extends JFrame {
 	private CardLayout cl = new CardLayout(10, 10);
 	private CardLayout cl1 = new CardLayout(10, 10);
 	private CardLayout cl2 = new CardLayout(10, 10);
+	private CardLayout cl3 = new CardLayout(10, 10);
 	private JPanel card = new JPanel(cl);
 	private JPanel card1 = new JPanel(cl1);
 	private JPanel card2 = new JPanel(cl2);
+	private JPanel card3 = new JPanel(cl3);
 
 	public AddList() {
 		super("Statistics & Listings");
@@ -37,6 +39,7 @@ public class AddList extends JFrame {
 		addCA();
 		addHistoricoPaises();
 		addHistoricoAtletas();
+		addHistoricoDiscipline();
 
 		setProperties(680, 520, 1, true);
 	}
@@ -58,8 +61,8 @@ public class AddList extends JFrame {
 		jtp.addTab("Comparative analysis", ca);
 		jtp.addTab("Ranking (Nation)", nr);
 		jtp.addTab("Ranking (Athlete)", ar);
-		jtp.addTab("Sport", spo);
-		jtp.addTab("Events", ev);
+		jtp.addTab("Ranking (Discipline)", rd);
+		jtp.addTab("Ranking (Event)", re);
 		jtp.addTab("Athlete", at);
 
 	}
@@ -70,16 +73,16 @@ public class AddList extends JFrame {
 		ca = new Painel(img.bg3);
 		nr = new Painel(img.bg3);
 		ar = new Painel(img.bg3);
-		spo = new Painel(img.bg3);
+		rd = new Painel(img.bg3);
+		re = new Painel(img.bg3);
 		at = new Painel(img.bg3);
-		ev = new Painel(img.bg3);
 
 		ca.setOpaque(false);
 		nr.setOpaque(false);
 		ar.setOpaque(false);
-		spo.setOpaque(false);
+		rd.setOpaque(false);
+		re.setOpaque(false);
 		at.setOpaque(false);
-		ev.setOpaque(false);
 	}
 
 	private void addCA() {
@@ -614,6 +617,106 @@ public class AddList extends JFrame {
 
 	}
 
+	private void addHistoricoDiscipline() {
+		Painel p1 = new Painel(img.bg4);
+		p1.setLayout(new BorderLayout());
+		p1.setBorder(new EmptyBorder(10, 10, 10, 10));
+		p1.setOpaque(false);
+		rd.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+
+		card3.setOpaque(false);
+
+		JPanel pTitulo = new JPanel();
+		pTitulo.setOpaque(false);
+		JLabel a = new JLabel("Discipline's ranking historical between two editions");
+		a.setFont((new Font("Arial", Font.BOLD, 14)));
+		a.setForeground(Color.white);
+		pTitulo.add(a);
+
+		JPanel p1_1 = new JPanel(new BorderLayout());
+
+		p1_1.setOpaque(false);
+		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country1_1 = new JLabel("  Begin:               ");
+		country1_1.setForeground(Color.white);
+		p1_1.add(country1_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb1_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb1_1.setToolTipText("Begin of the historical you want to consult.");
+		p1_1.add(cmb1_1, BorderLayout.CENTER);
+
+		JPanel p2_1 = new JPanel(new BorderLayout());
+		p2_1.setOpaque(false);
+		p2_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country2_1 = new JLabel("  End:                   ");
+		country2_1.setForeground(Color.white);
+		p2_1.add(country2_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb2_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb2_1.setToolTipText("End of the historical you want to consult");
+		p2_1.add(cmb2_1, BorderLayout.CENTER);
+
+		JPanel p3_1 = new JPanel(new BorderLayout());
+		p3_1.setOpaque(false);
+		p3_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel disc = new JLabel("  Discipline:       ");
+		disc.setForeground(Color.white);
+		p3_1.add(disc, BorderLayout.WEST);
+		final JComboBox<Object> cmbdis = new JComboBox<Object>(Main.getDisciplinas().toArray());
+		cmbdis.setToolTipText("Discipline you want to consult");
+		p3_1.add(cmbdis, BorderLayout.CENTER);
+
+		JPanel opcao1 = new JPanel(new GridLayout(3, 1, 0, 0));
+		opcao1.setOpaque(false);
+		opcao1.setBorder(new EmptyBorder(30, 0, 30, 0));
+		opcao1.add(p1_1);
+		opcao1.add(p2_1);
+		opcao1.add(p3_1);
+
+		card3.add(opcao1, "1");
+
+		JPanel pButn = new JPanel();
+		pButn.setOpaque(false);
+		Botao ok = new Botao(img.ok, img.ok_o);
+		ok.setContentAreaFilled(false);
+		ok.setBorderPainted(false);
+		Botao voltar = new Botao(img.back, img.back_o);
+		voltar.setContentAreaFilled(false);
+		voltar.setBorderPainted(false);
+		pButn.add(ok);
+		pButn.add(voltar);
+
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				Disciplina d = (Disciplina) cmbdis.getSelectedItem();
+				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, null, d);
+				String titulo = d.getNome();
+				JPanel tabela1 = createTablePaisAtleta(a, titulo);
+				card3.add(tabela1, "2");
+				cl3.show(card3, "2");
+
+			}
+		});
+
+		voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl3.show(card3, "1");
+
+			}
+		});
+
+		p1.add(pTitulo, BorderLayout.NORTH);
+		p1.add(card3, BorderLayout.CENTER);
+		p1.add(pButn, BorderLayout.SOUTH);
+		rd.add(p1);
+
+	}
+
 	private boolean isEmptyPaises() {
 		return Main.getPaises().isEmpty();
 	}
@@ -627,13 +730,45 @@ public class AddList extends JFrame {
 		return -1;
 	}
 
+	private JPanel createTableDiscipline(ListaLigada<Atleta> a, String tit) {
+		JPanel pTabela = new JPanel(new FlowLayout());
+		JLabel titulo = new JLabel(tit);
+		titulo.setFont((new Font("Arial", Font.BOLD, 14)));
+		titulo.setForeground(Color.white);
+		pTabela.setOpaque(false);
+		final int TOP = 10;
+		String[] col = { "Athlete", "# Gold", "# Silver", "# Bronze" };
+		Object[][] linhas = new Object[TOP][col.length];
+		Object[] aux = new Object[4];
+		for (int j = 0; j < TOP; j++) {
+			aux[0] = ((Atleta) a.get(j)).getNome();
+			aux[1] = ((Atleta) a.get(j)).getMedalha().getOuro();
+			aux[2] = ((Atleta) a.get(j)).getMedalha().getPrata();
+			aux[3] = ((Atleta) a.get(j)).getMedalha().getBronze();
+			for (int k = 0; k < col.length; k++) {
+				linhas[j][k] = aux[k];
+			}
+		}
+		final JTable table = new JTable(linhas, col);
+		table.setFont(new Font("Arial", Font.PLAIN, 9));
+		table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+		table.setFillsViewportHeight(true);
+
+		JScrollPane scrollPane = new JScrollPane(table);
+		pTabela.add(titulo);
+		pTabela.add(scrollPane);
+
+		return pTabela;
+	}
+
 	private JPanel createTablePaisAtleta(ListaLigada<?> p, String tipo) {
 		JPanel pTabela = new JPanel(new FlowLayout());
 		pTabela.setOpaque(false);
+		final int TOP = 10;
 		String[] col = { tipo, "# Gold", "# Silver", "# Bronze" };
-		Object[][] linhas = new Object[p.size()][col.length];
+		Object[][] linhas = new Object[TOP][col.length];
 		Object[] aux = new Object[4];
-		for (int j = 0; j < p.size(); j++) {
+		for (int j = 0; j < TOP; j++) {
 			if (tipo.equals("Nation")) {
 				aux[0] = ((Pais) p.get(j)).getNomePais();
 				aux[1] = ((Pais) p.get(j)).getMedalha().getOuro();

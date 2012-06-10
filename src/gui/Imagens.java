@@ -45,6 +45,9 @@ public class Imagens {
 	URL impResu = classLoader.getResource("Imagens/importRe.png");
 	URL impResu_o = classLoader.getResource("Imagens/importReOver.png");
 
+	URL impEv = classLoader.getResource("Imagens/importEv.png");
+	URL impEv_o = classLoader.getResource("Imagens/importEvOver.png");
+
 	// add
 
 	URL addAth = classLoader.getResource("Imagens/addAT.png");
