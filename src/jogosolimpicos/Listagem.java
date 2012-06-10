@@ -1,10 +1,8 @@
-package dados;
+package jogosolimpicos;
 
-import jogosolimpicos.*;
 import listaligada.*;
 
-//TODO remove class
-public class TesteListagens {
+public class Listagem {
 
 	public static ListaLigada<Pais> listarMedalhasPais(ListaLigada<Pais> paises, ListaLigada<Prova> provas, int anoInicio, int anoFim, String modalidade, Disciplina disciplina) {
 		ListaLigada<Prova> provaTemp = new ListaLigada<Prova>();
@@ -160,10 +158,6 @@ public class TesteListagens {
 					paisesTemp.set(i, (Pais) obj);
 				}
 			}
-		}
-
-		for (int i = 0; i < 10; i++) {
-			System.out.println((i + 1) + " - " + paisesTemp.get(i).getNomePais() + ":" + paisesTemp.get(i).getMedalha().toString());
 		}
 
 		return paisesTemp;
@@ -347,10 +341,6 @@ public class TesteListagens {
 			}
 		}
 
-		for (int i = 0; i < atletasTemp.size(); i++) {
-			System.out.println((i + 1) + " - " + atletasTemp.get(i).getNome() + ":" + atletasTemp.get(i).getMedalha().toString());
-		}
-
 		return atletasTemp;
 	}
 
@@ -366,15 +356,6 @@ public class TesteListagens {
 		valores[4] = valTemp[2];
 		valores[5] = valTemp[3];
 		valores[6] = (valores[2] + valores[3] + valores[4]) / valores[0];
-
-		System.out.println(pais.getNomePais());
-		System.out.println("Jogos que participou: " + valores[0]);
-		System.out.println("Disciplinas que participou: " + valores[1]);
-		System.out.println("Ouro: " + valores[2]);
-		System.out.println("Prata: " + valores[3]);
-		System.out.println("Bronze: " + valores[4]);
-		System.out.println("Ranking: " + valores[5]);
-		System.out.println("Média de Medalhas: " + valores[6]);
 
 		return valores;
 	}
@@ -452,4 +433,5 @@ public class TesteListagens {
 
 		return jogosTemp.size();
 	}
+
 }

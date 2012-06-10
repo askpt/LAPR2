@@ -7,6 +7,7 @@ import dados.*;
 import jogosolimpicos.*;
 import listaligada.ListaLigada;
 
+//TODO Remove class
 @SuppressWarnings("serial")
 public class Teste extends JFrame {
 
@@ -243,6 +244,19 @@ public class Teste extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				TesteListagens.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), 1996, 2008, null, null);
+			}
+		});
+
+		listar.add(menuItem);
+		menuBar.add(listar);
+
+		menuItem = new JMenuItem("Estatisticas", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Pais pais = new Pais("USA", "United States");
+				TesteListagens.estatisticaPais(pais, Main.getProvas(), Main.getPaises());
 			}
 		});
 
