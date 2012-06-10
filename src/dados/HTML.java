@@ -26,24 +26,22 @@ public class HTML {
 				return;
 			File ficheiro = fc.getSelectedFile();
 			Formatter fout = new Formatter(ficheiro + ".html");
-			corpoInicio(fout);
 			ListaLigada<Prova> provaTemp = Main.getProvas();
 			ListaLigada<Pais> paisTemp = Main.getPaises();
-			for (int i = anoInicio; i < anoFim; i += 4) {
-				for (int j = 0; j < provaTemp.size(); j++) {
-					if (provaTemp.get(j).getJogosOlimpicos().getAno() != i) {
-						provaTemp.remove(j);
-						j--;
-					}
-				}
-				for (int j = 0; j < provaTemp.size(); j++) {
-					if (provaTemp.get(j) instanceof ProvaInd && !((ProvaInd) provaTemp.get(j)).getResultados().isEmpty()) {
-						provaTemp.get(j).ordenar();
-						
-					}else if(provaTemp.get(j) instanceof ProvaCol && !((ProvaCol) provaTemp.get(j)).getResultados().isEmpty()){
-						provaTemp.get(j).ordenar();
-					}	
-				}
+			paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp,
+					anoInicio, anoFim, null, null);
+			corpoInicioPais(fout);
+			for (int i = 0; i < paisTemp.size(); i++) {
+
+				fout.format("<table border = 1>");
+				fout.format("<tr>");
+				fout.format("<td> Posi&ccedil&atildeo<td> Nome </td> <td> Ouro </td> <td> Prata </td> <td> Bronze </td><td> Data de Emiss&atildeo");
+				fout.format("</tr>");
+				fout.format("<tr>");
+				fout.format("<td>" + (i+1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td> <td>" + paisTemp.get(i).getMedalha().getOuro()+ "</td> <td>" + paisTemp.get(i).getMedalha().getPrata() + "</td> <td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + "Data de hoje" + "</td>");
+				fout.format("</tr>");
+				fout.format("</table><br>");
+
 			}
 		} else {
 			JOptionPane.showMessageDialog(janela,
@@ -53,7 +51,44 @@ public class HTML {
 		}
 	}
 
-	public void corpoInicio(Formatter fout) {
+	public void exportAtleta(Component janela, int anoInicio, int anoFim)
+			throws FileNotFoundException {
+
+		if (!Main.getPaises().isEmpty()) {
+
+			JFileChooser fc = new JFileChooser();
+			fc.setFileFilter(new HTMLFilter());
+			int returnVal = fc.showSaveDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+			File ficheiro = fc.getSelectedFile();
+			Formatter fout = new Formatter(ficheiro + ".html");
+			ListaLigada<Prova> provaTemp = Main.getProvas();
+			ListaLigada<Atleta> atletaTemp = Main.getAtleta();
+			ListaLigada<Equipa> equipaTemp = Main.getEquipas();
+			atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp,	anoInicio, anoFim, null, null);
+			corpoInicioAtleta(fout);
+			for (int i = 0; i < atletaTemp.size(); i++) {
+				
+				fout.format("<table border = 1>");
+				fout.format("<tr>");
+				fout.format("<td width=400> Posi&ccedil&atildeo<td> Nome </td> <td> Ouro </td> <td> Prata </td> <td> Bronze </td><td> Data de Emiss&atildeo");
+				fout.format("</tr>");
+				fout.format("<tr>");
+				fout.format("<td width=400>" + (i+1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + "Data de Hoje" + "</td>");
+				fout.format("</tr>");
+				fout.format("</table><br>");
+				
+			}
+		} else {
+			JOptionPane.showMessageDialog(janela,
+					"Não existem países para exportar", "Export",
+					JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+	}
+
+	public void corpoInicioPais(Formatter fout) {
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
@@ -62,6 +97,35 @@ public class HTML {
 		fout.format("</title>");
 		fout.format("</head>");
 		fout.format("<body>");
+		fout.format("<table border=1 align = center>");
+		fout.format("<tr>");
+		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
+		fout.format("<td align = center width = 400 height = 70> Listagens </td>");
+		fout.format("</tr>");
+		fout.format("<tr>");
+		fout.format("<td align = center width = 400 height= 70> Classificações de Países </td>");
+		fout.format("</tr>");
+		fout.format("</table><br>");
+	}
+
+	public void corpoInicioAtleta(Formatter fout) {
+
+		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
+		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
+		fout.format("<head>");
+		fout.format("<title> Jogos Ol&iacutempicos");
+		fout.format("</title>");
+		fout.format("</head>");
+		fout.format("<body>");
+		fout.format("<table border=1 align = center>");
+		fout.format("<tr>");
+		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
+		fout.format("<td align = center width = 400 height = 70> Listagens </td>");
+		fout.format("</tr>");
+		fout.format("<tr>");
+		fout.format("<td align = center width = 400 height= 70> Classificações de Atletas </td>");
+		fout.format("</tr>");
+		fout.format("</table><br>");
 
 	}
 
