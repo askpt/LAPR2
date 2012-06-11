@@ -347,11 +347,11 @@ public class AppConfig extends JFrame {
 		addCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
-					a.setSelectedIndex(1);
+					a.setSelectedIndex(0);
 					a.setVisible(true);
 				} else {
 					a = new AddDados();
-					a.setSelectedIndex(1);
+					a.setSelectedIndex(0);
 				}
 			}
 
@@ -364,11 +364,11 @@ public class AppConfig extends JFrame {
 		addDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
-					a.setSelectedIndex(2);
+					a.setSelectedIndex(1);
 					a.setVisible(true);
 				} else {
 					a = new AddDados();
-					a.setSelectedIndex(2);
+					a.setSelectedIndex(1);
 				}
 			}
 		});
@@ -380,11 +380,11 @@ public class AppConfig extends JFrame {
 		addSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
-					a.setSelectedIndex(3);
+					a.setSelectedIndex(2);
 					a.setVisible(true);
 				} else {
 					a = new AddDados();
-					a.setSelectedIndex(3);
+					a.setSelectedIndex(2);
 				}
 			}
 		});
