@@ -1,9 +1,35 @@
 package jogosolimpicos;
 
-import listaligada.ListaLigada;
+import listaligada.*;
 
+/**
+ * Main class to create the reports for the application.
+ * 
+ */
 public class Listagem {
 
+	/**
+	 * Method to create a list of the medals obtained by the country.
+	 * 
+	 * @param paises
+	 *            linked list of the countries.
+	 * @param provas
+	 *            linked list of the event.
+	 * @param anoInicio
+	 *            filter by year. The first year.
+	 * @param anoFim
+	 *            filter by year. The last year.
+	 * @param modalidade
+	 *            filter by sport.
+	 * @param disciplina
+	 *            filter by competition.
+	 * @return a linked list with the all countries ordered by who wons more
+	 *         medals.
+	 * @see Pais country details.
+	 * @see Prova event details
+	 * @see Modalidade sport details
+	 * @see Disciplina competition details
+	 */
 	public static ListaLigada<Pais> listarMedalhasPais(ListaLigada<Pais> paises, ListaLigada<Prova> provas, int anoInicio, int anoFim, String modalidade, Disciplina disciplina) {
 		ListaLigada<Prova> provaTemp = new ListaLigada<Prova>();
 		for (int i = 0; i < provas.size(); i++) {
@@ -164,6 +190,31 @@ public class Listagem {
 		return paisesTemp;
 	}
 
+	/**
+	 * Method to create a list of the medals obtained by the athlete.
+	 * 
+	 * @param atletas
+	 *            linked list of the athletes.
+	 * @param equipas
+	 *            linked list of the team.
+	 * @param provas
+	 *            linked list of the event.
+	 * @param anoInicio
+	 *            filter by year. The first year.
+	 * @param anoFim
+	 *            filter by year. The last year.
+	 * @param modalidade
+	 *            filter by sport.
+	 * @param disciplina
+	 *            filter by competition.
+	 * @return a linked list with the all athletes ordered by who wons more
+	 *         medals.
+	 * @see Atleta athlete details
+	 * @see Equipa team details
+	 * @see Prova event details
+	 * @see Modalidade sport details
+	 * @see Disciplina competition details
+	 */
 	public static ListaLigada<Atleta> listarMedalhasAtleta(ListaLigada<Atleta> atletas, ListaLigada<Equipa> equipas, ListaLigada<Prova> provas, int anoInicio, int anoFim, String modalidade, Disciplina disciplina) {
 		ListaLigada<Prova> provaTemp = new ListaLigada<Prova>();
 		for (int i = 0; i < provas.size(); i++) {
@@ -346,13 +397,33 @@ public class Listagem {
 		return atletasTemp;
 	}
 
+	/**
+	 * Calculate the statistics for one country.
+	 * 
+	 * @param pais
+	 *            country to be calculated
+	 * @param provas
+	 *            linked list of events
+	 * @param paises
+	 *            linked list of countries
+	 * @return return a array with the results of the country. The index 0
+	 *         returns the number of editions in which he participated, index 1
+	 *         returns the number of competitions in which he participated,
+	 *         index 2 returns the all-time gold medals earned, index 3 returns
+	 *         the all-time silver medals earned, index 4 returns the all-time
+	 *         bronze medals earned, index 5 returns the all-time ranking medals
+	 *         position, index 6 returns the average of medals earned by the
+	 *         country in the all editions
+	 * @see Pais country details
+	 * @see Prova event details
+	 */
 	public static Object[] estatisticaPais(Pais pais, ListaLigada<Prova> provas, ListaLigada<Pais> paises) {
 		Object valores[] = new Object[7];
 		int valTemp[] = new int[4];
 
 		valores[0] = jogosParticipou(pais, provas);
 		valores[1] = disciplinasParticipou(pais, provas);
-		valTemp = medalhasGanhasRank(pais, paises, provas, 0, 9999, null, null);
+		valTemp = medalhasGanhasRank(pais, paises, provas);
 		valores[2] = (valTemp[0]);
 		valores[3] = (valTemp[1]);
 		valores[4] = (valTemp[2]);
@@ -362,8 +433,25 @@ public class Listagem {
 		return valores;
 	}
 
-	private static int[] medalhasGanhasRank(Pais pais, ListaLigada<Pais> paises, ListaLigada<Prova> provas, int anoInicio, int anoFim, String modalidade, Disciplina disciplina) {
-		ListaLigada<Pais> paisesTemp = listarMedalhasPais(paises, provas, anoInicio, anoFim, modalidade, disciplina);
+	/**
+	 * Calculate the medals won by the country and the ranking for all editions
+	 * 
+	 * @param pais
+	 *            country to be calculated
+	 * @param paises
+	 *            linked list of countries
+	 * @param provas
+	 *            linked list of competitions
+	 * @return a array with the medals and the ranking of the country. The index
+	 *         0 returns the all-time gold medals earned, index 1 returns the
+	 *         all-time silver medals earned, index 2 returns the all-time
+	 *         bronze medals earned, index 3 returns the all-time ranking medals
+	 *         position
+	 * @see Pais country details
+	 * @see Prova competition details
+	 */
+	private static int[] medalhasGanhasRank(Pais pais, ListaLigada<Pais> paises, ListaLigada<Prova> provas) {
+		ListaLigada<Pais> paisesTemp = listarMedalhasPais(paises, provas, 0, 9999, null, null);
 		int valTemp[] = new int[4];
 
 		int itPais = 0;
@@ -381,6 +469,16 @@ public class Listagem {
 		return valTemp;
 	}
 
+	/**
+	 * calculates the number of competitions who participated in
+	 * 
+	 * @param pais
+	 *            country
+	 * @param provas
+	 * @return number of competitions participated
+	 * @see Pais country detail
+	 * @see Prova competition details
+	 */
 	private static int disciplinasParticipou(Pais pais, ListaLigada<Prova> provas) {
 		ListaLigada<Disciplina> discTemp = new ListaLigada<Disciplina>();
 
@@ -408,6 +506,16 @@ public class Listagem {
 		return discTemp.size();
 	}
 
+	/**
+	 * calculates the number of Olympic Games who participated in
+	 * 
+	 * @param pais
+	 *            country
+	 * @param provas
+	 * @return number of Olympic Games participated
+	 * @see Pais country detail
+	 * @see Prova competition details
+	 */
 	private static int jogosParticipou(Pais pais, ListaLigada<Prova> provas) {
 
 		ListaLigada<JogosOlimpicos> jogosTemp = new ListaLigada<JogosOlimpicos>();

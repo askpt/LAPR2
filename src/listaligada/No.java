@@ -1,5 +1,7 @@
 package listaligada;
 
+import java.io.*;
+
 /**
  * The Node of Linked List.
  * 
@@ -8,7 +10,8 @@ package listaligada;
  *            type of Node.
  */
 
-public class No<E> {
+@SuppressWarnings("serial")
+public class No<E> implements Serializable {
 	E elemento;
 	No<E> proximo, anterior;
 }

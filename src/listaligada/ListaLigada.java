@@ -1,5 +1,7 @@
 package listaligada;
 
+import java.io.*;
+
 /**
  * Main class for the Linked List. Accepts the generic form.
  * 
@@ -8,7 +10,8 @@ package listaligada;
  * 
  */
 
-public class ListaLigada<E> {
+@SuppressWarnings("serial")
+public class ListaLigada<E> implements Serializable {
 	/**
 	 * head of the linked list
 	 */
