@@ -22,6 +22,7 @@ public class Teste extends JFrame {
 		JMenu menu;
 		JMenuItem menuItem;
 		final Csv csv = new Csv();
+		final HTML html = new HTML();
 
 		menuBar = new JMenuBar();
 
@@ -48,8 +49,6 @@ public class Teste extends JFrame {
 			}
 		});
 
-		final HTML html = new HTML();
-
 		menuItem = new JMenuItem("Export Country HTML", 'H');
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,7 +63,7 @@ public class Teste extends JFrame {
 		});
 
 		menu.add(menuItem);
-
+		
 		menuItem = new JMenuItem("Export Atlhete HTML", 'A');
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
