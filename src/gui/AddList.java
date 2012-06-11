@@ -336,6 +336,19 @@ public class AddList extends JFrame {
 				if (index < MAX) {
 					index += 1;
 					cl.show(card, "" + (index));
+					if (index == 2) {
+						cmb1_2.setSelectedIndex(cmb1_1.getSelectedIndex());
+						cmb2_2.setSelectedIndex(cmb2_1.getSelectedIndex());
+					} else if (index == 3) {
+						cmb1_3.setSelectedIndex(cmb1_2.getSelectedIndex());
+						cmb2_3.setSelectedIndex(cmb2_2.getSelectedIndex());
+						cmb3_3.setSelectedIndex(cmb3_2.getSelectedIndex());
+					} else if (index == 4) {
+						cmb1_4.setSelectedIndex(cmb1_3.getSelectedIndex());
+						cmb2_4.setSelectedIndex(cmb2_3.getSelectedIndex());
+						cmb3_4.setSelectedIndex(cmb3_3.getSelectedIndex());
+						cmb4_4.setSelectedIndex(cmb4_3.getSelectedIndex());
+					}
 					if (index == MAX) {
 						add1.setEnabled(false);
 					}
@@ -414,7 +427,8 @@ public class AddList extends JFrame {
 						cl.show(card, "7");
 					}
 				} else if (index + 4 == 8) {
-					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
+					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem())
+							|| (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_4.getSelectedItem();
@@ -492,17 +506,13 @@ public class AddList extends JFrame {
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
-		Botao ok = new Botao(img.ok, img.ok_o);
+		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
 		Botao voltar = new Botao(img.back, img.back_o);
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
-		Botao all = new Botao(img.back, img.back_o);
-		all.setContentAreaFilled(false);
-		all.setBorderPainted(false);
 		pButn.add(ok);
-		pButn.add(all);
 		pButn.add(voltar);
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -515,29 +525,14 @@ public class AddList extends JFrame {
 				JPanel tabela1 = createTablePaisAtleta(p, pais);
 				card1.add(tabela1, "2");
 				cl1.show(card1, "2");
-
-			}
-		});
-
-		all.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
-				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
-				int ano_inicio = jogos_inicio.getAno();
-				int ano_fim = jogos_fim.getAno();
-				ListaLigada<Pais> p = Listagem.listarMedalhasPais(Main.getPaises(), Main.getProvas(), ano_inicio, ano_fim, null, null);
-				String pais = "Nation";
-				JPanel tabela1 = createTablePaisAtleta(p, pais);
-				card1.add(tabela1, "2");
-				cl1.show(card1, "2");
-
+				ok.setVisible(false);
 			}
 		});
 
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl1.show(card1, "1");
-
+				ok.setVisible(true);
 			}
 		});
 
@@ -887,7 +882,7 @@ public class AddList extends JFrame {
 	private JPanel createTable(int[] i) {
 		JPanel pTabela = new JPanel(new FlowLayout());
 		pTabela.setOpaque(false);
-		String[] col = { "Country", "# Participations", "# Disciplines played", "Medals(O,S,B)", "Rank", "# Medals average" };
+		String[] col = { "Country", "# Participations", "# Disciplines played", "Medals(G,S,B)", "Rank", "# Medals average" };
 		Object[][] linhas = new Object[i.length][col.length];
 		for (int j = 0; j < i.length; j++) {
 			Object[] estatisticasPais = Listagem.estatisticaPais(Main.getPaises().get(i[j]), Main.getProvas(), Main.getPaises());

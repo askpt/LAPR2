@@ -148,9 +148,43 @@ public class AppConfig extends JFrame {
 			}
 		});
 
+		Botao rankC = new Botao(img.rc);
+		rankC.setBotaoRollOver(img.rc_o);
+		rankC.setContentAreaFilled(false);
+		rankC.setBorder(emptyBorder);
+		rankC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (al != null) {
+					al.setSelectedIndex(3);
+					al.setVisible(true);
+				} else {
+					al = new AddList();
+					al.setSelectedIndex(3);
+				}
+			}
+		});
+
+		Botao rankS = new Botao(img.rs);
+		rankS.setBotaoRollOver(img.rs_o);
+		rankS.setContentAreaFilled(false);
+		rankS.setBorder(emptyBorder);
+		rankS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (al != null) {
+					al.setSelectedIndex(4);
+					al.setVisible(true);
+				} else {
+					al = new AddList();
+					al.setSelectedIndex(4);
+				}
+			}
+		});
+
 		p2.add(compAnalysis);
 		p2.add(rankP);
 		p2.add(rankA);
+		p2.add(rankC);
+		p2.add(rankS);
 		p1.add(lb, BorderLayout.NORTH);
 		p1.add(p2, BorderLayout.SOUTH);
 		list.add(p1);

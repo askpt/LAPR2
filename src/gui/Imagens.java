@@ -110,6 +110,10 @@ public class Imagens {
 	URL rn_o = classLoader.getResource("Imagens/rankingNOver.png");
 	URL ra = classLoader.getResource("Imagens/rankingA.png");
 	URL ra_o = classLoader.getResource("Imagens/RankingAOver.png");
+	URL rc = classLoader.getResource("Imagens/rankingC.png");
+	URL rc_o = classLoader.getResource("Imagens/rankingCOver.png");
+	URL rs = classLoader.getResource("Imagens/rankingS.png");
+	URL rs_o = classLoader.getResource("Imagens/rankingSOver.png");
 
 	// actions
 
