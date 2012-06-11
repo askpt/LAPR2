@@ -148,7 +148,7 @@ public class Csv extends JComponent implements Accessible {
 			linguas.add(eng);
 			in.close();
 			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
-		} catch (FileNotFoundException f) {
+		} catch (FileNotFoundException | ArrayIndexOutOfBoundsException f) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 		}
 	}

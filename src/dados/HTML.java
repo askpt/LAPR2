@@ -41,7 +41,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 				
@@ -81,9 +81,9 @@ public class HTML {
 				File ficheiro = fc.getSelectedFile();
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
-				ListaLigada<Atleta> atletaTemp = atleta;
+				ListaLigada<Atleta> atletaTemp;
 				ListaLigada<Equipa> equipaTemp = equipa;
-				atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp, anoInicio, anoFim, null, null);
+				atletaTemp = Listagem.listarMedalhasAtleta(atleta, equipaTemp, provaTemp, anoInicio, anoFim, null, null);
 				corpoInicioAtleta(fout, linguas, it);
 				for (int i = 0; i < atletaTemp.size(); i++) {
 
@@ -129,8 +129,8 @@ public class HTML {
 				File ficheiro = fc.getSelectedFile();
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
-				ListaLigada<Pais> paisTemp = pais;
-				paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp, anoInicio, anoFim, modalidade, null);
+				ListaLigada<Pais> paisTemp;
+				paisTemp = Listagem.listarMedalhasPais(pais, provaTemp, anoInicio, anoFim, modalidade, null);
 				corpoInicioModalidade(fout, linguas, it);
 				for (int i = 0; i < pais.size(); i++) {
 
@@ -175,10 +175,10 @@ public class HTML {
 				File ficheiro = fc.getSelectedFile();
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = provas;
-				ListaLigada<Atleta> atletaTemp = atleta;
+				ListaLigada<Atleta> atletaTemp;
 				ListaLigada<Equipa> equipaTemp = equipa;
-				atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp, anoInicio, anoFim, null, disciplina);
-				ListaLigada<Pais> paisTemp = pais;
+				atletaTemp = Listagem.listarMedalhasAtleta(atleta, equipaTemp, provaTemp, anoInicio, anoFim, null, disciplina);
+				ListaLigada<Pais> paisTemp;
 				paisTemp = Listagem.listarMedalhasPais(pais, provas, anoInicio, anoFim, null, disciplina);
 				corpoInicioDisciplina(fout, it, linguas);
 				for (int i = 0; i < paisTemp.size(); i++) {
