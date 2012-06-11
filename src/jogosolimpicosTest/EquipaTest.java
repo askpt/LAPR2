@@ -11,11 +11,6 @@ public class EquipaTest {
 	private static Equipa equipaTest = new Equipa(new Pais("POR", "Portugal"));
 
 	@Test
-	public void testGetID() {
-		assertEquals(1, equipaTest.getID());
-	}
-
-	@Test
 	public void testGetPais() {
 		assertEquals("POR", equipaTest.getPais().getCodigoPais(0));
 		assertEquals("Portugal", equipaTest.getPais().getNomePais());

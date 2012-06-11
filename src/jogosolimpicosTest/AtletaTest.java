@@ -10,11 +10,6 @@ public class AtletaTest {
 	private Atleta atletaTest = new Atleta(null, null);
 
 	@Test
-	public void testGetID() {
-		assertEquals(3, atletaTest.getID());
-	}
-
-	@Test
 	public void testGetNome() {
 		atletaTest.setNome("Vitor Hugo");
 
