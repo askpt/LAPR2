@@ -35,10 +35,7 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			if (!in.nextLine().equalsIgnoreCase("Code ;Nation (NOC) ;Other codes used")) {
-				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
+			in.nextLine();
 			while (in.hasNextLine()) {
 				String temp[] = in.nextLine().split(";");
 				temp[0] = temp[0].replaceAll("  ", " ");
@@ -118,8 +115,43 @@ public class Csv extends JComponent implements Accessible {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			exc.printStackTrace();
 		}
 
+	}
+
+	public void importLingua(Component janela, ListaLigada<Linguas> linguas) {
+
+		try {
+			JFileChooser fc = new JFileChooser();
+			fc.addChoosableFileFilter(new CsvFilter());
+			fc.setAcceptAllFileFilterUsed(false);
+			int returnVal = fc.showOpenDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+
+			File ficheiro = fc.getSelectedFile();
+			Scanner in = new Scanner(ficheiro);
+			if (!in.hasNextLine()) {
+				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			int i = 0, j = 1, k = 0, l = 1;
+			String[] temp = new String[30];
+			while (in.hasNextLine()) {
+				String tempz[] = in.nextLine().split(";");
+				temp[k] = tempz[i];
+				temp[l] = tempz[j];
+				k += 2;
+				l += 2;
+			}
+			Linguas eng = new Linguas(temp[1], temp[3], temp[5], temp[7], temp[9], temp[11], temp[13], temp[15], temp[17], temp[19], temp[21], temp[23], temp[25], temp[27]);
+			linguas.add(eng);
+			in.close();
+			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+		} catch (FileNotFoundException f) {
+			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	public void exportPais(Component janela, ListaLigada<Pais> paises) {

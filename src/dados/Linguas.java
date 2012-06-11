@@ -1,4 +1,4 @@
-package jogosolimpicos;
+package dados;
 
 public class Linguas {
 
@@ -19,7 +19,7 @@ public class Linguas {
 
 	public Linguas(String linguagem, String jogosolimpicos, String listagem, String classificacao, String posicao, String nome, String ouro, String prata, String bronze, String atleta, String modalidade, String disciplina, String pais, String data) {
 
-		setLinguagem(linguagem);
+		this(linguagem);
 		setJogosOlimpicos(jogosolimpicos);
 		setListagem(listagem);
 		setClassificacao(classificacao);
@@ -34,6 +34,11 @@ public class Linguas {
 		setPais(pais);
 		setData(data);
 
+	}
+
+	public Linguas(String linguagem) {
+
+		setLinguagem(linguagem);
 	}
 
 	public void setLinguagem(String linguagem) {

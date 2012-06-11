@@ -48,6 +48,45 @@ public class Teste extends JFrame {
 			}
 		});
 
+		final HTML html = new HTML();
+
+		menuItem = new JMenuItem("Export Country HTML", 'H');
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = 0;
+				for (int i = 0; i < Main.getLingua().size(); i++) {
+					if (Main.getLingua().get(i).getLinguagem().equalsIgnoreCase("English")) {
+						index = i;
+					}
+				}
+				html.exportPais(Teste.this, 1996, 1996, Main.getLingua().get(index), Main.getLingua(), Main.getProvas(), Main.getPaises());
+			}
+		});
+
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Export Atlhete HTML", 'A');
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = 0;
+				for (int i = 0; i < Main.getLingua().size(); i++) {
+					if (Main.getLingua().get(i).getLinguagem().equalsIgnoreCase("English")) {
+						index = i;
+					}
+				}
+				html.exportAtleta(Teste.this, 1996, 1996, Main.getLingua().get(index), Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
+			}
+		});
+
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Import Language", 'L');
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				csv.importLingua(Teste.this, Main.getLingua());
+			}
+		});
+
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("List Country", 'L');

@@ -37,18 +37,16 @@ public class HTML {
 				paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp, anoInicio, anoFim, null, null);
 				Date d = new Date();
 				corpoInicioPais(fout, it, linguas);
+
 				for (int i = 0; i < paisTemp.size(); i++) {
 
-					fout.format("<table border = 1>");
-					fout.format("<tr>");
-					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 					fout.format("</tr>");
-					fout.format("<tr>");
+					fout.format("<tr align=center>");
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
 					fout.format("</tr>");
-					fout.format("</table><br>");
 
 				}
+				fout.format("</table><br>");
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -70,7 +68,7 @@ public class HTML {
 			return;
 		}
 
-		if (!Main.getPaises().isEmpty()) {
+		if (!Main.getAtleta().isEmpty()) {
 			try {
 				JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(new HTMLFilter());
@@ -84,19 +82,15 @@ public class HTML {
 				ListaLigada<Equipa> equipaTemp = equipa;
 				atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp, anoInicio, anoFim, null, null);
 				Date d = new Date();
-				corpoInicioPais(fout, it, linguas);
+				corpoInicioAtleta(fout, linguas, it);
 				for (int i = 0; i < atletaTemp.size(); i++) {
 
-					fout.format("<table border = 1>");
-					fout.format("<tr>");
-					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 					fout.format("</tr>");
-					fout.format("<tr>");
+					fout.format("<tr align=center>");
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
 					fout.format("</tr>");
-					fout.format("</table><br>");
-
 				}
+				fout.format("</table><br>");
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -118,7 +112,7 @@ public class HTML {
 			return;
 		}
 
-		if (!Main.getPaises().isEmpty()) {
+		if (!Main.getModalidades().isEmpty()) {
 			try {
 				JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(new HTMLFilter());
@@ -134,16 +128,13 @@ public class HTML {
 				corpoInicioModalidade(fout, linguas, it);
 				for (int i = 0; i < pais.size(); i++) {
 
-					fout.format("<table border = 1>");
-					fout.format("<tr>");
-					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 					fout.format("</tr>");
-					fout.format("<tr>");
+					fout.format("<tr align=center>");
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
 					fout.format("</tr>");
-					fout.format("</table><br>");
 
 				}
+				fout.format("</table><br>");
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -165,7 +156,7 @@ public class HTML {
 			return;
 		}
 
-		if (!Main.getPaises().isEmpty()) {
+		if (!Main.getDisciplinas().isEmpty()) {
 			try {
 				JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(new HTMLFilter());
@@ -184,28 +175,26 @@ public class HTML {
 				corpoInicioDisciplina(fout, it, linguas);
 				for (int i = 0; i < paisTemp.size(); i++) {
 
-					fout.format("<table border = 1>");
-					fout.format("<tr>");
-					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 					fout.format("</tr>");
-					fout.format("<tr>");
+					fout.format("<tr align=center>");
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
 					fout.format("</tr>");
-					fout.format("</table><br>");
 
 				}
+				fout.format("</table><br>");
+
+				fout.format("<tr>");
+				fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 				for (int i = 0; i < atletaTemp.size(); i++) {
 
-					fout.format("<table border = 1>");
-					fout.format("<tr>");
-					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 					fout.format("</tr>");
-					fout.format("<tr>");
+					fout.format("<tr align=center>");
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
 					fout.format("</tr>");
-					fout.format("</table><br>");
 
 				}
+				fout.format("</table><br>");
+
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -227,12 +216,15 @@ public class HTML {
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> " + linguas.get(it).getListagem() + " </td>");
+		fout.format("<td align = center width = 400 height = 70 align = center> " + linguas.get(it).getListagem() + " </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70> " + linguas.get(it).getClassificacao() + " " + linguas.get(it).getPais() + " </td>");
+		fout.format("<td align = center width = 400 height= 70 align = center> " + linguas.get(it).getClassificacao() + " " + linguas.get(it).getPais() + " </td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
+		fout.format("<table border = 1 align=center>");
+		fout.format("<tr>");
+		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 
 	}
 
@@ -248,12 +240,15 @@ public class HTML {
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagem </td>");
+		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getAtleta() + "</td>");
+		fout.format("<td align = center width = 400 height= 70 align = center>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getAtleta() + "</td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
+		fout.format("<table border = 1 align=center>");
+		fout.format("<tr>");
+		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 	}
 
 	public void corpoInicioModalidade(Formatter fout, ListaLigada<Linguas> linguas, int it) {
@@ -268,12 +263,15 @@ public class HTML {
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagem </td>");
+		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getModalidade() + "</td>");
+		fout.format("<td align = center width = 400 height= 70 align = center>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getModalidade() + "</td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
+		fout.format("<table border = 1 align=center>");
+		fout.format("<tr>");
+		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 
 	}
 
@@ -289,12 +287,15 @@ public class HTML {
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagem </td>");
+		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getDisciplina() + "</td>");
+		fout.format("<td align = center width = 400 height= 70 align = center>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getDisciplina() + "</td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
+		fout.format("<table border = 1 align=center>");
+		fout.format("<tr>");
+		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
 
 	}
 
