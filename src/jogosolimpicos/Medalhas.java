@@ -95,4 +95,10 @@ public class Medalhas implements Serializable {
 		return String.format("Gold: %d Silver: %d Bronze: %d", this.ouro, this.prata, this.bronze);
 	}
 
+	public void resetMedalhas() {
+		this.ouro = 0;
+		this.prata = 0;
+		this.bronze = 0;
+	}
+
 }

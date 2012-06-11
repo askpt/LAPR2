@@ -113,11 +113,9 @@ public class Csv extends JComponent implements Accessible {
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (ArrayIndexOutOfBoundsException exc) {
+		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 			exc.printStackTrace();
-		} catch (NumberFormatException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
@@ -162,8 +160,6 @@ public class Csv extends JComponent implements Accessible {
 
 	public void importDisc(Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
 
-		// diretamente na lista disciplina
-
 		try {
 
 			JFileChooser fc = new JFileChooser();
@@ -182,11 +178,6 @@ public class Csv extends JComponent implements Accessible {
 				return;
 			}
 
-			// Disciplina(String nome, Modalidade modalidade, boolean
-			// tipoDisc,
-			// int genero)
-
-			// import modalidades
 			if (!in.nextLine().equals("Sport;Discipline;Type;Men;Women;Mixed;Type;Order")) {
 				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return;
@@ -212,7 +203,6 @@ public class Csv extends JComponent implements Accessible {
 			}
 			in.close();
 
-			// import disciplinas
 			Scanner in2 = new Scanner(ficheiro);
 			in2.nextLine();
 			while (in2.hasNextLine()) {
@@ -471,9 +461,7 @@ public class Csv extends JComponent implements Accessible {
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (ArrayIndexOutOfBoundsException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (NumberFormatException exc) {
+		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
@@ -582,16 +570,13 @@ public class Csv extends JComponent implements Accessible {
 			if (itJogos == jogos.size()) {
 				JOptionPane.showMessageDialog(janela, "Year not found!\nPlease import: " + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return;
-				// jogos.add(new JogosOlimpicos(ano));
 			}
 
 			String modalidade = tempPrin[1];
 			String genero = tempPrin[2];
-			int codGenero = -1; // 0 = masc 1= fem 2= mixed
-			boolean tipoDisc = false; // false = individual true =
-			// coletivo
-			int tipoClass = -1; // 0 - distancia 1 = tempo 2 = pontos 3
-			// = rank
+			int codGenero = -1;
+			boolean tipoDisc = false;
+			int tipoClass = -1;
 			String nomeDisc;
 			int itDisc = 0;
 			int itProva = 0;
@@ -761,8 +746,7 @@ public class Csv extends JComponent implements Accessible {
 						if (nomeDisc.equalsIgnoreCase(modalidades.get(itModal).getDisc().get(itDisc).getNome()) && codGenero == modalidades.get(itModal).getDisc().get(itDisc).getGenero())
 							break;
 					}
-					tipoClass = modalidades.get(itModal).getDisc().get(itDisc).getTipoClass(); // tipo
-					// class
+					tipoClass = modalidades.get(itModal).getDisc().get(itDisc).getTipoClass();
 
 					if (!tipoDisc) {
 						boolean existeAtleta = false;
@@ -891,9 +875,7 @@ public class Csv extends JComponent implements Accessible {
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (ArrayIndexOutOfBoundsException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (NumberFormatException exc) {
+		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 
@@ -1142,9 +1124,7 @@ public class Csv extends JComponent implements Accessible {
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (ArrayIndexOutOfBoundsException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-		} catch (NumberFormatException exc) {
+		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 		}
 

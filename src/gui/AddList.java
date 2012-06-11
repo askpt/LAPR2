@@ -414,8 +414,7 @@ public class AddList extends JFrame {
 						cl.show(card, "7");
 					}
 				} else if (index + 4 == 8) {
-					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem())
-							|| (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
+					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_4.getSelectedItem();

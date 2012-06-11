@@ -12,6 +12,7 @@ public class Listagem {
 
 		ListaLigada<Pais> paisesTemp = new ListaLigada<Pais>();
 		for (int i = 0; i < paises.size(); i++) {
+			paises.get(i).getMedalha().resetMedalhas();
 			paisesTemp.add(paises.get(i));
 		}
 
@@ -171,6 +172,7 @@ public class Listagem {
 
 		ListaLigada<Atleta> atletasTemp = new ListaLigada<Atleta>();
 		for (int i = 0; i < atletas.size(); i++) {
+			atletas.get(i).getMedalha().resetMedalhas();
 			atletasTemp.add(atletas.get(i));
 		}
 		ListaLigada<Equipa> equipasTemp = new ListaLigada<Equipa>();
@@ -355,7 +357,7 @@ public class Listagem {
 		valores[3] = (valTemp[1]);
 		valores[4] = (valTemp[2]);
 		valores[5] = (valTemp[3]);
-		valores[6] = (Integer) valores[0] != 0 ? ((Integer) valores[2] + (Integer) valores[3] + (Integer) valores[4]) / (Integer) valores[0] : 0;
+		valores[6] = (int) valores[0] != 0 ? ((int) valores[2] + (int) valores[3] + (int) valores[4]) / (int) valores[0] : 0;
 
 		return valores;
 	}
