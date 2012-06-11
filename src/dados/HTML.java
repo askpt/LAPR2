@@ -1,250 +1,303 @@
 package dados;
 
 import gui.*;
-
 import java.awt.*;
 import java.io.*;
 import java.util.*;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-
 import jogosolimpicos.*;
 import listaligada.*;
 
 public class HTML {
 
-	public void exportPais(Component janela, int anoInicio, int anoFim)
-			throws FileNotFoundException {
+	public void exportPais(Component janela, int anoInicio, int anoFim, Linguas lingua, ListaLigada<Linguas> linguas, ListaLigada<Prova> prova, ListaLigada<Pais> pais) {
+
+		int it = 0;
+		for (; it < linguas.size(); it++) {
+			if (linguas.get(it).getLinguagem().equalsIgnoreCase(lingua.getLinguagem()))
+				break;
+		}
+		if (linguas.size() == it) {
+			JOptionPane.showMessageDialog(janela, "Language not found!", "Export File", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		if (!Main.getPaises().isEmpty()) {
+			try {
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new HTMLFilter());
+				int returnVal = fc.showSaveDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
+				File ficheiro = fc.getSelectedFile();
+				Formatter fout = new Formatter(ficheiro + ".html");
+				ListaLigada<Prova> provaTemp = prova;
+				ListaLigada<Pais> paisTemp = pais;
+				paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp, anoInicio, anoFim, null, null);
+				Date d = new Date();
+				corpoInicioPais(fout, it, linguas);
+				for (int i = 0; i < paisTemp.size(); i++) {
 
-			JFileChooser fc = new JFileChooser();
-			fc.setFileFilter(new HTMLFilter());
-			int returnVal = fc.showSaveDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
-			File ficheiro = fc.getSelectedFile();
-			Formatter fout = new Formatter(ficheiro + ".html");
-			ListaLigada<Prova> provaTemp = Main.getProvas();
-			ListaLigada<Pais> paisTemp = Main.getPaises();
-			paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp,
-					anoInicio, anoFim, null, null);
-			corpoInicioPais(fout);
-			for (int i = 0; i < paisTemp.size(); i++) {
+					fout.format("<table border = 1>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
+					fout.format("</tr>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
+					fout.format("</tr>");
+					fout.format("</table><br>");
 
-				fout.format("<table border = 1>");
-				fout.format("<tr>");
-				fout.format("<td width=400> Posi&ccedil&atildeo<td> Nome </td> <td> Ouro </td> <td> Prata </td> <td> Bronze </td><td> Data de Emiss&atildeo");
-				fout.format("</tr>");
-				fout.format("<tr>");
-				fout.format("<td width=400>" + (i+1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td> <td>" + paisTemp.get(i).getMedalha().getOuro()+ "</td> <td>" + paisTemp.get(i).getMedalha().getPrata() + "</td> <td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + "Data de hoje" + "</td>");
-				fout.format("</tr>");
-				fout.format("</table><br>");
-
+				}
+			} catch (FileNotFoundException f) {
+				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(janela,
-					"Não existem países para exportar", "Export",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "No Countries to export", "Export", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 	}
 
-	public void exportAtleta(Component janela, int anoInicio, int anoFim)
-			throws FileNotFoundException {
+	public void exportAtleta(Component janela, int anoInicio, int anoFim, Linguas lingua, ListaLigada<Linguas> linguas, ListaLigada<Atleta> atleta, ListaLigada<Prova> prova, ListaLigada<Equipa> equipa) {
 
-		if (!Main.getPaises().isEmpty()) {
-
-			JFileChooser fc = new JFileChooser();
-			fc.setFileFilter(new HTMLFilter());
-			int returnVal = fc.showSaveDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
-			File ficheiro = fc.getSelectedFile();
-			Formatter fout = new Formatter(ficheiro + ".html");
-			ListaLigada<Prova> provaTemp = Main.getProvas();
-			ListaLigada<Atleta> atletaTemp = Main.getAtleta();
-			ListaLigada<Equipa> equipaTemp = Main.getEquipas();
-			atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp,	anoInicio, anoFim, null, null);
-			corpoInicioAtleta(fout);
-			for (int i = 0; i < atletaTemp.size(); i++) {
-				
-				fout.format("<table border = 1>");
-				fout.format("<tr>");
-				fout.format("<td width=400> Posi&ccedil&atildeo<td> Nome </td> <td> Ouro </td> <td> Prata </td> <td> Bronze </td><td> Data de Emiss&atildeo");
-				fout.format("</tr>");
-				fout.format("<tr>");
-				fout.format("<td width=400>" + (i+1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + "Data de Hoje" + "</td>");
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				
-			}
-		} else {
-			JOptionPane.showMessageDialog(janela,
-					"Não existem países para exportar", "Export",
-					JOptionPane.INFORMATION_MESSAGE);
+		int it = 0;
+		for (; it < linguas.size(); it++) {
+			if (linguas.get(it).getLinguagem().equalsIgnoreCase(lingua.getLinguagem()))
+				break;
+		}
+		if (linguas.size() == it) {
+			JOptionPane.showMessageDialog(janela, "Language not found!", "Export File", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-	}
-	
-	public void exportModalidade(Component janela, int anoInicio, int anoFim, String modalidade)
-			throws FileNotFoundException {
 
 		if (!Main.getPaises().isEmpty()) {
+			try {
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new HTMLFilter());
+				int returnVal = fc.showSaveDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
+				File ficheiro = fc.getSelectedFile();
+				Formatter fout = new Formatter(ficheiro + ".html");
+				ListaLigada<Prova> provaTemp = prova;
+				ListaLigada<Atleta> atletaTemp = atleta;
+				ListaLigada<Equipa> equipaTemp = equipa;
+				atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp, anoInicio, anoFim, null, null);
+				Date d = new Date();
+				corpoInicioPais(fout, it, linguas);
+				for (int i = 0; i < atletaTemp.size(); i++) {
 
-			JFileChooser fc = new JFileChooser();
-			fc.setFileFilter(new HTMLFilter());
-			int returnVal = fc.showSaveDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
-			File ficheiro = fc.getSelectedFile();
-			Formatter fout = new Formatter(ficheiro + ".html");
-			ListaLigada<Prova> provaTemp = Main.getProvas();
-			ListaLigada<Atleta> atletaTemp = Main.getAtleta();
-			ListaLigada<Equipa> equipaTemp = Main.getEquipas();
-			atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp,	anoInicio, anoFim, modalidade, null);
-			corpoInicioModalidade(fout);
-			for (int i = 0; i < atletaTemp.size(); i++) {
-				
-				fout.format("<table border = 1>");
-				fout.format("<tr>");
-				fout.format("<td width=400> Posi&ccedil&atildeo<td> Nome </td> <td> Ouro </td> <td> Prata </td> <td> Bronze </td><td> Data de Emiss&atildeo");
-				fout.format("</tr>");
-				fout.format("<tr>");
-				fout.format("<td width=400>" + (i+1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + "Data de Hoje" + "</td>");
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				
+					fout.format("<table border = 1>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
+					fout.format("</tr>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
+					fout.format("</tr>");
+					fout.format("</table><br>");
+
+				}
+			} catch (FileNotFoundException f) {
+				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(janela,
-					"Não existem países para exportar", "Export",
-					JOptionPane.INFORMATION_MESSAGE);
-			return;
-		}
-	}
-	
-	public void exportDisciplina(Component janela, int anoInicio, int anoFim, Disciplina disciplina)
-			throws FileNotFoundException {
-
-		if (!Main.getPaises().isEmpty()) {
-
-			JFileChooser fc = new JFileChooser();
-			fc.setFileFilter(new HTMLFilter());
-			int returnVal = fc.showSaveDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
-			File ficheiro = fc.getSelectedFile();
-			Formatter fout = new Formatter(ficheiro + ".html");
-			ListaLigada<Prova> provaTemp = Main.getProvas();
-			ListaLigada<Atleta> atletaTemp = Main.getAtleta();
-			ListaLigada<Equipa> equipaTemp = Main.getEquipas();
-			atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp,	anoInicio, anoFim, null, disciplina);
-			corpoInicioDisciplina(fout);
-			for (int i = 0; i < atletaTemp.size(); i++) {
-				
-				fout.format("<table border = 1>");
-				fout.format("<tr>");
-				fout.format("<td width=400> Posi&ccedil&atildeo<td> Nome </td> <td> Ouro </td> <td> Prata </td> <td> Bronze </td><td> Data de Emiss&atildeo");
-				fout.format("</tr>");
-				fout.format("<tr>");
-				fout.format("<td width=400>" + (i+1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + "Data de Hoje" + "</td>");
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				
-			}
-		} else {
-			JOptionPane.showMessageDialog(janela,
-					"Não existem países para exportar", "Export",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "No Countries to export", "Export", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 	}
 
-	public void corpoInicioPais(Formatter fout) {
+	public void exportModalidade(Component janela, int anoInicio, int anoFim, String modalidade, ListaLigada<Linguas> linguas, Linguas lingua, ListaLigada<Prova> prova, ListaLigada<Pais> pais) {
+
+		int it = 0;
+		for (; it < linguas.size(); it++) {
+			if (linguas.get(it).getLinguagem().equalsIgnoreCase(lingua.getLinguagem()))
+				break;
+		}
+		if (linguas.size() == it) {
+			JOptionPane.showMessageDialog(janela, "Language not found!", "Export File", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!Main.getPaises().isEmpty()) {
+			try {
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new HTMLFilter());
+				int returnVal = fc.showSaveDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
+				File ficheiro = fc.getSelectedFile();
+				Formatter fout = new Formatter(ficheiro + ".html");
+				ListaLigada<Prova> provaTemp = prova;
+				ListaLigada<Pais> paisTemp = pais;
+				paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp, anoInicio, anoFim, modalidade, null);
+				Date d = new Date();
+				corpoInicioModalidade(fout, linguas, it);
+				for (int i = 0; i < pais.size(); i++) {
+
+					fout.format("<table border = 1>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
+					fout.format("</tr>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
+					fout.format("</tr>");
+					fout.format("</table><br>");
+
+				}
+			} catch (FileNotFoundException f) {
+				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(janela, "No Countries to export", "Export", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+	}
+
+	public void exportDisciplina(Component janela, int anoInicio, int anoFim, ListaLigada<Prova> provas, Disciplina disciplina, ListaLigada<Linguas> linguas, Linguas lingua, ListaLigada<Atleta> atleta, ListaLigada<Equipa> equipa, ListaLigada<Pais> pais) {
+
+		int it = 0;
+		for (; it < linguas.size(); it++) {
+			if (linguas.get(it).getLinguagem().equalsIgnoreCase(lingua.getLinguagem()))
+				break;
+		}
+		if (linguas.size() == it) {
+			JOptionPane.showMessageDialog(janela, "Language not found!", "Export File", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+
+		if (!Main.getPaises().isEmpty()) {
+			try {
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new HTMLFilter());
+				int returnVal = fc.showSaveDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
+				File ficheiro = fc.getSelectedFile();
+				Formatter fout = new Formatter(ficheiro + ".html");
+				ListaLigada<Prova> provaTemp = provas;
+				ListaLigada<Atleta> atletaTemp = atleta;
+				ListaLigada<Equipa> equipaTemp = equipa;
+				atletaTemp = Listagem.listarMedalhasAtleta(atletaTemp, equipaTemp, provaTemp, anoInicio, anoFim, null, disciplina);
+				ListaLigada<Pais> paisTemp = pais;
+				paisTemp = Listagem.listarMedalhasPais(pais, provas, anoInicio, anoFim, null, disciplina);
+				Date d = new Date();
+				corpoInicioDisciplina(fout, it, linguas);
+				for (int i = 0; i < paisTemp.size(); i++) {
+
+					fout.format("<table border = 1>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
+					fout.format("</tr>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + pais.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
+					fout.format("</tr>");
+					fout.format("</table><br>");
+
+				}
+				for (int i = 0; i < atletaTemp.size(); i++) {
+
+					fout.format("<table border = 1>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + linguas.get(it).getPosicao() + "<td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td><td>" + linguas.get(it).getData());
+					fout.format("</tr>");
+					fout.format("<tr>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td><td>" + d + "</td>");
+					fout.format("</tr>");
+					fout.format("</table><br>");
+
+				}
+			} catch (FileNotFoundException f) {
+				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(janela, "No Countries to export", "Export", JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+	}
+
+	public void corpoInicioPais(Formatter fout, int it, ListaLigada<Linguas> linguas) {
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
 		fout.format("<head>");
-		fout.format("<title> Jogos Ol&iacutempicos");
+		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
 		fout.format("</title>");
 		fout.format("</head>");
 		fout.format("<body>");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagens </td>");
+		fout.format("<td align = center width = 400 height = 70> " + linguas.get(it).getListagem() + " </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70> Classificações de Países </td>");
+		fout.format("<td align = center width = 400 height= 70> " + linguas.get(it).getClassificacao() + " " + linguas.get(it).getPais() + " </td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
+
 	}
 
-	public void corpoInicioAtleta(Formatter fout) {
+	public void corpoInicioAtleta(Formatter fout, ListaLigada<Linguas> linguas, int it) {
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
 		fout.format("<head>");
-		fout.format("<title> Jogos Ol&iacutempicos");
+		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
 		fout.format("</title>");
 		fout.format("</head>");
 		fout.format("<body>");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagens </td>");
+		fout.format("<td align = center width = 400 height = 70> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70> Classificações de Atletas </td>");
+		fout.format("<td align = center width = 400 height= 70>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getAtleta() + "</td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
-
 	}
-	
-	public void corpoInicioModalidade(Formatter fout) {
+
+	public void corpoInicioModalidade(Formatter fout, ListaLigada<Linguas> linguas, int it) {
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
 		fout.format("<head>");
-		fout.format("<title> Jogos Ol&iacutempicos");
+		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
 		fout.format("</title>");
 		fout.format("</head>");
 		fout.format("<body>");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagens </td>");
+		fout.format("<td align = center width = 400 height = 70> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70> Classificações Da Modalidade </td>");
+		fout.format("<td align = center width = 400 height= 70>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getModalidade() + "</td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
 
 	}
 
-	public void corpoInicioDisciplina(Formatter fout) {
+	public void corpoInicioDisciplina(Formatter fout, int it, ListaLigada<Linguas> linguas) {
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
 		fout.format("<head>");
-		fout.format("<title> Jogos Ol&iacutempicos");
+		fout.format("<title>" + linguas.get(it).getJogosOlimpicos());
 		fout.format("</title>");
 		fout.format("</head>");
 		fout.format("<body>");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
 		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70> Listagens </td>");
+		fout.format("<td align = center width = 400 height = 70> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70> Classificações Da Disciplina </td>");
+		fout.format("<td align = center width = 400 height= 70>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getDisciplina() + "</td>");
 		fout.format("</tr>");
 		fout.format("</table><br>");
 
 	}
-	
+
 	private class HTMLFilter extends FileFilter {
 
 		@Override

@@ -17,6 +17,7 @@ public class Main {
 	private static ListaLigada<Disciplina> disciplinas = new ListaLigada<Disciplina>();
 	private static ListaLigada<Equipa> equipas = new ListaLigada<Equipa>();
 	private static ListaLigada<JogosOlimpicos> jogos = new ListaLigada<JogosOlimpicos>();
+	private static ListaLigada<Linguas> lingua = new ListaLigada<Linguas>();
 	private static JanelaPrincipal maingui;
 	public static Teste i = new Teste("Teste");
 
@@ -34,6 +35,10 @@ public class Main {
 
 	public static ListaLigada<Prova> getProvas() {
 		return provas;
+	}
+
+	public static ListaLigada<Linguas> getLingua() {
+		return lingua;
 	}
 
 	public static void main(String[] args) {
