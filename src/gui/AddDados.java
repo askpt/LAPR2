@@ -100,6 +100,7 @@ public class AddDados extends JFrame {
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
 		Botao clear = new Botao(img.clear);
+
 		clear.setBorderPainted(false);
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
@@ -113,7 +114,7 @@ public class AddDados extends JFrame {
 				} else if (txtCode.equals("")) {
 					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
 					txtCode.requestFocus();
-				} else if (!txtCode.getText().matches("^[A-Z]{1,}$")) {
+				} else if (!txtCode.getText().matches("^[A-Z]{3}$")) {
 					JOptionPane.showMessageDialog(AddDados.this, "Make sure the code field is formatted within the correct format!");
 					txtCode.requestFocus();
 				} else if (!txtName.getText().matches("^[A-Za-z]{1,}$")) {
@@ -166,7 +167,7 @@ public class AddDados extends JFrame {
 		JLabel c = new JLabel("  Sport:  ");
 		c.setForeground(Color.white);
 		panel6.add(c, BorderLayout.WEST);
-		final JComboBox cmbDiscipline = new JComboBox();
+		final JComboBox<?> cmbDiscipline = new JComboBox<Object>();
 		cmbDiscipline.setToolTipText("Discipline's Sport.");
 		panel6.add(cmbDiscipline, BorderLayout.CENTER);
 		panel.add(panel6);
@@ -263,8 +264,8 @@ public class AddDados extends JFrame {
 		JLabel b = new JLabel("Name:    ");
 		b.setForeground(Color.white);
 		panel1.add(b, BorderLayout.WEST);
-		JTextField txtSpo = new JTextField(20);
-		txtSpo.setToolTipText("Discipline whose this sport belongs");
+		final JTextField txtSpo = new JTextField(20);
+		txtSpo.setToolTipText("Sport's name");
 		panel1.add(txtSpo, BorderLayout.CENTER);
 
 		JPanel panel3 = new JPanel();
@@ -278,6 +279,29 @@ public class AddDados extends JFrame {
 		panel3.add(ok);
 		panel3.add(clear);
 
+		clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtSpo.setText("");
+			}
+		});
+
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtSpo.equals("")) {
+					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
+					txtSpo.requestFocus();
+				} else if (!txtSpo.getText().matches("^[A-Za-z]{1,}$")) {
+					JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
+					txtSpo.requestFocus();
+				} else if (sportExists(txtSpo.getText())) {
+					JOptionPane.showMessageDialog(AddDados.this, "That sport already exists!");
+					txtSpo.requestFocus();
+				} else {
+					Main.getModalidades().add(new Modalidade(txtSpo.getText()));
+				}
+			}
+		});
+
 		p1.add(panel1, BorderLayout.CENTER);
 		p1.add(panel3, BorderLayout.SOUTH);
 		spo.add(p1);
@@ -286,6 +310,14 @@ public class AddDados extends JFrame {
 	private boolean codeExists(String code) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
 			if (Main.getPaises().get(i).getCodigoPais(0).equalsIgnoreCase(code))
+				return true;
+		}
+		return false;
+	}
+
+	private boolean sportExists(String sport) {
+		for (int i = 0; i < Main.getModalidades().size(); i++) {
+			if (Main.getModalidades().get(i).getNome().equalsIgnoreCase(sport))
 				return true;
 		}
 		return false;

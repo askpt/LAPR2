@@ -74,6 +74,10 @@ public class AppConfig extends JFrame {
 		list.setOpaque(false);
 	}
 
+	private boolean isReady() {
+		return (!Main.getPaises().isEmpty() || !Main.getAtleta().isEmpty() || !Main.getJogos().isEmpty() || !Main.getDisciplinas().isEmpty() || !Main.getModalidades().isEmpty() || !Main.getProvas().isEmpty());
+	}
+
 	private void addList() {
 
 		Painel p1 = new Painel(img.bg4);
@@ -96,13 +100,18 @@ public class AppConfig extends JFrame {
 		compAnalysis.setBorder(emptyBorder);
 		compAnalysis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (al != null) {
-					al.setSelectedIndex(0);
-					al.setVisible(true);
+				if (Main.getPaises().size() >= 5) {
+					if (al != null) {
+						al.setSelectedIndex(0);
+						al.setVisible(true);
+					} else {
+						al = new AddList();
+						al.setSelectedIndex(0);
+					}
 				} else {
-					al = new AddList();
-					al.setSelectedIndex(0);
+					JOptionPane.showMessageDialog(AppConfig.this, "Make sure you imported countries!");
 				}
+
 			}
 		});
 
@@ -112,12 +121,16 @@ public class AppConfig extends JFrame {
 		rankP.setBorder(emptyBorder);
 		rankP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (al != null) {
-					al.setSelectedIndex(1);
-					al.setVisible(true);
+				if (isReady()) {
+					if (al != null) {
+						al.setSelectedIndex(1);
+						al.setVisible(true);
+					} else {
+						al = new AddList();
+						al.setSelectedIndex(1);
+					}
 				} else {
-					al = new AddList();
-					al.setSelectedIndex(1);
+					JOptionPane.showMessageDialog(AppConfig.this, "Make sure you imported the necessary data!");
 				}
 			}
 		});
@@ -128,12 +141,16 @@ public class AppConfig extends JFrame {
 		rankA.setBorder(emptyBorder);
 		rankA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (al != null) {
-					al.setSelectedIndex(2);
-					al.setVisible(true);
+				if (isReady()) {
+					if (al != null) {
+						al.setSelectedIndex(2);
+						al.setVisible(true);
+					} else {
+						al = new AddList();
+						al.setSelectedIndex(2);
+					}
 				} else {
-					al = new AddList();
-					al.setSelectedIndex(2);
+					JOptionPane.showMessageDialog(AppConfig.this, "Make sure you imported the necessary data!");
 				}
 			}
 		});
@@ -144,12 +161,16 @@ public class AppConfig extends JFrame {
 		rankC.setBorder(emptyBorder);
 		rankC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (al != null) {
-					al.setSelectedIndex(3);
-					al.setVisible(true);
+				if (isReady()) {
+					if (al != null) {
+						al.setSelectedIndex(3);
+						al.setVisible(true);
+					} else {
+						al = new AddList();
+						al.setSelectedIndex(3);
+					}
 				} else {
-					al = new AddList();
-					al.setSelectedIndex(3);
+					JOptionPane.showMessageDialog(AppConfig.this, "Make sure you imported the necessary data!");
 				}
 			}
 		});
@@ -160,12 +181,16 @@ public class AppConfig extends JFrame {
 		rankS.setBorder(emptyBorder);
 		rankS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (al != null) {
-					al.setSelectedIndex(4);
-					al.setVisible(true);
+				if (isReady()) {
+					if (al != null) {
+						al.setSelectedIndex(4);
+						al.setVisible(true);
+					} else {
+						al = new AddList();
+						al.setSelectedIndex(4);
+					}
 				} else {
-					al = new AddList();
-					al.setSelectedIndex(4);
+					JOptionPane.showMessageDialog(AppConfig.this, "Make sure you imported the necessary data!");
 				}
 			}
 		});

@@ -8,31 +8,194 @@ import javax.swing.border.*;
 
 import jogosolimpicos.*;
 import listaligada.*;
-import dados.*;
 
+/*
+ * Class that creates a frame to show listings and statistics, an instance of this class is created on the class AppConfig.
+ * 
+ */
+@SuppressWarnings("serial")
 public class AddList extends JFrame {
-	private Painel ca, nr, ar, rd, me;
 
+	/*
+	 * Custom Panel that contains the JPanel card (uses FlowLayout).
+	 * 
+	 * @see #card content of this panel
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel ca;
+	/*
+	 * Custom Panel that contains the JPanel card1 (uses FlowLayout).
+	 * 
+	 * @see #card1 content of this panel
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel nr;
+	/*
+	 * Custom Panel that contains the JPanel card2 (uses FlowLayout).
+	 * 
+	 * @see #card2 content of this panel
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel ar;
+	/*
+	 * Custom Panel that contains the JPanel card3 (uses FlowLayout).
+	 * 
+	 * @see #card3 content of this panel
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel rd;
+	/*
+	 * Custom Panel that contains the JPanel card4 (uses FlowLayout).
+	 * 
+	 * @see #card4 content of this panel
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel me;
+
+	/*
+	 * Intance of the class <code>Imagens</code>, used to load images in order
+	 * to fill buttons and panels.
+	 * 
+	 * @see Imagens Imagens Class
+	 */
 	private Imagens img = new Imagens();
-	private final Csv csv = new Csv();
-	private Border emptyBorder = BorderFactory.createEmptyBorder();
+	/*
+	 * TabbedPane that will hold various tabs.
+	 */
 	private JTabbedPane jtp = new JTabbedPane();
+	/*
+	 * Current index of the card.
+	 * 
+	 * @see #card used on this card
+	 */
 	private int index = 1;
-	private final int MAX = 4, MIN = 1;
+	/*
+	 * max size of <code>Comparative Analysis'</code> card (used to avoid
+	 * errors).
+	 * 
+	 * @see #addCA() used in this method
+	 */
+	private final int MAX = 4;
+	/*
+	 * max size of <code>Comparative Analysis'</code> card (used to avoid
+	 * errors).
+	 * 
+	 * @see #addCA() used in this method
+	 */
+	private final int MIN = 1;
+	/*
+	 * custom button used on <code>addCA()</code> method, its fuction is to show
+	 * the next card index each time it is pressed.
+	 * 
+	 * @see Botao Botao Class
+	 * 
+	 * @see #addCA() used in this method
+	 */
 	private Botao add1 = new Botao(img.add1);
+	/*
+	 * custom button used on <code>addCA()</code> method,its fuction is to show
+	 * the previous card index each time it is pressed.
+	 * 
+	 * @see Botao Botao Class
+	 * 
+	 * @see #addCA() used in this method
+	 */
 	private Botao reduce1 = new Botao(img.remove1);
+	/*
+	 * custom button used on <code>addCA()</code> method, its fuction is to show
+	 * the last card index in order to show a table with results as output.
+	 * 
+	 * 
+	 * @see Botao Botao Class
+	 * 
+	 * @see #addCA() used in this method
+	 */
 	private Botao getResults = new Botao(img.getResults);
+	/*
+	 * CardLayout to be used in the panel card.
+	 */
 	private CardLayout cl = new CardLayout(10, 10);
+	/*
+	 * CardLayout to be used in the panel card1.
+	 */
 	private CardLayout cl1 = new CardLayout(10, 10);
+	/*
+	 * CardLayout to be used in the panel card2.
+	 */
 	private CardLayout cl2 = new CardLayout(10, 10);
+	/*
+	 * CardLayout to be used in the panel card3.
+	 */
 	private CardLayout cl3 = new CardLayout(10, 10);
+	/*
+	 * CardLayout to be used in the panel card4.
+	 */
 	private CardLayout cl4 = new CardLayout(10, 10);
+	/*
+	 * JPanel using CardLayout, this panel is used in the method
+	 * <code>addCA()</code>.
+	 * 
+	 * @see #addCA()
+	 */
 	private JPanel card = new JPanel(cl);
+	/*
+	 * JPanel using CardLayout, this panel is used in the method
+	 * <code>addHistoricoPaises()</code>.
+	 * 
+	 * @see #addHistoricoPaises()
+	 */
 	private JPanel card1 = new JPanel(cl1);
+	/*
+	 * JPanel using CardLayout, this panel is used in the method
+	 * <code>addHistoricoAtletas()</code>.
+	 * 
+	 * @see #addHistoricoAtletas()
+	 */
 	private JPanel card2 = new JPanel(cl2);
+	/*
+	 * JPanel using CardLayout, this panel is used in the method
+	 * <code>addHistoricoDiscipline()</code>.
+	 * 
+	 * @see #addHistoricoDiscipline()
+	 */
 	private JPanel card3 = new JPanel(cl3);
+	/*
+	 * JPanel using CardLayout, this panel is used in the method
+	 * <code>addHistoricoSport()</code>.
+	 * 
+	 * @see #addHistoricoSport()
+	 */
 	private JPanel card4 = new JPanel(cl4);
 
+	/*
+	 * Constructor of this class it calls its superclass constructor to set the
+	 * <code>title</code>, it also calls all the necessary methods in this class
+	 * in order to initialize the <code>panels</code> when an object of this
+	 * class is created. Sets properties.
+	 * 
+	 * @see javax.swing.JFrame#constructor(String)
+	 * 
+	 * @see #addPaineis()
+	 * 
+	 * @see #addTabs()
+	 * 
+	 * @see #addCA()
+	 * 
+	 * @see #addHistoricoPaises()
+	 * 
+	 * @see #addHistoricoAtletas()
+	 * 
+	 * @see #addHistoricoDiscipline()
+	 * 
+	 * @see #addHistoricoSport()
+	 * 
+	 * @see #setProperties(int,int,int,boolean)
+	 */
 	public AddList() {
 		super("Statistics & Listings");
 
@@ -47,16 +210,49 @@ public class AddList extends JFrame {
 		setProperties(680, 520, 1, true);
 	}
 
+	/*
+	 * Sets the properties to this frame such as <code>/size<code>,
+	 * <code>visibility</code> and the <code>operation</code> that will happen
+	 * by default when the user initiates a "close" on this frame.
+	 * 
+	 * @see java.awt.Window#setSize(int,int)
+	 * 
+	 * @see javax.swing.JFrame#setDefaultCloseOperation(int)
+	 * 
+	 * @see java.awt.Window#setVisible(boolean)
+	 * 
+	 * @param w the desired width to the window
+	 * 
+	 * @param h the desired height to the window
+	 * 
+	 * @param opcao parameter to use when calling
+	 * javax.swing.JFrame#setDefaultCloseOperation(int)
+	 * 
+	 * @param visible sets the windows to visible if the parameter is true
+	 */
 	private void setProperties(int w, int h, int opcao, boolean visible) {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
 		setVisible(visible);
 	}
 
+	/*
+	 * Sets the selected index of the <code>TabbedPane/<code>, this method is
+	 * for exterior use and it is used in the class <code>AppConfig</code>.
+	 * 
+	 * @see AppConfig used in this class
+	 * 
+	 * @param i index of the tab
+	 */
 	public void setSelectedIndex(int i) {
 		jtp.setSelectedIndex(i);
 	}
 
+	/*
+	 * This method adds tabs to the TabbedPane, it is called on the constructor.
+	 * 
+	 * @see #constructor
+	 */
 	private void addTabs() {
 
 		getContentPane().add(jtp);
@@ -64,11 +260,32 @@ public class AddList extends JFrame {
 		jtp.addTab("Comparative analysis", ca);
 		jtp.addTab("Ranking (Nation)", nr);
 		jtp.addTab("Ranking (Athlete)", ar);
-		jtp.addTab("Ranking (Discipline)", rd);
+		jtp.addTab("Ranking (Competition)", rd);
 		jtp.addTab("Ranking (Sport)", me);
 
 	}
 
+	/*
+	 * This method creates custom panels and sets them as not Opaque, it is
+	 * called on the constructor.
+	 * 
+	 * @see #ca
+	 * 
+	 * @see #nr
+	 * 
+	 * @see #ar
+	 * 
+	 * @see #rd
+	 * 
+	 * @see #me
+	 * 
+	 * @see javax.swing.JComponent#setOpaque()
+	 * 
+	 * @see gui.Painel#constructor(URL)
+	 * 
+	 * 
+	 * @see #constructor
+	 */
 	private void addPaineis() {
 
 		// Panels
@@ -85,6 +302,25 @@ public class AddList extends JFrame {
 		me.setOpaque(false);
 	}
 
+	/*
+	 * Creates the form to <code>Comparative Analysis</code> that will be
+	 * inserted into the panel <code>ca</code>. This form allows the user to
+	 * choose from 2 to 5 countries he wants to compare, the first 4 indexes of
+	 * the <code>card panel</code> are used to comboboxes showing a list of
+	 * countries, the last 4 indexes are used to create <code>tables</code> with
+	 * statistcs, those will be shown as a result of the selected countries.
+	 * This action will be handled in the actionlistener of the button
+	 * <code>getResults</code> which has several conditions in order not to let
+	 * the user choose repeated countries. It uses the method
+	 * <code>isEmpty()</code> to check if the list of countries isnt empty and
+	 * avoid errors. It also uses the method <code>createTable()</code>.
+	 * 
+	 * @see #ca container
+	 * 
+	 * @see #isEmpty()
+	 * 
+	 * @see #createTable()
+	 */
 	private void addCA() {
 
 		Painel p1 = new Painel(img.bg4);
@@ -482,6 +718,23 @@ public class AddList extends JFrame {
 
 	}
 
+	/*
+	 * Creates the form to <code>Nation's Ranking</code> that will be inserted
+	 * into the panel <code>nr</code>. This form allows the user to choose 2
+	 * editions of the games, as a result a table will be created using the
+	 * method <code>createTablePaisAtleta()</code> and its content will be the
+	 * historical of the nations between those 2 editions. The 1st index of the
+	 * <code>card panel</code> has the form and the second index has the table
+	 * created as a result of the options chosen on the form. It uses a static
+	 * method of the class <code>Listagem</code> to receive the necessary data
+	 * to create the table.
+	 * 
+	 * @see #nr container
+	 * 
+	 * @see jogosolimpicos.Listagem#listarMedalhasPais
+	 * 
+	 * @see #createTablePaisAtleta()
+	 */
 	private void addHistoricoPaises() {
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout());
@@ -568,6 +821,23 @@ public class AddList extends JFrame {
 
 	}
 
+	/*
+	 * Creates the form to <code>Athlete's Ranking</code> that will be inserted
+	 * into the panel <code>ar</code>. This form allows the user to choose 2
+	 * editions of the games, as a result a table will be created using the
+	 * method <code>createTablePaisAtleta()</code> and its content will be the
+	 * historical of the athletes between those 2 editions. The 1st index of the
+	 * <code>card panel</code> has the form and the second index has the table
+	 * created as a result of the options chosen on the form. It uses a static
+	 * method of the class <code>Listagem</code> to receive the necessary data
+	 * to create the table.
+	 * 
+	 * @see #ar container
+	 * 
+	 * @see jogosolimpicos.Listagem#listarMedalhasAtleta
+	 * 
+	 * @see #createTablePaisAtleta()
+	 */
 	private void addHistoricoAtletas() {
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout());
@@ -657,6 +927,23 @@ public class AddList extends JFrame {
 
 	}
 
+	/*
+	 * Creates the form to <code>Competition's Ranking</code> that will be
+	 * inserted into the panel <code>ar</code>. This form allows the user to
+	 * choose 2 editions of the games and a competition, as a result a table
+	 * will be created using the method <code>createTablePaisAtleta()</code> and
+	 * its content will be the historical of the competition between those 2
+	 * editions. The 1st index of the <code>card panel</code> has the form and
+	 * the second index has the table created as a result of the options chosen
+	 * on the form. It uses a static method of the class <code>Listagem</code>
+	 * to receive the necessary data to create the table.
+	 * 
+	 * @see #rd container
+	 * 
+	 * @see jogosolimpicos.Listagem#listarMedalhasAtleta
+	 * 
+	 * @see #createTablePaisAtleta()
+	 */
 	private void addHistoricoDiscipline() {
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout());
@@ -673,20 +960,45 @@ public class AddList extends JFrame {
 		a.setForeground(Color.white);
 		pTitulo.add(a);
 
+		JPanel p1_1 = new JPanel(new BorderLayout());
+
+		p1_1.setOpaque(false);
+		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country1_1 = new JLabel(" Begin:         ");
+		country1_1.setForeground(Color.white);
+		p1_1.add(country1_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb1_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb1_1.setToolTipText("Begin of the historical you want to consult.");
+		p1_1.add(cmb1_1, BorderLayout.CENTER);
+
+		JPanel p2_1 = new JPanel(new BorderLayout());
+		p2_1.setOpaque(false);
+		p2_1.setBorder(new EmptyBorder(10, 10, 0, 10));
+
+		JLabel country2_1 = new JLabel("  End:           ");
+		country2_1.setForeground(Color.white);
+		p2_1.add(country2_1, BorderLayout.WEST);
+		final JComboBox<Object> cmb2_1 = new JComboBox<Object>(Main.getJogos().toArray());
+		cmb2_1.setToolTipText("End of the historical you want to consult");
+		p2_1.add(cmb2_1, BorderLayout.CENTER);
+
 		JPanel p3_1 = new JPanel(new BorderLayout());
 		p3_1.setOpaque(false);
 		p3_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		JLabel disc = new JLabel(" Competition:       ");
+		JLabel disc = new JLabel("   Competition:       ");
 		disc.setForeground(Color.white);
 		p3_1.add(disc, BorderLayout.WEST);
-		final JComboBox<Object> cmbdis = new JComboBox<Object>(Main.getDisciplinas().toArray());
+		final JComboBox<Object> cmbdis = new JComboBox<Object>(competitionsFiltradas().toArray());
 		cmbdis.setToolTipText("Competition you want to consult");
 		p3_1.add(cmbdis, BorderLayout.CENTER);
 
 		JPanel opcao1 = new JPanel(new GridLayout(3, 1, 0, 0));
 		opcao1.setOpaque(false);
 		opcao1.setBorder(new EmptyBorder(30, 0, 30, 0));
+		opcao1.add(p1_1);
+		opcao1.add(p2_1);
 		opcao1.add(p3_1);
 
 		card3.add(opcao1, "1");
@@ -704,8 +1016,12 @@ public class AddList extends JFrame {
 
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
 				Disciplina d = (Disciplina) cmbdis.getSelectedItem();
-				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), Main.getJogos().get(0).getAno(), Main.getJogos().get(Main.getJogos().size() - 1).getAno(), null, d);
+				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, null, d);
 				String titulo = d.getNome();
 				JPanel tabela1 = createTablePaisAtleta(a, titulo);
 				card3.add(tabela1, "2");
@@ -730,6 +1046,23 @@ public class AddList extends JFrame {
 
 	}
 
+	/*
+	 * Creates the form to <code>Sports Ranking</code> that will be inserted
+	 * into the panel <code>me</code>. This form allows the user to choose 2
+	 * editions of the games and a sport, as a result a table will be created
+	 * using the method <code>createTablePaisAtleta()</code> and its content
+	 * will be the historical of the sport between those 2 editions. The 1st
+	 * index of the <code>card panel</code> has the form and the second index
+	 * has the table created as a result of the options chosen on the form. It
+	 * uses a static method of the class <code>Listagem</code> to receive the
+	 * necessary data to create the table.
+	 * 
+	 * @see #me container
+	 * 
+	 * @see jogosolimpicos.Listagem#listarMedalhasAtleta
+	 * 
+	 * @see #createTablePaisAtleta()
+	 */
 	private void addHistoricoSport() {
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout());
@@ -776,7 +1109,7 @@ public class AddList extends JFrame {
 		JLabel sport = new JLabel("  Sport:               ");
 		sport.setForeground(Color.white);
 		p3_1.add(sport, BorderLayout.WEST);
-		final JComboBox<Object> cmbSp = new JComboBox<Object>(Main.getModalidades().toArray());
+		final JComboBox<Object> cmbSp = new JComboBox<Object>(sportsFiltrados().toArray());
 		cmbSp.setToolTipText("Sport you want to consult");
 		p3_1.add(cmbSp, BorderLayout.CENTER);
 
@@ -832,10 +1165,24 @@ public class AddList extends JFrame {
 
 	}
 
+	/*
+	 * Returns true if the container of countries is empty.
+	 * 
+	 * @return true if the container of countries is empty
+	 */
 	private boolean isEmptyPaises() {
 		return Main.getPaises().isEmpty();
 	}
 
+	/*
+	 * Returns the index of the country with the same name as the parameter
+	 * variable.
+	 * 
+	 * @param name the name of the <code>country</code>
+	 * 
+	 * @return i returns the index of the country with the same name as the
+	 * parameter variable or -1 if it wasnt found
+	 */
 	private int findPais(String name) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
 			if (Main.getPaises().get(i).getNomePais().equals(name)) {
@@ -845,6 +1192,74 @@ public class AddList extends JFrame {
 		return -1;
 	}
 
+	/*
+	 * Returns a linked list with filtered sports, only sports with results will
+	 * be added to the list.
+	 * 
+	 * @return modalidadesValidas Returns a linked list with filtered sports,
+	 * only sports with results will be added to the list
+	 */
+	private ListaLigada<Modalidade> sportsFiltrados() {
+		ListaLigada<Modalidade> modalidadesValidas = new ListaLigada<Modalidade>();
+		for (int i = 0; i < Main.getProvas().size(); i++) {
+			if (Main.getProvas().get(i) instanceof ProvaInd) {
+				if (!((ProvaInd) Main.getProvas().get(i)).getResultados().isEmpty()) {
+					if (!modalidadesValidas.contains(Main.getProvas().get(i).getDisciplina().getModalidade())) {
+						modalidadesValidas.add(Main.getProvas().get(i).getDisciplina().getModalidade());
+					}
+				}
+			} else {
+				if (!((ProvaCol) Main.getProvas().get(i)).getResultados().isEmpty()) {
+					if (!modalidadesValidas.contains(Main.getProvas().get(i).getDisciplina().getModalidade())) {
+						modalidadesValidas.add(Main.getProvas().get(i).getDisciplina().getModalidade());
+					}
+				}
+			}
+		}
+		return modalidadesValidas;
+	}
+
+	/*
+	 * Returns a linked list with filtered competitions, only competitions with
+	 * results will be added to the list.
+	 * 
+	 * @return disciplinaValidas Returns a linked list with filtered
+	 * competitions, only competitions with results will be added to the list
+	 */
+	private ListaLigada<Disciplina> competitionsFiltradas() {
+		ListaLigada<Disciplina> disciplinaValidas = new ListaLigada<Disciplina>();
+		for (int i = 0; i < Main.getProvas().size(); i++) {
+			if (Main.getProvas().get(i) instanceof ProvaInd) {
+				if (!((ProvaInd) Main.getProvas().get(i)).getResultados().isEmpty()) {
+					if (!disciplinaValidas.contains(Main.getProvas().get(i).getDisciplina())) {
+						disciplinaValidas.add(Main.getProvas().get(i).getDisciplina());
+					}
+				}
+			} else {
+				if (!((ProvaCol) Main.getProvas().get(i)).getResultados().isEmpty()) {
+					if (!disciplinaValidas.contains(Main.getProvas().get(i).getDisciplina())) {
+						disciplinaValidas.add(Main.getProvas().get(i).getDisciplina());
+					}
+				}
+			}
+		}
+		return disciplinaValidas;
+	}
+
+	/*
+	 * Returns a panel with a <code>JTable</code> created with the data parsed
+	 * in parameters. The header is the only part that is defined inside the
+	 * method yet, it is easy to modify.
+	 * 
+	 * @param a a linked list with the name of athletes and the number of medals
+	 * they have got
+	 * 
+	 * @param tit the title
+	 * 
+	 * @return pTabela Returns a panel with a table created with the data parsed
+	 * in parameters
+	 */
+	@SuppressWarnings("unused")
 	private JPanel createTableDiscipline(ListaLigada<Atleta> a, String tit) {
 		JPanel pTabela = new JPanel(new GridLayout(2, 1));
 		JLabel titulo = new JLabel(tit);
@@ -876,6 +1291,19 @@ public class AddList extends JFrame {
 		return pTabela;
 	}
 
+	/*
+	 * Returns a panel with a <code>JTable</code> created with the data parsed
+	 * in parameters. The header is the only part that is defined inside the
+	 * method yet, it is easy to modify.
+	 * 
+	 * @param a a linked list with the name of athletes and the number of medals
+	 * they have got
+	 * 
+	 * @param tit the title
+	 * 
+	 * @return pTabela Returns a panel with a table created with the data parsed
+	 * in parameters
+	 */
 	private JPanel createTablePaisAtleta(ListaLigada<?> p, String tipo) {
 		JPanel pTabela = new JPanel(new FlowLayout());
 		pTabela.setOpaque(false);
@@ -910,6 +1338,17 @@ public class AddList extends JFrame {
 		return pTabela;
 	}
 
+	/*
+	 * Returns a panel with a <code>JTable</code> created with the data parsed
+	 * in parameters. The header is the only part that is defined inside the
+	 * method yet, it is easy to modify.
+	 * 
+	 * @param a vector with indexes of countries
+	 * 
+	 * 
+	 * @return pTabela Returns a panel with a table created with the data parsed
+	 * in parameters
+	 */
 	private JPanel createTable(int[] i) {
 		JPanel pTabela = new JPanel(new FlowLayout());
 		pTabela.setOpaque(false);
