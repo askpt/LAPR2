@@ -16,18 +16,148 @@ import listaligada.*;
 @SuppressWarnings("serial")
 public class Csv extends JComponent implements Accessible {
 
-	public void importPais(Component janela, ListaLigada<Pais> paises) {
+	public void intelImport(Component janela, ListaLigada<Pais> paises, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<Atleta> atletas) {
+
+		JFileChooser fc = new JFileChooser();
+		fc.setMultiSelectionEnabled(true);
+		fc.addChoosableFileFilter(new CsvFilter());
+		fc.setAcceptAllFileFilterUsed(true);
+		int returnVal = fc.showOpenDialog(janela);
+		if (returnVal != JFileChooser.APPROVE_OPTION)
+			return;
+		File[] ficheiros = fc.getSelectedFiles();
+
+		ListaLigada<File> ficheirosPais = new ListaLigada<File>();
+		ListaLigada<File> ficheirosDisc = new ListaLigada<File>();
+		ListaLigada<File> ficheirosProva = new ListaLigada<File>();
+		ListaLigada<File> ficheirosResul = new ListaLigada<File>();
+
+		for (int i = 0; i < ficheiros.length; i++) {
+			if (testPais(ficheiros[i])) {
+				ficheirosPais.add(ficheiros[i]);
+			} else if (testDisc(ficheiros[i])) {
+				ficheirosDisc.add(ficheiros[i]);
+			} else if (testProva(ficheiros[i])) {
+				ficheirosProva.add(ficheiros[i]);
+			} else if (testResul(ficheiros[i])) {
+				ficheirosResul.add(ficheiros[i]);
+			}
+		}
+
+		System.out.println("Pais:");
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			System.out.println(ficheirosPais.get(i));
+		}
+		System.out.println("Disciplina:");
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			System.out.println(ficheirosDisc.get(i));
+		}
+		System.out.println("Prova:");
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			System.out.println(ficheirosProva.get(i));
+		}
+		System.out.println("Resultados:");
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			System.out.println(ficheirosResul.get(i));
+		}
+
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			importPais(ficheirosPais.get(i), janela, paises);
+		}
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			importDisc(ficheirosDisc.get(i), janela, disciplinas, modalidades);
+		}
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			importProvas(ficheirosProva.get(i), janela, jogos, provas, disciplinas, modalidades);
+		}
+		for (int i = 0; i < ficheirosPais.size(); i++) {
+			importResultados(ficheirosResul.get(i), janela, atletas, modalidades, paises, provas, equipas, jogos);
+		}
+
+	}
+
+	private boolean testResul(File file) {
+		try {
+			Scanner in = new Scanner(file);
+			String cabind = "Individual ;;Value";
+			String cabcol = "Team ;;Value";
+
+			if (in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabind.replaceAll(" ", "")) || in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabcol.replaceAll(" ", ""))) {
+				in.close();
+				return true;
+			}
+
+		} catch (FileNotFoundException e) {
+		}
+
+		return false;
+	}
+
+	private boolean testProva(File file) {
+		try {
+			Scanner in = new Scanner(file);
+			String cabecalho = "Sport;Discipline;Men;Women";
+
+			if (in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabecalho.replaceAll(" ", ""))) {
+				in.close();
+				return true;
+			}
+
+		} catch (FileNotFoundException e) {
+		}
+
+		return false;
+	}
+
+	private boolean testDisc(File file) {
+		try {
+			Scanner in = new Scanner(file);
+			String cabecalho = "Sport;Discipline;Type;Men;Women;Mixed;Type;Order";
+
+			if (in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabecalho.replaceAll(" ", ""))) {
+				in.close();
+				return true;
+			}
+
+		} catch (FileNotFoundException e) {
+		}
+
+		return false;
+	}
+
+	private boolean testPais(File file) {
+		try {
+			Scanner in = new Scanner(file);
+			String cabecalho = "Code ;Nation (NOC) ;Other codes used";
+
+			if (in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabecalho.replaceAll(" ", ""))) {
+				in.close();
+				return true;
+			}
+
+		} catch (FileNotFoundException e) {
+		}
+
+		return false;
+	}
+
+	public void importPais(File ficheiro, Component janela, ListaLigada<Pais> paises) {
 
 		try {
 
-			JFileChooser fc = new JFileChooser();
-			fc.addChoosableFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
-			int returnVal = fc.showOpenDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
+			boolean veri = false;
+			if (ficheiro == null) {
+				JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(new CsvFilter());
+				fc.setAcceptAllFileFilterUsed(true);
+				int returnVal = fc.showOpenDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
 
-			File ficheiro = fc.getSelectedFile();
+				ficheiro = fc.getSelectedFile();
+				veri = true;
+
+			}
 
 			Scanner in = new Scanner(ficheiro);
 
@@ -109,7 +239,8 @@ public class Csv extends JComponent implements Accessible {
 
 			}
 			in.close();
-			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -124,7 +255,7 @@ public class Csv extends JComponent implements Accessible {
 		try {
 			JFileChooser fc = new JFileChooser();
 			fc.addChoosableFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
+			fc.setAcceptAllFileFilterUsed(true);
 			int returnVal = fc.showOpenDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
@@ -191,18 +322,22 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
-	public void importDisc(Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
+	public void importDisc(File ficheiro, Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
 
 		try {
+			boolean veri = false;
 
-			JFileChooser fc = new JFileChooser();
-			fc.addChoosableFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
-			int returnVal = fc.showOpenDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
+			if (ficheiro == null) {
+				JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(new CsvFilter());
+				fc.setAcceptAllFileFilterUsed(true);
+				int returnVal = fc.showOpenDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
 
-			File ficheiro = fc.getSelectedFile();
+				ficheiro = fc.getSelectedFile();
+				veri = true;
+			}
 
 			Scanner in = new Scanner(ficheiro);
 
@@ -490,7 +625,8 @@ public class Csv extends JComponent implements Accessible {
 					disciplina.add(tempDisc2);
 			}
 			in2.close();
-			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -579,17 +715,20 @@ public class Csv extends JComponent implements Accessible {
 	}
 
 	@SuppressWarnings("unused")
-	public void importResultados(Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
+	public void importResultados(File ficheiro, Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
 		try {
+			boolean veri = false;
 
-			JFileChooser fc = new JFileChooser();
-			fc.addChoosableFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
-			int returnVal = fc.showOpenDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
-			File ficheiro = fc.getSelectedFile();
-
+			if (ficheiro == null) {
+				JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(new CsvFilter());
+				fc.setAcceptAllFileFilterUsed(true);
+				int returnVal = fc.showOpenDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
+				ficheiro = fc.getSelectedFile();
+				veri = true;
+			}
 			int ponto = ficheiro.getName().lastIndexOf(".");
 			String[] tempPrin = ficheiro.getName().substring(0, ponto).split("_");
 			int ano = Integer.parseInt(tempPrin[0]);
@@ -653,7 +792,7 @@ public class Csv extends JComponent implements Accessible {
 				} else {
 					boolean testeDisc = false;
 					for (int j = 0; j < modalidades.get(itModal).getDisc().size(); j++) {
-						if (test[0].equalsIgnoreCase(modalidades.get(itModal).getDisc().get(j).getNome()))
+						if (test[0].replaceAll(" ", "").equalsIgnoreCase(modalidades.get(itModal).getDisc().get(j).getNome().replaceAll(" ", "")))
 							testeDisc = true;
 					}
 					if (!testeDisc) {
@@ -826,7 +965,7 @@ public class Csv extends JComponent implements Accessible {
 						itProva = 0;
 
 						for (; itProva < provas.size(); itProva++) {
-							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().equalsIgnoreCase(nomeDisc) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
+							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().replaceAll(" ", "").equalsIgnoreCase(nomeDisc.replaceAll(" ", "")) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
 								break;
 							}
 						}
@@ -886,7 +1025,7 @@ public class Csv extends JComponent implements Accessible {
 						itProva = 0;
 
 						for (; itProva < provas.size(); itProva++) {
-							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().equalsIgnoreCase(nomeDisc) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
+							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().replaceAll(" ", "").equalsIgnoreCase(nomeDisc.replaceAll(" ", "")) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
 								break;
 							}
 						}
@@ -904,7 +1043,8 @@ public class Csv extends JComponent implements Accessible {
 
 			}
 			in.close();
-			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -1013,18 +1153,21 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
-	public void importProvas(Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
+	public void importProvas(File ficheiro, Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
 
 		try {
+			boolean veri = false;
+			if (ficheiro == null) {
+				JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(new CsvFilter());
+				fc.setAcceptAllFileFilterUsed(true);
+				int returnVal = fc.showOpenDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
 
-			JFileChooser fc = new JFileChooser();
-			fc.addChoosableFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
-			int returnVal = fc.showOpenDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
-
-			File ficheiro = fc.getSelectedFile();
+				ficheiro = fc.getSelectedFile();
+				veri = true;
+			}
 
 			String file[] = ficheiro.getName().split("_");
 			file[3] = file[3].replaceAll(".csv", "");
@@ -1153,7 +1296,8 @@ public class Csv extends JComponent implements Accessible {
 
 			}
 			in.close();
-			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);

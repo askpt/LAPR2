@@ -21,7 +21,7 @@ public class CsvTest {
 		esperadoList.add(new Pais("ALG", "Algeria"));
 
 		Csv csv = new Csv();
-		csv.importPais(new Teste("Test"), testeList);
+		csv.importPais(null, new Teste("Test"), testeList);
 
 		for (int i = 0; i < testeList.size(); i++) {
 			if (!esperadoList.get(i).getCodigoPais(0).equals(testeList.get(i).getCodigoPais(0)) || !esperadoList.get(i).getNomePais().equals(testeList.get(i).getNomePais()))
@@ -44,7 +44,7 @@ public class CsvTest {
 		csv.exportPais(new Teste("Test"), esperadoList);
 
 		ListaLigada<Pais> testList = new ListaLigada<Pais>();
-		csv.importPais(new Teste("Test"), testList);
+		csv.importPais(null, new Teste("Test"), testList);
 		for (int i = 0; i < testList.size(); i++) {
 			if (!esperadoList.get(i).getCodigoPais(0).equals(testList.get(i).getCodigoPais(0)) || !esperadoList.get(i).getNomePais().equals(testList.get(i).getNomePais()))
 				teste = false;
@@ -72,7 +72,7 @@ public class CsvTest {
 		esperadoDiscList.add(new Disciplina("Basketball", esperadoModalList.get(1), true, 0, false, 3));
 		esperadoDiscList.add(new Disciplina("Basketball", esperadoModalList.get(1), true, 1, false, 3));
 		Csv csv = new Csv();
-		csv.importDisc(new Teste("Test"), testeDiscList, testeModalList);
+		csv.importDisc(null, new Teste("Test"), testeDiscList, testeModalList);
 		for (int i = 0; i < esperadoModalList.size() && i < testeModalList.size() && teste; i++) {
 			if (!esperadoModalList.get(i).getNome().equalsIgnoreCase(testeModalList.get(i).getNome()))
 				teste = false;
@@ -106,7 +106,7 @@ public class CsvTest {
 
 		ListaLigada<Modalidade> testeModalList = new ListaLigada<Modalidade>();
 		ListaLigada<Disciplina> testeDiscList = new ListaLigada<Disciplina>();
-		csv.importDisc(new Teste("Test"), testeDiscList, testeModalList);
+		csv.importDisc(null, new Teste("Test"), testeDiscList, testeModalList);
 
 		for (int i = 0; i < esperadoModalList.size() && i < testeModalList.size() && teste; i++) {
 			if (!esperadoModalList.get(i).getNome().equalsIgnoreCase(testeModalList.get(i).getNome()))

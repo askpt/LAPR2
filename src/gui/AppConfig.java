@@ -229,7 +229,7 @@ public class AppConfig extends JFrame {
 		impCountry.setBorder(emptyBorder);
 		impCountry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importPais(AppConfig.this, Main.getPaises());
+				csv.importPais(null, AppConfig.this, Main.getPaises());
 			}
 		});
 
@@ -240,7 +240,7 @@ public class AppConfig extends JFrame {
 		impDisc.setBorder(emptyBorder);
 		impDisc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importDisc(AppConfig.this, Main.getDisciplinas(), Main.getModalidades());
+				csv.importDisc(null, AppConfig.this, Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
 
@@ -251,7 +251,7 @@ public class AppConfig extends JFrame {
 		impResu.setBorder(emptyBorder);
 		impResu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(AppConfig.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
+				csv.importResultados(null, AppConfig.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
 			}
 		});
 
@@ -262,7 +262,7 @@ public class AppConfig extends JFrame {
 		impEv.setBorder(emptyBorder);
 		impEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importProvas(AppConfig.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
+				csv.importProvas(null, AppConfig.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
 

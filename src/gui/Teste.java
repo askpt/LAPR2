@@ -30,12 +30,22 @@ public class Teste extends JFrame {
 		menu.setMnemonic('F');
 		menuBar.add(menu);
 
+		menuItem = new JMenuItem("IntelImport", 'I');
+		menuItem.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+
+				csv.intelImport(Teste.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
+			}
+		});
+		menu.add(menuItem);
+
 		menuItem = new JMenuItem("Import Country", 'I');
 		menuItem.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
-				csv.importPais(Teste.this, Main.getPaises());
+				csv.importPais(null, Teste.this, Main.getPaises());
 			}
 		});
 		menu.add(menuItem);
@@ -63,7 +73,7 @@ public class Teste extends JFrame {
 		});
 
 		menu.add(menuItem);
-		
+
 		menuItem = new JMenuItem("Export Atlhete HTML", 'A');
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,7 +118,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importDisc(Teste.this, Main.getDisciplinas(), Main.getModalidades());
+				csv.importDisc(null, Teste.this, Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
 
@@ -151,7 +161,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importResultados(Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
+				csv.importResultados(null, Teste.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
 			}
 		});
 
@@ -232,7 +242,7 @@ public class Teste extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				csv.importProvas(Teste.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
+				csv.importProvas(null, Teste.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
 
