@@ -113,9 +113,15 @@ public class AddList extends JFrame {
 		getResults.setBotaoRollOver(img.getResults_o);
 		getResults.setBorderPainted(false);
 		getResults.setContentAreaFilled(false);
+		final Botao voltar = new Botao(img.back, img.back_o);
+		voltar.setContentAreaFilled(false);
+		voltar.setBorderPainted(false);
+		voltar.setVisible(false);
+		reduce1.setVisible(false);
 		pButn.add(add1);
 		pButn.add(reduce1);
 		pButn.add(getResults);
+		pButn.add(voltar);
 
 		// PARA 2 PAISES
 		JPanel p1_1 = new JPanel(new BorderLayout());
@@ -350,9 +356,11 @@ public class AddList extends JFrame {
 						cmb4_4.setSelectedIndex(cmb4_3.getSelectedIndex());
 					}
 					if (index == MAX) {
-						add1.setEnabled(false);
+						add1.setVisible(false);
+						reduce1.setVisible(true);
+					} else {
+						add1.setVisible(true);
 					}
-					add1.setEnabled(true);
 				}
 			}
 		});
@@ -363,9 +371,11 @@ public class AddList extends JFrame {
 					index -= 1;
 					cl.show(card, "" + (index));
 					if (index == MIN) {
-						reduce1.setEnabled(false);
+						reduce1.setVisible(false);
+						add1.setVisible(true);
+					} else {
+						reduce1.setVisible(true);
 					}
-					reduce1.setEnabled(true);
 				}
 			}
 		});
@@ -376,6 +386,10 @@ public class AddList extends JFrame {
 				for (int i = 1; i < 6; i++) {
 					a.add(i);
 				}
+				add1.setVisible(false);
+				reduce1.setVisible(false);
+				voltar.setVisible(true);
+				getResults.setVisible(false);
 				// GraficoLinhas b = new GraficoLinhas(a);
 				// b.createAndShowGui(a);
 
@@ -446,7 +460,18 @@ public class AddList extends JFrame {
 						card.add(tabela4, "8");
 						cl.show(card, "8");
 					}
+
 				}
+			}
+		});
+
+		voltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cl.show(card, "1");
+				add1.setVisible(true);
+				reduce1.setVisible(true);
+				voltar.setVisible(false);
+				getResults.setVisible(true);
 			}
 		});
 
@@ -468,7 +493,7 @@ public class AddList extends JFrame {
 
 		JPanel pTitulo = new JPanel();
 		pTitulo.setOpaque(false);
-		JLabel a = new JLabel("Nation's ranking historical between two editions");
+		JLabel a = new JLabel("Nation's ranking historical between editions");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		a.setForeground(Color.white);
 		pTitulo.add(a);
@@ -554,7 +579,7 @@ public class AddList extends JFrame {
 
 		JPanel pTitulo = new JPanel();
 		pTitulo.setOpaque(false);
-		JLabel a = new JLabel("Athlete's ranking historical between two editions");
+		JLabel a = new JLabel("Athlete's ranking historical between editions");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		a.setForeground(Color.white);
 		pTitulo.add(a);
@@ -592,7 +617,7 @@ public class AddList extends JFrame {
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
-		Botao ok = new Botao(img.ok, img.ok_o);
+		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
 		Botao voltar = new Botao(img.back, img.back_o);
@@ -612,6 +637,7 @@ public class AddList extends JFrame {
 				JPanel tabela1 = createTablePaisAtleta(a, atleta);
 				card2.add(tabela1, "2");
 				cl2.show(card2, "2");
+				ok.setVisible(false);
 
 			}
 		});
@@ -619,6 +645,7 @@ public class AddList extends JFrame {
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl2.show(card2, "1");
+				ok.setVisible(true);
 
 			}
 		});
@@ -641,7 +668,7 @@ public class AddList extends JFrame {
 
 		JPanel pTitulo = new JPanel();
 		pTitulo.setOpaque(false);
-		JLabel a = new JLabel("Discipline's ranking historical between two editions");
+		JLabel a = new JLabel("Competition's ranking historical between editions");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		a.setForeground(Color.white);
 		pTitulo.add(a);
@@ -650,11 +677,11 @@ public class AddList extends JFrame {
 		p3_1.setOpaque(false);
 		p3_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		JLabel disc = new JLabel("  Discipline:       ");
+		JLabel disc = new JLabel(" Competition:       ");
 		disc.setForeground(Color.white);
 		p3_1.add(disc, BorderLayout.WEST);
 		final JComboBox<Object> cmbdis = new JComboBox<Object>(Main.getDisciplinas().toArray());
-		cmbdis.setToolTipText("Discipline you want to consult");
+		cmbdis.setToolTipText("Competition you want to consult");
 		p3_1.add(cmbdis, BorderLayout.CENTER);
 
 		JPanel opcao1 = new JPanel(new GridLayout(3, 1, 0, 0));
@@ -666,7 +693,7 @@ public class AddList extends JFrame {
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
-		Botao ok = new Botao(img.ok, img.ok_o);
+		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
 		Botao voltar = new Botao(img.back, img.back_o);
@@ -683,6 +710,7 @@ public class AddList extends JFrame {
 				JPanel tabela1 = createTablePaisAtleta(a, titulo);
 				card3.add(tabela1, "2");
 				cl3.show(card3, "2");
+				ok.setVisible(false);
 
 			}
 		});
@@ -690,6 +718,7 @@ public class AddList extends JFrame {
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl3.show(card3, "1");
+				ok.setVisible(true);
 
 			}
 		});
@@ -712,7 +741,7 @@ public class AddList extends JFrame {
 
 		JPanel pTitulo = new JPanel();
 		pTitulo.setOpaque(false);
-		JLabel a = new JLabel("Sport's ranking historical between two editions");
+		JLabel a = new JLabel("Sport's ranking historical between editions");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		a.setForeground(Color.white);
 		pTitulo.add(a);
@@ -762,7 +791,7 @@ public class AddList extends JFrame {
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
-		Botao ok = new Botao(img.ok, img.ok_o);
+		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
 		Botao voltar = new Botao(img.back, img.back_o);
@@ -783,6 +812,7 @@ public class AddList extends JFrame {
 				JPanel tabela1 = createTablePaisAtleta(a, titulo);
 				card4.add(tabela1, "2");
 				cl4.show(card4, "2");
+				ok.setVisible(false);
 
 			}
 		});
@@ -790,6 +820,7 @@ public class AddList extends JFrame {
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl4.show(card4, "1");
+				ok.setVisible(true);
 
 			}
 		});
@@ -882,7 +913,7 @@ public class AddList extends JFrame {
 	private JPanel createTable(int[] i) {
 		JPanel pTabela = new JPanel(new FlowLayout());
 		pTabela.setOpaque(false);
-		String[] col = { "Country", "# Participations", "# Disciplines played", "Medals(G,S,B)", "Rank", "# Medals average" };
+		String[] col = { "Country", "# Participations", "# Competitions played", "Medals(G,S,B)", "Rank", "# Medals average" };
 		Object[][] linhas = new Object[i.length][col.length];
 		for (int j = 0; j < i.length; j++) {
 			Object[] estatisticasPais = Listagem.estatisticaPais(Main.getPaises().get(i[j]), Main.getProvas(), Main.getPaises());
