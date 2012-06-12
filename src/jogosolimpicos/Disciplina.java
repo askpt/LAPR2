@@ -216,11 +216,19 @@ public class Disciplina implements Serializable {
 	}
 
 	/**
-	 * @return returns a String in this format: "name". Eg:"100 m"
+	 * @return returns a String in this format: "name, genre". Eg:"100 m, Men"
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s", nome);
+		if (this.getGenero() == 0) {
+			return String.format("%s, Men", nome);
+		} else if (this.getGenero() == 1) {
+			return String.format("%s, Women", nome);
+		} else {
+			return String.format("%s, Mixed", nome);
+
+		}
+
 	}
 
 	// TODO Remover

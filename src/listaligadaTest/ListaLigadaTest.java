@@ -38,16 +38,6 @@ public class ListaLigadaTest {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Test
-	public void testNo() {
-		ListaLigada teste = new ListaLigada();
-		teste.add(1);
-
-		// TODO falta testar
-
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Test
 	public void testToArray() {
 		ListaLigada teste = new ListaLigada();
 		teste.add(1);

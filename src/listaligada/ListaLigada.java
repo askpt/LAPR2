@@ -95,7 +95,7 @@ public class ListaLigada<E> implements Serializable {
 	 *            index of the element in order to get its node
 	 * @return the node that corresponds to the index passed as parameter
 	 */
-	public No<E> no(int index) {
+	private No<E> no(int index) {
 
 		No<E> x = cabeca;
 		if (index < size()) {

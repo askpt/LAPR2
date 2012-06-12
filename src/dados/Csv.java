@@ -24,6 +24,7 @@ public class Csv extends JComponent implements Accessible {
 	 * evaluate the content of the csv and will choose the csv file type.
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param paises
 	 *            linked list with the countries
 	 * @param disciplinas
@@ -47,13 +48,13 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Atleta athlete details
 	 * 
 	 */
-	// TODO arranjar isto param janela
 	public void intelImport(Component janela, ListaLigada<Pais> paises, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<Atleta> atletas) {
 
 		JFileChooser fc = new JFileChooser();
 		fc.setMultiSelectionEnabled(true);
+		fc.setAcceptAllFileFilterUsed(false);
 		fc.addChoosableFileFilter(new CsvFilter());
-		fc.setAcceptAllFileFilterUsed(true);
+		fc.setDialogTitle("intelImport Files");
 		int returnVal = fc.showOpenDialog(janela);
 		if (returnVal != JFileChooser.APPROVE_OPTION)
 			return;
@@ -93,6 +94,14 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Check if the file passed by parameter is a results csv file type
+	 * 
+	 * @param file
+	 *            file to be checked
+	 * @return true if is a result csv file type.
+	 */
+
 	private boolean testResul(File file) {
 		try {
 			Scanner in = new Scanner(file);
@@ -110,6 +119,15 @@ public class Csv extends JComponent implements Accessible {
 		return false;
 	}
 
+	/**
+	 * Check if the file passed by parameter is a competition with edition csv
+	 * file type
+	 * 
+	 * @param file
+	 *            file to be checked
+	 * @return true if is a competition with edition csv file type.
+	 */
+
 	private boolean testProva(File file) {
 		try {
 			Scanner in = new Scanner(file);
@@ -126,6 +144,13 @@ public class Csv extends JComponent implements Accessible {
 		return false;
 	}
 
+	/**
+	 * Check if the file passed by parameter is a competition csv file type
+	 * 
+	 * @param file
+	 *            file to be checked
+	 * @return true if is a competition csv file type.
+	 */
 	private boolean testDisc(File file) {
 		try {
 			Scanner in = new Scanner(file);
@@ -142,6 +167,13 @@ public class Csv extends JComponent implements Accessible {
 		return false;
 	}
 
+	/**
+	 * Check if the file passed by parameter is a country csv file type
+	 * 
+	 * @param file
+	 *            file to be checked
+	 * @return true if is a country csv file type.
+	 */
 	private boolean testPais(File file) {
 		try {
 			Scanner in = new Scanner(file);
@@ -164,12 +196,12 @@ public class Csv extends JComponent implements Accessible {
 	 * @param ficheiro
 	 *            if wanna choose the file in this method, send null.
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param paises
 	 *            linked list with the countries
 	 * @see Pais country details
 	 * 
 	 */
-	// TODO see janela
 	public void importPais(File ficheiro, Component janela, ListaLigada<Pais> paises) {
 
 		try {
@@ -177,8 +209,9 @@ public class Csv extends JComponent implements Accessible {
 			boolean veri = false;
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
+				fc.setAcceptAllFileFilterUsed(false);
 				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(true);
+				fc.setDialogTitle("Import Country");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
@@ -318,12 +351,12 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to export the data of the countries
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param paises
 	 *            linked list with the countries
 	 * @see Pais country details
 	 * 
 	 */
-	// TODO see janela
 	public void exportPais(Component janela, ListaLigada<Pais> paises) {
 
 		if (paises.isEmpty()) {
@@ -335,6 +368,8 @@ public class Csv extends JComponent implements Accessible {
 			JFileChooser fc = new JFileChooser();
 
 			fc.setFileFilter(new CsvFilter());
+			fc.setAcceptAllFileFilterUsed(false);
+			fc.setDialogTitle("Export Country");
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
@@ -366,6 +401,7 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to import the competition csv file type
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param disciplina
 	 *            linked list with the competitions
 	 * @param modalidades
@@ -376,7 +412,6 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Modalidade sport details
 	 * 
 	 */
-	// TODO see janela
 	public void importDisc(File ficheiro, Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
 
 		try {
@@ -384,8 +419,9 @@ public class Csv extends JComponent implements Accessible {
 
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
+				fc.setDialogTitle("Competition Import");
 				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(true);
+				fc.setAcceptAllFileFilterUsed(false);
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
@@ -695,12 +731,12 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to export the data of the competitions
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param modalidades
 	 *            linked list with the sports
 	 * @see Modalidade sport details
 	 * 
 	 */
-	// TODO see janela
 	public void exportDisciplina(Component janela, ListaLigada<Modalidade> modalidades) {
 
 		if (modalidades.isEmpty()) {
@@ -712,6 +748,8 @@ public class Csv extends JComponent implements Accessible {
 			JFileChooser fc = new JFileChooser();
 
 			fc.setFileFilter(new CsvFilter());
+			fc.setAcceptAllFileFilterUsed(false);
+			fc.setDialogTitle("Export Competition");
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
@@ -787,6 +825,7 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to import the results csv file type.
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param paises
 	 *            linked list with the countries
 	 * @param modalidades
@@ -810,7 +849,6 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Atleta athlete details
 	 * 
 	 */
-	// TODO see janela
 	@SuppressWarnings("unused")
 	public void importResultados(File ficheiro, Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
 		try {
@@ -819,7 +857,8 @@ public class Csv extends JComponent implements Accessible {
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
 				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(true);
+				fc.setAcceptAllFileFilterUsed(false);
+				fc.setDialogTitle("Import Results");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
@@ -1156,6 +1195,7 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to export the results to csv file.
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param modalidades
 	 *            linked list with the sports
 	 * @param provas
@@ -1170,7 +1210,6 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Modalidade sport details
 	 * @see Prova competition with event details
 	 */
-	// TODO see janela
 	public void exportResultados(Component janela, ListaLigada<Modalidade> modalidades, ListaLigada<Prova> provas, String modalidade, int genero, int ano) {
 
 		if (modalidades.isEmpty() || provas.isEmpty()) {
@@ -1182,6 +1221,8 @@ public class Csv extends JComponent implements Accessible {
 			JFileChooser fc = new JFileChooser();
 
 			fc.setFileFilter(new CsvFilter());
+			fc.setAcceptAllFileFilterUsed(false);
+			fc.setDialogTitle("Export Results");
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -1277,6 +1318,7 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to import the competitions with event csv file.
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param modalidades
 	 *            linked list with the sports
 	 * @param provas
@@ -1292,8 +1334,6 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Disciplina competition details
 	 * @see JogosOlimpicos event details
 	 */
-	// TODO see janela
-
 	public void importProvas(File ficheiro, Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
 
 		try {
@@ -1301,7 +1341,8 @@ public class Csv extends JComponent implements Accessible {
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
 				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(true);
+				fc.setAcceptAllFileFilterUsed(false);
+				fc.setDialogTitle("Competition with Event Import");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
@@ -1452,13 +1493,13 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to export the competitions with event to csv.
 	 * 
 	 * @param janela
+	 *            the parent component of the dialog
 	 * @param provas
 	 *            linked list with the competitions with event
 	 * @param ano
 	 *            year to export
 	 * @see Prova competition with event details
 	 */
-	// TODO see janela
 	public void exportProvas(Component janela, ListaLigada<Prova> provas, int ano) {
 
 		if (provas.isEmpty()) {
@@ -1471,6 +1512,8 @@ public class Csv extends JComponent implements Accessible {
 
 			fc.setFileFilter(new CsvFilter());
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			fc.setAcceptAllFileFilterUsed(false);
+			fc.setDialogTitle("Export Competitions with Events");
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
@@ -1529,6 +1572,7 @@ public class Csv extends JComponent implements Accessible {
 		 *            file to be evaluated
 		 * @return true if is acceptable
 		 */
+
 		@Override
 		public boolean accept(File f) {
 
