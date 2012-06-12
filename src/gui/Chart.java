@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.*;
 
 import jogosolimpicos.*;
 import listaligada.*;
@@ -35,6 +36,14 @@ public class Chart extends ApplicationFrame {
 		final ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new Dimension(500, 270));
 		setContentPane(chartPanel);
+		setVisible(true);
+		pack();
+
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				dispose();
+			}
+		});
 
 	}
 
@@ -42,36 +51,52 @@ public class Chart extends ApplicationFrame {
 	 * Creates a sample dataset.
 	 * 
 	 * @param pais5
+	 *            the fifth country
 	 * @param pais4
+	 *            the fourth country
 	 * @param pais3
+	 *            the third country
 	 * @param pais2
+	 *            the second country
 	 * @param pais1
+	 *            the first country
 	 * @param nomes
+	 *            linked list with country names
 	 * 
 	 * @return The dataset.
 	 */
 	private CategoryDataset createDataset(ListaLigada<String> nomes, ListaLigada<Integer> pais1, ListaLigada<Integer> pais2, ListaLigada<Integer> pais3, ListaLigada<Integer> pais4, ListaLigada<Integer> pais5) {
 
-		// create the dataset...
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		ListaLigada<JogosOlimpicos> temp = sortEditions();
 
 		if (pais1 != null) {
 			for (int i = 0; i < pais1.size(); i++) {
-				ListaLigada<JogosOlimpicos> temp = sortEditions();
-				System.out.println(nomes.get(0));
-				System.out.println(temp.get(0));
-				System.out.println(pais1.get(i));
 				dataset.addValue((double) pais1.get(i), nomes.get(0), sortEditions().get(i));
 			}
 		}
 
 		if (pais2 != null) {
 			for (int i = 0; i < pais2.size(); i++) {
-				ListaLigada<JogosOlimpicos> temp = sortEditions();
-				System.out.println(nomes.get(1));
-				System.out.println(temp.get(i));
-				System.out.println(pais2.get(i));
 				dataset.addValue((double) pais2.get(i), nomes.get(1), sortEditions().get(i));
+			}
+		}
+
+		if (pais3 != null) {
+			for (int i = 0; i < pais3.size(); i++) {
+				dataset.addValue((double) pais3.get(i), nomes.get(2), sortEditions().get(i));
+			}
+		}
+
+		if (pais4 != null) {
+			for (int i = 0; i < pais4.size(); i++) {
+				dataset.addValue((double) pais4.get(i), nomes.get(3), sortEditions().get(i));
+			}
+		}
+
+		if (pais5 != null) {
+			for (int i = 0; i < pais5.size(); i++) {
+				dataset.addValue((double) pais5.get(i), nomes.get(1), sortEditions().get(i));
 			}
 		}
 
@@ -110,7 +135,6 @@ public class Chart extends ApplicationFrame {
 	 */
 	private JFreeChart createChart(final CategoryDataset dataset) {
 
-		// create the chart...
 		final JFreeChart chart = ChartFactory.createLineChart("Comparative Analysis", // chart
 																						// title
 				"Game Edition", // domain axis label
@@ -122,32 +146,20 @@ public class Chart extends ApplicationFrame {
 				false // urls
 				);
 
-		// NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
-		// final StandardLegend legend = (StandardLegend) chart.getLegend();
-		// legend.setDisplaySeriesShapes(true);
-		// legend.setShapeScaleX(1.5);
-		// legend.setShapeScaleY(1.5);
-		// legend.setDisplaySeriesLines(true);
-
-		chart.setBackgroundPaint(Color.white);
-
+		chart.setBackgroundPaint(Color.WHITE);
 		final CategoryPlot plot = (CategoryPlot) chart.getPlot();
 		plot.setBackgroundPaint(Color.lightGray);
 		plot.setRangeGridlinePaint(Color.white);
 
-		// customise the range axis...
 		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		rangeAxis.setAutoRangeIncludesZero(true);
 
-		// customise the renderer...
 		final LineAndShapeRenderer renderer = (LineAndShapeRenderer) plot.getRenderer();
-		// renderer.setDrawShapes(true);
 
 		renderer.setSeriesStroke(0, new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[] { 10.0f, 6.0f }, 0.0f));
 		renderer.setSeriesStroke(1, new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[] { 6.0f, 6.0f }, 0.0f));
 		renderer.setSeriesStroke(2, new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND, 1.0f, new float[] { 2.0f, 6.0f }, 0.0f));
-		// OPTIONAL CUSTOMISATION COMPLETED.
 
 		return chart;
 	}

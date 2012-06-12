@@ -7,12 +7,16 @@ public class Imagens {
 
 	URL snd = classLoader.getResource("Imagens/snd2.au");
 
+	URL logo = classLoader.getResource("Imagens/logo.png");
+
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
 	URL bg = classLoader.getResource("Imagens/background.png");
 	URL bg2 = classLoader.getResource("Imagens/bg2.png");
 	URL bg3 = classLoader.getResource("Imagens/bg3.png");
 	URL bg4 = classLoader.getResource("Imagens/bg4.png");
 	URL exit = classLoader.getResource("Imagens/exit.png");
+	URL about = classLoader.getResource("Imagens/about.png");
+	URL about_o = classLoader.getResource("Imagens/aboutOver.png");
 
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");

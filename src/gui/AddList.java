@@ -640,10 +640,6 @@ public class AddList extends JFrame {
 
 		getResults.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListaLigada<Integer> a = new ListaLigada<Integer>();
-				for (int i = 1; i < 6; i++) {
-					a.add(i);
-				}
 				add1.setVisible(false);
 				reduce1.setVisible(false);
 				voltar.setVisible(true);
@@ -758,9 +754,83 @@ public class AddList extends JFrame {
 					ListaLigada<Integer> historico_pais2 = Listagem.historicoMedalhasPais(Main.getPaises().get(index2), Main.getPaises(), Main.getProvas(), Main.getJogos());
 
 					Chart chart1 = new Chart("Comparative Analysis", nomes, historico_pais1, historico_pais2, null, null, null);
-					chart1.pack();
 					RefineryUtilities.centerFrameOnScreen(chart1);
-					chart1.setVisible(true);
+				} else if (index + 4 == 6) {
+					ListaLigada<String> nomes = new ListaLigada<String>();
+
+					Pais pais1 = (Pais) cmb1_2.getSelectedItem();
+					int index1 = findPais(pais1.getNomePais());
+					nomes.add(pais1.getNomePais());
+					ListaLigada<Integer> historico_pais1 = Listagem.historicoMedalhasPais(Main.getPaises().get(index1), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais2 = (Pais) cmb2_2.getSelectedItem();
+					int index2 = findPais(pais2.getNomePais());
+					nomes.add(pais2.getNomePais());
+					ListaLigada<Integer> historico_pais2 = Listagem.historicoMedalhasPais(Main.getPaises().get(index2), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais3 = (Pais) cmb3_2.getSelectedItem();
+					int index3 = findPais(pais3.getNomePais());
+					nomes.add(pais3.getNomePais());
+					ListaLigada<Integer> historico_pais3 = Listagem.historicoMedalhasPais(Main.getPaises().get(index3), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Chart chart1 = new Chart("Comparative Analysis", nomes, historico_pais1, historico_pais2, historico_pais3, null, null);
+					RefineryUtilities.centerFrameOnScreen(chart1);
+				} else if (index + 4 == 7) {
+					ListaLigada<String> nomes = new ListaLigada<String>();
+
+					Pais pais1 = (Pais) cmb1_3.getSelectedItem();
+					int index1 = findPais(pais1.getNomePais());
+					nomes.add(pais1.getNomePais());
+					ListaLigada<Integer> historico_pais1 = Listagem.historicoMedalhasPais(Main.getPaises().get(index1), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais2 = (Pais) cmb2_3.getSelectedItem();
+					int index2 = findPais(pais2.getNomePais());
+					nomes.add(pais2.getNomePais());
+					ListaLigada<Integer> historico_pais2 = Listagem.historicoMedalhasPais(Main.getPaises().get(index2), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais3 = (Pais) cmb3_3.getSelectedItem();
+					int index3 = findPais(pais3.getNomePais());
+					nomes.add(pais3.getNomePais());
+					ListaLigada<Integer> historico_pais3 = Listagem.historicoMedalhasPais(Main.getPaises().get(index3), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais4 = (Pais) cmb4_3.getSelectedItem();
+					int index4 = findPais(pais4.getNomePais());
+					nomes.add(pais4.getNomePais());
+					ListaLigada<Integer> historico_pais4 = Listagem.historicoMedalhasPais(Main.getPaises().get(index4), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Chart chart1 = new Chart("Comparative Analysis", nomes, historico_pais1, historico_pais2, historico_pais3, historico_pais4, null);
+					RefineryUtilities.centerFrameOnScreen(chart1);
+
+				} else if (index + 4 == 8) {
+					ListaLigada<String> nomes = new ListaLigada<String>();
+
+					Pais pais1 = (Pais) cmb1_4.getSelectedItem();
+					int index1 = findPais(pais1.getNomePais());
+					nomes.add(pais1.getNomePais());
+					ListaLigada<Integer> historico_pais1 = Listagem.historicoMedalhasPais(Main.getPaises().get(index1), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais2 = (Pais) cmb2_4.getSelectedItem();
+					int index2 = findPais(pais2.getNomePais());
+					nomes.add(pais2.getNomePais());
+					ListaLigada<Integer> historico_pais2 = Listagem.historicoMedalhasPais(Main.getPaises().get(index2), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais3 = (Pais) cmb3_4.getSelectedItem();
+					int index3 = findPais(pais3.getNomePais());
+					nomes.add(pais3.getNomePais());
+					ListaLigada<Integer> historico_pais3 = Listagem.historicoMedalhasPais(Main.getPaises().get(index3), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais4 = (Pais) cmb4_4.getSelectedItem();
+					int index4 = findPais(pais4.getNomePais());
+					nomes.add(pais4.getNomePais());
+					ListaLigada<Integer> historico_pais4 = Listagem.historicoMedalhasPais(Main.getPaises().get(index4), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Pais pais5 = (Pais) cmb5_4.getSelectedItem();
+					int index5 = findPais(pais5.getNomePais());
+					nomes.add(pais5.getNomePais());
+					ListaLigada<Integer> historico_pais5 = Listagem.historicoMedalhasPais(Main.getPaises().get(index5), Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+					Chart chart1 = new Chart("Comparative Analysis", nomes, historico_pais1, historico_pais2, historico_pais3, historico_pais4, historico_pais5);
+					RefineryUtilities.centerFrameOnScreen(chart1);
 				}
 			}
 		});

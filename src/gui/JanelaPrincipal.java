@@ -1,23 +1,11 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.net.URISyntaxException;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class JanelaPrincipal extends JFrame {
 
@@ -54,13 +42,15 @@ public class JanelaPrincipal extends JFrame {
 		// Buttons
 		Botao btn1 = new Botao(img.appconfig);
 		btn1.setBotaoRollOver(img.appconfig_o);
+		Botao btn2 = new Botao(img.about);
+		btn2.setBotaoRollOver(img.about_o);
 		Botao btn3 = new Botao(img.exitapp);
 		btn3.setBotaoRollOver(img.exitapp_o);
 
 		// Panels
 		Painel panel = new Painel(new FlowLayout(FlowLayout.RIGHT, 55, 120));
 		Painel panelbtn = new Painel(img.bg4);
-		panelbtn.setLayout(new GridLayout(3, 1, 10, 10));
+		panelbtn.setLayout(new GridLayout(4, 1, 10, 10));
 		panelbtn.setBorder(new EmptyBorder(20, 20, 30, 20));
 		panelbtn.setOpaque(false);
 		panel.add(panelbtn);
@@ -75,7 +65,21 @@ public class JanelaPrincipal extends JFrame {
 		btn1.setBorder(emptyBorder);
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AppConfig b = new AppConfig();
+				AppConfig appconfig = new AppConfig();
+			}
+		});
+
+		// about
+		btn2.setContentAreaFilled(false);
+		btn2.setBorder(emptyBorder);
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					About about = new About(JanelaPrincipal.this);
+				} catch (URISyntaxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -90,6 +94,7 @@ public class JanelaPrincipal extends JFrame {
 
 		panelbtn.add(lb);
 		panelbtn.add(btn1);
+		panelbtn.add(btn2);
 		panelbtn.add(btn3);
 		add(panel, BorderLayout.CENTER);
 	}
