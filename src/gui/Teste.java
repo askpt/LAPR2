@@ -7,9 +7,6 @@ import javax.swing.*;
 
 import jogosolimpicos.*;
 import listaligada.*;
-
-import org.jfree.ui.*;
-
 import dados.*;
 
 //TODO Remove class
@@ -313,11 +310,6 @@ public class Teste extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Pais pais = new Pais("USA", "United States");
 				TesteListagens.estatisticaPais(pais, Main.getProvas(), Main.getPaises());
-				ListaLigada<Integer> pais1 = Listagem.historicoMedalhasPais(Main.getPaises().get(0), Main.getPaises(), Main.getProvas(), Main.getJogos());
-				TesteGraph b = new TesteGraph("tits", pais1);
-				b.pack();
-				RefineryUtilities.centerFrameOnScreen(b);
-				b.setVisible(true);
 			}
 		});
 
