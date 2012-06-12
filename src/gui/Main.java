@@ -67,16 +67,13 @@ public class Main {
 			}
 		}
 		if (checkGB) {
-			// TODO add construtor com lingua inglesa
-			// getLingua().add("EN-GB",...);
+			getLingua().add(new Linguas("EN-GB","Olympic Games","Listing","Classification","Position","Name","Gold","Silver","Bronze","Athlete","Sport","Competition","Country","Emission Date"));
 		}
 		if (checkFR) {
-			// TODO add construtor com lingua francesa
-			// getLingua().add("FR-FR",...); cuidado com acentos em HTML
+			 getLingua().add(new Linguas("FR-FR","Jeux Olympiques","Liste","Classification","Position","Nom","Or","Argent","Bronze","Athl&egrave;te","Modalit&eacute;","Discipline","Pays","Date d'&eacute;mission"));
 		}
 		if (checkPT) {
-			// TODO add construtor com lingua portuguesa
-			// getLingua().add("PT-PT",...); cuidado com acentos em HTML
+			 getLingua().add(new Linguas("PT-PT","Jogos Ol&iacute;mpicos","Listagem","Classifica&ccedil;&atilde;o","Posi&ccedil;&atilde;o","Nome","Ouro","Prata","Bronze","Atletas","Modalidade","Disciplina","Pa&iacute;s","Data de Emiss&atilde;o"));
 		}
 
 	}
