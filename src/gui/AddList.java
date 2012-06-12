@@ -354,11 +354,16 @@ public class AddList extends JFrame {
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
 		voltar.setVisible(false);
+		final Botao chart = new Botao(img.back, img.back_o);
+		chart.setContentAreaFilled(false);
+		chart.setBorderPainted(false);
+		chart.setVisible(false);
 		reduce1.setVisible(false);
 		pButn.add(add1);
 		pButn.add(reduce1);
 		pButn.add(getResults);
 		pButn.add(voltar);
+		pButn.add(chart);
 
 		// PARA 2 PAISES
 		JPanel p1_1 = new JPanel(new BorderLayout());
@@ -579,6 +584,15 @@ public class AddList extends JFrame {
 				if (index < MAX) {
 					index += 1;
 					cl.show(card, "" + (index));
+					if (index == MAX) {
+						add1.setVisible(false);
+						reduce1.setVisible(true);
+					} else {
+						add1.setVisible(true);
+						if (index > MIN) {
+							reduce1.setVisible(true);
+						}
+					}
 					if (index == 2) {
 						cmb1_2.setSelectedIndex(cmb1_1.getSelectedIndex());
 						cmb2_2.setSelectedIndex(cmb2_1.getSelectedIndex());
@@ -592,12 +606,6 @@ public class AddList extends JFrame {
 						cmb3_4.setSelectedIndex(cmb3_3.getSelectedIndex());
 						cmb4_4.setSelectedIndex(cmb4_3.getSelectedIndex());
 					}
-					if (index == MAX) {
-						add1.setVisible(false);
-						reduce1.setVisible(true);
-					} else {
-						add1.setVisible(true);
-					}
 				}
 			}
 		});
@@ -606,12 +614,16 @@ public class AddList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (index > MIN) {
 					index -= 1;
+					reduce1.setVisible(true);
 					cl.show(card, "" + (index));
 					if (index == MIN) {
 						reduce1.setVisible(false);
 						add1.setVisible(true);
 					} else {
 						reduce1.setVisible(true);
+						if (index < MAX) {
+							add1.setVisible(true);
+						}
 					}
 				}
 			}
@@ -1029,9 +1041,9 @@ public class AddList extends JFrame {
 				int ano_inicio = jogos_inicio.getAno();
 				int ano_fim = jogos_fim.getAno();
 				Disciplina d = (Disciplina) cmbdis.getSelectedItem();
-				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, null, d);
+				ListaLigada<Pais> listagem_pais = Listagem.listarMedalhasPais(Main.getPaises(), Main.getProvas(), ano_inicio, ano_fim, null, d);
 				String titulo = d.getNome();
-				JPanel tabela1 = createTablePaisAtleta(a, titulo);
+				JPanel tabela1 = createTablePaisAtleta(listagem_pais, "Nation");
 				card3.add(tabela1, "2");
 				cl3.show(card3, "2");
 				ok.setVisible(false);
@@ -1150,9 +1162,8 @@ public class AddList extends JFrame {
 				int ano_inicio = jogos_inicio.getAno();
 				int ano_fim = jogos_fim.getAno();
 				Modalidade m = (Modalidade) cmbSp.getSelectedItem();
-				ListaLigada<Atleta> a = Listagem.listarMedalhasAtleta(Main.getAtleta(), Main.getEquipas(), Main.getProvas(), ano_inicio, ano_fim, m.getNome(), null);
-				String titulo = m.getNome();
-				JPanel tabela1 = createTablePaisAtleta(a, titulo);
+				ListaLigada<Pais> listagem_pais = Listagem.listarMedalhasPais(Main.getPaises(), Main.getProvas(), ano_inicio, ano_fim, m.getNome(), null);
+				JPanel tabela1 = createTablePaisAtleta(listagem_pais, "Nation");
 				card4.add(tabela1, "2");
 				cl4.show(card4, "2");
 				ok.setVisible(false);

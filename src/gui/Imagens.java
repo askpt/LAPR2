@@ -98,6 +98,10 @@ public class Imagens {
 	URL getResults_o = classLoader.getResource("Imagens/getResultsOver.png");
 	URL back = classLoader.getResource("Imagens/back.png");
 	URL back_o = classLoader.getResource("Imagens/backOver.png");
+	URL html = classLoader.getResource("Imagens/html.png");
+	URL html_o = classLoader.getResource("Imagens/htmlOver.png");
+	URL chart = classLoader.getResource("Imagens/chart.png");
+	URL chart_o = classLoader.getResource("Imagens/chartOver.png");
 
 	// panels
 	URL imp = classLoader.getResource("Imagens/import.png");
