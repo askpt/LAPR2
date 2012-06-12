@@ -70,7 +70,7 @@ public class Teste extends JFrame {
 						index = i;
 					}
 				}
-				html.exportPais(Teste.this, 1996, 1996, Main.getLingua().get(index), Main.getLingua(), Main.getProvas(), Main.getPaises());
+				html.exportPais(Teste.this, 1996, 2008, Main.getLingua().get(index), Main.getLingua(), Main.getProvas(), Main.getPaises());
 			}
 		});
 
@@ -85,7 +85,7 @@ public class Teste extends JFrame {
 						index = i;
 					}
 				}
-				html.exportAtleta(Teste.this, 1996, 1996, Main.getLingua().get(index), Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
+				html.exportAtleta(Teste.this, 1996, 2008, Main.getLingua().get(index), Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
 			}
 		});
 
