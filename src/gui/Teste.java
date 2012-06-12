@@ -313,7 +313,8 @@ public class Teste extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Pais pais = new Pais("USA", "United States");
 				TesteListagens.estatisticaPais(pais, Main.getProvas(), Main.getPaises());
-				TesteGraph b = new TesteGraph("tits");
+				ListaLigada<Integer> pais1 = Listagem.historicoMedalhasPais(Main.getPaises().get(0), Main.getPaises(), Main.getProvas(), Main.getJogos());
+				TesteGraph b = new TesteGraph("tits", pais1);
 				b.pack();
 				RefineryUtilities.centerFrameOnScreen(b);
 				b.setVisible(true);

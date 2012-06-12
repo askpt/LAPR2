@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.*;
 
+import listaligada.*;
+
 import org.jfree.chart.*;
 import org.jfree.chart.axis.*;
 import org.jfree.chart.plot.*;
@@ -22,11 +24,11 @@ public class TesteGraph extends ApplicationFrame {
 	 * @param title
 	 *            the frame title.
 	 */
-	public TesteGraph(final String title) {
+	public TesteGraph(final String title, final ListaLigada<Integer> pais1) {
 
 		super(title);
 
-		final XYDataset dataset = createDataset();
+		final XYDataset dataset = createDataset("a", pais1);
 		final JFreeChart chart = createChart(dataset);
 		final ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
@@ -39,19 +41,14 @@ public class TesteGraph extends ApplicationFrame {
 	 * 
 	 * @return a sample dataset.
 	 */
-	private XYDataset createDataset() {
+	private XYDataset createDataset(String a, ListaLigada<Integer> pais1) {
 
-		final XYSeries series1 = new XYSeries("First");
-		series1.add(1.0, 1.0);
-		series1.add(2.0, 4.0);
-		series1.add(3.0, 3.0);
-		series1.add(4.0, 5.0);
-		series1.add(5.0, 5.0);
-		series1.add(6.0, 7.0);
-		series1.add(7.0, 7.0);
-		series1.add(8.0, 8.0);
+		final XYSeries series1 = new XYSeries(a);
+		for (int i = 0; i < pais1.size(); i++) {
+			series1.add((double) pais1.get(i), i + 1);
+		}
 
-		final XYSeries series2 = new XYSeries("Second");
+		final XYSeries series2 = new XYSeries("ca");
 		series2.add(1.0, 5.0);
 		series2.add(2.0, 7.0);
 		series2.add(3.0, 6.0);
@@ -61,7 +58,7 @@ public class TesteGraph extends ApplicationFrame {
 		series2.add(7.0, 2.0);
 		series2.add(8.0, 1.0);
 
-		final XYSeries series3 = new XYSeries("Third");
+		final XYSeries series3 = new XYSeries("b");
 		series3.add(3.0, 4.0);
 		series3.add(4.0, 3.0);
 		series3.add(5.0, 2.0);
