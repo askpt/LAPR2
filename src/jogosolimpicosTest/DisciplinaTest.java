@@ -7,40 +7,45 @@ import org.junit.*;
 
 public class DisciplinaTest {
 
-	private static Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
-
 	@Test
 	public void testGetGenero() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		assertEquals(0, discTest.getGenero());
 	}
 
 	@Test
 	public void testGetTipoMod() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		assertFalse(discTest.getTipoMod());
 	}
 
 	@Test
 	public void testGetTipoClass() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		assertEquals(0, discTest.getTipoClass());
 	}
 
 	@Test
 	public void testGetNome() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		assertEquals("100 m", discTest.getNome());
 	}
 
 	@Test
 	public void testGetModalidade() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		assertEquals("Atletismo", discTest.getModalidade().getNome());
 	}
 
 	@Test
 	public void testGetOrdenacao() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		assertTrue(discTest.getOrdenacao());
 	}
 
 	@Test
 	public void testSetGenero() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		discTest.setGenero(1);
 
 		assertEquals(1, discTest.getGenero());
@@ -48,6 +53,7 @@ public class DisciplinaTest {
 
 	@Test
 	public void testSetTipoDisc() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		discTest.setTipoDisc(true);
 
 		assertTrue(discTest.getTipoMod());
@@ -55,12 +61,14 @@ public class DisciplinaTest {
 
 	@Test
 	public void testSetNome() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		discTest.setNome("4x100m");
 		assertEquals("4x100m", discTest.getNome());
 	}
 
 	@Test
 	public void testSetModalidade() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		discTest.setModalidade(new Modalidade("Ginastica"));
 
 		assertEquals("Ginastica", discTest.getModalidade().getNome());
@@ -68,6 +76,7 @@ public class DisciplinaTest {
 
 	@Test
 	public void testSetOrdenacao() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		discTest.setOrdenacao(false);
 
 		assertFalse(discTest.getOrdenacao());
@@ -75,6 +84,7 @@ public class DisciplinaTest {
 
 	@Test
 	public void testSetTipoClass() {
+		Disciplina discTest = new Disciplina("100 m", new Modalidade("Atletismo"), false, 0, true, 0);
 		discTest.setTipoClass(1);
 
 		assertEquals(1, discTest.getTipoClass());

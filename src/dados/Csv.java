@@ -13,9 +13,41 @@ import javax.swing.filechooser.FileFilter;
 import jogosolimpicos.*;
 import listaligada.*;
 
+/**
+ * 
+ * Main class for the CSV imports and exports
+ */
 @SuppressWarnings("serial")
 public class Csv extends JComponent implements Accessible {
-
+	/**
+	 * Method to add various csv files to the program. The application will
+	 * evaluate the content of the csv and will choose the csv file type.
+	 * 
+	 * @param janela
+	 * @param paises
+	 *            linked list with the countries
+	 * @param disciplinas
+	 *            linked list with the competitions
+	 * @param modalidades
+	 *            linked list with the sports
+	 * @param jogos
+	 *            linked list of events
+	 * @param provas
+	 *            linked list with the competitions with event
+	 * @param equipas
+	 *            linked list with the teams
+	 * @param atletas
+	 *            linked list with the athletes
+	 * @see Pais country details
+	 * @see Disciplina competition details
+	 * @see Modalidade sport details
+	 * @see JogosOlimpicos event details
+	 * @see Prova competition with event details
+	 * @see Equipa team details
+	 * @see Atleta athlete details
+	 * 
+	 */
+	// TODO arranjar isto param janela
 	public void intelImport(Component janela, ListaLigada<Pais> paises, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<Atleta> atletas) {
 
 		JFileChooser fc = new JFileChooser();
@@ -126,6 +158,18 @@ public class Csv extends JComponent implements Accessible {
 		return false;
 	}
 
+	/**
+	 * Method to import the country csv file type.
+	 * 
+	 * @param ficheiro
+	 *            if wanna choose the file in this method, send null.
+	 * @param janela
+	 * @param paises
+	 *            linked list with the countries
+	 * @see Pais country details
+	 * 
+	 */
+	// TODO see janela
 	public void importPais(File ficheiro, Component janela, ListaLigada<Pais> paises) {
 
 		try {
@@ -235,6 +279,7 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	// TODO javadoc
 	public void importLingua(Component janela, ListaLigada<Linguas> linguas) {
 
 		try {
@@ -269,6 +314,16 @@ public class Csv extends JComponent implements Accessible {
 		}
 	}
 
+	/**
+	 * Method to export the data of the countries
+	 * 
+	 * @param janela
+	 * @param paises
+	 *            linked list with the countries
+	 * @see Pais country details
+	 * 
+	 */
+	// TODO see janela
 	public void exportPais(Component janela, ListaLigada<Pais> paises) {
 
 		if (paises.isEmpty()) {
@@ -307,6 +362,21 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Method to import the competition csv file type
+	 * 
+	 * @param janela
+	 * @param disciplina
+	 *            linked list with the competitions
+	 * @param modalidades
+	 *            linked list with the sports
+	 * @param ficheiro
+	 *            if wanna choose the file in this method, send null.
+	 * @see Disciplina competition details
+	 * @see Modalidade sport details
+	 * 
+	 */
+	// TODO see janela
 	public void importDisc(File ficheiro, Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
 
 		try {
@@ -621,6 +691,16 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Method to export the data of the competitions
+	 * 
+	 * @param janela
+	 * @param modalidades
+	 *            linked list with the sports
+	 * @see Modalidade sport details
+	 * 
+	 */
+	// TODO see janela
 	public void exportDisciplina(Component janela, ListaLigada<Modalidade> modalidades) {
 
 		if (modalidades.isEmpty()) {
@@ -645,7 +725,11 @@ public class Csv extends JComponent implements Accessible {
 				String typeClass = "";
 				String order = "";
 
-				ListaLigada<Disciplina> discTemp = modalidades.get(i).getDisc();
+				ListaLigada<Disciplina> discTemp = new ListaLigada<Disciplina>();
+				for (int j = 0; j < modalidades.get(i).getDisc().size(); j++) {
+					discTemp.add(modalidades.get(i).getDisc().get(j));
+				}
+
 				for (int j = 0; j < discTemp.size(); j++) {
 					nomeDisc = discTemp.get(j).getNome();
 					String men = "";
@@ -699,6 +783,36 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Method to import the results csv file type.
+	 * 
+	 * @param janela
+	 * @param paises
+	 *            linked list with the countries
+	 * @param disciplinas
+	 *            linked list with the competitions
+	 * @param modalidades
+	 *            linked list with the sports
+	 * @param jogos
+	 *            linked list of events
+	 * @param provas
+	 *            linked list with the competitions with event
+	 * @param equipas
+	 *            linked list with the teams
+	 * @param atletas
+	 *            linked list with the athletes
+	 * @param ficheiro
+	 *            if wanna choose the file in this method, send null.
+	 * @see Pais country details
+	 * @see Disciplina competition details
+	 * @see Modalidade sport details
+	 * @see JogosOlimpicos event details
+	 * @see Prova competition with event details
+	 * @see Equipa team details
+	 * @see Atleta athlete details
+	 * 
+	 */
+	// TODO see janela
 	@SuppressWarnings("unused")
 	public void importResultados(File ficheiro, Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
 		try {
@@ -1039,6 +1153,25 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Method to export the results to csv file.
+	 * 
+	 * @param janela
+	 * @param modalidades
+	 *            linked list with the sports
+	 * @param provas
+	 *            linked list with the competitions with event
+	 * @param modalidade
+	 *            sport to export
+	 * @param genero
+	 *            genre to export. Male = 0, Female = 1, Mixed = 2
+	 * @param ano
+	 *            year to export
+	 * 
+	 * @see Modalidade sport details
+	 * @see Prova competition with event details
+	 */
+	// TODO see janela
 	public void exportResultados(Component janela, ListaLigada<Modalidade> modalidades, ListaLigada<Prova> provas, String modalidade, int genero, int ano) {
 
 		if (modalidades.isEmpty() || provas.isEmpty()) {
@@ -1140,6 +1273,27 @@ public class Csv extends JComponent implements Accessible {
 		}
 
 	}
+
+	/**
+	 * Method to import the competitions with event csv file.
+	 * 
+	 * @param janela
+	 * @param modalidades
+	 *            linked list with the sports
+	 * @param provas
+	 *            linked list with the competitions with event
+	 * @param ficheiro
+	 *            if wanna choose the file in this method, send null.
+	 * @param disciplinas
+	 *            linked list with the competitions
+	 * @param jogos
+	 *            linked list with the events
+	 * @see Modalidade sport details
+	 * @see Prova competition with event details
+	 * @see Disciplina competition details
+	 * @see JogosOlimpicos event details
+	 */
+	// TODO see janela
 
 	public void importProvas(File ficheiro, Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
 
@@ -1295,6 +1449,17 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Method to export the competitions with event to csv.
+	 * 
+	 * @param janela
+	 * @param provas
+	 *            linked list with the competitions with event
+	 * @param ano
+	 *            year to export
+	 * @see Prova competition with event details
+	 */
+	// TODO see janela
 	public void exportProvas(Component janela, ListaLigada<Prova> provas, int ano) {
 
 		if (provas.isEmpty()) {
@@ -1352,8 +1517,19 @@ public class Csv extends JComponent implements Accessible {
 
 	}
 
+	/**
+	 * Private class to filter the files in the JChooseFile by CSV
+	 * 
+	 */
 	private class CsvFilter extends FileFilter {
 
+		/**
+		 * Choose if the file in File chooser is acceptable
+		 * 
+		 * @param f
+		 *            file to be evaluated
+		 * @return true if is acceptable
+		 */
 		@Override
 		public boolean accept(File f) {
 
@@ -1373,6 +1549,11 @@ public class Csv extends JComponent implements Accessible {
 
 		}
 
+		/**
+		 * The description of this filter. Eg: "CSV File"
+		 * 
+		 * @see FileView#getName
+		 */
 		@Override
 		public String getDescription() {
 
