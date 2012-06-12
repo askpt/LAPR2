@@ -11,7 +11,7 @@ import javax.swing.*;
 public class Painel extends JPanel {
 
 	// imagem que carrega por defeito
-	String imagem = "bin/Imagens/background.png";
+	String imagem = "Imagens/background.png";
 
 	public Painel() {
 		super();

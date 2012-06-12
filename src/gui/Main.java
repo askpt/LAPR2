@@ -45,12 +45,41 @@ public class Main {
 
 	public static void main(String[] args) {
 		lerEstadoAnterior();
+		adicionarLinguas();
 		try {
 			maingui = new JanelaPrincipal();
 		} catch (URISyntaxException e) {
 
 			e.printStackTrace();
 		}
+	}
+
+	private static void adicionarLinguas() {
+		boolean checkGB = true;
+		boolean checkFR = true;
+		boolean checkPT = true;
+		for (int i = 0; i < getLingua().size(); i++) {
+			if (getLingua().get(i).getLinguagem().equalsIgnoreCase("PT-PT")) {
+				checkPT = false;
+			} else if (getLingua().get(i).getLinguagem().equalsIgnoreCase("EN-GB")) {
+				checkGB = false;
+			} else if (getLingua().get(i).getLinguagem().equalsIgnoreCase("FR-FR")) {
+				checkFR = false;
+			}
+		}
+		if (checkGB) {
+			// TODO add construtor com lingua inglesa
+			// getLingua().add("EN-GB",...);
+		}
+		if (checkFR) {
+			// TODO add construtor com lingua francesa
+			// getLingua().add("FR-FR",...); cuidado com acentos em HTML
+		}
+		if (checkPT) {
+			// TODO add construtor com lingua portuguesa
+			// getLingua().add("PT-PT",...); cuidado com acentos em HTML
+		}
+
 	}
 
 	public static ListaLigada<Disciplina> getDisciplinas() {
@@ -75,6 +104,7 @@ public class Main {
 			out.writeObject(equipas);
 			out.writeObject(disciplinas);
 			out.writeObject(jogos);
+			out.writeObject(lingua);
 			out.close();
 		} catch (IOException exc) {
 			JOptionPane.showMessageDialog(maingui, "Status not saved!", "Closing Application", JOptionPane.ERROR_MESSAGE);
@@ -92,6 +122,7 @@ public class Main {
 			equipas = (ListaLigada<Equipa>) in.readObject();
 			disciplinas = (ListaLigada<Disciplina>) in.readObject();
 			jogos = (ListaLigada<JogosOlimpicos>) in.readObject();
+			lingua = (ListaLigada<Linguas>) in.readObject();
 			in.close();
 		} catch (IOException exc) {
 			JOptionPane.showMessageDialog(maingui, "Previous status wasn't successfully loaded!", "Loading previous status", JOptionPane.ERROR_MESSAGE);

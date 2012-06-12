@@ -23,6 +23,16 @@ public class Botao extends JButton {
 		}
 	}
 
+	public Botao(String botao, String btnRoll) {
+		try {
+			image = ImageIO.read(new File(botao));
+			imageRollOver = ImageIO.read(new File(btnRoll));
+			hasRollOver = true;
+		} catch (IOException e) {
+
+		}
+	}
+
 	public Botao(URL url) {
 		try {
 			String temp = url.getPath();
@@ -54,6 +64,14 @@ public class Botao extends JButton {
 			String[] temparray = temp.split("/");
 			temp = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
 			imageRollOver = ImageIO.read(new File(temp));
+			hasRollOver = true;
+		} catch (IOException e) {
+		}
+	}
+
+	public void setBotaoRollOver(String uRollOver) {
+		try {
+			imageRollOver = ImageIO.read(new File(uRollOver));
 			hasRollOver = true;
 		} catch (IOException e) {
 		}
