@@ -11,24 +11,23 @@ import listaligada.*;
 
 public class HTML {
 
-	
 	/**
-	 * Method to Export HTML files about the results of the countries. 
+	 * Method to Export HTML files about the results of the countries.
 	 * 
 	 * @param janela
-	 * 			the parent component of the dialog
+	 *            the parent component of the dialog
 	 * @param anoInicio
-	 * 			sets from which year starts the ranking
+	 *            sets from which year starts the ranking
 	 * @param anoFim
-	 * 			sets from which year ends the ranking
+	 *            sets from which year ends the ranking
 	 * @param lingua
-	 * 			sets which language it will be used to present the data
+	 *            sets which language it will be used to present the data
 	 * @param linguas
-	 * 			language details
+	 *            language details
 	 * @param prova
-	 * 			competition details
+	 *            competition details
 	 * @param pais
-	 * 			country details
+	 *            country details
 	 */
 	public void exportPais(Component janela, int anoInicio, int anoFim, Linguas lingua, ListaLigada<Linguas> linguas, ListaLigada<Prova> prova, ListaLigada<Pais> pais) {
 
@@ -63,7 +62,7 @@ public class HTML {
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
-				
+
 				fout.format("</tr>");
 				fout.format("</table><br>");
 				fout.format("</body>");
@@ -82,21 +81,21 @@ public class HTML {
 	 * Method to export HTML files about the results of the athletes
 	 * 
 	 * @param janela
-	 * 			the parent component of the dialog
+	 *            the parent component of the dialog
 	 * @param anoInicio
-	 * 			sets from which year starts the ranking
+	 *            sets from which year starts the ranking
 	 * @param anoFim
-	 * 			sets from which year ends the ranking
+	 *            sets from which year ends the ranking
 	 * @param lingua
-	 * 			sets which language it will be used to present the data
+	 *            sets which language it will be used to present the data
 	 * @param linguas
-	 * 			languages details
+	 *            languages details
 	 * @param atleta
-	 * 			athletes details
+	 *            athletes details
 	 * @param prova
-	 * 			competition details
+	 *            competition details
 	 * @param equipa
-	 * 			team details
+	 *            team details
 	 */
 	public void exportAtleta(Component janela, int anoInicio, int anoFim, Linguas lingua, ListaLigada<Linguas> linguas, ListaLigada<Atleta> atleta, ListaLigada<Prova> prova, ListaLigada<Equipa> equipa) {
 
@@ -129,9 +128,9 @@ public class HTML {
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
 					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td>");
-					
+
 				}
-				
+
 				fout.format("</tr>");
 				fout.format("</table><br>");
 				fout.format("</body>");
@@ -152,19 +151,19 @@ public class HTML {
 	 * @param janela
 	 * 
 	 * @param janela
-	 * 			the parent component of the dialog
+	 *            the parent component of the dialog
 	 * @param anoInicio
-	 * 			sets from which year starts the ranking
+	 *            sets from which year starts the ranking
 	 * @param anoFim
-	 * 			sets from which year ends the ranking
+	 *            sets from which year ends the ranking
 	 * @param linguas
-	 * 			languages details
+	 *            languages details
 	 * @param lingua
-	 * 			sets which language it will be used to present the data
+	 *            sets which language it will be used to present the data
 	 * @param prova
-	 * 			competition details
+	 *            competition details
 	 * @param pais
-	 * 			country details
+	 *            country details
 	 */
 	public void exportModalidade(Component janela, int anoInicio, int anoFim, String modalidade, ListaLigada<Linguas> linguas, Linguas lingua, ListaLigada<Prova> prova, ListaLigada<Pais> pais) {
 
@@ -211,26 +210,26 @@ public class HTML {
 			return;
 		}
 	}
-	
+
 	/**
 	 * Method to export HTML files about a specific competition.
 	 * 
 	 * @param janela
-	 * 			the parent component of the dialog
+	 *            the parent component of the dialog
 	 * @param anoInicio
-	 * 			sets from which year starts the ranking
+	 *            sets from which year starts the ranking
 	 * @param anoFim
-	 * 			sets from which year ends the ranking
+	 *            sets from which year ends the ranking
 	 * @param linguas
-	 * 			languages details
+	 *            languages details
 	 * @param lingua
-	 * 			sets which language it will be used to present the data
+	 *            sets which language it will be used to present the data
 	 * @param atleta
-	 * 			athletes details
+	 *            athletes details
 	 * @param equipa
-	 * 			team details
+	 *            team details
 	 * @param pais
-	 * 			country details
+	 *            country details
 	 */
 	public void exportDisciplina(Component janela, int anoInicio, int anoFim, ListaLigada<Prova> provas, Disciplina disciplina, ListaLigada<Linguas> linguas, Linguas lingua, ListaLigada<Pais> pais) {
 
@@ -277,16 +276,16 @@ public class HTML {
 			return;
 		}
 	}
-	
+
 	/**
 	 * Method to write the starting lines on the file relative to the country.
 	 * 
 	 * @param fout
-	 * 		file to be written upon
+	 *            file to be written upon
 	 * @param it
-	 * 		location of the language inside languages
+	 *            location of the language inside languages
 	 * @param linguas
-	 * 		language details
+	 *            language details
 	 */
 	public void corpoInicioPais(Formatter fout, int it, ListaLigada<Linguas> linguas) {
 
@@ -322,14 +321,14 @@ public class HTML {
 	 * Method to write the starting lines on the file relative to the athletes.
 	 * 
 	 * @param fout
-	 * 		file to be written upon
+	 *            file to be written upon
 	 * @param it
-	 * 		location of the language inside languages
+	 *            location of the language inside languages
 	 * @param linguas
-	 * 		language details
+	 *            language details
 	 */
 	public void corpoInicioAtleta(Formatter fout, ListaLigada<Linguas> linguas, int it) {
-		
+
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
 		fout.format("<head>");
@@ -355,18 +354,18 @@ public class HTML {
 		fout.format("<table border = 1 align=center>");
 		fout.format("<tr>");
 		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
-		
+
 	}
 
 	/**
 	 * Method to write the starting lines on the file relative to a sport.
 	 * 
 	 * @param fout
-	 * 		file to be written upon
+	 *            file to be written upon
 	 * @param it
-	 * 		location of the language inside languages
+	 *            location of the language inside languages
 	 * @param linguas
-	 * 		language details
+	 *            language details
 	 */
 	public void corpoInicioModalidade(Formatter fout, ListaLigada<Linguas> linguas, int it) {
 
@@ -397,16 +396,16 @@ public class HTML {
 		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
 
 	}
-	
+
 	/**
 	 * Method to write the starting lines on the file relative to a competition.
 	 * 
 	 * @param fout
-	 * 		file to be written upon
+	 *            file to be written upon
 	 * @param it
-	 * 		location of the language inside languages
+	 *            location of the language inside languages
 	 * @param linguas
-	 * 		language details
+	 *            language details
 	 */
 	public void corpoInicioDisciplina(Formatter fout, int it, ListaLigada<Linguas> linguas) {
 
@@ -438,6 +437,10 @@ public class HTML {
 
 	}
 
+	/**
+	 * Private class to filter the files in the JChooseFile by HTML
+	 * 
+	 */
 	private class HTMLFilter extends FileFilter {
 
 		/**
@@ -467,13 +470,13 @@ public class HTML {
 		}
 
 		/**
-		 * The description of this filter. Eg: "CSV File"
+		 * The description of this filter. Eg: "HTMLs File"
 		 * 
 		 */
 		@Override
 		public String getDescription() {
 
-			return String.format("HTML File.");
+			return String.format("HTML File");
 		}
 	}
 

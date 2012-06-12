@@ -51,9 +51,8 @@ public class Csv extends JComponent implements Accessible {
 	public void intelImport(Component janela, ListaLigada<Pais> paises, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<Atleta> atletas) {
 
 		JFileChooser fc = new JFileChooser();
+		fc.setFileFilter(new CsvFilter());
 		fc.setMultiSelectionEnabled(true);
-		fc.setAcceptAllFileFilterUsed(false);
-		fc.addChoosableFileFilter(new CsvFilter());
 		fc.setDialogTitle("intelImport Files");
 		int returnVal = fc.showOpenDialog(janela);
 		if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -209,8 +208,7 @@ public class Csv extends JComponent implements Accessible {
 			boolean veri = false;
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
-				fc.setAcceptAllFileFilterUsed(false);
-				fc.addChoosableFileFilter(new CsvFilter());
+				fc.setFileFilter(new CsvFilter());
 				fc.setDialogTitle("Import Country");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -317,8 +315,7 @@ public class Csv extends JComponent implements Accessible {
 
 		try {
 			JFileChooser fc = new JFileChooser();
-			fc.addChoosableFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(true);
+			fc.setFileFilter(new CsvFilter());
 			int returnVal = fc.showOpenDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
@@ -366,9 +363,7 @@ public class Csv extends JComponent implements Accessible {
 
 		try {
 			JFileChooser fc = new JFileChooser();
-
 			fc.setFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
 			fc.setDialogTitle("Export Country");
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -420,8 +415,7 @@ public class Csv extends JComponent implements Accessible {
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
 				fc.setDialogTitle("Competition Import");
-				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(false);
+				fc.setFileFilter(new CsvFilter());
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
@@ -746,9 +740,7 @@ public class Csv extends JComponent implements Accessible {
 
 		try {
 			JFileChooser fc = new JFileChooser();
-
 			fc.setFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
 			fc.setDialogTitle("Export Competition");
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -856,8 +848,7 @@ public class Csv extends JComponent implements Accessible {
 
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
-				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(false);
+				fc.setFileFilter(new CsvFilter());
 				fc.setDialogTitle("Import Results");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -1219,9 +1210,7 @@ public class Csv extends JComponent implements Accessible {
 
 		try {
 			JFileChooser fc = new JFileChooser();
-
 			fc.setFileFilter(new CsvFilter());
-			fc.setAcceptAllFileFilterUsed(false);
 			fc.setDialogTitle("Export Results");
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			int returnVal = fc.showSaveDialog(janela);
@@ -1340,8 +1329,7 @@ public class Csv extends JComponent implements Accessible {
 			boolean veri = false;
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
-				fc.addChoosableFileFilter(new CsvFilter());
-				fc.setAcceptAllFileFilterUsed(false);
+				fc.setFileFilter(new CsvFilter());
 				fc.setDialogTitle("Competition with Event Import");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
@@ -1509,10 +1497,8 @@ public class Csv extends JComponent implements Accessible {
 
 		try {
 			JFileChooser fc = new JFileChooser();
-
 			fc.setFileFilter(new CsvFilter());
 			fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			fc.setAcceptAllFileFilterUsed(false);
 			fc.setDialogTitle("Export Competitions with Events");
 			int returnVal = fc.showSaveDialog(janela);
 			if (returnVal != JFileChooser.APPROVE_OPTION)
