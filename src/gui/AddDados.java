@@ -2,22 +2,72 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
 import jogosolimpicos.*;
-import dados.*;
 
+/*
+ * Class that creates a frame to add data manually, an instance of this class is created on the class AppConfig.
+ * 
+ */
 public class AddDados extends JFrame {
-	private Painel co, di, spo;
 
+	/*
+	 * Custom Panel that contains a form within another panel.
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel co;
+	/*
+	 * Custom Panel that contains a form within another panel.
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel di;
+	/*
+	 * Custom Panel that contains a form within another panel.
+	 * 
+	 * @see Panel Panel Class
+	 */
+	private Painel spo;
+	/*
+	 * Custom Panel that contains a form within another panel.
+	 * 
+	 * @see Panel Panel Class
+	 */
 	private Imagens img = new Imagens();
-	private final Csv csv = new Csv();
-	private Border emptyBorder = BorderFactory.createEmptyBorder();
+	/*
+	 * Custom Panel that contains a form within another panel.
+	 * 
+	 * @see Panel Panel Class
+	 */
 	private JTabbedPane jtp = new JTabbedPane();
 
-	public AddDados() {
+	/*
+	 * Constructor of this class it calls its superclass constructor to set the
+	 * <code>title</code>, it also calls all the necessary methods in this class
+	 * in order to initialize the <code>panels</code> when an object of this
+	 * class is created. Sets properties.
+	 * 
+	 * @see javax.swing.JFrame#constructor(String)
+	 * 
+	 * @see #addPaineis()
+	 * 
+	 * @see #addTabs()
+	 * 
+	 * @see #addCountry()
+	 * 
+	 * @see #addDiscipline()
+	 * 
+	 * @see #addSport()
+	 * 
+	 * @see #setProperties(int,int,int,boolean)
+	 */
+	public AddDados() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		super("Add Info");
 
 		addPaineis();
@@ -30,16 +80,49 @@ public class AddDados extends JFrame {
 		setProperties(600, 480, 1, true);
 	}
 
+	/*
+	 * Sets the properties to this frame such as <code>/size<code>,
+	 * <code>visibility</code> and the <code>operation</code> that will happen
+	 * by default when the user initiates a "close" on this frame.
+	 * 
+	 * @see java.awt.Window#setSize(int,int)
+	 * 
+	 * @see javax.swing.JFrame#setDefaultCloseOperation(int)
+	 * 
+	 * @see java.awt.Window#setVisible(boolean)
+	 * 
+	 * @param w the desired width to the window
+	 * 
+	 * @param h the desired height to the window
+	 * 
+	 * @param opcao parameter to use when calling
+	 * javax.swing.JFrame#setDefaultCloseOperation(int)
+	 * 
+	 * @param visible sets the windows to visible if the parameter is true
+	 */
 	private void setProperties(int w, int h, int opcao, boolean visible) {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
 		setVisible(visible);
 	}
 
+	/*
+	 * Sets the selected index of the <code>TabbedPane/<code>, this method is
+	 * for exterior use and it is used in the class <code>AppConfig</code>.
+	 * 
+	 * @see AppConfig used in this class
+	 * 
+	 * @param i index of the tab
+	 */
 	public void setSelectedIndex(int i) {
 		jtp.setSelectedIndex(i);
 	}
 
+	/*
+	 * This method adds tabs to the TabbedPane, it is called on the constructor.
+	 * 
+	 * @see #constructor
+	 */
 	private void addTabs() {
 
 		getContentPane().add(jtp);
@@ -50,6 +133,23 @@ public class AddDados extends JFrame {
 
 	}
 
+	/*
+	 * This method creates custom panels and sets them as not Opaque, it is
+	 * called in the constructor.
+	 * 
+	 * @see #co
+	 * 
+	 * @see #di
+	 * 
+	 * @see #spo
+	 * 
+	 * @see javax.swing.JComponent#setOpaque()
+	 * 
+	 * @see gui.Painel#constructor(URL)
+	 * 
+	 * 
+	 * @see #constructor
+	 */
 	private void addPaineis() {
 
 		// Panels
@@ -62,7 +162,17 @@ public class AddDados extends JFrame {
 		spo.setOpaque(false);
 	}
 
+	/*
+	 * Creates the form to create a <code>Country</code> that will be inserted
+	 * into the panel <code>co</code>. This form allows the user to give the
+	 * country a name and its correspondent code. This method is really
+	 * meticulous about the way it reads the input as it tests if the input
+	 * matches the desired format.It will not accept until the user types
+	 * something that matches the format.
+	 */
 	private void addCountry() {
+		CardLayout cl = new CardLayout();
+		JPanel card = new JPanel(cl);
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout(10, 10));
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
@@ -93,7 +203,6 @@ public class AddDados extends JFrame {
 		final JTextField txtCode = new JTextField(20);
 		txtCode.setToolTipText("Country's code.");
 		panel2.add(txtCode, BorderLayout.CENTER);
-
 		JPanel panel3 = new JPanel();
 		panel3.setOpaque(false);
 		Botao ok = new Botao(img.ok);
@@ -105,6 +214,14 @@ public class AddDados extends JFrame {
 		clear.setContentAreaFilled(false);
 		panel3.add(ok);
 		panel3.add(clear);
+
+		clear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtName.setText("");
+				txtCode.setText("");
+
+			}
+		});
 
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,7 +244,11 @@ public class AddDados extends JFrame {
 					JOptionPane.showMessageDialog(AddDados.this, "That name already exists!");
 					txtName.requestFocus();
 				} else {
-					Main.getPaises().add(new Pais(txtCode.getText(), txtName.getText()));
+					Pais pais = new Pais(txtCode.getText(), corrigirNome(txtName.getText()));
+					Main.getPaises().add(pais);
+					JOptionPane.showMessageDialog(AddDados.this, "Country (" + pais + ") was added successfully!");
+					txtName.setText("");
+					txtCode.setText("");
 				}
 			}
 		});
@@ -138,6 +259,14 @@ public class AddDados extends JFrame {
 
 	}
 
+	/*
+	 * Creates the form to create a <code>Competition</code> that will be
+	 * inserted into the panel <code>di</code>. This form allows the user to
+	 * give the competition a name, to choose its correspondent sport. This
+	 * method is really meticulous about the way it reads the input as it tests
+	 * if the input matches the desired format.It will not accept until the user
+	 * types something that matches the format.
+	 */
 	private void addDiscipline() {
 		di.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
 
@@ -247,12 +376,22 @@ public class AddDados extends JFrame {
 		di.add(panel);
 	}
 
-	private void addSport() {
+	/*
+	 * Creates the form to create a <code>Sport</code> that will be inserted
+	 * into the panel <code>spo</code>. This form allows the user to give the
+	 * sport a name. This method is really meticulous about the way it reads the
+	 * input as it tests if the input matches the desired format.It will not
+	 * accept until the user types something that matches the format.
+	 */
+	private void addSport() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout(10, 10));
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		spo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+
+		final Clip clickClip = AudioSystem.getClip();
+		final AudioInputStream ais = AudioSystem.getAudioInputStream(img.snd);
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
 		panel1.setOpaque(false);
@@ -293,11 +432,28 @@ public class AddDados extends JFrame {
 				} else if (!txtSpo.getText().matches("^[A-Za-z]{1,}$")) {
 					JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
 					txtSpo.requestFocus();
-				} else if (sportExists(txtSpo.getText())) {
-					JOptionPane.showMessageDialog(AddDados.this, "That sport already exists!");
-					txtSpo.requestFocus();
-				} else {
-					Main.getModalidades().add(new Modalidade(txtSpo.getText()));
+				} else if (txtSpo.getText().matches("^[A-Za-z]{1,}$")) {
+					String modalidade = corrigirNome(txtSpo.getText());
+					if (sportExists(modalidade)) {
+						JOptionPane.showMessageDialog(AddDados.this, "That sport already exists!");
+						txtSpo.requestFocus();
+					} else {
+						if (modalidade != null) {
+							Modalidade n_mod = new Modalidade(modalidade);
+							Main.getModalidades().add(n_mod);
+							try {
+								clickClip.open(ais);
+								clickClip.start();
+							} catch (LineUnavailableException | IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(AddDados.this, "Sport (" + n_mod + ") was added successfully!");
+							txtSpo.setText("");
+							clickClip.close();
+
+						}
+					}
 				}
 			}
 		});
@@ -307,6 +463,13 @@ public class AddDados extends JFrame {
 		spo.add(p1);
 	}
 
+	/*
+	 * Returns true if there is already a country with the code equal to the
+	 * code in the parameter.
+	 * 
+	 * @return Returns true if there is already a country with the code equal to
+	 * the code in the parameter
+	 */
 	private boolean codeExists(String code) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
 			if (Main.getPaises().get(i).getCodigoPais(0).equalsIgnoreCase(code))
@@ -315,6 +478,13 @@ public class AddDados extends JFrame {
 		return false;
 	}
 
+	/*
+	 * Returns true if there is already a sport with the name equal to the name
+	 * in the parameter.
+	 * 
+	 * @return Returns true if there is already a sport with the name equal to
+	 * the name in the parameter
+	 */
 	private boolean sportExists(String sport) {
 		for (int i = 0; i < Main.getModalidades().size(); i++) {
 			if (Main.getModalidades().get(i).getNome().equalsIgnoreCase(sport))
@@ -323,6 +493,13 @@ public class AddDados extends JFrame {
 		return false;
 	}
 
+	/*
+	 * Returns true if there is already a country with the name equal to the
+	 * name in the parameter.
+	 * 
+	 * @return Returns true if there is already a country with the name equal to
+	 * the name in the parameter
+	 */
 	private boolean nameExists(String name) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
 			if (Main.getPaises().get(i).getNomePais().equalsIgnoreCase(name))
@@ -331,4 +508,21 @@ public class AddDados extends JFrame {
 		return false;
 	}
 
+	private String corrigirNome(String nome) {
+		String pletra = "";
+		String novo = "";
+		if (nome.matches("^[A-Za-z]{1,}$")) {
+			nome = nome.toLowerCase();
+			char[] c = nome.toCharArray();
+			pletra = c[0] + "";
+			pletra = pletra.toUpperCase();
+			novo = pletra;
+			for (int i = 1; i < c.length; i++) {
+				novo += "" + c[i];
+			}
+			return novo;
+		} else {
+			return null;
+		}
+	}
 }

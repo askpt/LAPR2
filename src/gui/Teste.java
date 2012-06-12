@@ -2,10 +2,12 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
-import dados.*;
+
 import jogosolimpicos.*;
-import listaligada.ListaLigada;
+import listaligada.*;
+import dados.*;
 
 //TODO Remove class
 @SuppressWarnings("serial")
@@ -179,21 +181,24 @@ public class Teste extends JFrame {
 						break;
 				}
 
-				ListaLigada<Prova> provas = Main.getProvas();
+				ListaLigada<Prova> provasTemp = new ListaLigada<Prova>();
+				for (int i = 0; i < Main.getProvas().size(); i++) {
+					provasTemp.add(Main.getProvas().get(i));
+				}
 
 				for (int i = 0; i < Main.getModalidades().get(itModal).getDisc().size(); i++) {
 					if (!Main.getModalidades().get(itModal).getDisc().get(i).getTipoMod())
-						for (int j = 0; j < provas.size(); j++) {
+						for (int j = 0; j < provasTemp.size(); j++) {
 
-							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(provas.get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(provas.get(j).getDisciplina().getModalidade().getNome())) {
+							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
-								if (provas.get(j) instanceof ProvaInd) {
+								if (provasTemp.get(j) instanceof ProvaInd) {
 
-									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome() + " Year: " + Main.getProvas().get(j).getJogosOlimpicos().getAno());
-									for (int k = 0; k < ((ProvaInd) Main.getProvas().get(j)).getResultados().size(); k++) {
-										System.out.println(((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getAtleta().getNome() + " : " + ((ProvaInd) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome() + " Year: " + provasTemp.get(j).getJogosOlimpicos().getAno());
+									for (int k = 0; k < ((ProvaInd) provasTemp.get(j)).getResultados().size(); k++) {
+										System.out.println(((ProvaInd) provasTemp.get(j)).getResultados().get(k).getAtleta().getNome() + " : " + ((ProvaInd) provasTemp.get(j)).getResultados().get(k).getResulTemp());
 									}
-									provas.remove(j);
+									provasTemp.remove(j);
 									j--;
 								}
 
@@ -207,13 +212,13 @@ public class Teste extends JFrame {
 
 							if (Main.getModalidades().get(itModal).getDisc().get(i).getNome().equals(Main.getProvas().get(j).getDisciplina().getNome()) && Main.getModalidades().get(itModal).getNome().equals(Main.getProvas().get(j).getDisciplina().getModalidade().getNome())) {
 
-								if (Main.getProvas().get(j) instanceof ProvaCol) {
-									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome() + " Year: " + Main.getProvas().get(j).getJogosOlimpicos().getAno());
+								if (provasTemp.get(j) instanceof ProvaCol) {
+									System.out.println(Main.getModalidades().get(itModal).getDisc().get(i).getNome() + " Year: " + provasTemp.get(j).getJogosOlimpicos().getAno());
 
-									for (int k = 0; k < ((ProvaCol) Main.getProvas().get(j)).getResultados().size(); k++) {
-										System.out.println(((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais(2008) + " : " + ((ProvaCol) Main.getProvas().get(j)).getResultados().get(k).getResulTemp());
+									for (int k = 0; k < ((ProvaCol) provasTemp.get(j)).getResultados().size(); k++) {
+										System.out.println(((ProvaCol) provasTemp.get(j)).getResultados().get(k).getEquipa().getPais().getCodigoPais(2008) + " : " + ((ProvaCol) provasTemp.get(j)).getResultados().get(k).getResulTemp());
 									}
-									provas.remove(j);
+									provasTemp.remove(j);
 									j--;
 								}
 

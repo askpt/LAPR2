@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.*;
 
 import jogosolimpicos.*;
 import listaligada.*;
@@ -58,7 +59,7 @@ public class AddList extends JFrame {
 	private Painel me;
 
 	/*
-	 * Intance of the class <code>Imagens</code>, used to load images in order
+	 * Instance of the class <code>Imagens</code>, used to load images in order
 	 * to fill buttons and panels.
 	 * 
 	 * @see Imagens Imagens Class
@@ -267,7 +268,7 @@ public class AddList extends JFrame {
 
 	/*
 	 * This method creates custom panels and sets them as not Opaque, it is
-	 * called on the constructor.
+	 * called in the constructor.
 	 * 
 	 * @see #ca
 	 * 
@@ -703,7 +704,7 @@ public class AddList extends JFrame {
 
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cl.show(card, "1");
+				cl.show(card, "" + index);
 				add1.setVisible(true);
 				reduce1.setVisible(true);
 				voltar.setVisible(false);
@@ -787,9 +788,10 @@ public class AddList extends JFrame {
 		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
-		Botao voltar = new Botao(img.back, img.back_o);
+		final Botao voltar = new Botao(img.back, img.back_o);
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
+		voltar.setVisible(false);
 		pButn.add(ok);
 		pButn.add(voltar);
 		ok.addActionListener(new ActionListener() {
@@ -804,6 +806,7 @@ public class AddList extends JFrame {
 				card1.add(tabela1, "2");
 				cl1.show(card1, "2");
 				ok.setVisible(false);
+				voltar.setVisible(true);
 			}
 		});
 
@@ -811,6 +814,7 @@ public class AddList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cl1.show(card1, "1");
 				ok.setVisible(true);
+				voltar.setVisible(false);
 			}
 		});
 
@@ -890,9 +894,10 @@ public class AddList extends JFrame {
 		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
-		Botao voltar = new Botao(img.back, img.back_o);
+		final Botao voltar = new Botao(img.back, img.back_o);
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
+		voltar.setVisible(false);
 		pButn.add(ok);
 		pButn.add(voltar);
 
@@ -908,6 +913,7 @@ public class AddList extends JFrame {
 				card2.add(tabela1, "2");
 				cl2.show(card2, "2");
 				ok.setVisible(false);
+				voltar.setVisible(true);
 
 			}
 		});
@@ -916,6 +922,7 @@ public class AddList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cl2.show(card2, "1");
 				ok.setVisible(true);
+				voltar.setVisible(false);
 
 			}
 		});
@@ -965,7 +972,7 @@ public class AddList extends JFrame {
 		p1_1.setOpaque(false);
 		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		JLabel country1_1 = new JLabel(" Begin:         ");
+		JLabel country1_1 = new JLabel("  Begin:                ");
 		country1_1.setForeground(Color.white);
 		p1_1.add(country1_1, BorderLayout.WEST);
 		final JComboBox<Object> cmb1_1 = new JComboBox<Object>(Main.getJogos().toArray());
@@ -976,7 +983,7 @@ public class AddList extends JFrame {
 		p2_1.setOpaque(false);
 		p2_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		JLabel country2_1 = new JLabel("  End:           ");
+		JLabel country2_1 = new JLabel("   End:                   ");
 		country2_1.setForeground(Color.white);
 		p2_1.add(country2_1, BorderLayout.WEST);
 		final JComboBox<Object> cmb2_1 = new JComboBox<Object>(Main.getJogos().toArray());
@@ -1008,9 +1015,10 @@ public class AddList extends JFrame {
 		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
-		Botao voltar = new Botao(img.back, img.back_o);
+		final Botao voltar = new Botao(img.back, img.back_o);
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
+		voltar.setVisible(false);
 		pButn.add(ok);
 		pButn.add(voltar);
 
@@ -1027,6 +1035,7 @@ public class AddList extends JFrame {
 				card3.add(tabela1, "2");
 				cl3.show(card3, "2");
 				ok.setVisible(false);
+				voltar.setVisible(true);
 
 			}
 		});
@@ -1035,7 +1044,7 @@ public class AddList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cl3.show(card3, "1");
 				ok.setVisible(true);
-
+				voltar.setVisible(false);
 			}
 		});
 
@@ -1106,7 +1115,7 @@ public class AddList extends JFrame {
 		p3_1.setOpaque(false);
 		p3_1.setBorder(new EmptyBorder(10, 10, 0, 10));
 
-		JLabel sport = new JLabel("  Sport:               ");
+		JLabel sport = new JLabel("   Sport:               ");
 		sport.setForeground(Color.white);
 		p3_1.add(sport, BorderLayout.WEST);
 		final JComboBox<Object> cmbSp = new JComboBox<Object>(sportsFiltrados().toArray());
@@ -1127,9 +1136,10 @@ public class AddList extends JFrame {
 		final Botao ok = new Botao(img.ok, img.ok_o);
 		ok.setContentAreaFilled(false);
 		ok.setBorderPainted(false);
-		Botao voltar = new Botao(img.back, img.back_o);
+		final Botao voltar = new Botao(img.back, img.back_o);
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
+		voltar.setVisible(false);
 		pButn.add(ok);
 		pButn.add(voltar);
 
@@ -1146,6 +1156,7 @@ public class AddList extends JFrame {
 				card4.add(tabela1, "2");
 				cl4.show(card4, "2");
 				ok.setVisible(false);
+				voltar.setVisible(true);
 
 			}
 		});
@@ -1154,6 +1165,7 @@ public class AddList extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				cl4.show(card4, "1");
 				ok.setVisible(true);
+				voltar.setVisible(false);
 
 			}
 		});
@@ -1281,6 +1293,8 @@ public class AddList extends JFrame {
 			}
 		}
 		final JTable table = new JTable(linhas, col);
+		table.setEnabled(false);
+
 		table.setFont(new Font("Arial", Font.PLAIN, 9));
 		table.setPreferredScrollableViewportSize(new Dimension(500, 80));
 		table.setFillsViewportHeight(true);
@@ -1328,8 +1342,17 @@ public class AddList extends JFrame {
 			}
 		}
 		final JTable table = new JTable(linhas, col);
+		table.setEnabled(false);
+		table.setGridColor(Color.WHITE);
+		table.setBackground(new Color(60, 69, 76));
+		table.setForeground(Color.WHITE);
+		JTableHeader header = table.getTableHeader();
+		header.setBackground(new Color(60, 69, 76));
+		header.setForeground(Color.white);
+
 		table.setFont(new Font("Arial", Font.PLAIN, 9));
-		table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+		table.setEnabled(false);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 163));
 		table.setFillsViewportHeight(true);
 
 		JScrollPane scrollPane = new JScrollPane(table);
@@ -1362,14 +1385,30 @@ public class AddList extends JFrame {
 			}
 		}
 		final JTable table = new JTable(linhas, col);
+		table.setEnabled(false);
+		table.setGridColor(Color.WHITE);
+		table.setBackground(new Color(60, 69, 76));
+		table.setForeground(Color.WHITE);
+		JTableHeader header = table.getTableHeader();
+		header.setBackground(new Color(60, 69, 76));
+		header.setForeground(Color.white);
+
 		table.setFont(new Font("Arial", Font.PLAIN, 9));
-		table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+		if (i.length == 2) {
+			table.setPreferredScrollableViewportSize(new Dimension(500, 32));
+		} else if (i.length == 3) {
+			table.setPreferredScrollableViewportSize(new Dimension(500, 48));
+		} else if (i.length == 4) {
+			table.setPreferredScrollableViewportSize(new Dimension(500, 64));
+		} else if (i.length == 5) {
+			table.setPreferredScrollableViewportSize(new Dimension(500, 80));
+		}
 		table.setFillsViewportHeight(true);
 
 		JScrollPane scrollPane = new JScrollPane(table);
+
 		pTabela.add(scrollPane);
 
 		return pTabela;
 	}
-
 }

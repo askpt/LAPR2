@@ -5,6 +5,8 @@ import java.net.*;
 public class Imagens {
 	ClassLoader classLoader = getClass().getClassLoader();
 
+	URL snd = classLoader.getResource("Imagens/snd2.au");
+
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
 	URL bg = classLoader.getResource("Imagens/background.png");
 	URL bg2 = classLoader.getResource("Imagens/bg2.png");
@@ -47,6 +49,9 @@ public class Imagens {
 
 	URL impEv = classLoader.getResource("Imagens/importEv.png");
 	URL impEv_o = classLoader.getResource("Imagens/importEvOver.png");
+
+	URL intelImport = classLoader.getResource("Imagens/intelimport.png");
+	URL intelImport_o = classLoader.getResource("Imagens/intelimportOver.png");
 
 	// add
 

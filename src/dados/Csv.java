@@ -44,23 +44,6 @@ public class Csv extends JComponent implements Accessible {
 			}
 		}
 
-		System.out.println("Pais:");
-		for (int i = 0; i < ficheirosPais.size(); i++) {
-			System.out.println(ficheirosPais.get(i));
-		}
-		System.out.println("Disciplina:");
-		for (int i = 0; i < ficheirosPais.size(); i++) {
-			System.out.println(ficheirosDisc.get(i));
-		}
-		System.out.println("Prova:");
-		for (int i = 0; i < ficheirosPais.size(); i++) {
-			System.out.println(ficheirosProva.get(i));
-		}
-		System.out.println("Resultados:");
-		for (int i = 0; i < ficheirosPais.size(); i++) {
-			System.out.println(ficheirosResul.get(i));
-		}
-
 		for (int i = 0; i < ficheirosPais.size(); i++) {
 			importPais(ficheirosPais.get(i), janela, paises);
 		}
@@ -73,6 +56,8 @@ public class Csv extends JComponent implements Accessible {
 		for (int i = 0; i < ficheirosPais.size(); i++) {
 			importResultados(ficheirosResul.get(i), janela, atletas, modalidades, paises, provas, equipas, jogos);
 		}
+
+		JOptionPane.showMessageDialog(janela, "Files imported sucessfully!", "intelImport File", JOptionPane.INFORMATION_MESSAGE);
 
 	}
 
@@ -240,7 +225,7 @@ public class Csv extends JComponent implements Accessible {
 			}
 			in.close();
 			if (veri)
-				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -278,7 +263,7 @@ public class Csv extends JComponent implements Accessible {
 			Linguas eng = new Linguas(temp[1], temp[3], temp[5], temp[7], temp[9], temp[11], temp[13], temp[15], temp[17], temp[19], temp[21], temp[23], temp[25], temp[27]);
 			linguas.add(eng);
 			in.close();
-			JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 		} catch (FileNotFoundException | ArrayIndexOutOfBoundsException f) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 		}
@@ -314,7 +299,7 @@ public class Csv extends JComponent implements Accessible {
 				out.format("\n");
 			}
 			out.close();
-			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "File exported sucessfully!", "Export File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
@@ -626,7 +611,7 @@ public class Csv extends JComponent implements Accessible {
 			}
 			in2.close();
 			if (veri)
-				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -706,7 +691,7 @@ public class Csv extends JComponent implements Accessible {
 
 			}
 			out.close();
-			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "File exported sucessfully!", "Export File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
@@ -1044,7 +1029,7 @@ public class Csv extends JComponent implements Accessible {
 			}
 			in.close();
 			if (veri)
-				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -1094,7 +1079,10 @@ public class Csv extends JComponent implements Accessible {
 					break;
 			}
 
-			ListaLigada<Prova> provasTemp = provas;
+			ListaLigada<Prova> provasTemp = new ListaLigada<Prova>();
+			for (int i = 0; i < provas.size(); i++) {
+				provasTemp.add(provas.get(i));
+			}
 
 			for (int i = 0; i < modalidades.get(itModal).getDisc().size(); i++) {
 				if (!modalidades.get(itModal).getDisc().get(i).getTipoMod())
@@ -1145,7 +1133,7 @@ public class Csv extends JComponent implements Accessible {
 			}
 
 			out.close();
-			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "File exported sucessfully!", "Export File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
@@ -1297,7 +1285,7 @@ public class Csv extends JComponent implements Accessible {
 			}
 			in.close();
 			if (veri)
-				JOptionPane.showMessageDialog(janela, "File imported successful!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
@@ -1356,7 +1344,7 @@ public class Csv extends JComponent implements Accessible {
 				out.format("%s;%s;%s;%s\n", modalidade, nomeDisc, men, women);
 			}
 			out.close();
-			JOptionPane.showMessageDialog(janela, "File exported successful!", "Export File", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(janela, "File exported sucessfully!", "Export File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
 			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
