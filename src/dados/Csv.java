@@ -79,13 +79,13 @@ public class Csv extends JComponent implements Accessible {
 		for (int i = 0; i < ficheirosPais.size(); i++) {
 			importPais(ficheirosPais.get(i), janela, paises);
 		}
-		for (int i = 0; i < ficheirosPais.size(); i++) {
+		for (int i = 0; i < ficheirosDisc.size(); i++) {
 			importDisc(ficheirosDisc.get(i), janela, disciplinas, modalidades);
 		}
-		for (int i = 0; i < ficheirosPais.size(); i++) {
+		for (int i = 0; i < ficheirosProva.size(); i++) {
 			importProvas(ficheirosProva.get(i), janela, jogos, provas, disciplinas, modalidades);
 		}
-		for (int i = 0; i < ficheirosPais.size(); i++) {
+		for (int i = 0; i < ficheirosResul.size(); i++) {
 			importResultados(ficheirosResul.get(i), janela, atletas, modalidades, paises, provas, equipas, jogos);
 		}
 
@@ -997,10 +997,10 @@ public class Csv extends JComponent implements Accessible {
 
 					}
 
-				} else if (temp[0].equalsIgnoreCase("Individual ")) {
+				} else if (temp[0].replaceAll(" ", "").equalsIgnoreCase("Individual")) {
 					tipoDisc = false;
 
-				} else if (temp[0].equalsIgnoreCase("Team ")) {
+				} else if (temp[0].replaceAll(" ", "").equalsIgnoreCase("Team")) {
 					tipoDisc = true;
 				} else {
 					nomeDisc = temp[0];
@@ -1012,7 +1012,7 @@ public class Csv extends JComponent implements Accessible {
 
 					itDisc = 0;
 					for (; itDisc < modalidades.get(itModal).getDisc().size(); itDisc++) {
-						if (nomeDisc.equalsIgnoreCase(modalidades.get(itModal).getDisc().get(itDisc).getNome()) && codGenero == modalidades.get(itModal).getDisc().get(itDisc).getGenero())
+						if (nomeDisc.replaceAll(" ", "").equalsIgnoreCase(modalidades.get(itModal).getDisc().get(itDisc).getNome().replaceAll(" ", "")) && codGenero == modalidades.get(itModal).getDisc().get(itDisc).getGenero())
 							break;
 					}
 					tipoClass = modalidades.get(itModal).getDisc().get(itDisc).getTipoClass();
@@ -1147,6 +1147,7 @@ public class Csv extends JComponent implements Accessible {
 			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
 			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			exc.printStackTrace();
 		}
 
 	}

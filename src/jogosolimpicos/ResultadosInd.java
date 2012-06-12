@@ -113,11 +113,11 @@ public class ResultadosInd implements Serializable {
 	 */
 	private void convertDist() {
 		String temp = resulTemp;
-		if (temp.matches("^[0-9]*(.{1}[0-9]{1,})?( m){1}$"))
-			temp.replaceAll(" m", "");
-		else if (temp.matches("^[0-9]*(.{1}[0-9]{1,})?( ft){1}$"))
-			temp.replaceAll(" ft", "");
-
+		temp = temp.replaceAll(" ", "");
+		if (temp.matches("^[0-9]*(.{1}[0-9]{1,})?(m){1}$"))
+			temp = temp.replaceAll("m", "");
+		else if (temp.matches("^[0-9]*(.{1}[0-9]{1,})?(ft){1}$"))
+			temp = temp.replaceAll("ft", "");
 		setResultado(Float.parseFloat(temp));
 	}
 
