@@ -5,10 +5,9 @@ import java.net.*;
 
 import javax.swing.*;
 
-import dados.*;
-
 import jogosolimpicos.*;
 import listaligada.*;
+import dados.*;
 
 public class Main {
 

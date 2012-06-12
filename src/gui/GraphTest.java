@@ -1,10 +1,12 @@
 package gui;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
+
 import javax.swing.*;
+
+import listaligada.*;
 
 //TODO remover classe
 @SuppressWarnings("serial")
@@ -17,13 +19,13 @@ public class GraphTest extends JPanel {
 	private static final Stroke GRAPH_STROKE = new BasicStroke(3f);
 	private static final int GRAPH_POINT_WIDTH = 12;
 	private static final int Y_HATCH_CNT = 10;
-	private List<Integer> scores1;
-	private List<Integer> scores2;
-	private List<Integer> scores3;
-	private List<Integer> scores4;
-	private List<Integer> scores5;
+	private ListaLigada<Integer> scores1;
+	private ListaLigada<Integer> scores2;
+	private ListaLigada<Integer> scores3;
+	private ListaLigada<Integer> scores4;
+	private ListaLigada<Integer> scores5;
 
-	public GraphTest(List<Integer> scores1, List<Integer> scores2, List<Integer> scores3, List<Integer> scores4, List<Integer> scores5) {
+	public GraphTest(ListaLigada<Integer> scores1, ListaLigada<Integer> scores2, ListaLigada<Integer> scores3, ListaLigada<Integer> scores4, ListaLigada<Integer> scores5) {
 		this.scores1 = scores1;
 		this.scores2 = scores2;
 		this.scores3 = scores3;
@@ -48,7 +50,7 @@ public class GraphTest extends JPanel {
 
 	}
 
-	public void createLines(List<Integer> scores, double xScale, double yScale, Graphics2D g2, Color color) {
+	public void createLines(ListaLigada<Integer> scores, double xScale, double yScale, Graphics2D g2, Color color) {
 		List<Point> graphPoints = new ArrayList<Point>();
 		for (int i = 0; i < scores.size(); i++) {
 			int x1 = (int) (i * xScale + BORDER_GAP);
@@ -106,40 +108,28 @@ public class GraphTest extends JPanel {
 		return new Dimension(PREF_W, PREF_H);
 	}
 
-	private static void createAndShowGui() {
-		List<Integer> scores1 = new ArrayList<Integer>();
-		List<Integer> scores2 = new ArrayList<Integer>();
-		List<Integer> scores3 = new ArrayList<Integer>();
-		List<Integer> scores4 = new ArrayList<Integer>();
-		List<Integer> scores5 = new ArrayList<Integer>();
-		Random random = new Random();
-		int maxDataPoints = 16;
-		int maxScore = 20;
-		for (int i = 0; i < maxDataPoints; i++) {
-			scores1.add(random.nextInt(maxScore));
-		}
-		for (int i = 0; i < maxDataPoints; i++) {
-			scores2.add(random.nextInt(maxScore));
-		}
-		for (int i = 0; i < maxDataPoints; i++) {
-			scores3.add(random.nextInt(maxScore));
-		}
-		for (int i = 0; i < maxDataPoints; i++) {
-			scores4.add(random.nextInt(maxScore));
-		}
-		for (int i = 0; i < maxDataPoints; i++) {
-			scores5.add(random.nextInt(maxScore));
-		}
+	private static void createAndShowGui(ListaLigada<String> paises, ListaLigada<Integer> scores1, ListaLigada<Integer> scores2, ListaLigada<Integer> scores3, ListaLigada<Integer> scores4, ListaLigada<Integer> scores5) {
 		GraphTest mainPanel = new GraphTest(scores1, scores2, scores3, scores4, scores5);
 
 		JFrame frame = new JFrame("DrawGraph");
 		JPanel arroz = new JPanel(new BorderLayout());
 		arroz.add(mainPanel, BorderLayout.WEST);
+		Font font = new Font("Arial", Font.BOLD, 14);
 		JLabel lbl1 = new JLabel("Portugal");
+		lbl1.setFont(font);
+		lbl1.setForeground(Color.green);
 		JLabel lbl2 = new JLabel("Espanha");
+		lbl2.setFont(font);
+		lbl2.setForeground(Color.red);
 		JLabel lbl3 = new JLabel("Inglaterra");
+		lbl3.setFont(font);
+		lbl3.setForeground(Color.cyan);
 		JLabel lbl4 = new JLabel("Arroz");
+		lbl4.setFont(font);
+		lbl4.setForeground(Color.orange);
 		JLabel lbl5 = new JLabel("Massa");
+		lbl5.setFont(font);
+		lbl5.setForeground(Color.yellow);
 		JPanel massa = new JPanel(new GridLayout(5, 1));
 		massa.add(lbl1);
 		massa.add(lbl2);
@@ -153,13 +143,5 @@ public class GraphTest extends JPanel {
 		frame.pack();
 		frame.setLocationByPlatform(true);
 		frame.setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGui();
-			}
-		});
 	}
 }
