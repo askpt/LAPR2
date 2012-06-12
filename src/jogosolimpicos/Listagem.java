@@ -191,6 +191,52 @@ public class Listagem {
 	}
 
 	/**
+	 * Method to calculate the number of medals by year.
+	 * 
+	 * @param pais
+	 *            country to be calculated
+	 * @param paises
+	 *            linked list of countries
+	 * @param provas
+	 *            linked list of competitions with event
+	 * @param jogos
+	 *            linked list of event
+	 * @return a linked list of integers with a number of medals by year
+	 */
+	public static ListaLigada<Integer> historicoMedalhasPais(Pais pais, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<JogosOlimpicos> jogos) {
+		ListaLigada<Integer> medalhas = new ListaLigada<Integer>();
+		ListaLigada<JogosOlimpicos> jogosTemp = new ListaLigada<JogosOlimpicos>();
+		ListaLigada<Pais> paisTemp = new ListaLigada<Pais>();
+
+		for (int i = 0; i < jogos.size(); i++) {
+			jogosTemp.add(jogos.get(i));
+		}
+
+		for (int i = 0; i < jogosTemp.size() - 1; i++) {
+			for (int j = i + 1; j < jogosTemp.size(); j++) {
+				if (jogosTemp.get(i).compareTo(jogosTemp.get(j)) > 0) {
+					JogosOlimpicos temp = jogosTemp.get(j);
+					jogosTemp.set(j, jogosTemp.get(i));
+					jogosTemp.set(i, temp);
+				}
+			}
+		}
+
+		for (int i = 0; i < jogosTemp.size(); i++) {
+			paisTemp = listarMedalhasPais(paises, provas, jogosTemp.get(i).getAno(), jogosTemp.get(i).getAno(), null, null);
+			int itPais = 0;
+			for (; itPais < paisTemp.size(); itPais++) {
+				if (pais.getCodigoPais(jogosTemp.get(i).getAno()).equalsIgnoreCase(paisTemp.get(itPais).getCodigoPais(jogosTemp.get(i).getAno()))) {
+					break;
+				}
+			}
+			medalhas.add(paisTemp.get(itPais).getMedalha().getOuro() + paisTemp.get(itPais).getMedalha().getPrata() + paisTemp.get(itPais).getMedalha().getBronze());
+		}
+
+		return medalhas;
+	}
+
+	/**
 	 * Method to create a list of the medals obtained by the athlete.
 	 * 
 	 * @param atletas

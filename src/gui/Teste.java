@@ -314,6 +314,23 @@ public class Teste extends JFrame {
 		});
 
 		listar.add(menuItem);
+
+		menuItem = new JMenuItem("Medalhas por ano", 'L');
+		menuItem.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Pais pais = new Pais("USA", "United States");
+				ListaLigada<Integer> medalhas;
+				medalhas = Listagem.historicoMedalhasPais(pais, Main.getPaises(), Main.getProvas(), Main.getJogos());
+
+				for (int i = 0; i < medalhas.size(); i++) {
+					System.out.println(medalhas.get(i));
+				}
+			}
+		});
+
+		listar.add(menuItem);
 		menuBar.add(listar);
 
 		setJMenuBar(menuBar);

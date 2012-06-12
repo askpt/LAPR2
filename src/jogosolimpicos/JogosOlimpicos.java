@@ -7,8 +7,8 @@ import java.io.*;
  * 
  */
 
-@SuppressWarnings("serial")
-public class JogosOlimpicos implements Serializable {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class JogosOlimpicos implements Serializable, Comparable {
 
 	/**
 	 * year of the edition.
@@ -89,6 +89,20 @@ public class JogosOlimpicos implements Serializable {
 	 */
 	public String toString() {
 		return String.format("%d %s Games", ano, cidade);
+	}
+
+	/**
+	 * Method to compare two editions by year
+	 * 
+	 * @return the diference between this year and that year.
+	 */
+	@Override
+	public int compareTo(Object obj) {
+		if (obj instanceof JogosOlimpicos) {
+			JogosOlimpicos that = (JogosOlimpicos) obj;
+			return this.getAno() - that.getAno();
+		}
+		return 0;
 	}
 
 }
