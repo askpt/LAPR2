@@ -2,9 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -67,7 +65,7 @@ public class AddDados extends JFrame {
 	 * 
 	 * @see #setProperties(int,int,int,boolean)
 	 */
-	public AddDados() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public AddDados() {
 		super("Add Info");
 
 		addPaineis();
@@ -268,10 +266,10 @@ public class AddDados extends JFrame {
 	 * types something that matches the format.
 	 */
 	private void addDiscipline() {
-		di.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
+		di.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 30));
 
 		Painel panel = new Painel(img.bg4);
-		panel.setLayout(new GridLayout(5, 1));
+		panel.setLayout(new GridLayout(7, 1));
 		panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 		panel.setOpaque(false);
 
@@ -296,7 +294,7 @@ public class AddDados extends JFrame {
 		JLabel c = new JLabel("  Sport:  ");
 		c.setForeground(Color.white);
 		panel6.add(c, BorderLayout.WEST);
-		final JComboBox<?> cmbDiscipline = new JComboBox<Object>();
+		final JComboBox<?> cmbDiscipline = new JComboBox<Object>(Main.getModalidades().toArray());
 		cmbDiscipline.setToolTipText("Discipline's Sport.");
 		panel6.add(cmbDiscipline, BorderLayout.CENTER);
 		panel.add(panel6);
@@ -305,11 +303,10 @@ public class AddDados extends JFrame {
 		panel2.setOpaque(false);
 		panel2.setBorder(new EmptyBorder(10, 10, 0, 10));
 		ButtonGroup btngrp = new ButtonGroup();
-		JRadioButton rbDistancia = new JRadioButton("Distance", true);
-
-		JRadioButton rbTempo = new JRadioButton("Time", false);
-		JRadioButton rbPontos = new JRadioButton("Points", false);
-		JRadioButton rbRank = new JRadioButton("Rank", false);
+		final JRadioButton rbDistancia = new JRadioButton("Distance", true);
+		final JRadioButton rbTempo = new JRadioButton("Time", false);
+		final JRadioButton rbPontos = new JRadioButton("Score", false);
+		final JRadioButton rbRank = new JRadioButton("Rank", false);
 
 		rbDistancia.setOpaque(false);
 		rbDistancia.setForeground(Color.white);
@@ -334,9 +331,9 @@ public class AddDados extends JFrame {
 		JPanel panel4 = new JPanel();
 		panel4.setOpaque(false);
 		ButtonGroup btngrp2 = new ButtonGroup();
-		JRadioButton rbM = new JRadioButton("Male", true);
-		JRadioButton rbF = new JRadioButton("Female", false);
-		JRadioButton rbMi = new JRadioButton("Mixed", false);
+		final JRadioButton rbM = new JRadioButton("Male", true);
+		final JRadioButton rbF = new JRadioButton("Female", false);
+		final JRadioButton rbMi = new JRadioButton("Mixed", false);
 
 		rbM.setOpaque(false);
 		rbM.setForeground(Color.white);
@@ -345,14 +342,50 @@ public class AddDados extends JFrame {
 		rbMi.setOpaque(false);
 		rbMi.setForeground(Color.white);
 
-		btngrp.add(rbM);
-		btngrp.add(rbF);
-		btngrp.add(rbMi);
+		btngrp2.add(rbM);
+		btngrp2.add(rbF);
+		btngrp2.add(rbMi);
 
 		panel4.add(rbM);
 		panel4.add(rbF);
 		panel4.add(rbMi);
 		panel.add(panel4);
+
+		JPanel panel7 = new JPanel();
+		panel7.setOpaque(false);
+		ButtonGroup btngrp3 = new ButtonGroup();
+		final JRadioButton rbI = new JRadioButton("Individual", true);
+		final JRadioButton rbC = new JRadioButton("Colective", false);
+
+		rbI.setOpaque(false);
+		rbI.setForeground(Color.white);
+		rbC.setOpaque(false);
+		rbC.setForeground(Color.white);
+
+		btngrp3.add(rbI);
+		btngrp3.add(rbC);
+
+		panel7.add(rbI);
+		panel7.add(rbC);
+		panel.add(panel7);
+
+		JPanel panel8 = new JPanel();
+		panel8.setOpaque(false);
+		ButtonGroup btngrp4 = new ButtonGroup();
+		final JRadioButton rbH = new JRadioButton("Highest", true);
+		final JRadioButton rbL = new JRadioButton("Lowest", false);
+
+		rbH.setOpaque(false);
+		rbH.setForeground(Color.white);
+		rbL.setOpaque(false);
+		rbL.setForeground(Color.white);
+
+		btngrp4.add(rbH);
+		btngrp4.add(rbL);
+
+		panel8.add(rbH);
+		panel8.add(rbL);
+		panel.add(panel8);
 
 		JPanel panel5 = new JPanel();
 		panel5.setOpaque(false);
@@ -371,6 +404,112 @@ public class AddDados extends JFrame {
 			}
 		});
 
+		ok.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtName.equals("")) {
+					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
+					txtName.requestFocus();
+				} else if (!((txtName.getText().matches("^[A-Za-z]{1,}$")) || (txtName.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")))) {
+					JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
+					txtName.requestFocus();
+				} else if (txtName.getText().matches("^[A-Za-z]{1,}$")) {
+					String comp = corrigirNome(txtName.getText());
+					if (comp != null) {
+						Disciplina comp_ = new Disciplina(comp);
+						if (rbM.isSelected()) {
+							comp_.setGenero(0);
+						} else if (rbF.isSelected()) {
+							comp_.setGenero(1);
+						} else if (rbMi.isSelected()) {
+							comp_.setGenero(2);
+						}
+						if (rbI.isSelected()) {
+							comp_.setTipoDisc(false);
+						} else if (rbC.isSelected()) {
+							comp_.setTipoDisc(true);
+						}
+						if (rbDistancia.isSelected()) {
+							comp_.setTipoClass(0);
+						} else if (rbPontos.isSelected()) {
+							comp_.setTipoClass(2);
+						} else if (rbRank.isSelected()) {
+							comp_.setTipoClass(3);
+						} else if (rbTempo.isSelected()) {
+							comp_.setTipoClass(1);
+
+						}
+						if (rbH.isSelected()) {
+							comp_.setOrdenacao(true);
+						} else if (rbL.isSelected()) {
+							comp_.setOrdenacao(false);
+						}
+
+						if (cmbDiscipline.getSelectedItem() != null) {
+							int index = Main.getModalidades().indexOf((Modalidade) cmbDiscipline.getSelectedItem());
+							comp_.setModalidade(Main.getModalidades().get(index));
+						}
+						if (competitionExists(comp_)) {
+							JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
+							txtName.setText("");
+							txtName.requestFocus();
+						} else {
+							Main.getDisciplinas().add(comp_);
+							JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
+							txtName.setText("");
+
+						}
+					}
+				} else if (txtName.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")) {
+					String comp = corrigirNomeCar(txtName.getText());
+
+					Disciplina comp_ = new Disciplina(comp);
+					if (rbM.isSelected()) {
+						comp_.setGenero(0);
+					} else if (rbF.isSelected()) {
+						comp_.setGenero(1);
+					} else if (rbMi.isSelected()) {
+						comp_.setGenero(2);
+					}
+					if (rbI.isSelected()) {
+						comp_.setTipoDisc(false);
+					} else if (rbC.isSelected()) {
+						comp_.setTipoDisc(true);
+					}
+					if (rbDistancia.isSelected()) {
+						comp_.setTipoClass(0);
+					} else if (rbPontos.isSelected()) {
+						comp_.setTipoClass(2);
+					} else if (rbRank.isSelected()) {
+						comp_.setTipoClass(3);
+					} else if (rbTempo.isSelected()) {
+						comp_.setTipoClass(1);
+
+					}
+					if (rbH.isSelected()) {
+						comp_.setOrdenacao(true);
+					} else if (rbL.isSelected()) {
+						comp_.setOrdenacao(false);
+					}
+
+					if (cmbDiscipline.getSelectedItem() != null) {
+						int index = Main.getModalidades().indexOf((Modalidade) cmbDiscipline.getSelectedItem());
+						comp_.setModalidade(Main.getModalidades().get(index));
+					}
+					if (competitionExists(comp_)) {
+						JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
+						txtName.setText("");
+						txtName.requestFocus();
+					} else {
+						Main.getDisciplinas().add(comp_);
+						JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
+						txtName.setText("");
+					}
+
+				}
+
+			}
+		});
+
 		panel.add(panel5);
 
 		di.add(panel);
@@ -383,15 +522,12 @@ public class AddDados extends JFrame {
 	 * input as it tests if the input matches the desired format.It will not
 	 * accept until the user types something that matches the format.
 	 */
-	private void addSport() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	private void addSport() {
 		Painel p1 = new Painel(img.bg4);
 		p1.setLayout(new BorderLayout(10, 10));
 		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p1.setOpaque(false);
 		spo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
-
-		final Clip clickClip = AudioSystem.getClip();
-		final AudioInputStream ais = AudioSystem.getAudioInputStream(img.snd);
 
 		JPanel panel1 = new JPanel(new BorderLayout(0, 10));
 		panel1.setOpaque(false);
@@ -429,28 +565,36 @@ public class AddDados extends JFrame {
 				if (txtSpo.equals("")) {
 					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
 					txtSpo.requestFocus();
-				} else if (!txtSpo.getText().matches("^[A-Za-z]{1,}$")) {
-					JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
+				} else if (!((txtSpo.getText().matches("^[A-Za-z]{1,}$")) || (txtSpo.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")))) {
+					JOptionPane.showMessageDialog(AddDados.this, "Make sure the sport field is formatted within the correct format!");
 					txtSpo.requestFocus();
 				} else if (txtSpo.getText().matches("^[A-Za-z]{1,}$")) {
 					String modalidade = corrigirNome(txtSpo.getText());
 					if (sportExists(modalidade)) {
 						JOptionPane.showMessageDialog(AddDados.this, "That sport already exists!");
+						txtSpo.setText("");
 						txtSpo.requestFocus();
 					} else {
 						if (modalidade != null) {
 							Modalidade n_mod = new Modalidade(modalidade);
 							Main.getModalidades().add(n_mod);
-							try {
-								clickClip.open(ais);
-								clickClip.start();
-							} catch (LineUnavailableException | IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
 							JOptionPane.showMessageDialog(AddDados.this, "Sport (" + n_mod + ") was added successfully!");
 							txtSpo.setText("");
-							clickClip.close();
+
+						}
+					}
+				} else if (txtSpo.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")) {
+					String modalidade = corrigirNomeCar(txtSpo.getText());
+					if (sportExists(modalidade)) {
+						JOptionPane.showMessageDialog(AddDados.this, "That sport already exists!");
+						txtSpo.setText("");
+						txtSpo.requestFocus();
+					} else {
+						if (modalidade != null) {
+							Modalidade n_mod = new Modalidade(modalidade);
+							Main.getModalidades().add(n_mod);
+							JOptionPane.showMessageDialog(AddDados.this, "Sport (" + n_mod + ") was added successfully!");
+							txtSpo.setText("");
 
 						}
 					}
@@ -494,6 +638,20 @@ public class AddDados extends JFrame {
 	}
 
 	/*
+	 * Returns true if there is already a competition equal to the the parameter
+	 * 
+	 * @return Returns true if there is already a competition equal to the the
+	 * parameter
+	 */
+	private boolean competitionExists(Disciplina a) {
+		for (int i = 0; i < Main.getDisciplinas().size(); i++) {
+			if (Main.getDisciplinas().get(i).equals(a))
+				return true;
+		}
+		return false;
+	}
+
+	/*
 	 * Returns true if there is already a country with the name equal to the
 	 * name in the parameter.
 	 * 
@@ -520,9 +678,24 @@ public class AddDados extends JFrame {
 			for (int i = 1; i < c.length; i++) {
 				novo += "" + c[i];
 			}
-			return novo;
-		} else {
-			return null;
 		}
+		return novo;
+	}
+
+	private String corrigirNomeCar(String nome) {
+		String novo = "";
+		if (nome.matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")) {
+			String[] a = nome.split("-");
+			for (int i = 0; i < a.length; i++) {
+				a[i] = a[i].trim();
+				a[i] = corrigirNome(a[i]);
+				if (i != a.length - 1) {
+					novo += "" + a[i] + "-";
+				} else {
+					novo += "" + a[i];
+				}
+			}
+		}
+		return novo;
 	}
 }

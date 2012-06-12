@@ -2,9 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 
-import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
@@ -200,6 +198,7 @@ public class AppConfig extends JFrame {
 		jtp.addTab("List", list);
 		jtp.setBackground(new Color(61, 71, 78));
 		jtp.setForeground(Color.WHITE);
+
 	}
 
 	/*
@@ -236,6 +235,7 @@ public class AppConfig extends JFrame {
 		add.setOpaque(false);
 		edit.setOpaque(false);
 		list.setOpaque(false);
+
 	}
 
 	/*
@@ -589,12 +589,7 @@ public class AppConfig extends JFrame {
 					a.setSelectedIndex(0);
 					a.setVisible(true);
 				} else {
-					try {
-						a = new AddDados();
-					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					a = new AddDados();
 					a.setSelectedIndex(0);
 				}
 			}
@@ -611,12 +606,7 @@ public class AppConfig extends JFrame {
 					a.setSelectedIndex(1);
 					a.setVisible(true);
 				} else {
-					try {
-						a = new AddDados();
-					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					a = new AddDados();
 					a.setSelectedIndex(1);
 				}
 			}
@@ -632,12 +622,7 @@ public class AppConfig extends JFrame {
 					a.setSelectedIndex(2);
 					a.setVisible(true);
 				} else {
-					try {
-						a = new AddDados();
-					} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					a = new AddDados();
 					a.setSelectedIndex(2);
 				}
 			}
