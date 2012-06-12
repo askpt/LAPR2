@@ -309,8 +309,15 @@ public class Csv extends JComponent implements Accessible {
 		}
 
 	}
-
-	// TODO javadoc
+	
+	/**
+	 * Method to import languages through .csv files.
+	 * 
+	 * @param janela
+	 * 			the parent component of the dialog
+	 * @param linguas
+	 * 			language details
+	 */
 	public void importLingua(Component janela, ListaLigada<Linguas> linguas) {
 
 		try {
