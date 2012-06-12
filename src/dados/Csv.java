@@ -789,8 +789,6 @@ public class Csv extends JComponent implements Accessible {
 	 * @param janela
 	 * @param paises
 	 *            linked list with the countries
-	 * @param disciplinas
-	 *            linked list with the competitions
 	 * @param modalidades
 	 *            linked list with the sports
 	 * @param jogos
@@ -1552,7 +1550,6 @@ public class Csv extends JComponent implements Accessible {
 		/**
 		 * The description of this filter. Eg: "CSV File"
 		 * 
-		 * @see FileView#getName
 		 */
 		@Override
 		public String getDescription() {
