@@ -169,7 +169,14 @@ public class ResultadosInd implements Serializable, Comparable {
 		return resulTemp;
 	}
 
-	// TODO JavaDoc
+	/**
+	 * Compare if this result and his athelete associated is equal
+	 * 
+	 * @return true if is equal
+	 * @param obj
+	 *            individual result
+	 * @see Atleta athlete details
+	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof ResultadosInd) {
 			ResultadosInd that = (ResultadosInd) obj;

@@ -1039,7 +1039,6 @@ public class Csv extends JComponent implements Accessible {
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
 
 						}
-						// TODO comparar para não duplicar
 						int i = 0;
 						for (; i < ((ProvaInd) provas.get(itProva)).getResultados().size(); i++) {
 							if (((ProvaInd) provas.get(itProva)).getResultados().get(i).equals(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass)))
@@ -1088,7 +1087,6 @@ public class Csv extends JComponent implements Accessible {
 
 							atletasEqu.add(atletas.get(itAtleta));
 						}
-						// TODO comparar para não duplicar
 						Equipa equiTemp = new Equipa(paises.get(itPais));
 						equiTemp.setAtletas(atletasEqu);
 						int itEquipa = 0;
@@ -1099,7 +1097,6 @@ public class Csv extends JComponent implements Accessible {
 						}
 						if (itEquipa == equipas.size())
 							equipas.add(new Equipa(paises.get(itPais)));
-						// TODO comparar para não duplicar
 						int i = 0;
 						for (; i < ((ProvaCol) provas.get(itProva)).getResultados().size(); i++) {
 							if (((ProvaCol) provas.get(itProva)).getResultados().get(i).equals(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass)))
@@ -1184,7 +1181,6 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-						// TODO comparar para não duplicar
 						int i = 0;
 						for (; i < ((ProvaInd) provas.get(itProva)).getResultados().size(); i++) {
 							if (((ProvaInd) provas.get(itProva)).getResultados().get(i).equals(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass)))
@@ -1227,7 +1223,6 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-						// TODO comparar para não duplicar
 
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
@@ -1250,7 +1245,6 @@ public class Csv extends JComponent implements Accessible {
 							}
 							atletasEqu.add(atletas.get(itAtleta));
 						}
-						// TODO comparar para não duplicar
 						Equipa equiTemp = new Equipa(paises.get(itPais));
 						equiTemp.setAtletas(atletasEqu);
 						int itEquipa = 0;
@@ -1261,7 +1255,6 @@ public class Csv extends JComponent implements Accessible {
 						}
 						if (itEquipa == equipas.size())
 							equipas.add(new Equipa(paises.get(itPais)));
-						// TODO comparar para não duplicar
 						int i = 0;
 						for (; i < ((ProvaCol) provas.get(itProva)).getResultados().size(); i++) {
 							if (((ProvaCol) provas.get(itProva)).getResultados().get(i).equals(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass)))

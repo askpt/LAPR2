@@ -173,7 +173,14 @@ public class ResultadosCol implements Comparable, Serializable {
 		return resulTemp;
 	}
 
-	// TODO javadoc
+	/**
+	 * Compare if this result and his team associated is equal
+	 * 
+	 * @return true if is equal
+	 * @param obj
+	 *            team result
+	 * @see Equipa team details
+	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof ResultadosCol) {
 			ResultadosCol that = (ResultadosCol) obj;

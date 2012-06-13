@@ -5,8 +5,15 @@ import jogosolimpicos.*;
 
 import org.junit.*;
 
-//TODO equals test
 public class ResultadosColTest {
+
+	@Test
+	public void testEquals() {
+		ResultadosCol resulTest = new ResultadosCol(new Equipa(new Pais("POR", "Portugal")), "17", 0);
+		ResultadosCol resulTest2 = new ResultadosCol(new Equipa(new Pais("POR", "Portugal")), "17", 0);
+
+		assertTrue(resulTest.equals(resulTest2));
+	}
 
 	@Test
 	public void testGetEquipa() {

@@ -132,7 +132,15 @@ public class Equipa implements Serializable {
 		}
 	}
 
-	// TODO javadoc
+	/**
+	 * Compare if this team is equal to that team
+	 * 
+	 * @param obj
+	 *            team to be compared
+	 * @return true if the compared teams are equal
+	 * @see Pais country details
+	 * @see Atleta athlete details
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Equipa) {
@@ -142,13 +150,18 @@ public class Equipa implements Serializable {
 		return false;
 	}
 
-	// TODO javadoc
+	/**
+	 * Compare if this team of athletes is equal to that team of athletes
+	 * 
+	 * @param that
+	 *            linked list of the team of athletes
+	 * @return true if is equal
+	 * @see Atleta athlete details
+	 */
 	private boolean equalsAtletas(ListaLigada<Atleta> that) {
-		for (int i = 0; i < this.getAtleta().size(); i++) {
-			for (int j = 0; j < that.size(); j++) {
-				if (!(this.getAtleta().get(i).getID() == that.get(j).getID())) {
-					return false;
-				}
+		for (int i = 0; i < this.getAtleta().size() && i < that.size(); i++) {
+			if (!(this.getAtleta().get(i).getID() == that.get(i).getID())) {
+				return false;
 			}
 		}
 

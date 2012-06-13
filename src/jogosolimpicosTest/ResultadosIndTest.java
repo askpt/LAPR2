@@ -6,7 +6,15 @@ import jogosolimpicos.*;
 import org.junit.*;
 
 public class ResultadosIndTest {
-	// TODO equals test
+	@Test
+	public void testEquals() {
+		Atleta atl = new Atleta("Quim", new Pais("POR", "Portugal"));
+		ResultadosInd resulTest = new ResultadosInd(atl, "17", 0);
+		ResultadosInd resulTest2 = new ResultadosInd(atl, "17", 0);
+
+		assertTrue(resulTest.equals(resulTest2));
+	}
+
 	@Test
 	public void testGetAtleta() {
 		ResultadosInd resulTest = new ResultadosInd(new Atleta("Quim", new Pais("POR", "Portugal")), "17", 0);
