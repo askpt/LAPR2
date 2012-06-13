@@ -56,10 +56,8 @@ public class HTML {
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
 				File ficheiro = fc.getSelectedFile();
-				ListaLigada<String> path = splitFilePath(ficheiro);
-				for (int i = 0; i < path.size(); i++) {
-					System.out.println(path.get(i));
-				}
+				splitFilePath(ficheiro);
+
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
 				ListaLigada<Pais> paisTemp = pais;
@@ -431,7 +429,7 @@ public class HTML {
 		fout.format("<body>");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
+		fout.format("<td rowspan = 2><img src=\\"" + img.argolas + "\\" width=350 height= 140> </td>");
 		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
@@ -450,17 +448,17 @@ public class HTML {
 
 	}
 
-	public static ListaLigada<String> splitFilePath(final File f) {
-		if (f == null) {
-			throw new NullPointerException();
+	public static String splitFilePath(final File f) {
+
+		String a = f.getAbsolutePath();
+		String temp[] = a.split("\\\\");
+
+		for (int i = 0; i < temp.length; i++) {
+
+			System.out.println(temp[i]);
 		}
-		final ListaLigada<String> result = new ListaLigada<String>();
-		File temp = f.getAbsoluteFile();
-		while (temp != null) {
-			result.add(0, temp.getName());
-			temp = temp.getParentFile();
-		}
-		return result;
+		return null;
+
 	}
 
 	/**
