@@ -5,8 +5,6 @@ import java.net.*;
 public class Imagens {
 	ClassLoader classLoader = getClass().getClassLoader();
 
-	URL snd = classLoader.getResource("Imagens/snd2.au");
-
 	URL logo = classLoader.getResource("Imagens/logo.png");
 
 	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
@@ -17,6 +15,8 @@ public class Imagens {
 	URL exit = classLoader.getResource("Imagens/exit.png");
 	URL about = classLoader.getResource("Imagens/about.png");
 	URL about_o = classLoader.getResource("Imagens/aboutOver.png");
+	URL argolas = classLoader.getResource("Imagens/argolascr3.gif");
+	URL dragndrop = classLoader.getResource("Imagens/dragndrop.png");
 
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");

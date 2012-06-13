@@ -1,7 +1,8 @@
 package gui;
 
 import java.awt.*;
-import java.awt.event.*;
+
+import javax.swing.*;
 
 import jogosolimpicos.*;
 import listaligada.*;
@@ -12,14 +13,13 @@ import org.jfree.chart.plot.*;
 import org.jfree.chart.renderer.category.*;
 import org.jfree.data.category.*;
 import org.jfree.data.xy.*;
-import org.jfree.ui.*;
 
 /**
  * A simple demonstration application showing how to create a line chart using
  * data from an {@link XYDataset}.
  * 
  */
-public class Chart extends ApplicationFrame {
+public class Chart extends JFrame {
 
 	/**
 	 * Creates a new demo.
@@ -34,16 +34,11 @@ public class Chart extends ApplicationFrame {
 		final CategoryDataset dataset = createDataset(nomes, pais1, pais2, pais3, pais4, pais5);
 		final JFreeChart chart = createChart(dataset);
 		final ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setPreferredSize(new Dimension(500, 270));
+		chartPanel.setPreferredSize(new Dimension(640, 400));
 		setContentPane(chartPanel);
 		setVisible(true);
 		pack();
-
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				dispose();
-			}
-		});
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 	}
 
