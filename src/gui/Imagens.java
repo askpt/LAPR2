@@ -57,6 +57,9 @@ public class Imagens {
 	URL intelImport = classLoader.getResource("Imagens/intelimport.png");
 	URL intelImport_o = classLoader.getResource("Imagens/intelimportOver.png");
 
+	URL impdrag = classLoader.getResource("Imagens/dragndropimp.png");
+	URL impdrag_o = classLoader.getResource("Imagens/dragndropimpOver.png");
+
 	// add
 
 	URL addCo = classLoader.getResource("Imagens/addCO.png");

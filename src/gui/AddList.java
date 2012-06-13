@@ -239,6 +239,7 @@ public class AddList extends JFrame {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
 		setVisible(visible);
+		setLocationRelativeTo(null);
 	}
 
 	/*

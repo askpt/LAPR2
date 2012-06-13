@@ -45,6 +45,7 @@ public class About extends JDialog {
 		});
 		panel_principal.add(inner, BorderLayout.EAST);
 		getContentPane().add(panel_principal);
+		setLocationRelativeTo(null);
 		setSize(400, 200);
 		setVisible(true);
 

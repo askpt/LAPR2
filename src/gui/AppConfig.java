@@ -175,6 +175,7 @@ public class AppConfig extends JFrame {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
 		setVisible(visible);
+		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 			}
@@ -398,7 +399,7 @@ public class AppConfig extends JFrame {
 		p1.setOpaque(false);
 		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
 
-		JPanel p2 = new JPanel(new GridLayout(5, 1, 10, 10));
+		JPanel p2 = new JPanel(new GridLayout(3, 1, 10, 10));
 		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
 		p2.setOpaque(false);
 
@@ -414,6 +415,18 @@ public class AppConfig extends JFrame {
 		intelImport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.intelImport(null, AppConfig.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
+
+			}
+		});
+
+		// dragndrop
+		Botao drag = new Botao(img.impdrag);
+		drag.setBotaoRollOver(img.impdrag_o);
+		drag.setContentAreaFilled(false);
+		drag.setBorder(emptyBorder);
+		drag.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Drag drag_ = new Drag(AppConfig.this);
 
 			}
 		});
@@ -463,6 +476,7 @@ public class AppConfig extends JFrame {
 		});
 
 		p2.add(intelImport);
+		p2.add(drag);
 		p2.add(impCountry);
 		p2.add(impDisc);
 		p2.add(impEv);
