@@ -9,6 +9,7 @@ import javax.swing.*;
 import jogosolimpicos.*;
 import listaligada.*;
 import dados.*;
+import dragndrop.*;
 
 //TODO Remove class
 @SuppressWarnings("serial")

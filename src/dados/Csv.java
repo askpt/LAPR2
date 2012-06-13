@@ -68,6 +68,7 @@ public class Csv extends JComponent implements Accessible {
 		ListaLigada<File> ficheirosProva = new ListaLigada<File>();
 		ListaLigada<File> ficheirosResul = new ListaLigada<File>();
 		ListaLigada<File> ficheirosTemp = new ListaLigada<File>();
+		ListaLigada<Boolean> testes = new ListaLigada<Boolean>();
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].getName().endsWith(".csv"))
 				ficheirosTemp.add(files[i]);
@@ -86,20 +87,30 @@ public class Csv extends JComponent implements Accessible {
 		}
 
 		for (int i = 0; i < ficheirosPais.size(); i++) {
-			importPais(ficheirosPais.get(i), janela, paises);
+			testes.add(importPais(ficheirosPais.get(i), janela, paises));
 		}
 		for (int i = 0; i < ficheirosDisc.size(); i++) {
-			importDisc(ficheirosDisc.get(i), janela, disciplinas, modalidades);
+			testes.add(importDisc(ficheirosDisc.get(i), janela, disciplinas, modalidades));
 		}
 		for (int i = 0; i < ficheirosProva.size(); i++) {
-			importProvas(ficheirosProva.get(i), janela, jogos, provas, disciplinas, modalidades);
+			testes.add(importProvas(ficheirosProva.get(i), janela, jogos, provas, disciplinas, modalidades));
 		}
 		for (int i = 0; i < ficheirosResul.size(); i++) {
-			importResultados(ficheirosResul.get(i), janela, atletas, modalidades, paises, provas, equipas, jogos);
+			testes.add(importResultados(ficheirosResul.get(i), janela, atletas, modalidades, paises, provas, equipas, jogos));
 		}
 
-		if (ficheirosTemp.size() != 0) {
+		int cont = 0;
+		for (int i = 0; i < testes.size(); i++) {
+			if (testes.get(i))
+				cont++;
+		}
+
+		if (cont == ficheirosTemp.size() && ficheirosTemp.size() != 0) {
 			JOptionPane.showMessageDialog(janela, "Files imported sucessfully!", "intelImport File", JOptionPane.INFORMATION_MESSAGE);
+		} else if (cont == 0) {
+			JOptionPane.showMessageDialog(janela, "File imported failed!", "intelImport File", JOptionPane.ERROR_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(janela, "Files imported with errors!", "intelImport File", JOptionPane.INFORMATION_MESSAGE);
 		}
 
 	}
@@ -209,21 +220,22 @@ public class Csv extends JComponent implements Accessible {
 	 *            the parent component of the dialog
 	 * @param paises
 	 *            linked list with the countries
+	 * @return true if file import was sucessful
 	 * @see Pais country details
 	 * 
 	 */
-	public void importPais(File ficheiro, Component janela, ListaLigada<Pais> paises) {
+	public boolean importPais(File ficheiro, Component janela, ListaLigada<Pais> paises) {
+		boolean veri = false;
 
 		try {
 
-			boolean veri = false;
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(new CsvFilter());
 				fc.setDialogTitle("Import Country");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
-					return;
+					return false;
 
 				ficheiro = fc.getSelectedFile();
 				veri = true;
@@ -234,7 +246,7 @@ public class Csv extends JComponent implements Accessible {
 
 			if (!in.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 			in.nextLine();
 			while (in.hasNextLine()) {
@@ -314,10 +326,15 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
-			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
+		return true;
 
 	}
 
@@ -423,12 +440,13 @@ public class Csv extends JComponent implements Accessible {
 	 *            if wanna choose the file in this method, send null.
 	 * @see Disciplina competition details
 	 * @see Modalidade sport details
+	 * @return true if file import was sucessful
 	 * 
 	 */
-	public void importDisc(File ficheiro, Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
+	public boolean importDisc(File ficheiro, Component janela, ListaLigada<Disciplina> disciplina, ListaLigada<Modalidade> modalidades) {
 
+		boolean veri = false;
 		try {
-			boolean veri = false;
 
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
@@ -436,7 +454,7 @@ public class Csv extends JComponent implements Accessible {
 				fc.setFileFilter(new CsvFilter());
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
-					return;
+					return false;
 
 				ficheiro = fc.getSelectedFile();
 				veri = true;
@@ -446,12 +464,12 @@ public class Csv extends JComponent implements Accessible {
 
 			if (!in.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 
 			if (!in.nextLine().equals("Sport;Discipline;Type;Men;Women;Mixed;Type;Order")) {
 				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 			;
 			while (in.hasNextLine()) {
@@ -732,10 +750,15 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
-			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
+		return true;
 
 	}
 
@@ -857,20 +880,20 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Prova competition with event details
 	 * @see Equipa team details
 	 * @see Atleta athlete details
+	 * @return true if file import was sucessful
 	 * 
 	 */
 	@SuppressWarnings("unused")
-	public void importResultados(File ficheiro, Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
+	public boolean importResultados(File ficheiro, Component janela, ListaLigada<Atleta> atletas, ListaLigada<Modalidade> modalidades, ListaLigada<Pais> paises, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<JogosOlimpicos> jogos) {
+		boolean veri = false;
 		try {
-			boolean veri = false;
-
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(new CsvFilter());
 				fc.setDialogTitle("Import Results");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
-					return;
+					return false;
 				ficheiro = fc.getSelectedFile();
 				veri = true;
 			}
@@ -886,7 +909,7 @@ public class Csv extends JComponent implements Accessible {
 
 			if (itJogos == jogos.size()) {
 				JOptionPane.showMessageDialog(janela, "Year not found!\nPlease import: " + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 
 			String modalidade = tempPrin[1];
@@ -915,14 +938,14 @@ public class Csv extends JComponent implements Accessible {
 
 			if (itModal == modalidades.size()) {
 				JOptionPane.showMessageDialog(janela, "Sport not found!\nPlease import: " + modalidade + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 
 			Scanner inTest = new Scanner(ficheiro);
 
 			if (!inTest.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 
 			while (inTest.hasNextLine()) {
@@ -942,7 +965,7 @@ public class Csv extends JComponent implements Accessible {
 					}
 					if (!testeDisc) {
 						JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + test[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-						return;
+						return false;
 					}
 
 				}
@@ -988,7 +1011,7 @@ public class Csv extends JComponent implements Accessible {
 
 							if (itPais == paises.size()) {
 								JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + atl[1] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-								return;
+								return false;
 							}
 
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
@@ -1016,7 +1039,7 @@ public class Csv extends JComponent implements Accessible {
 
 						if (itPais == paises.size()) {
 							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-							return;
+							return false;
 						}
 
 						equipas.add(new Equipa(paises.get(itPais)));
@@ -1100,7 +1123,7 @@ public class Csv extends JComponent implements Accessible {
 
 							if (itPais == paises.size()) {
 								JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + atl[1] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-								return;
+								return false;
 							}
 
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
@@ -1117,7 +1140,7 @@ public class Csv extends JComponent implements Accessible {
 
 						if (itProva == provas.size()) {
 							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-							return;
+							return false;
 						}
 
 						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
@@ -1142,7 +1165,7 @@ public class Csv extends JComponent implements Accessible {
 
 						if (itPais == paises.size()) {
 							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-							return;
+							return false;
 						}
 
 						equipas.add(new Equipa(paises.get(itPais)));
@@ -1177,7 +1200,7 @@ public class Csv extends JComponent implements Accessible {
 
 						if (itProva == provas.size()) {
 							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-							return;
+							return false;
 						}
 
 						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
@@ -1192,12 +1215,16 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
-			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
-			exc.printStackTrace();
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 
+		return true;
 	}
 
 	/**
@@ -1340,18 +1367,19 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Prova competition with event details
 	 * @see Disciplina competition details
 	 * @see JogosOlimpicos event details
+	 * @return true if file import was sucessful
 	 */
-	public void importProvas(File ficheiro, Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
+	public boolean importProvas(File ficheiro, Component janela, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades) {
 
+		boolean veri = false;
 		try {
-			boolean veri = false;
 			if (ficheiro == null) {
 				JFileChooser fc = new JFileChooser();
 				fc.setFileFilter(new CsvFilter());
 				fc.setDialogTitle("Competition with Event Import");
 				int returnVal = fc.showOpenDialog(janela);
 				if (returnVal != JFileChooser.APPROVE_OPTION)
-					return;
+					return false;
 
 				ficheiro = fc.getSelectedFile();
 				veri = true;
@@ -1367,7 +1395,7 @@ public class Csv extends JComponent implements Accessible {
 
 			if (!inTest.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
-				return;
+				return false;
 			}
 
 			inTest.nextLine();
@@ -1392,7 +1420,7 @@ public class Csv extends JComponent implements Accessible {
 
 				if (iTest == modalidades.size()) {
 					JOptionPane.showMessageDialog(janela, "Sport not found!\nPlease import: " + test[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-					return;
+					return false;
 				}
 				iTest = 0;
 				for (; iTest < disciplinas.size(); iTest++) {
@@ -1402,7 +1430,7 @@ public class Csv extends JComponent implements Accessible {
 
 				if (iTest == disciplinas.size()) {
 					JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + test[1] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-					return;
+					return false;
 				}
 			}
 			inTest.close();
@@ -1488,11 +1516,15 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 
 		} catch (FileNotFoundException exc) {
-			JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File not found!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		} catch (ArrayIndexOutOfBoundsException | NumberFormatException exc) {
-			JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
-
+		return true;
 	}
 
 	/**

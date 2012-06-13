@@ -5,6 +5,7 @@ import java.io.*;
 import javax.swing.*;
 
 import dados.*;
+import dragndrop.*;
 
 public class Drag extends JDialog {
 
