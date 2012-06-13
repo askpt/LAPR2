@@ -12,6 +12,7 @@ import jogosolimpicos.*;
  * Class that creates a frame to add data manually, an instance of this class is created on the class AppConfig.
  * 
  */
+@SuppressWarnings("serial")
 public class AddDados extends JFrame {
 
 	/*
@@ -33,9 +34,10 @@ public class AddDados extends JFrame {
 	 */
 	private Painel spo;
 	/*
-	 * Custom Panel that contains a form within another panel.
+	 * Instance of the class <code>Imagens</code>, used to load images in order
+	 * to fill buttons and panels.
 	 * 
-	 * @see Panel Panel Class
+	 * @see Imagens Imagens Class
 	 */
 	private Imagens img = new Imagens();
 	/*
@@ -168,6 +170,7 @@ public class AddDados extends JFrame {
 	 * matches the desired format.It will not accept until the user types
 	 * something that matches the format.
 	 */
+	@SuppressWarnings("unused")
 	private void addCountry() {
 		CardLayout cl = new CardLayout();
 		JPanel card = new JPanel(cl);
@@ -658,6 +661,7 @@ public class AddDados extends JFrame {
 	 * @return Returns true if there is already a country with the name equal to
 	 * the name in the parameter
 	 */
+	@SuppressWarnings("unused")
 	private boolean nameExists(String name) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
 			if (Main.getPaises().get(i).getNomePais().equalsIgnoreCase(name))

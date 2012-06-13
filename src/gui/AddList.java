@@ -12,8 +12,6 @@ import listaligada.*;
 
 import org.jfree.ui.*;
 
-import dados.*;
-
 /*
  * Class that creates a frame to show listings and statistics, an instance of this class is created on the class AppConfig.
  * 
@@ -364,16 +362,11 @@ public class AddList extends JFrame {
 		chart.setContentAreaFilled(false);
 		chart.setBorderPainted(false);
 		chart.setVisible(false);
-		final Botao html = new Botao(img.html, img.html_o);
-		html.setContentAreaFilled(false);
-		html.setBorderPainted(false);
-		html.setVisible(false);
 		pButn.add(add1);
 		pButn.add(reduce1);
 		pButn.add(getResults);
 		pButn.add(voltar);
 		pButn.add(chart);
-		pButn.add(html);
 
 		// PARA 2 PAISES
 		JPanel p1_1 = new JPanel(new BorderLayout());
@@ -645,7 +638,6 @@ public class AddList extends JFrame {
 				reduce1.setVisible(false);
 				voltar.setVisible(true);
 				getResults.setVisible(false);
-				html.setVisible(true);
 				chart.setVisible(true);
 
 				if (index + 4 == 5) {
@@ -727,15 +719,7 @@ public class AddList extends JFrame {
 				reduce1.setVisible(true);
 				voltar.setVisible(false);
 				getResults.setVisible(true);
-				html.setVisible(false);
 				chart.setVisible(false);
-			}
-		});
-
-		html.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Linguas desired_language = (Linguas) JOptionPane.showInputDialog(AddList.this, "Choose a language: ", "Export to html", JOptionPane.PLAIN_MESSAGE, null, Main.getLingua().toArray(), Main.getLingua().toArray()[0]);
-				// TODO: think about it.
 			}
 		});
 

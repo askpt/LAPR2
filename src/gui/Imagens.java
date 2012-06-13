@@ -15,8 +15,9 @@ public class Imagens {
 	URL exit = classLoader.getResource("Imagens/exit.png");
 	URL about = classLoader.getResource("Imagens/about.png");
 	URL about_o = classLoader.getResource("Imagens/aboutOver.png");
-	URL argolas = classLoader.getResource("Imagens/argolascr3.gif");
+	public URL argolas = classLoader.getResource("Imagens/argolascr3.gif");
 	URL dragndrop = classLoader.getResource("Imagens/dragndrop.png");
+	public URL html_bg = classLoader.getResource("Imagens/html.png");
 
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");

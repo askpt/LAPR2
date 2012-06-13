@@ -8,8 +8,10 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+@SuppressWarnings("serial")
 public class About extends JDialog {
 
+	@SuppressWarnings("unused")
 	public About(JFrame parent) throws URISyntaxException {
 		super(parent, "About M&M", true);
 

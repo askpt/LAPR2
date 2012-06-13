@@ -262,61 +262,69 @@ public class Csv extends JComponent implements Accessible {
 				if (temp[1].startsWith(" "))
 					temp[1] = temp[1].substring(1);
 
-				paises.add(new Pais(temp[0], temp[1]));
+				int itPais = 0;
+				for (; itPais < paises.size(); itPais++) {
+					if (paises.get(itPais).getNomePais().equalsIgnoreCase(temp[1]) && paises.get(itPais).getCodigoPais(0).equalsIgnoreCase(temp[0])) {
+						break;
+					}
+				}
 
-				if (temp.length == 3) {
-					int index = paises.size() - 1;
-					temp[2] = temp[2].replaceAll(" ", "");
-					String[] codes = temp[2].split("\\)");
+				if (itPais == paises.size()) {
+					paises.add(new Pais(temp[0], temp[1]));
 
-					for (int i = 0; i < codes.length; i++) {
-						String[] code = codes[i].split("\\(");
-						String[] anos = code[1].split(",");
-						for (int j = 0; j < anos.length; j++) {
+					if (temp.length == 3) {
+						int index = paises.size() - 1;
+						temp[2] = temp[2].replaceAll(" ", "");
+						String[] codes = temp[2].split("\\)");
 
-							if (anos[j].matches("^[0-9]{4}$")) {
-								int ano = Integer.parseInt(anos[j]);
+						for (int i = 0; i < codes.length; i++) {
+							String[] code = codes[i].split("\\(");
+							String[] anos = code[1].split(",");
+							for (int j = 0; j < anos.length; j++) {
 
-								paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
-							} else if (anos[j].matches("^[0-9]{4}(S){1}$")) {
-								anos[j] = anos[j].replaceAll("S", "");
-								int ano = Integer.parseInt(anos[j]);
-								paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
-							} else if (anos[j].matches("^[0-9]{4}(_){1}[0-9]{4}$")) {
-								String[] anosTemp = anos[j].split("_");
-								int anoInicio = Integer.parseInt(anosTemp[0]);
-								int anoFim = Integer.parseInt(anosTemp[1]);
-								paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
-							} else if (anos[j].matches("^[0-9]{4}(S|W){0,1}_[0-9]{4}(S|W){0,1}$")) {
-								String[] anosTemp = anos[j].split("_");
-								int anoInicio = 0;
-								int anoFim = 0;
-								if (anosTemp[0].matches("^[0-9]{4}(W){1}")) {
-									anosTemp[0] = anosTemp[0].replaceAll("W", "");
-									anoInicio = Integer.parseInt(anosTemp[0]);
-									anoInicio++;
-								} else if (anosTemp[0].matches("^[0-9]{4}(S){1}")) {
-									anosTemp[1] = anosTemp[0].replaceAll("S", "");
-									anoInicio = Integer.parseInt(anosTemp[0]);
-								} else if (anosTemp[0].matches("^[0-9]{4}")) {
-									anoInicio = Integer.parseInt(anosTemp[0]);
+								if (anos[j].matches("^[0-9]{4}$")) {
+									int ano = Integer.parseInt(anos[j]);
+
+									paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
+								} else if (anos[j].matches("^[0-9]{4}(S){1}$")) {
+									anos[j] = anos[j].replaceAll("S", "");
+									int ano = Integer.parseInt(anos[j]);
+									paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
+								} else if (anos[j].matches("^[0-9]{4}(_){1}[0-9]{4}$")) {
+									String[] anosTemp = anos[j].split("_");
+									int anoInicio = Integer.parseInt(anosTemp[0]);
+									int anoFim = Integer.parseInt(anosTemp[1]);
+									paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
+								} else if (anos[j].matches("^[0-9]{4}(S|W){0,1}_[0-9]{4}(S|W){0,1}$")) {
+									String[] anosTemp = anos[j].split("_");
+									int anoInicio = 0;
+									int anoFim = 0;
+									if (anosTemp[0].matches("^[0-9]{4}(W){1}")) {
+										anosTemp[0] = anosTemp[0].replaceAll("W", "");
+										anoInicio = Integer.parseInt(anosTemp[0]);
+										anoInicio++;
+									} else if (anosTemp[0].matches("^[0-9]{4}(S){1}")) {
+										anosTemp[1] = anosTemp[0].replaceAll("S", "");
+										anoInicio = Integer.parseInt(anosTemp[0]);
+									} else if (anosTemp[0].matches("^[0-9]{4}")) {
+										anoInicio = Integer.parseInt(anosTemp[0]);
+									}
+									if (anosTemp[1].matches("^[0-9]{4}(W){1}")) {
+										anosTemp[1] = anosTemp[1].replaceAll("W", "");
+										anoFim = Integer.parseInt(anosTemp[1]);
+										anoFim++;
+									} else if (anosTemp[1].matches("^[0-9]{4}(S){1}")) {
+										anosTemp[1] = anosTemp[1].replaceAll("S", "");
+										anoFim = Integer.parseInt(anosTemp[1]);
+									} else if (anosTemp[1].matches("^[0-9]{4}")) {
+										anoFim = Integer.parseInt(anosTemp[1]);
+									}
+									paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
+								} else if (anos[j].matches("^[0-9]{4}(W){1}$")) {
 								}
-								if (anosTemp[1].matches("^[0-9]{4}(W){1}")) {
-									anosTemp[1] = anosTemp[1].replaceAll("W", "");
-									anoFim = Integer.parseInt(anosTemp[1]);
-									anoFim++;
-								} else if (anosTemp[1].matches("^[0-9]{4}(S){1}")) {
-									anosTemp[1] = anosTemp[1].replaceAll("S", "");
-									anoFim = Integer.parseInt(anosTemp[1]);
-								} else if (anosTemp[1].matches("^[0-9]{4}")) {
-									anoFim = Integer.parseInt(anosTemp[1]);
-								}
-								paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
-							} else if (anos[j].matches("^[0-9]{4}(W){1}$")) {
+
 							}
-
 						}
-
 					}
 				}
 

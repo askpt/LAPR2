@@ -67,13 +67,13 @@ public class Main {
 			}
 		}
 		if (checkGB) {
-			getLingua().add(new Linguas("EN-GB","Olympic Games","Listing","Classification","Position","Name","Gold","Silver","Bronze","Athlete","Sport","Competition","Country","Emission Date"));
+			getLingua().add(new Linguas("EN-GB", "Olympic Games", "Listing", "Classification", "Position", "Name", "Gold", "Silver", "Bronze", "Athlete", "Sport", "Competition", "Country", "Emission Date"));
 		}
 		if (checkFR) {
-			 getLingua().add(new Linguas("FR-FR","Jeux Olympiques","Liste","Classification","Position","Nom","Or","Argent","Bronze","Athl&egrave;te","Modalit&eacute;","Discipline","Pays","Date d'&eacute;mission"));
+			getLingua().add(new Linguas("FR-FR", "Jeux Olympiques", "Liste", "Classification", "Position", "Nom", "Or", "Argent", "Bronze", "Athl&egrave;te", "Modalit&eacute;", "Discipline", "Pays", "Date d'&eacute;mission"));
 		}
 		if (checkPT) {
-			 getLingua().add(new Linguas("PT-PT","Jogos Ol&iacute;mpicos","Listagem","Classifica&ccedil;&atilde;o","Posi&ccedil;&atilde;o","Nome","Ouro","Prata","Bronze","Atletas","Modalidade","Disciplina","Pa&iacute;s","Data de Emiss&atilde;o"));
+			getLingua().add(new Linguas("PT-PT", "Jogos Ol&iacute;mpicos", "Listagem", "Classifica&ccedil;&atilde;o", "Posi&ccedil;&atilde;o", "Nome", "Ouro", "Prata", "Bronze", "Atletas", "Modalidade", "Disciplina", "Pa&iacute;s", "Data de Emiss&atilde;o"));
 		}
 
 	}
@@ -104,6 +104,7 @@ public class Main {
 			out.close();
 		} catch (IOException exc) {
 			JOptionPane.showMessageDialog(maingui, "Status not saved!", "Closing Application", JOptionPane.ERROR_MESSAGE);
+			exc.printStackTrace();
 		}
 	}
 

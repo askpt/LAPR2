@@ -1,6 +1,9 @@
 package dados;
 
-public class Linguas {
+import java.io.*;
+
+@SuppressWarnings("serial")
+public class Linguas implements Serializable {
 
 	/**
 	 * a string with language to be used.
@@ -64,46 +67,46 @@ public class Linguas {
 	 * language that will be used to show on screen.
 	 * 
 	 * @param linguagem
-	 *               sets the language
+	 *            sets the language
 	 * @param jogosolimpicos
-	 *               sets the word "Olympic Games" on another language
-	 *               depending on the language
+	 *            sets the word "Olympic Games" on another language depending on
+	 *            the language
 	 * @param listagem
-	 *               sets the word "Listing" on another language depending on
-	 *               the language
+	 *            sets the word "Listing" on another language depending on the
+	 *            language
 	 * @param classificacao
-	 *               sets the word "Classification" on another language
-	 *               depending on the language
+	 *            sets the word "Classification" on another language depending
+	 *            on the language
 	 * @param posicao
-	 *               sets the word "Position" on another language depending
-	 *               on the language
+	 *            sets the word "Position" on another language depending on the
+	 *            language
 	 * @param nome
-	 *               sets the word "Name" on another language depending on
-	 *               the language
+	 *            sets the word "Name" on another language depending on the
+	 *            language
 	 * @param ouro
-	 *               sets the word "Gold" on another language depending on
-	 *               the language
+	 *            sets the word "Gold" on another language depending on the
+	 *            language
 	 * @param prata
-	 *               sets the word "Silver" on another language depending on
-	 *               the language
+	 *            sets the word "Silver" on another language depending on the
+	 *            language
 	 * @param bronze
-	 *               sets the word "Bronze" on another language depending on
-	 *               the language
+	 *            sets the word "Bronze" on another language depending on the
+	 *            language
 	 * @param atleta
-	 *               sets the word "Athlete" on another language depending on
-	 *               the language
+	 *            sets the word "Athlete" on another language depending on the
+	 *            language
 	 * @param modalidade
-	 *               sets the word "Sport" on another language depending on
-	 *               the language
+	 *            sets the word "Sport" on another language depending on the
+	 *            language
 	 * @param disciplina
-	 *               sets the word "Competition" on another language
-	 *               depending on the language
+	 *            sets the word "Competition" on another language depending on
+	 *            the language
 	 * @param pais
-	 *               sets the word "Country" on another language depending on
-	 *               the language
+	 *            sets the word "Country" on another language depending on the
+	 *            language
 	 * @param data
-	 *               sets the word "Emission Date" on another language
-	 *               depending on the language
+	 *            sets the word "Emission Date" on another language depending on
+	 *            the language
 	 */
 	public Linguas(String linguagem, String jogosolimpicos, String listagem, String classificacao, String posicao, String nome, String ouro, String prata, String bronze, String atleta, String modalidade, String disciplina, String pais, String data) {
 
@@ -128,7 +131,7 @@ public class Linguas {
 	 * Sets the language of the file.
 	 * 
 	 * @param linguagem
-	 *               the language of the file.
+	 *            the language of the file.
 	 */
 	public void setLinguagem(String linguagem) {
 		this.linguagem = linguagem;

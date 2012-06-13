@@ -426,7 +426,9 @@ public class AppConfig extends JFrame {
 		drag.setBorder(emptyBorder);
 		drag.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Drag drag_ = new Drag(AppConfig.this);
+				setVisible(false);
+				Drag dragDg = new Drag(AppConfig.this);
+				setVisible(true);
 
 			}
 		});

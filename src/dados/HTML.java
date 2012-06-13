@@ -1,13 +1,20 @@
 package dados;
 
 import gui.*;
+
 import java.awt.*;
 import java.io.*;
 import java.util.*;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
+
 import jogosolimpicos.*;
 import listaligada.*;
+
+/*
+ * HTML class to export data to files.
+ */
 
 public class HTML {
 
@@ -49,6 +56,10 @@ public class HTML {
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
 				File ficheiro = fc.getSelectedFile();
+				ListaLigada<String> path = splitFilePath(ficheiro);
+				for (int i = 0; i < path.size(); i++) {
+					System.out.println(path.get(i));
+				}
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
 				ListaLigada<Pais> paisTemp = pais;
@@ -289,16 +300,18 @@ public class HTML {
 	 */
 	public void corpoInicioPais(Formatter fout, int it, ListaLigada<Linguas> linguas) {
 
+		Imagens img = new Imagens();
+
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
 		fout.format("<head>");
 		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
 		fout.format("</title>");
 		fout.format("</head>");
-		fout.format("<body>");
+		fout.format("<body background=\"Imagens/html.png\">");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
+		fout.format("<td rowspan = 2><img src=\"" + img.argolas + "\" width=350 height= 140> </td>");
 		fout.format("<td align = center width = 400 height = 70 align = center> " + linguas.get(it).getListagem() + " </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
@@ -435,6 +448,19 @@ public class HTML {
 		fout.format("<tr>");
 		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
 
+	}
+
+	public static ListaLigada<String> splitFilePath(final File f) {
+		if (f == null) {
+			throw new NullPointerException();
+		}
+		final ListaLigada<String> result = new ListaLigada<String>();
+		File temp = f.getAbsoluteFile();
+		while (temp != null) {
+			result.add(0, temp.getName());
+			temp = temp.getParentFile();
+		}
+		return result;
 	}
 
 	/**

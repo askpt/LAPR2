@@ -7,6 +7,7 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+@SuppressWarnings("serial")
 public class JanelaPrincipal extends JFrame {
 
 	private Imagens img = new Imagens();
@@ -30,6 +31,7 @@ public class JanelaPrincipal extends JFrame {
 	private void setProperties(int w, int h, int opcao, boolean v) {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
+		setUndecorated(true);
 		setVisible(v);
 		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {
@@ -65,6 +67,7 @@ public class JanelaPrincipal extends JFrame {
 		btn1.setContentAreaFilled(false);
 		btn1.setBorder(emptyBorder);
 		btn1.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				AppConfig appconfig = new AppConfig();
 			}
@@ -74,12 +77,11 @@ public class JanelaPrincipal extends JFrame {
 		btn2.setContentAreaFilled(false);
 		btn2.setBorder(emptyBorder);
 		btn2.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					About about = new About(JanelaPrincipal.this);
 				} catch (URISyntaxException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
 			}
 		});
