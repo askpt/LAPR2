@@ -6,6 +6,7 @@ import listaligada.*;
 
 import org.junit.*;
 
+//TODO equalstest
 public class EquipaTest {
 
 	private static Equipa equipaTest = new Equipa(new Pais("POR", "Portugal"));

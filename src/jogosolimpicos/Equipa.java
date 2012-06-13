@@ -131,4 +131,27 @@ public class Equipa implements Serializable {
 			}
 		}
 	}
+
+	// TODO javadoc
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Equipa) {
+			Equipa that = (Equipa) obj;
+			return (this.getPais().getCodigoPais(0) == that.getPais().getCodigoPais(0) && this.equalsAtletas(that.getAtleta()));
+		}
+		return false;
+	}
+
+	// TODO javadoc
+	private boolean equalsAtletas(ListaLigada<Atleta> that) {
+		for (int i = 0; i < this.getAtleta().size(); i++) {
+			for (int j = 0; j < that.size(); j++) {
+				if (!(this.getAtleta().get(i).getID() == that.get(j).getID())) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 }

@@ -748,10 +748,9 @@ public class Csv extends JComponent implements Accessible {
 					}
 				}
 
-				// TODO verificar e corrigir
 				int j = 0;
 				for (; j < disciplina.size(); j++) {
-					if (!disciplina.get(j).equals(tempDisc))
+					if (disciplina.get(j).equals(tempDisc))
 						break;
 				}
 				if (disciplina.size() == j)
@@ -759,7 +758,7 @@ public class Csv extends JComponent implements Accessible {
 
 				if (!tempDisc2.getNome().equals("temp")) {
 					for (; j < disciplina.size(); j++) {
-						if (!disciplina.equals(tempDisc2))
+						if (disciplina.equals(tempDisc2))
 							break;
 					}
 
@@ -1040,14 +1039,14 @@ public class Csv extends JComponent implements Accessible {
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
 
 						}
-						for (int i = 0; i < atl.length; i++) {
-
-						}
 						// TODO comparar para não duplicar
-						for (int i = 0; i < atl.length; i++) {
-
+						int i = 0;
+						for (; i < ((ProvaInd) provas.get(itProva)).getResultados().size(); i++) {
+							if (((ProvaInd) provas.get(itProva)).getResultados().get(i).equals(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass)))
+								break;
 						}
-						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
+						if (i == ((ProvaInd) provas.get(itProva)).getResultados().size())
+							((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
 
 					} else {
 						String[] team = temp[1].split("\\(");
@@ -1071,8 +1070,7 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-						// TODO comparar para não duplicar
-						equipas.add(new Equipa(paises.get(itPais)));
+						ListaLigada<Atleta> atletasEqu = new ListaLigada<Atleta>();
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
 						for (int i = 0; i < atletasTemp.length; i++) {
@@ -1083,18 +1081,32 @@ public class Csv extends JComponent implements Accessible {
 									existeAtleta = true;
 									break;
 								}
-
 							}
-
 							if (!existeAtleta) {
-
 								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
-
 							}
-							equipas.get(equipas.size() - 1).addAtleta(atletas.get(itAtleta));
+
+							atletasEqu.add(atletas.get(itAtleta));
 						}
 						// TODO comparar para não duplicar
-						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
+						Equipa equiTemp = new Equipa(paises.get(itPais));
+						equiTemp.setAtletas(atletasEqu);
+						int itEquipa = 0;
+						for (; itEquipa < equipas.size(); itEquipa++) {
+							if (equiTemp.equals(equipas.get(itEquipa))) {
+								break;
+							}
+						}
+						if (itEquipa == equipas.size())
+							equipas.add(new Equipa(paises.get(itPais)));
+						// TODO comparar para não duplicar
+						int i = 0;
+						for (; i < ((ProvaCol) provas.get(itProva)).getResultados().size(); i++) {
+							if (((ProvaCol) provas.get(itProva)).getResultados().get(i).equals(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass)))
+								break;
+						}
+						if (i == ((ProvaCol) provas.get(itProva)).getResultados().size())
+							((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass));
 
 					}
 
@@ -1173,9 +1185,27 @@ public class Csv extends JComponent implements Accessible {
 							return false;
 						}
 						// TODO comparar para não duplicar
-						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
+						int i = 0;
+						for (; i < ((ProvaInd) provas.get(itProva)).getResultados().size(); i++) {
+							if (((ProvaInd) provas.get(itProva)).getResultados().get(i).equals(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass)))
+								break;
+						}
+						if (i == ((ProvaInd) provas.get(itProva)).getResultados().size())
+							((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
 
 					} else {
+						itProva = 0;
+
+						for (; itProva < provas.size(); itProva++) {
+							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().replaceAll(" ", "").equalsIgnoreCase(nomeDisc.replaceAll(" ", "")) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
+								break;
+							}
+						}
+
+						if (itProva == provas.size()) {
+							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
+							return false;
+						}
 						String[] team = temp[1].split("\\(");
 
 						boolean existeAtletas = false;
@@ -1198,9 +1228,10 @@ public class Csv extends JComponent implements Accessible {
 							return false;
 						}
 						// TODO comparar para não duplicar
-						equipas.add(new Equipa(paises.get(itPais)));
+
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
+						ListaLigada<Atleta> atletasEqu = new ListaLigada<Atleta>();
 
 						for (int i = 0; i < atletasTemp.length; i++) {
 							int itAtleta = 0;
@@ -1217,23 +1248,27 @@ public class Csv extends JComponent implements Accessible {
 								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
 
 							}
-							equipas.get(equipas.size() - 1).addAtleta(atletas.get(itAtleta));
+							atletasEqu.add(atletas.get(itAtleta));
 						}
-
-						itProva = 0;
-
-						for (; itProva < provas.size(); itProva++) {
-							if (provas.get(itProva).getJogosOlimpicos().getAno() == ano && provas.get(itProva).getDisciplina().getNome().replaceAll(" ", "").equalsIgnoreCase(nomeDisc.replaceAll(" ", "")) && provas.get(itProva).getDisciplina().getTipoMod() == tipoDisc && provas.get(itProva).getDisciplina().getGenero() == codGenero) {
+						// TODO comparar para não duplicar
+						Equipa equiTemp = new Equipa(paises.get(itPais));
+						equiTemp.setAtletas(atletasEqu);
+						int itEquipa = 0;
+						for (; itEquipa < equipas.size(); itEquipa++) {
+							if (equiTemp.equals(equipas.get(itEquipa))) {
 								break;
 							}
 						}
-
-						if (itProva == provas.size()) {
-							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
-							return false;
-						}
+						if (itEquipa == equipas.size())
+							equipas.add(new Equipa(paises.get(itPais)));
 						// TODO comparar para não duplicar
-						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
+						int i = 0;
+						for (; i < ((ProvaCol) provas.get(itProva)).getResultados().size(); i++) {
+							if (((ProvaCol) provas.get(itProva)).getResultados().get(i).equals(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass)))
+								break;
+						}
+						if (i == ((ProvaCol) provas.get(itProva)).getResultados().size())
+							((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass));
 
 					}
 
@@ -1428,6 +1463,16 @@ public class Csv extends JComponent implements Accessible {
 				jogos.add(new JogosOlimpicos(ano));
 			else
 				return true;
+
+			for (int i = 0; i < jogos.size() - 1; i++) {
+				for (int j = i + 1; j < jogos.size(); j++) {
+					if (jogos.get(i).compareTo(jogos.get(j)) > 0) {
+						JogosOlimpicos temp = jogos.get(j);
+						jogos.set(j, jogos.get(i));
+						jogos.set(i, temp);
+					}
+				}
+			}
 
 			Scanner inTest = new Scanner(ficheiro);
 
