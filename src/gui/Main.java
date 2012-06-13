@@ -44,7 +44,7 @@ public class Main {
 	public static void main(String[] args) {
 		lerEstadoAnterior();
 		adicionarLinguas();
-		SplashScreen splash = new SplashScreen(3000);
+		SplashScreen splash = new SplashScreen(5000);
 		splash.showSplashAndAPP();
 
 	}
