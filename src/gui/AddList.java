@@ -12,6 +12,8 @@ import listaligada.*;
 
 import org.jfree.ui.*;
 
+import dados.*;
+
 /*
  * Class that creates a frame to show listings and statistics, an instance of this class is created on the class AppConfig.
  * 
@@ -900,8 +902,13 @@ public class AddList extends JFrame {
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
 		voltar.setVisible(false);
+		final Botao html = new Botao(img.html, img.html_o);
+		html.setContentAreaFilled(false);
+		html.setBorderPainted(false);
 		pButn.add(ok);
+		pButn.add(html);
 		pButn.add(voltar);
+
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
@@ -923,6 +930,24 @@ public class AddList extends JFrame {
 				cl1.show(card1, "1");
 				ok.setVisible(true);
 				voltar.setVisible(false);
+			}
+		});
+
+		html.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HTML html = new HTML();
+				Linguas lingua = (Linguas) JOptionPane.showInputDialog(AddList.this, "Choose a language: ", "Export to HTML", 0, new ImageIcon(img.html_icon), Main.getLingua().toArray(), Main.getLingua().toArray()[0]);
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				int index = 0;
+				for (int i = 0; i < Main.getLingua().size(); i++) {
+					if (Main.getLingua().get(i).getLinguagem().equalsIgnoreCase("English")) {
+						index = i;
+					}
+				}
+				html.exportPais(AddList.this, ano_inicio, ano_fim, Main.getLingua().get(index), Main.getLingua(), Main.getProvas(), Main.getPaises());
 			}
 		});
 
@@ -1006,7 +1031,11 @@ public class AddList extends JFrame {
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
 		voltar.setVisible(false);
+		final Botao html = new Botao(img.html, img.html_o);
+		html.setContentAreaFilled(false);
+		html.setBorderPainted(false);
 		pButn.add(ok);
+		pButn.add(html);
 		pButn.add(voltar);
 
 		ok.addActionListener(new ActionListener() {
@@ -1032,6 +1061,24 @@ public class AddList extends JFrame {
 				ok.setVisible(true);
 				voltar.setVisible(false);
 
+			}
+		});
+
+		html.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HTML html = new HTML();
+				Linguas lingua = (Linguas) JOptionPane.showInputDialog(AddList.this, "Choose a language: ", "Export to HTML", 0, new ImageIcon(img.html_icon), Main.getLingua().toArray(), Main.getLingua().toArray()[0]);
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				int index = 0;
+				for (int i = 0; i < Main.getLingua().size(); i++) {
+					if (Main.getLingua().get(i).getLinguagem().equalsIgnoreCase("English")) {
+						index = i;
+					}
+				}
+				html.exportAtleta(AddList.this, ano_inicio, ano_fim, Main.getLingua().get(index), Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
 			}
 		});
 

@@ -56,7 +56,7 @@ public class HTML {
 				if (returnVal != JFileChooser.APPROVE_OPTION)
 					return;
 				File ficheiro = fc.getSelectedFile();
-				splitFilePath(ficheiro);
+				String dir = getDirPath(ficheiro);
 
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
@@ -419,6 +419,7 @@ public class HTML {
 	 *            language details
 	 */
 	public void corpoInicioDisciplina(Formatter fout, int it, ListaLigada<Linguas> linguas) {
+		Imagens img = new Imagens();
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
@@ -429,7 +430,7 @@ public class HTML {
 		fout.format("<body>");
 		fout.format("<table border=1 align = center>");
 		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\\"" + img.argolas + "\\" width=350 height= 140> </td>");
+		fout.format("<td rowspan = 2><img src=\\" + img.argolas + "\\" + " width=350 height= 140> </td>");
 		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
 		fout.format("</tr>");
 		fout.format("<tr>");
@@ -448,17 +449,24 @@ public class HTML {
 
 	}
 
-	public static String splitFilePath(final File f) {
+	/*
+	 * Returns the path of the directory where the file in param is located
+	 * 
+	 * @param f the file we need to know the directory he is in
+	 * 
+	 * @return returns the path of the directory where the file in param is
+	 * located
+	 */
+	private String getDirPath(final File f) {
 
-		String a = f.getAbsolutePath();
-		String temp[] = a.split("\\\\");
+		String file = f.getAbsolutePath();
+		String temp[] = file.split("\\\\");
+		String fixedPath = "";
 
-		for (int i = 0; i < temp.length; i++) {
-
-			System.out.println(temp[i]);
+		for (int i = 0; i < temp.length - 1; i++) {
+			fixedPath += temp[i] + "\\";
 		}
-		return null;
-
+		return fixedPath;
 	}
 
 	/**

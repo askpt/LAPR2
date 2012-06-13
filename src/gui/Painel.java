@@ -43,7 +43,6 @@ public class Painel extends JPanel {
 				g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
 
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 	}

@@ -25,6 +25,7 @@ public class JanelaPrincipal extends JFrame {
 		if (JOptionPane.showOptionDialog(this, "Do you really want to exit?", "Olympic Games", 0, JOptionPane.INFORMATION_MESSAGE, new ImageIcon(img.exit), opt, opt[0]) == 0) {
 			Main.gravarEstado();
 			dispose();
+			System.exit(0);
 		}
 	}
 
