@@ -173,4 +173,14 @@ public class ResultadosCol implements Comparable, Serializable {
 		return resulTemp;
 	}
 
+	// TODO javadoc
+	public boolean equals(Object obj) {
+		if (obj instanceof ResultadosCol) {
+			ResultadosCol that = (ResultadosCol) obj;
+			return (this.getEquipa().getPais().getCodigoPais(0).equalsIgnoreCase(that.getEquipa().getPais().getCodigoPais(0)) && this.getResulTemp().equalsIgnoreCase(that.getResulTemp()));
+		}
+		return false;
+
+	}
+
 }

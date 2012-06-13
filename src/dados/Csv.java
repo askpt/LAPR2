@@ -479,7 +479,6 @@ public class Csv extends JComponent implements Accessible {
 				JOptionPane.showMessageDialog(janela, "Corrupted File!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return false;
 			}
-			;
 			while (in.hasNextLine()) {
 				String tempModal[] = in.nextLine().split(";");
 				boolean temModal = false;
@@ -749,9 +748,24 @@ public class Csv extends JComponent implements Accessible {
 					}
 				}
 
-				disciplina.add(tempDisc);
-				if (!tempDisc2.getNome().equals("temp"))
-					disciplina.add(tempDisc2);
+				// TODO verificar e corrigir
+				int j = 0;
+				for (; j < disciplina.size(); j++) {
+					if (!disciplina.get(j).equals(tempDisc))
+						break;
+				}
+				if (disciplina.size() == j)
+					disciplina.add(tempDisc);
+
+				if (!tempDisc2.getNome().equals("temp")) {
+					for (; j < disciplina.size(); j++) {
+						if (!disciplina.equals(tempDisc2))
+							break;
+					}
+
+					if (disciplina.size() == j)
+						disciplina.add(tempDisc2);
+				}
 			}
 			in2.close();
 			if (veri)
@@ -1026,6 +1040,13 @@ public class Csv extends JComponent implements Accessible {
 							atletas.add(new Atleta(atl[0], paises.get(itPais)));
 
 						}
+						for (int i = 0; i < atl.length; i++) {
+
+						}
+						// TODO comparar para não duplicar
+						for (int i = 0; i < atl.length; i++) {
+
+						}
 						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
 
 					} else {
@@ -1050,7 +1071,7 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-
+						// TODO comparar para não duplicar
 						equipas.add(new Equipa(paises.get(itPais)));
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
@@ -1072,7 +1093,7 @@ public class Csv extends JComponent implements Accessible {
 							}
 							equipas.get(equipas.size() - 1).addAtleta(atletas.get(itAtleta));
 						}
-
+						// TODO comparar para não duplicar
 						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
 
 					}
@@ -1151,7 +1172,7 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-
+						// TODO comparar para não duplicar
 						((ProvaInd) provas.get(itProva)).getResultados().add(new ResultadosInd(atletas.get(itAtleta), temp[2], tipoClass));
 
 					} else {
@@ -1176,7 +1197,7 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Country not found!\nPlease import: " + team[0] + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-
+						// TODO comparar para não duplicar
 						equipas.add(new Equipa(paises.get(itPais)));
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
@@ -1211,7 +1232,7 @@ public class Csv extends JComponent implements Accessible {
 							JOptionPane.showMessageDialog(janela, "Competition not found!\nPlease import: " + nomeDisc + "of year" + ano + "!", "Import File", JOptionPane.ERROR_MESSAGE);
 							return false;
 						}
-
+						// TODO comparar para não duplicar
 						((ProvaCol) provas.get(itProva)).getResultados().add(new ResultadosCol(equipas.get(equipas.size() - 1), temp[2], tipoClass));
 
 					}

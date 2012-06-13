@@ -5,6 +5,7 @@ import jogosolimpicos.*;
 
 import org.junit.*;
 
+//TODO equals test
 public class ResultadosColTest {
 
 	@Test

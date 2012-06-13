@@ -6,8 +6,8 @@ import java.io.*;
  * Main class for individual result.
  * 
  */
-@SuppressWarnings("serial")
-public class ResultadosInd implements Serializable {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class ResultadosInd implements Serializable, Comparable {
 	/**
 	 * athlete with that result
 	 * 
@@ -169,4 +169,13 @@ public class ResultadosInd implements Serializable {
 		return resulTemp;
 	}
 
+	// TODO JavaDoc
+	public boolean equals(Object obj) {
+		if (obj instanceof ResultadosInd) {
+			ResultadosInd that = (ResultadosInd) obj;
+			return (this.getAtleta().getID() == that.getAtleta().getID() && this.getResulTemp().equalsIgnoreCase(that.getResulTemp()));
+		}
+		return false;
+
+	}
 }

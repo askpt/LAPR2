@@ -6,7 +6,7 @@ import jogosolimpicos.*;
 import org.junit.*;
 
 public class ResultadosIndTest {
-
+	// TODO equals test
 	@Test
 	public void testGetAtleta() {
 		ResultadosInd resulTest = new ResultadosInd(new Atleta("Quim", new Pais("POR", "Portugal")), "17", 0);
