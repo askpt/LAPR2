@@ -96,7 +96,7 @@ public class Teste extends JFrame {
 		menuItem = new JMenuItem("Import Language", 'L');
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.importLingua(Teste.this, Main.getLingua());
+				csv.importLingua(null, Teste.this, Main.getLingua());
 			}
 		});
 
