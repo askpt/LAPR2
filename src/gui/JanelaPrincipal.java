@@ -32,7 +32,6 @@ public class JanelaPrincipal extends JFrame {
 	private void setProperties(int w, int h, int opcao, boolean v) {
 		setSize(w, h);
 		setDefaultCloseOperation(opcao);
-		setUndecorated(true);
 		setVisible(v);
 		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {

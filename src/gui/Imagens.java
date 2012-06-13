@@ -19,6 +19,7 @@ public class Imagens {
 	URL dragndrop = classLoader.getResource("Imagens/dragndrop.png");
 	public URL html_bg = classLoader.getResource("Imagens/html_bg.png");
 	URL html_icon = classLoader.getResource("Imagens/html_icon.png");
+	URL splash = classLoader.getResource("Imagens/splash.png");
 
 	// buttons
 	URL appconfig = classLoader.getResource("Imagens/appconfig.png");

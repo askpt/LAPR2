@@ -34,7 +34,7 @@ public class About extends JDialog {
 		Font font = new Font("Arial", Font.PLAIN, 9);
 		JLabel name = new JLabel("M&M - Medal Managment");
 		name.setForeground(Color.white);
-		JLabel version = new JLabel("Version: Medal Managment Realease 1");
+		JLabel version = new JLabel("Version: Medal Management Realease 1");
 		version.setForeground(Color.white);
 		inner.setBorder(new EmptyBorder(30, 20, 40, 20));
 		inner.add(name);

@@ -1,7 +1,6 @@
 package gui;
 
 import java.io.*;
-import java.net.*;
 
 import javax.swing.*;
 
@@ -45,12 +44,9 @@ public class Main {
 	public static void main(String[] args) {
 		lerEstadoAnterior();
 		adicionarLinguas();
-		try {
-			maingui = new JanelaPrincipal();
-		} catch (URISyntaxException e) {
+		SplashScreen splash = new SplashScreen(3000);
+		splash.showSplashAndAPP();
 
-			e.printStackTrace();
-		}
 	}
 
 	private static void adicionarLinguas() {
