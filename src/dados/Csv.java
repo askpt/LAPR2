@@ -23,6 +23,8 @@ public class Csv extends JComponent implements Accessible {
 	 * Method to add various csv files to the program. The application will
 	 * evaluate the content of the csv and will choose the csv file type.
 	 * 
+	 * * @param files if wanna choose the file in this method, send null.
+	 * 
 	 * @param janela
 	 *            the parent component of the dialog
 	 * @param paises
@@ -48,31 +50,38 @@ public class Csv extends JComponent implements Accessible {
 	 * @see Atleta athlete details
 	 * 
 	 */
-	public void intelImport(Component janela, ListaLigada<Pais> paises, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<Atleta> atletas) {
+	public void intelImport(File[] files, Component janela, ListaLigada<Pais> paises, ListaLigada<Disciplina> disciplinas, ListaLigada<Modalidade> modalidades, ListaLigada<JogosOlimpicos> jogos, ListaLigada<Prova> provas, ListaLigada<Equipa> equipas, ListaLigada<Atleta> atletas) {
 
-		JFileChooser fc = new JFileChooser();
-		fc.setFileFilter(new CsvFilter());
-		fc.setMultiSelectionEnabled(true);
-		fc.setDialogTitle("intelImport Files");
-		int returnVal = fc.showOpenDialog(janela);
-		if (returnVal != JFileChooser.APPROVE_OPTION)
-			return;
-		File[] ficheiros = fc.getSelectedFiles();
+		if (files == null) {
+			JFileChooser fc = new JFileChooser();
+			fc.setFileFilter(new CsvFilter());
+			fc.setMultiSelectionEnabled(true);
+			fc.setDialogTitle("intelImport Files");
+			int returnVal = fc.showOpenDialog(janela);
+			if (returnVal != JFileChooser.APPROVE_OPTION)
+				return;
+			files = fc.getSelectedFiles();
+		}
 
 		ListaLigada<File> ficheirosPais = new ListaLigada<File>();
 		ListaLigada<File> ficheirosDisc = new ListaLigada<File>();
 		ListaLigada<File> ficheirosProva = new ListaLigada<File>();
 		ListaLigada<File> ficheirosResul = new ListaLigada<File>();
+		ListaLigada<File> ficheirosTemp = new ListaLigada<File>();
+		for (int i = 0; i < files.length; i++) {
+			if (files[i].getName().endsWith(".csv"))
+				ficheirosTemp.add(files[i]);
+		}
 
-		for (int i = 0; i < ficheiros.length; i++) {
-			if (testPais(ficheiros[i])) {
-				ficheirosPais.add(ficheiros[i]);
-			} else if (testDisc(ficheiros[i])) {
-				ficheirosDisc.add(ficheiros[i]);
-			} else if (testProva(ficheiros[i])) {
-				ficheirosProva.add(ficheiros[i]);
-			} else if (testResul(ficheiros[i])) {
-				ficheirosResul.add(ficheiros[i]);
+		for (int i = 0; i < ficheirosTemp.size(); i++) {
+			if (testPais(ficheirosTemp.get(i))) {
+				ficheirosPais.add(ficheirosTemp.get(i));
+			} else if (testDisc(ficheirosTemp.get(i))) {
+				ficheirosDisc.add(ficheirosTemp.get(i));
+			} else if (testProva(ficheirosTemp.get(i))) {
+				ficheirosProva.add(ficheirosTemp.get(i));
+			} else if (testResul(ficheirosTemp.get(i))) {
+				ficheirosResul.add(ficheirosTemp.get(i));
 			}
 		}
 
@@ -89,7 +98,9 @@ public class Csv extends JComponent implements Accessible {
 			importResultados(ficheirosResul.get(i), janela, atletas, modalidades, paises, provas, equipas, jogos);
 		}
 
-		JOptionPane.showMessageDialog(janela, "Files imported sucessfully!", "intelImport File", JOptionPane.INFORMATION_MESSAGE);
+		if (ficheirosTemp.size() != 0) {
+			JOptionPane.showMessageDialog(janela, "Files imported sucessfully!", "intelImport File", JOptionPane.INFORMATION_MESSAGE);
+		}
 
 	}
 
@@ -309,14 +320,14 @@ public class Csv extends JComponent implements Accessible {
 		}
 
 	}
-	
+
 	/**
 	 * Method to import languages through .csv files.
 	 * 
 	 * @param janela
-	 * 			the parent component of the dialog
+	 *            the parent component of the dialog
 	 * @param linguas
-	 * 			language details
+	 *            language details
 	 */
 	public void importLingua(Component janela, ListaLigada<Linguas> linguas) {
 
@@ -1594,7 +1605,5 @@ public class Csv extends JComponent implements Accessible {
 
 			return String.format("CSV File");
 		}
-
 	}
-
 }

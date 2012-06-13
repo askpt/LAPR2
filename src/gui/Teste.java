@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 import javax.swing.*;
 
@@ -37,7 +38,7 @@ public class Teste extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				csv.intelImport(Teste.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
+				csv.intelImport(null, Teste.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
 			}
 		});
 		menu.add(menuItem);
@@ -338,6 +339,15 @@ public class Teste extends JFrame {
 		JLabel label = new JLabel(new ImageIcon(img.constrution));
 		label.setEnabled(false);
 		label.setDisabledIcon(new ImageIcon(img.constrution));
+		new FileDrop(label, new FileDrop.Listener() {
+
+			@Override
+			public void filesDropped(File[] files) {
+				Csv csv = new Csv();
+				csv.intelImport(files, Teste.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
+
+			}
+		});
 		add(label);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

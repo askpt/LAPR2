@@ -413,7 +413,7 @@ public class AppConfig extends JFrame {
 		intelImport.setBorder(emptyBorder);
 		intelImport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.intelImport(AppConfig.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
+				csv.intelImport(null, AppConfig.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
 
 			}
 		});
