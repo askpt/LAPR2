@@ -128,8 +128,9 @@ public class Csv extends JComponent implements Accessible {
 			Scanner in = new Scanner(file);
 			String cabind = "Individual ;;Value";
 			String cabcol = "Team ;;Value";
+			String temp = in.nextLine();
 
-			if (in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabind.replaceAll(" ", "")) || in.nextLine().replaceAll(" ", "").equalsIgnoreCase(cabcol.replaceAll(" ", ""))) {
+			if (temp.replaceAll(" ", "").equalsIgnoreCase(cabind.replaceAll(" ", "")) || temp.replaceAll(" ", "").equalsIgnoreCase(cabcol.replaceAll(" ", ""))) {
 				in.close();
 				return true;
 			}
