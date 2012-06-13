@@ -39,19 +39,19 @@ public class Linguas {
 	 */
 	private String bronze;
 	/**
-	 * a string with the of type of classificiation.
+	 * a string with the of type of classification.
 	 */
 	private String atleta;
 	/**
-	 * a string with the of type of classificiation.
+	 * a string with the of type of classification.
 	 */
 	private String modalidade;
 	/**
-	 * a string with the of type of classificiation.
+	 * a string with the of type of classification.
 	 */
 	private String disciplina;
 	/**
-	 * a string with the of type of classificiation.
+	 * a string with the of type of classification.
 	 */
 	private String pais;
 	/**
@@ -62,34 +62,48 @@ public class Linguas {
 	/**
 	 * Main constructor of the class Language. This constructor assigns the
 	 * language that will be used to show on screen.
+	 * 
 	 * @param linguagem
-	 * 				sets the language
+	 *               sets the language
 	 * @param jogosolimpicos
-	 * 				sets the word "Olympic Games" on another language depending on the language
+	 *               sets the word "Olympic Games" on another language
+	 *               depending on the language
 	 * @param listagem
-	 * 				sets the word "Listing" on another language depending on the language
+	 *               sets the word "Listing" on another language depending on
+	 *               the language
 	 * @param classificacao
-	 * 				sets the word "Classification" on another language depending on the language
+	 *               sets the word "Classification" on another language
+	 *               depending on the language
 	 * @param posicao
-	 *    			sets the word "Position" on another language depending on the language
+	 *               sets the word "Position" on another language depending
+	 *               on the language
 	 * @param nome
-	 * 				sets the word "Name" on another language depending on the language
+	 *               sets the word "Name" on another language depending on
+	 *               the language
 	 * @param ouro
-	 * 				sets the word "Gold" on another language depending on the language
+	 *               sets the word "Gold" on another language depending on
+	 *               the language
 	 * @param prata
-	 * 				sets the word "Silver" on another language depending on the language
+	 *               sets the word "Silver" on another language depending on
+	 *               the language
 	 * @param bronze
-	 * 				sets the word "Bronze" on another language depending on the language
+	 *               sets the word "Bronze" on another language depending on
+	 *               the language
 	 * @param atleta
-	 * 				sets the word "Athlete" on another language depending on the language
+	 *               sets the word "Athlete" on another language depending on
+	 *               the language
 	 * @param modalidade
-	 * 				sets the word "Sport" on another language depending on the language
+	 *               sets the word "Sport" on another language depending on
+	 *               the language
 	 * @param disciplina
-	 * 				sets the word "Competition" on another language depending on the language
+	 *               sets the word "Competition" on another language
+	 *               depending on the language
 	 * @param pais
-	 * 				sets the word "Country" on another language depending on the language
+	 *               sets the word "Country" on another language depending on
+	 *               the language
 	 * @param data
-	 * 				sets the word "Emission Date" on another language depending on the language
+	 *               sets the word "Emission Date" on another language
+	 *               depending on the language
 	 */
 	public Linguas(String linguagem, String jogosolimpicos, String listagem, String classificacao, String posicao, String nome, String ouro, String prata, String bronze, String atleta, String modalidade, String disciplina, String pais, String data) {
 
@@ -114,14 +128,15 @@ public class Linguas {
 	 * Sets the language of the file.
 	 * 
 	 * @param linguagem
-	 * 			the language of the file.
+	 *               the language of the file.
 	 */
 	public void setLinguagem(String linguagem) {
 		this.linguagem = linguagem;
 	}
 
 	/**
-	 * Sets the String Olympic Games on title of the page depending on the language.
+	 * Sets the String Olympic Games on title of the page depending on the
+	 * language.
 	 * 
 	 * @param jogosolimpicos
 	 */
@@ -146,7 +161,7 @@ public class Linguas {
 	public void setClassificacao(String classificacao) {
 		this.classificacao = classificacao;
 	}
-	
+
 	/**
 	 * Sets the String Position depending on the language.
 	 * 
@@ -165,7 +180,6 @@ public class Linguas {
 		this.data = data;
 	}
 
-	
 	/**
 	 * Gets the String Emission Date depending on the language.
 	 * 
@@ -214,13 +228,12 @@ public class Linguas {
 	/**
 	 * Gets the String Athlete depending on the language.
 	 * 
-	 * @return atleta.
+	 * @return athlete.
 	 */
 	public String getAtleta() {
 		return atleta;
 	}
-	
-	
+
 	/**
 	 * Sets the String Athlete depending on the language.
 	 * 
@@ -233,7 +246,7 @@ public class Linguas {
 	/**
 	 * Gets the String Sport depending on the language.
 	 * 
-	 * @return modalidade
+	 * @return sport
 	 */
 	public String getModalidade() {
 		return modalidade;
@@ -251,7 +264,7 @@ public class Linguas {
 	/**
 	 * Gets the Competition String depending on the language.
 	 * 
-	 * @return disciplina.
+	 * @return competition.
 	 */
 	public String getDisciplina() {
 		return disciplina;
@@ -265,11 +278,11 @@ public class Linguas {
 	public void setDisciplina(String disciplina) {
 		this.disciplina = disciplina;
 	}
-	
+
 	/**
 	 * Gets the String Country depending on the language.
 	 * 
-	 * @return pais.
+	 * @return country.
 	 */
 	public String getPais() {
 		return pais;
@@ -283,11 +296,11 @@ public class Linguas {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-	
+
 	/**
 	 * Gets the language for the file.
 	 * 
-	 * @return linguagem.
+	 * @return language.
 	 */
 	public String getLinguagem() {
 
@@ -297,7 +310,7 @@ public class Linguas {
 	/**
 	 * Gets the String Olympic Games depending on the language.
 	 * 
-	 * @return jogosolimpicos.
+	 * @return olympic games.
 	 */
 	public String getJogosOlimpicos() {
 
@@ -307,7 +320,7 @@ public class Linguas {
 	/**
 	 * Gets the String Listing depending on the language.
 	 * 
-	 * @return listagem.
+	 * @return listing.
 	 */
 	public String getListagem() {
 		return listagem;
@@ -316,7 +329,7 @@ public class Linguas {
 	/**
 	 * Gets the String Classification depending on the language.
 	 * 
-	 * @return classificacao.
+	 * @return classification.
 	 */
 	public String getClassificacao() {
 		return classificacao;
@@ -325,7 +338,7 @@ public class Linguas {
 	/**
 	 * Gets the String Position depending on the language.
 	 * 
-	 * @return posicao.
+	 * @return position.
 	 */
 	public String getPosicao() {
 		return posicao;
@@ -334,7 +347,7 @@ public class Linguas {
 	/**
 	 * Gets the String Name depending on the language.
 	 * 
-	 * @return nome.
+	 * @return name.
 	 */
 	public String getNome() {
 		return nome;
@@ -343,7 +356,7 @@ public class Linguas {
 	/**
 	 * Gets the String Gold depending on the language.
 	 * 
-	 * @return ouro.
+	 * @return gold.
 	 */
 	public String getOuro() {
 		return ouro;
@@ -352,7 +365,7 @@ public class Linguas {
 	/**
 	 * Gets the String Silver depending on the language.
 	 * 
-	 * @return prata.
+	 * @return silver.
 	 */
 	public String getPrata() {
 		return prata;
@@ -366,4 +379,10 @@ public class Linguas {
 	public String getBronze() {
 		return bronze;
 	}
+
+	public String toString() {
+
+		return String.format("%s", linguagem);
+	}
+
 }
