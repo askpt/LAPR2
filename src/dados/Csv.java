@@ -897,6 +897,7 @@ public class Csv extends JComponent implements Accessible {
 				ficheiro = fc.getSelectedFile();
 				veri = true;
 			}
+
 			int ponto = ficheiro.getName().lastIndexOf(".");
 			String[] tempPrin = ficheiro.getName().substring(0, ponto).split("_");
 			int ano = Integer.parseInt(tempPrin[0]);
@@ -1389,7 +1390,15 @@ public class Csv extends JComponent implements Accessible {
 			file[3] = file[3].replaceAll(".csv", "");
 			int ano = Integer.parseInt(file[3]);
 
-			jogos.add(new JogosOlimpicos(ano));
+			int itAno = 0;
+			for (; itAno < jogos.size(); itAno++) {
+				if (jogos.get(itAno).getAno() == ano)
+					break;
+			}
+			if (itAno == jogos.size())
+				jogos.add(new JogosOlimpicos(ano));
+			else
+				return true;
 
 			Scanner inTest = new Scanner(ficheiro);
 
