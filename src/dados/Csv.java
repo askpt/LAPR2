@@ -355,7 +355,7 @@ public class Csv extends JComponent implements Accessible {
 	 * @param linguas
 	 *            language details
 	 */
-	public void importLingua(Component janela, ListaLigada<Linguas> linguas) {
+	public void importLingua(File ficheiro, Component janela, ListaLigada<Linguas> linguas) {
 
 		try {
 			JFileChooser fc = new JFileChooser();
@@ -364,7 +364,7 @@ public class Csv extends JComponent implements Accessible {
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
 
-			File ficheiro = fc.getSelectedFile();
+			ficheiro = fc.getSelectedFile();
 			Scanner in = new Scanner(ficheiro);
 			if (!in.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);

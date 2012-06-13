@@ -34,10 +34,26 @@ public class CsvTest {
 		assertTrue(teste);
 	}
 
-	// TODO acabar
 	@Test
 	public void testImportLingua() {
-		fail("Not yet implemented");
+		ListaLigada<Linguas> testeLingua = new ListaLigada<Linguas>();
+		ListaLigada<Linguas> esperadoLingua = new ListaLigada<Linguas>();
+		boolean teste = true;
+		
+		esperadoLingua.add(new Linguas("EN-GB", "Olympic Games", "Listing", "Classification", "Position", "Name", "Gold", "Silver", "Bronze", "Athlete", "Sport", "Competition", "Country", "Emission Date"));
+		esperadoLingua.add(new Linguas("FR-FR", "Jeux Olympiques", "Liste", "Classification", "Position", "Nom", "Or", "Argent", "Bronze", "Athl&egrave;te", "Modalit&eacute;", "Discipline", "Pays", "Date d'&eacute;mission"));
+		esperadoLingua.add(new Linguas("PT-PT", "Jogos Ol&iacute;mpicos", "Listagem", "Classifica&ccedil;&atilde;o", "Posi&ccedil;&atilde;o", "Nome", "Ouro", "Prata", "Bronze", "Atletas", "Modalidade", "Disciplina", "Pa&iacute;s", "Data de Emiss&atilde;o"));
+		
+		Csv csv = new Csv();
+		csv.importLingua(new File("csv_tests\\IOC_test_JUnit_importLingua.csv"), new Teste("Test"), testeLingua);
+		
+		for (int i = 0; i < testeLingua.size(); i++) {
+			if (!esperadoLingua.get(i).getLinguagem().equals(testeLingua.get(i).getLinguagem()));
+				teste = false;
+		}
+		
+		assertTrue(teste);
+		
 	}
 
 	@Test
