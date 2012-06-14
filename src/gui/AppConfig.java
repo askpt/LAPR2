@@ -561,7 +561,9 @@ public class AppConfig extends JFrame {
 				csv.exportResultados(AppConfig.this, Main.getModalidades(), Main.getProvas(), "Gymnastics", 1, 2008);
 			}
 		});
-
+		// FIXME erro a exportar CSV, adicionar botão competition with event
+		// (exportProvas),
+		// remover html's, check pre-definidos
 		Botao expResuHtml = new Botao(img.expResuHtml);
 		expResuHtml.setBotaoRollOver(img.expResuHtml_o);
 		expResuHtml.setContentAreaFilled(false);
@@ -690,7 +692,7 @@ public class AppConfig extends JFrame {
 		editCo.setBorder(emptyBorder);
 		editCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// FIXME:
+				// TODO: não implementado
 				String[] atletas = { "Portugal", "Espanha", "Franca" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the country:", "Edit Country", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.flag), atletas, atletas[0]);
 
@@ -703,7 +705,7 @@ public class AppConfig extends JFrame {
 		editDis.setBorder(emptyBorder);
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// FIXME:
+				// TODO: não implementado
 				String[] atletas = { "Bolt", "Boltas", "Boltes" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the discipline:", "Edit Discipline", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
 
@@ -716,7 +718,7 @@ public class AppConfig extends JFrame {
 		editSpo.setBorder(emptyBorder);
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// FIXME:
+				// TODO: não implementado
 				String[] atletas = { "Bolt", "Boltas", "Boltes" };
 				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the sport:", "Edit Sport", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
 
