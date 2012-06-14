@@ -104,8 +104,9 @@ public class Main {
 	 *            command line parameters
 	 */
 	public static void main(String[] args) {
-		SplashScreen splash = new SplashScreen(5000);
-		splash.showSplash();
+		Imagens img = new Imagens();
+		@SuppressWarnings("unused")
+		SplashScreen splash = new SplashScreen(5000, img.splash, true);
 		lerEstadoAnterior();
 		adicionarLinguas();
 		try {

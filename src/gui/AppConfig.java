@@ -183,10 +183,6 @@ public class AppConfig extends JFrame {
 		setDefaultCloseOperation(opcao);
 		setVisible(visible);
 		setLocationRelativeTo(null);
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-			}
-		});
 	}
 
 	/**

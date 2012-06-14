@@ -8,21 +8,43 @@ import java.net.*;
 import javax.imageio.*;
 import javax.swing.*;
 
+/**
+ * 
+ * Custom panel with a background image
+ * 
+ */
 @SuppressWarnings("serial")
 public class Painel extends JPanel {
 
-	// imagem que carrega por defeito
+	/**
+	 * Default image
+	 */
 	String imagem = "bin/Imagens/background.png";
 
+	/**
+	 * Constructor of this class
+	 */
 	public Painel() {
 		super();
 	}
 
+	/**
+	 * Constructor of this class, creates an image from the String in param
+	 * 
+	 * @param image
+	 *            image's path
+	 */
 	public Painel(String image) {
 		super();
 		this.imagem = image;
 	}
 
+	/**
+	 * Constructor of this class, creates an image from the url in param
+	 * 
+	 * @param url
+	 *            image's path
+	 */
 	public Painel(URL url) {
 		String temp = url.getPath();
 		String[] temparray = temp.split("/");
@@ -33,6 +55,11 @@ public class Painel extends JPanel {
 		super(layout);
 	}
 
+	/**
+	 * Loads the image into the panel
+	 * 
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	public void paintComponent(Graphics g) {
 		BufferedImage image;
 		try {

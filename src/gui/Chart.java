@@ -12,11 +12,9 @@ import org.jfree.chart.axis.*;
 import org.jfree.chart.plot.*;
 import org.jfree.chart.renderer.category.*;
 import org.jfree.data.category.*;
-import org.jfree.data.xy.*;
 
 /**
- * A simple demonstration application showing how to create a line chart using
- * data from an {@link XYDataset}.
+ * Class that creates a line chart
  * 
  */
 @SuppressWarnings("serial")
@@ -101,6 +99,11 @@ public class Chart extends JFrame {
 
 	}
 
+	/**
+	 * This method sorts the linked list of Olympic Games Editions
+	 * 
+	 * @return jogosTemp linked list of sorted Olympic Games Editions
+	 */
 	private ListaLigada<JogosOlimpicos> sortEditions() {
 		ListaLigada<JogosOlimpicos> jogosTemp = new ListaLigada<JogosOlimpicos>();
 
