@@ -68,7 +68,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400 align=center>" + (i + 1) + "</td><td align=center>" + paisTemp.get(i).getNomePais() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 
@@ -136,7 +136,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400 align=center>" + (i + 1) + "</td><td align=center>" + atletaTemp.get(i).getNome() + "</td><td align=center>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + atletaTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 
@@ -203,7 +203,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400 align=center>" + (i + 1) + "</td><td align=center>" + paisTemp.get(i).getNomePais() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 				fout.format("</tr>");
@@ -268,7 +268,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td align=center>" + paisTemp.get(i).getNomePais() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 				fout.format("</tr>");

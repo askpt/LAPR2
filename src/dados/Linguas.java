@@ -3,7 +3,7 @@ package dados;
 import java.io.*;
 
 /**
- * Main class for the language sethings.
+ * Main class for the language settings.
  * 
  */
 @SuppressWarnings("serial")
