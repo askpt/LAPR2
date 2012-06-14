@@ -7,6 +7,7 @@ import javax.swing.*;
 /*
  * Class that loads first, this class creates a simple splashscreen
  */
+@SuppressWarnings("serial")
 public class SplashScreen extends JWindow {
 
 	/*

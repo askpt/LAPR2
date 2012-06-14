@@ -8,6 +8,7 @@ import java.net.*;
 import javax.imageio.*;
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Painel extends JPanel {
 
 	// imagem que carrega por defeito

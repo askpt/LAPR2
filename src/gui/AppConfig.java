@@ -432,6 +432,7 @@ public class AppConfig extends JFrame {
 		drag.setContentAreaFilled(false);
 		drag.setBorder(emptyBorder);
 		drag.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				Drag dragDg = new Drag(AppConfig.this);
@@ -693,9 +694,6 @@ public class AppConfig extends JFrame {
 		editCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: não implementado
-				String[] atletas = { "Portugal", "Espanha", "Franca" };
-				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the country:", "Edit Country", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.flag), atletas, atletas[0]);
-
 			}
 		});
 
@@ -706,9 +704,6 @@ public class AppConfig extends JFrame {
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: não implementado
-				String[] atletas = { "Bolt", "Boltas", "Boltes" };
-				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the discipline:", "Edit Discipline", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
-
 			}
 		});
 
@@ -719,9 +714,6 @@ public class AppConfig extends JFrame {
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: não implementado
-				String[] atletas = { "Bolt", "Boltas", "Boltes" };
-				String atleta = (String) JOptionPane.showInputDialog(AppConfig.this, "Choose the sport:", "Edit Sport", JOptionPane.PLAIN_MESSAGE, new ImageIcon(img.sport), atletas, atletas[0]);
-
 			}
 		});
 

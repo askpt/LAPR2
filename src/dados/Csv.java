@@ -352,6 +352,8 @@ public class Csv extends JComponent implements Accessible {
 	 *            the parent component of the dialog
 	 * @param linguas
 	 *            language details
+	 * @param ficheiro
+	 *            if wanna choose the file in this method, send null.
 	 */
 	public void importLingua(File ficheiro, Component janela, ListaLigada<Linguas> linguas) {
 		boolean veri = false;

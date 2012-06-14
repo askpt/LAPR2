@@ -97,24 +97,6 @@ public class AddList extends JFrame {
 	private final int MIN = 1;
 	/**
 	 * custom button used on <code>addCA()</code> method, its fuction is to show
-	 * the next card index each time it is pressed.
-	 * 
-	 * @see Botao Botao Class
-	 * 
-	 * @see #addCA() used in this method
-	 */
-	private Botao add1 = new Botao(img.add1);
-	/**
-	 * custom button used on <code>addCA()</code> method,its fuction is to show
-	 * the previous card index each time it is pressed.
-	 * 
-	 * @see Botao Botao Class
-	 * 
-	 * @see #addCA() used in this method
-	 */
-	private Botao reduce1 = new Botao(img.remove1);
-	/**
-	 * custom button used on <code>addCA()</code> method, its fuction is to show
 	 * the last card index in order to show a table with results as output.
 	 * 
 	 * 
@@ -353,6 +335,7 @@ public class AddList extends JFrame {
 
 		JPanel pButn = new JPanel();
 		pButn.setOpaque(false);
+		final Botao add1 = new Botao(img.add1);
 		add1.setBotaoRollOver(img.add1_o);
 		add1.setContentAreaFilled(false);
 		add1.setBorderPainted(false);
@@ -361,6 +344,7 @@ public class AddList extends JFrame {
 		reduce1.setBorderPainted(false);
 		reduce1.setContentAreaFilled(false);
 		reduce1.setVisible(false);
+		add1.setMnemonic('+');
 		reduce1.setMnemonic('-');
 		getResults.setBotaoRollOver(img.getResults_o);
 		getResults.setBorderPainted(false);
@@ -699,8 +683,7 @@ public class AddList extends JFrame {
 						cl.show(card, "7");
 					}
 				} else if (index + 4 == 8) {
-					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem())
-							|| (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
+					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_4.getSelectedItem();
@@ -1076,14 +1059,9 @@ public class AddList extends JFrame {
 				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
 				int ano_inicio = jogos_inicio.getAno();
 				int ano_fim = jogos_fim.getAno();
-				int index = 0;
-				for (int i = 0; i < Main.getLingua().size(); i++) {
-					if (Main.getLingua().get(i).getLinguagem().equalsIgnoreCase("English")) {
-						index = i;
-					}
-				}
 
-				html.exportAtleta(AddList.this, ano_inicio, ano_fim, Main.getLingua().get(index), Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
+				if (lingua != null)
+					html.exportAtleta(AddList.this, ano_inicio, ano_fim, lingua, Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
 			}
 		});
 
@@ -1194,7 +1172,6 @@ public class AddList extends JFrame {
 				int ano_fim = jogos_fim.getAno();
 				Disciplina d = (Disciplina) cmbdis.getSelectedItem();
 				ListaLigada<Pais> listagem_pais = Listagem.listarMedalhasPais(Main.getPaises(), Main.getProvas(), ano_inicio, ano_fim, null, d);
-				String titulo = d.getNome();
 				JPanel tabela1 = createTablePaisAtleta(listagem_pais, "Nation");
 				card3.add(tabela1, "2");
 				cl3.show(card3, "2");

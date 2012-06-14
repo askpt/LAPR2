@@ -14,7 +14,7 @@ import javax.swing.filechooser.FileFilter;
 import jogosolimpicos.*;
 import listaligada.*;
 
-/*
+/**
  * HTML class to export data to files.
  */
 
@@ -79,7 +79,6 @@ public class HTML {
 				criarFimHTML(fout);
 			} catch (IOException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
-				f.printStackTrace(); // TODO rem
 			}
 		} else {
 			JOptionPane.showMessageDialog(janela, "No Countries to export", "Export", JOptionPane.INFORMATION_MESSAGE);
@@ -87,6 +86,15 @@ public class HTML {
 		}
 	}
 
+	/**
+	 * Copy the image to the specified directory, near the html document.
+	 * 
+	 * @param dirHTML
+	 *            the html directory
+	 * @param img
+	 *            the image to be copied
+	 * @throws IOException
+	 */
 	private void createImage(String dirHTML, URL img) throws IOException {
 		File dir = new File(dirHTML + "/Imagens");
 		dir.mkdirs();
@@ -184,6 +192,8 @@ public class HTML {
 	 *            competition details
 	 * @param pais
 	 *            country details
+	 * @param modalidade
+	 *            linked list of sports
 	 */
 	public void exportModalidade(Component janela, int anoInicio, int anoFim, String modalidade, ListaLigada<Linguas> linguas, Linguas lingua, ListaLigada<Prova> prova, ListaLigada<Pais> pais) {
 
@@ -247,6 +257,10 @@ public class HTML {
 	 *            team details
 	 * @param pais
 	 *            country details
+	 * @param provas
+	 *            linked list of competitoin with event
+	 * @param disciplina
+	 *            linked list of the competitons
 	 */
 	public void exportDisciplina(Component janela, int anoInicio, int anoFim, ListaLigada<Prova> provas, Disciplina disciplina, ListaLigada<Linguas> linguas, Linguas lingua, ListaLigada<Pais> pais) {
 
@@ -290,6 +304,12 @@ public class HTML {
 		}
 	}
 
+	/**
+	 * Creates the end of the html body.
+	 * 
+	 * @param fout
+	 *            file to be written upon
+	 */
 	private void criarFimHTML(Formatter fout) {
 		fout.format("</tr>\n");
 		fout.format("</table><br>\n");
@@ -309,8 +329,6 @@ public class HTML {
 	 *            language details
 	 */
 	private void corpoInicio(Formatter fout, int it, ListaLigada<Linguas> linguas) {
-
-		Imagens img = new Imagens();
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
 		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">\n");
@@ -336,18 +354,18 @@ public class HTML {
 		fout.format("</table>\n");
 		fout.format("<table border = 1 align=center>\n");
 		fout.format("<tr>\n");
-		fout.format("<td width=200 align = center><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPosicao() + "</font></td><td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getNome() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getOuro()
-				+ "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPrata() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getBronze() + "</font></td>\n");
+		fout.format("<td width=200 align = center><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPosicao() + "</font></td><td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getNome() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getOuro() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPrata() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getBronze() + "</font></td>\n");
 
 	}
 
-	/*
+	/**
 	 * Returns the path of the directory where the file in param is located
 	 * 
-	 * @param f the file we need to know the directory he is in
+	 * @param f
+	 *            the file we need to know the directory he is in
 	 * 
 	 * @return returns the path of the directory where the file in param is
-	 * located
+	 *         located
 	 */
 	private String getDirPath(final File f) {
 

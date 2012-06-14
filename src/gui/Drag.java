@@ -7,6 +7,7 @@ import javax.swing.*;
 import dados.*;
 import dragndrop.*;
 
+@SuppressWarnings("serial")
 public class Drag extends JDialog {
 
 	public Drag(JFrame parent) {

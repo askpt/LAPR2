@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class Botao extends JButton {
 
 	private BufferedImage image, imageRollOver;
