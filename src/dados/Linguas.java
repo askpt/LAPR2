@@ -2,6 +2,10 @@ package dados;
 
 import java.io.*;
 
+/**
+ * Main class for the language sethings.
+ * 
+ */
 @SuppressWarnings("serial")
 public class Linguas implements Serializable {
 
@@ -383,6 +387,10 @@ public class Linguas implements Serializable {
 		return bronze;
 	}
 
+	/**
+	 * 
+	 * @return returns a String in this format: "Language". Eg.: "EN-GB"
+	 */
 	public String toString() {
 
 		return String.format("%s", linguagem);

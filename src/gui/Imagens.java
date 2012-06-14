@@ -7,7 +7,6 @@ public class Imagens {
 
 	URL logo = classLoader.getResource("Imagens/logo.png");
 
-	URL constrution = classLoader.getResource("Imagens/under_constrution.jpg");
 	URL bg = classLoader.getResource("Imagens/background.png");
 	URL bg2 = classLoader.getResource("Imagens/bg2.png");
 	URL bg3 = classLoader.getResource("Imagens/bg3.png");

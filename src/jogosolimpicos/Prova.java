@@ -116,7 +116,4 @@ public abstract class Prova implements Serializable {
 	 */
 	public abstract void ordenar();
 
-	// TODO remover
-	public abstract String toStringTest();
-
 }

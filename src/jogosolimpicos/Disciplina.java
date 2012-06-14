@@ -231,11 +231,6 @@ public class Disciplina implements Serializable {
 
 	}
 
-	// TODO Remover
-	public String toStringTest() {
-		return String.format("%s - %s - %s - %d - %d - %s", mod, nome, tipoDisc, genero, tipoClass, ordenacao);
-	}
-
 	/**
 	 * @param obj
 	 *            object to be compared.

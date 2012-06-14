@@ -356,35 +356,51 @@ public class Csv extends JComponent implements Accessible {
 	 *            language details
 	 */
 	public void importLingua(File ficheiro, Component janela, ListaLigada<Linguas> linguas) {
-
+		boolean veri = false;
 		try {
-			JFileChooser fc = new JFileChooser();
-			fc.setFileFilter(new CsvFilter());
-			int returnVal = fc.showOpenDialog(janela);
-			if (returnVal != JFileChooser.APPROVE_OPTION)
-				return;
+			if (ficheiro == null) {
+				JFileChooser fc = new JFileChooser();
+				fc.setFileFilter(new CsvFilter());
+				int returnVal = fc.showOpenDialog(janela);
+				if (returnVal != JFileChooser.APPROVE_OPTION)
+					return;
 
-			ficheiro = fc.getSelectedFile();
+				ficheiro = fc.getSelectedFile();
+				veri = true;
+			}
 			Scanner in = new Scanner(ficheiro);
 			if (!in.hasNextLine()) {
 				JOptionPane.showMessageDialog(janela, "Empty File!", "Import File", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			int i = 0, j = 1, k = 0, l = 1;
+			int k = 0, l = 1;
 			String[] temp = new String[30];
 			while (in.hasNextLine()) {
 				String tempz[] = in.nextLine().split(";");
-				temp[k] = tempz[i];
-				temp[l] = tempz[j];
+				tempz[0] = tempz[0].replaceAll("  ", " ");
+				if (tempz[0].endsWith(" "))
+					tempz[0] = tempz[0].substring(0, tempz[0].length() - 1);
+				if (tempz[0].startsWith(" "))
+					tempz[0] = tempz[0].substring(1);
+				temp[k] = tempz[0];
+
+				tempz[0] = tempz[0].replaceAll("  ", " ");
+				if (tempz[1].endsWith(" "))
+					tempz[1] = tempz[1].substring(0, tempz[1].length() - 1);
+				if (tempz[1].startsWith(" "))
+					tempz[1] = tempz[1].substring(1);
+				temp[l] = tempz[1];
 				k += 2;
 				l += 2;
 			}
 			Linguas eng = new Linguas(temp[1], temp[3], temp[5], temp[7], temp[9], temp[11], temp[13], temp[15], temp[17], temp[19], temp[21], temp[23], temp[25], temp[27]);
 			linguas.add(eng);
 			in.close();
-			JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "File imported sucessfully!", "Import File", JOptionPane.INFORMATION_MESSAGE);
 		} catch (FileNotFoundException | ArrayIndexOutOfBoundsException f) {
-			JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+			if (veri)
+				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

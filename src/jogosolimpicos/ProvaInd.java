@@ -92,11 +92,4 @@ public class ProvaInd extends Prova implements Serializable {
 
 	}
 
-	// TODO remover
-	@Override
-	public String toStringTest() {
-		return String.format("Individual, %s, %d, %d", this.getDisciplina().getNome(), this.getDisciplina().getGenero(), this.getJogosOlimpicos().getAno());
-
-	}
-
 }

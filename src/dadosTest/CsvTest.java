@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.*;
 
-import gui.*;
 import jogosolimpicos.*;
 import listaligada.*;
 
@@ -24,7 +23,7 @@ public class CsvTest {
 		esperadoList.add(new Pais("ALG", "Algeria"));
 
 		Csv csv = new Csv();
-		csv.importPais(new File("csv_tests\\IOC_test_JUnit_importPais.csv"), new Teste("Test"), testeList);
+		csv.importPais(new File("csv_tests\\IOC_test_JUnit_importPais.csv"), null, testeList);
 
 		for (int i = 0; i < testeList.size(); i++) {
 			if (!esperadoList.get(i).getCodigoPais(0).equals(testeList.get(i).getCodigoPais(0)) || !esperadoList.get(i).getNomePais().equals(testeList.get(i).getNomePais()))
@@ -39,21 +38,19 @@ public class CsvTest {
 		ListaLigada<Linguas> testeLingua = new ListaLigada<Linguas>();
 		ListaLigada<Linguas> esperadoLingua = new ListaLigada<Linguas>();
 		boolean teste = true;
-		
+
 		esperadoLingua.add(new Linguas("EN-GB", "Olympic Games", "Listing", "Classification", "Position", "Name", "Gold", "Silver", "Bronze", "Athlete", "Sport", "Competition", "Country", "Emission Date"));
-		esperadoLingua.add(new Linguas("FR-FR", "Jeux Olympiques", "Liste", "Classification", "Position", "Nom", "Or", "Argent", "Bronze", "Athl&egrave;te", "Modalit&eacute;", "Discipline", "Pays", "Date d'&eacute;mission"));
-		esperadoLingua.add(new Linguas("PT-PT", "Jogos Ol&iacute;mpicos", "Listagem", "Classifica&ccedil;&atilde;o", "Posi&ccedil;&atilde;o", "Nome", "Ouro", "Prata", "Bronze", "Atletas", "Modalidade", "Disciplina", "Pa&iacute;s", "Data de Emiss&atilde;o"));
-		
+
 		Csv csv = new Csv();
-		csv.importLingua(new File("csv_tests\\IOC_test_JUnit_importLingua.csv"), new Teste("Test"), testeLingua);
-		
-		for (int i = 0; i < testeLingua.size(); i++) {
-			if (!esperadoLingua.get(i).getLinguagem().equals(testeLingua.get(i).getLinguagem()));
+		csv.importLingua(new File("csv_tests\\IOC_test_JUnit_importLingua.csv"), null, testeLingua);
+
+		for (int i = 0; i < testeLingua.size() && i < esperadoLingua.size() && teste; i++) {
+			if (!esperadoLingua.get(i).getLinguagem().equalsIgnoreCase(testeLingua.get(i).getLinguagem()))
 				teste = false;
 		}
-		
+
 		assertTrue(teste);
-		
+
 	}
 
 	@Test
@@ -73,7 +70,7 @@ public class CsvTest {
 		esperadoDiscList.add(new Disciplina("Basketball", esperadoModalList.get(1), true, 0, false, 3));
 		esperadoDiscList.add(new Disciplina("Basketball", esperadoModalList.get(1), true, 1, false, 3));
 		Csv csv = new Csv();
-		csv.importDisc(new File("csv_tests\\IOC_test_JUnit_importDisc.csv"), new Teste("Test"), testeDiscList, testeModalList);
+		csv.importDisc(new File("csv_tests\\IOC_test_JUnit_importDisc.csv"), null, testeDiscList, testeModalList);
 		for (int i = 0; i < esperadoModalList.size() && i < testeModalList.size() && teste; i++) {
 			if (!esperadoModalList.get(i).getNome().equalsIgnoreCase(testeModalList.get(i).getNome()))
 				teste = false;
@@ -99,10 +96,10 @@ public class CsvTest {
 		ListaLigada<Atleta> atletaTest = new ListaLigada<Atleta>();
 		ListaLigada<Equipa> equipaTest = new ListaLigada<Equipa>();
 
-		csv.importPais(new File("csv_tests\\IOC_test_JUnit_importPais.csv"), new Teste("Test"), paisesTest);
-		csv.importDisc(new File("csv_tests\\IOC_test_JUnit_importDisc.csv"), new Teste("Test"), discTest, modalTest);
-		csv.importProvas(new File("csv_tests\\IOC_Sports_OG_1996.csv"), new Teste("Test"), jogosTest, provaTest, discTest, modalTest);
-		csv.importResultados(new File("csv_tests\\1996_Athletics_Men.csv"), new Teste("Test"), atletaTest, modalTest, paisesTest, provaTest, equipaTest, jogosTest);
+		csv.importPais(new File("csv_tests\\IOC_test_JUnit_importPais.csv"), null, paisesTest);
+		csv.importDisc(new File("csv_tests\\IOC_test_JUnit_importDisc.csv"), null, discTest, modalTest);
+		csv.importProvas(new File("csv_tests\\IOC_Sports_OG_1996.csv"), null, jogosTest, provaTest, discTest, modalTest);
+		csv.importResultados(new File("csv_tests\\1996_Athletics_Men.csv"), null, atletaTest, modalTest, paisesTest, provaTest, equipaTest, jogosTest);
 
 		ListaLigada<Pais> paisesEsp = new ListaLigada<Pais>();
 		ListaLigada<JogosOlimpicos> jogosEsp = new ListaLigada<JogosOlimpicos>();
@@ -188,8 +185,8 @@ public class CsvTest {
 		provaEsp.add(new ProvaInd(discEsp.get(0), jogosEsp.get(0)));
 		provaEsp.add(new ProvaInd(discEsp.get(2), jogosEsp.get(0)));
 		provaEsp.add(new ProvaInd(discEsp.get(3), jogosEsp.get(0)));
-		csv.importDisc(new File("csv_tests\\IOC_test_JUnit_importDisc.csv"), new Teste("Test"), discTest, modalTest);
-		csv.importProvas(new File("csv_tests\\IOC_Sports_OG_1996.csv"), new Teste("Test"), jogosTest, provaTest, discTest, modalTest);
+		csv.importDisc(new File("csv_tests\\IOC_test_JUnit_importDisc.csv"), null, discTest, modalTest);
+		csv.importProvas(new File("csv_tests\\IOC_Sports_OG_1996.csv"), null, jogosTest, provaTest, discTest, modalTest);
 
 		boolean teste = true;
 		for (int i = 0; i < modalEsp.size() && i < modalTest.size() && teste; i++) {

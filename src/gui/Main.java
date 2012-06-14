@@ -9,44 +9,105 @@ import jogosolimpicos.*;
 import listaligada.*;
 import dados.*;
 
+/**
+ * Main class of the program.
+ * 
+ */
 public class Main {
-
+	/**
+	 * Linked list of athletes
+	 */
 	private static ListaLigada<Atleta> atleta = new ListaLigada<Atleta>();
+	/**
+	 * Linked list of the country
+	 */
 	private static ListaLigada<Pais> paises = new ListaLigada<Pais>();
+	/**
+	 * Linked list of the sports
+	 */
 	private static ListaLigada<Modalidade> modalidades = new ListaLigada<Modalidade>();
+	/**
+	 * Linked list of the competitions with events
+	 */
 	private static ListaLigada<Prova> provas = new ListaLigada<Prova>();
+	/**
+	 * Linked list of the competitions
+	 */
 	private static ListaLigada<Disciplina> disciplinas = new ListaLigada<Disciplina>();
+	/**
+	 * Linked list of the team
+	 */
 	private static ListaLigada<Equipa> equipas = new ListaLigada<Equipa>();
+	/**
+	 * Linked list of the events
+	 */
 	private static ListaLigada<JogosOlimpicos> jogos = new ListaLigada<JogosOlimpicos>();
+	/**
+	 * Linked list of the languages
+	 */
 	private static ListaLigada<Linguas> lingua = new ListaLigada<Linguas>();
+	/**
+	 * Main graphical user interface
+	 */
 	private static JanelaPrincipal maingui;
-	public static Teste i = new Teste("Teste");
 
+	/**
+	 * Get the sports
+	 * 
+	 * @return linked list of the sports
+	 */
 	public static ListaLigada<Modalidade> getModalidades() {
 		return modalidades;
 	}
 
+	/**
+	 * Get the countries
+	 * 
+	 * @return linked list of the countries
+	 */
 	public static ListaLigada<Pais> getPaises() {
 		return paises;
 	}
 
+	/**
+	 * Get the athletes
+	 * 
+	 * @return linked list of the athletes
+	 */
 	public static ListaLigada<Atleta> getAtleta() {
 		return atleta;
 	}
 
+	/**
+	 * Get the competitions with events
+	 * 
+	 * @return linked list of the competition with events
+	 */
 	public static ListaLigada<Prova> getProvas() {
 		return provas;
 	}
 
+	/**
+	 * Get the languages
+	 * 
+	 * @return linked list of the languages
+	 */
 	public static ListaLigada<Linguas> getLingua() {
 		return lingua;
 	}
 
+	/**
+	 * The main method to start the program. This method will show a splash
+	 * image while loads the previous state of the program.
+	 * 
+	 * @param args
+	 *            command line parameters
+	 */
 	public static void main(String[] args) {
-		lerEstadoAnterior();
-		adicionarLinguas();
 		SplashScreen splash = new SplashScreen(5000);
 		splash.showSplash();
+		lerEstadoAnterior();
+		adicionarLinguas();
 		try {
 			maingui = new JanelaPrincipal();
 		} catch (URISyntaxException e) {
@@ -55,6 +116,9 @@ public class Main {
 
 	}
 
+	/**
+	 * Method who will add the default export languages of the program.
+	 */
 	private static void adicionarLinguas() {
 		boolean checkGB = true;
 		boolean checkFR = true;
@@ -77,21 +141,38 @@ public class Main {
 		if (checkPT) {
 			getLingua().add(new Linguas("PT-PT", "Jogos Ol&iacute;mpicos", "Listagem", "Classifica&ccedil;&atilde;o", "Posi&ccedil;&atilde;o", "Nome", "Ouro", "Prata", "Bronze", "Atletas", "Modalidade", "Disciplina", "Pa&iacute;s", "Data de Emiss&atilde;o"));
 		}
-
 	}
 
+	/**
+	 * Get the competitions
+	 * 
+	 * @return linked list of the competitions
+	 */
 	public static ListaLigada<Disciplina> getDisciplinas() {
 		return disciplinas;
 	}
 
+	/**
+	 * Get the teams
+	 * 
+	 * @return linked list of the teams
+	 */
 	public static ListaLigada<Equipa> getEquipas() {
 		return equipas;
 	}
 
+	/**
+	 * Get the events
+	 * 
+	 * @return linked list of the events
+	 */
 	public static ListaLigada<JogosOlimpicos> getJogos() {
 		return jogos;
 	}
 
+	/**
+	 * Method to save the current state of the program.
+	 */
 	public static void gravarEstado() {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("estado.bin"));
@@ -106,10 +187,12 @@ public class Main {
 			out.close();
 		} catch (IOException exc) {
 			JOptionPane.showMessageDialog(maingui, "Status not saved!", "Closing Application", JOptionPane.ERROR_MESSAGE);
-			exc.printStackTrace();
 		}
 	}
 
+	/**
+	 * Method to read the previous state of the program.
+	 */
 	@SuppressWarnings({ "unchecked" })
 	private static void lerEstadoAnterior() {
 		try {

@@ -73,8 +73,4 @@ public class Modalidade implements Serializable {
 
 	}
 
-	// TODO remover
-	public String toStringTest() {
-		return String.format("%s - %s", this.nome, this.disc);
-	}
 }
