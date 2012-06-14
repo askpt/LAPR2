@@ -4,6 +4,7 @@ import gui.*;
 
 import java.awt.*;
 import java.io.*;
+import java.net.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -37,6 +38,7 @@ public class HTML {
 	 *            country details
 	 */
 	public void exportPais(Component janela, int anoInicio, int anoFim, Linguas lingua, ListaLigada<Linguas> linguas, ListaLigada<Prova> prova, ListaLigada<Pais> pais) {
+		Imagens img = new Imagens();
 
 		int it = 0;
 		for (; it < linguas.size(); it++) {
@@ -57,7 +59,7 @@ public class HTML {
 					return;
 				File ficheiro = fc.getSelectedFile();
 				String dir = getDirPath(ficheiro);
-
+				createImage(dir, img.html_bg);
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
 				ListaLigada<Pais> paisTemp = pais;
@@ -68,7 +70,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400 align=center>" + (i + 1) + "</td><td align=center>" + paisTemp.get(i).getNomePais() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 
@@ -77,13 +79,44 @@ public class HTML {
 				fout.format("</body>");
 				fout.format("</html>");
 				fout.close();
-			} catch (FileNotFoundException f) {
+			} catch (IOException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
+				f.printStackTrace(); // TODO rem
 			}
 		} else {
 			JOptionPane.showMessageDialog(janela, "No Countries to export", "Export", JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+	}
+
+	private void createImage(String dirHTML, URL img) throws IOException {
+		File dir = new File(dirHTML + "/Imagens");
+		dir.mkdirs();
+
+		String[] temp = img.getPath().split("\\\\");
+		String image = temp[temp.length - 1];
+
+		File f1 = new File(img.getPath().replaceAll("\\\\", "/"));
+		File f2 = new File(dir + "/" + image);
+		System.out.println(f1);
+		System.out.println(f2); // TODO rem
+
+		InputStream in = new FileInputStream(f1);
+
+		// For Append the file.
+		// OutputStream out = new FileOutputStream(f2,true);
+
+		// For Overwrite the file.
+		OutputStream out = new FileOutputStream(f2);
+
+		byte[] buf = new byte[1024];
+		int len;
+		while ((len = in.read(buf)) > 0) {
+			out.write(buf, 0, len);
+		}
+		in.close();
+		out.close();
+
 	}
 
 	/**
@@ -136,7 +169,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400 align=center>" + (i + 1) + "</td><td align=center>" + atletaTemp.get(i).getNome() + "</td><td align=center>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + atletaTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 
@@ -203,7 +236,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400 align=center>" + (i + 1) + "</td><td align=center>" + paisTemp.get(i).getNomePais() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 				fout.format("</tr>");
@@ -268,7 +301,7 @@ public class HTML {
 
 					fout.format("</tr>");
 					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td align=center>" + paisTemp.get(i).getNomePais() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td align=center>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
 
 				}
 				fout.format("</tr>");
