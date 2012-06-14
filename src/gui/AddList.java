@@ -699,7 +699,8 @@ public class AddList extends JFrame {
 						cl.show(card, "7");
 					}
 				} else if (index + 4 == 8) {
-					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
+					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem())
+							|| (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_4.getSelectedItem();
@@ -949,8 +950,8 @@ public class AddList extends JFrame {
 				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
 				int ano_inicio = jogos_inicio.getAno();
 				int ano_fim = jogos_fim.getAno();
-				html.exportPais(AddList.this, ano_inicio, ano_fim, lingua, Main.getLingua(), Main.getProvas(), Main.getPaises());
-				// FIXME erro no cancel
+				if (lingua != null)
+					html.exportPais(AddList.this, ano_inicio, ano_fim, lingua, Main.getLingua(), Main.getProvas(), Main.getPaises());
 			}
 		});
 
@@ -1081,6 +1082,7 @@ public class AddList extends JFrame {
 						index = i;
 					}
 				}
+
 				html.exportAtleta(AddList.this, ano_inicio, ano_fim, Main.getLingua().get(index), Main.getLingua(), Main.getAtleta(), Main.getProvas(), Main.getEquipas());
 			}
 		});
@@ -1177,7 +1179,11 @@ public class AddList extends JFrame {
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
 		voltar.setVisible(false);
+		final Botao html = new Botao(img.html, img.html_o);
+		html.setContentAreaFilled(false);
+		html.setBorderPainted(false);
 		pButn.add(ok);
+		pButn.add(html);
 		pButn.add(voltar);
 
 		ok.addActionListener(new ActionListener() {
@@ -1206,6 +1212,19 @@ public class AddList extends JFrame {
 			}
 		});
 
+		html.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HTML html = new HTML();
+				Linguas lingua = (Linguas) JOptionPane.showInputDialog(AddList.this, "Choose a language: ", "Export to HTML", 0, new ImageIcon(img.html_icon), Main.getLingua().toArray(), Main.getLingua().toArray()[0]);
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				Disciplina competition = (Disciplina) cmbdis.getSelectedItem();
+				if (lingua != null)
+					html.exportDisciplina(AddList.this, ano_inicio, ano_fim, Main.getProvas(), competition, Main.getLingua(), lingua, Main.getPaises());
+			}
+		});
 		p1.add(pTitulo, BorderLayout.NORTH);
 		p1.add(card3, BorderLayout.CENTER);
 		p1.add(pButn, BorderLayout.SOUTH);
@@ -1298,7 +1317,11 @@ public class AddList extends JFrame {
 		voltar.setContentAreaFilled(false);
 		voltar.setBorderPainted(false);
 		voltar.setVisible(false);
+		final Botao html = new Botao(img.html, img.html_o);
+		html.setContentAreaFilled(false);
+		html.setBorderPainted(false);
 		pButn.add(ok);
+		pButn.add(html);
 		pButn.add(voltar);
 
 		ok.addActionListener(new ActionListener() {
@@ -1324,6 +1347,20 @@ public class AddList extends JFrame {
 				ok.setVisible(true);
 				voltar.setVisible(false);
 
+			}
+		});
+
+		html.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HTML html = new HTML();
+				Linguas lingua = (Linguas) JOptionPane.showInputDialog(AddList.this, "Choose a language: ", "Export to HTML", 0, new ImageIcon(img.html_icon), Main.getLingua().toArray(), Main.getLingua().toArray()[0]);
+				JogosOlimpicos jogos_inicio = (JogosOlimpicos) cmb1_1.getSelectedItem();
+				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
+				int ano_inicio = jogos_inicio.getAno();
+				int ano_fim = jogos_fim.getAno();
+				Modalidade sport = (Modalidade) cmbSp.getSelectedItem();
+				if (lingua != null)
+					html.exportModalidade(AddList.this, ano_inicio, ano_fim, sport.getNome(), Main.getLingua(), lingua, Main.getProvas(), Main.getPaises());
 			}
 		});
 

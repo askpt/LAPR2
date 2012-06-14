@@ -5,7 +5,7 @@ import gui.*;
 import java.awt.*;
 import java.io.*;
 import java.net.*;
-import java.nio.channels.*;
+import java.nio.file.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -61,25 +61,22 @@ public class HTML {
 				File ficheiro = fc.getSelectedFile();
 				String dir = getDirPath(ficheiro);
 				createImage(dir, img.html_bg);
+				createImage(dir, img.argolas);
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Prova> provaTemp = prova;
 				ListaLigada<Pais> paisTemp = pais;
 				paisTemp = Listagem.listarMedalhasPais(paisTemp, provaTemp, anoInicio, anoFim, null, null);
-				corpoInicioPais(fout, it, linguas);
-
+				corpoInicio(fout, it, linguas);
+				String fonte = "<font = \"Times New Roman\" color = \"white\">";
 				for (int i = 0; i < paisTemp.size(); i++) {
 
-					fout.format("</tr>");
-					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("</tr>\n");
+					fout.format("<tr align=center>\n");
+					fout.format("<td width=400>" + fonte + (i + 1) + "</font></td><td>" + fonte + paisTemp.get(i).getNomePais() + "</font></td><td>" + fonte + paisTemp.get(i).getMedalha().getOuro() + "</font></td><td>" + fonte + paisTemp.get(i).getMedalha().getPrata() + "</fonte></td><td>" + fonte + paisTemp.get(i).getMedalha().getBronze() + "</font></td>\n");
 
 				}
 
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				fout.format("</body>");
-				fout.format("</html>");
-				fout.close();
+				criarFimHTML(fout);
 			} catch (IOException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 				f.printStackTrace(); // TODO rem
@@ -94,51 +91,14 @@ public class HTML {
 		File dir = new File(dirHTML + "/Imagens");
 		dir.mkdirs();
 
-		String[] temp = img.getPath().split("\\\\");
+		String[] temp = img.getPath().split("/");
 		String image = temp[temp.length - 1];
 
-		File f1 = new File(img.getPath().replaceAll("\\\\", "/"));
+		File f1 = new File(img.getPath().replaceAll("\\\\", "/").replaceAll("%20", " "));
 		File f2 = new File(dir + "/" + image);
 
-		copyFile(f1, f2);
-		// System.out.println(f1);
-		// System.out.println(f2); // TODO rem
-		//
-		// InputStream in = new FileInputStream(f1);
-		//
-		// // For Append the file.
-		// // OutputStream out = new FileOutputStream(f2,true);
-		//
-		// // For Overwrite the file.
-		// OutputStream out = new FileOutputStream(f2);
-		//
-		// byte[] buf = new byte[1024];
-		// int len;
-		// while ((len = in.read(buf)) > 0) {
-		// out.write(buf, 0, len);
-		// }
-		// in.close();
-		// out.close();
+		Files.copy(f1.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-	}
-
-	public static void copyFile(File source, File destination) throws IOException {
-		if (destination.exists())
-			destination.delete();
-
-		FileChannel sourceChannel = null;
-		FileChannel destinationChannel = null;
-
-		try {
-			sourceChannel = new FileInputStream(source).getChannel();
-			destinationChannel = new FileOutputStream(destination).getChannel();
-			sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
-		} finally {
-			if (sourceChannel != null && sourceChannel.isOpen())
-				sourceChannel.close();
-			if (destinationChannel != null && destinationChannel.isOpen())
-				destinationChannel.close();
-		}
 	}
 
 	/**
@@ -186,20 +146,16 @@ public class HTML {
 				ListaLigada<Atleta> atletaTemp;
 				ListaLigada<Equipa> equipaTemp = equipa;
 				atletaTemp = Listagem.listarMedalhasAtleta(atleta, equipaTemp, provaTemp, anoInicio, anoFim, null, null);
-				corpoInicioAtleta(fout, linguas, it);
+				corpoInicio(fout, it, linguas);
+				String fonte = "<font = \"Times New Roman\" color = \"white\">";
 				for (int i = 0; i < atletaTemp.size(); i++) {
 
-					fout.format("</tr>");
-					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + atletaTemp.get(i).getNome() + "</td><td>" + atletaTemp.get(i).getMedalha().getOuro() + "</td><td>" + atletaTemp.get(i).getMedalha().getPrata() + "</td><td>" + atletaTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("</tr>\n");
+					fout.format("<tr align=center>\n");
+					fout.format("<td width=400>" + fonte + (i + 1) + "</font></td><td>" + fonte + atletaTemp.get(i).getNome() + "</font></td><td>" + fonte + atletaTemp.get(i).getMedalha().getOuro() + "</font></td><td>" + fonte + atletaTemp.get(i).getMedalha().getPrata() + "</font></td><td>" + fonte + atletaTemp.get(i).getMedalha().getBronze() + "</font></td>\n");
 
 				}
-
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				fout.format("</body>");
-				fout.format("</html>");
-				fout.close();
+				criarFimHTML(fout);
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -253,19 +209,16 @@ public class HTML {
 				ListaLigada<Prova> provaTemp = prova;
 				ListaLigada<Pais> paisTemp;
 				paisTemp = Listagem.listarMedalhasPais(pais, provaTemp, anoInicio, anoFim, modalidade, null);
-				corpoInicioModalidade(fout, linguas, it);
+				corpoInicio(fout, it, linguas);
+				String fonte = "<font = \"Times New Roman\" color = \"white\">";
 				for (int i = 0; i < pais.size(); i++) {
 
-					fout.format("</tr>");
-					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("</tr>\n");
+					fout.format("<tr align=center>\n");
+					fout.format("<td width=400>" + fonte + (i + 1) + "</font></td><td>" + fonte + paisTemp.get(i).getNomePais() + "</font></td><td>" + fonte + paisTemp.get(i).getMedalha().getOuro() + "</font></td><td>" + fonte + paisTemp.get(i).getMedalha().getPrata() + "</fonte></td><td>" + fonte + paisTemp.get(i).getMedalha().getBronze() + "</font></td>\n");
 
 				}
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				fout.format("</body>");
-				fout.format("</html>");
-				fout.close();
+				criarFimHTML(fout);
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -318,20 +271,16 @@ public class HTML {
 				Formatter fout = new Formatter(ficheiro + ".html");
 				ListaLigada<Pais> paisTemp;
 				paisTemp = Listagem.listarMedalhasPais(pais, provas, anoInicio, anoFim, null, disciplina);
-				corpoInicioDisciplina(fout, it, linguas);
+				corpoInicio(fout, it, linguas);
+				String fonte = "<font = \"Times New Roman\" color = \"white\">";
 				for (int i = 0; i < paisTemp.size(); i++) {
 
-					fout.format("</tr>");
-					fout.format("<tr align=center>");
-					fout.format("<td width=400>" + (i + 1) + "</td><td>" + paisTemp.get(i).getNomePais() + "</td><td>" + paisTemp.get(i).getMedalha().getOuro() + "</td><td>" + paisTemp.get(i).getMedalha().getPrata() + "</td><td>" + paisTemp.get(i).getMedalha().getBronze() + "</td>");
+					fout.format("</tr>\n");
+					fout.format("<tr align=center>\n");
+					fout.format("<td width=400>" + fonte + (i + 1) + "</font></td><td>" + fonte + paisTemp.get(i).getNomePais() + "</font></td><td>" + fonte + paisTemp.get(i).getMedalha().getOuro() + "</font></td><td>" + fonte + paisTemp.get(i).getMedalha().getPrata() + "</fonte></td><td>" + fonte + paisTemp.get(i).getMedalha().getBronze() + "</font></td>\n");
 
 				}
-				fout.format("</tr>");
-				fout.format("</table><br>");
-				fout.format("</body>");
-				fout.format("</html>");
-				fout.close();
-
+				criarFimHTML(fout);
 			} catch (FileNotFoundException f) {
 				JOptionPane.showMessageDialog(janela, "Error exporting the document!", "Export File", JOptionPane.ERROR_MESSAGE);
 			}
@@ -341,8 +290,16 @@ public class HTML {
 		}
 	}
 
+	private void criarFimHTML(Formatter fout) {
+		fout.format("</tr>\n");
+		fout.format("</table><br>\n");
+		fout.format("</body>\n");
+		fout.format("</html>");
+		fout.close();
+	}
+
 	/**
-	 * Method to write the starting lines on the file relative to the country.
+	 * Method to write the starting lines on the file.
 	 * 
 	 * @param fout
 	 *            file to be written upon
@@ -351,156 +308,36 @@ public class HTML {
 	 * @param linguas
 	 *            language details
 	 */
-	public void corpoInicioPais(Formatter fout, int it, ListaLigada<Linguas> linguas) {
+	private void corpoInicio(Formatter fout, int it, ListaLigada<Linguas> linguas) {
 
 		Imagens img = new Imagens();
 
 		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
-		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
-		fout.format("<head>");
-		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
-		fout.format("</title>");
-		fout.format("</head>");
-		fout.format("<body background=\"Imagens/html.png\">");
-		fout.format("<table border=1 align = center>");
-		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\"" + img.argolas + "\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70 align = center> " + linguas.get(it).getListagem() + " </td>");
-		fout.format("</tr>");
-		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70 align = center> " + linguas.get(it).getClassificacao() + " " + linguas.get(it).getPais() + " </td>");
-		fout.format("</tr>");
-		fout.format("</table><br>");
+		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">\n");
+		fout.format("<head>\n");
+		fout.format("<title> " + linguas.get(it).getJogosOlimpicos() + "\n");
+		fout.format("</title>\n");
+		fout.format("</head>\n");
+		fout.format("<body background=\"Imagens/html_bg.png\">\n");
+		fout.format("<table border=1 align = center>\n");
+		fout.format("<tr>\n");
+		fout.format("<td rowspan = 2><img src=\"Imagens/argolascr3.png\" width=500 height= 140> </td>\n");
+		fout.format("<td align = center width = 500 height = 70 align = center><font = \"Times New Roman\" color = \"white\"> " + linguas.get(it).getListagem() + " </font></td>\n");
+		fout.format("</tr>\n");
+		fout.format("<tr>\n");
+		fout.format("<td align = center width = 400 height= 70 align = center><font = \"Times New Roman\" color = \"white\"> " + linguas.get(it).getClassificacao() + " " + linguas.get(it).getPais() + " </font></td>\n");
+		fout.format("</tr>\n");
+		fout.format("</table><br>\n");
 		Date d = new Date();
-		fout.format("<table border = 0 align = center>");
-		fout.format("<tr align = center>");
-		fout.format("<td>" + linguas.get(it).getData() + ": " + d + "</td>");
-		fout.format("</tr>");
-		fout.format("</table>");
-		fout.format("<table border = 1 align=center>");
-		fout.format("<tr>");
-		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
-
-	}
-
-	/**
-	 * Method to write the starting lines on the file relative to the athletes.
-	 * 
-	 * @param fout
-	 *            file to be written upon
-	 * @param it
-	 *            location of the language inside languages
-	 * @param linguas
-	 *            language details
-	 */
-	public void corpoInicioAtleta(Formatter fout, ListaLigada<Linguas> linguas, int it) {
-
-		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
-		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
-		fout.format("<head>");
-		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
-		fout.format("</title>");
-		fout.format("</head>");
-		fout.format("<body>");
-		fout.format("<table border=1 align = center>");
-		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70 align = center> " + linguas.get(it).getListagem() + " </td>");
-		fout.format("</tr>");
-		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70 align = center> " + linguas.get(it).getClassificacao() + " " + linguas.get(it).getAtleta() + " </td>");
-		fout.format("</tr>");
-		fout.format("</table><br>");
-		Date d = new Date();
-		fout.format("<table border = 0 align = center>");
-		fout.format("<tr align = center>");
-		fout.format("<td>" + linguas.get(it).getData() + ": " + d + "</td>");
-		fout.format("</tr>");
-		fout.format("</table>");
-		fout.format("<table border = 1 align=center>");
-		fout.format("<tr>");
-		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
-
-	}
-
-	/**
-	 * Method to write the starting lines on the file relative to a sport.
-	 * 
-	 * @param fout
-	 *            file to be written upon
-	 * @param it
-	 *            location of the language inside languages
-	 * @param linguas
-	 *            language details
-	 */
-	public void corpoInicioModalidade(Formatter fout, ListaLigada<Linguas> linguas, int it) {
-
-		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
-		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
-		fout.format("<head>");
-		fout.format("<title> " + linguas.get(it).getJogosOlimpicos());
-		fout.format("</title>");
-		fout.format("</head>");
-		fout.format("<body>");
-		fout.format("<table border=1 align = center>");
-		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\"argolascr3.gif\" width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
-		fout.format("</tr>");
-		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70 align = center>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getModalidade() + "</td>");
-		fout.format("</tr>");
-		fout.format("</table><br>");
-		Date d = new Date();
-		fout.format("<table border = 0 align = center>");
-		fout.format("<tr align = center>");
-		fout.format("<td>" + linguas.get(it).getData() + ": " + d + "</td>");
-		fout.format("</tr>");
-		fout.format("</table>");
-		fout.format("<table border = 1 align=center>");
-		fout.format("<tr>");
-		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
-
-	}
-
-	/**
-	 * Method to write the starting lines on the file relative to a competition.
-	 * 
-	 * @param fout
-	 *            file to be written upon
-	 * @param it
-	 *            location of the language inside languages
-	 * @param linguas
-	 *            language details
-	 */
-	public void corpoInicioDisciplina(Formatter fout, int it, ListaLigada<Linguas> linguas) {
-		Imagens img = new Imagens();
-
-		fout.format("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\n");
-		fout.format("\"http://www.w3.org/TR/html4/loose.dtd\">");
-		fout.format("<head>");
-		fout.format("<title>" + linguas.get(it).getJogosOlimpicos());
-		fout.format("</title>");
-		fout.format("</head>");
-		fout.format("<body>");
-		fout.format("<table border=1 align = center>");
-		fout.format("<tr>");
-		fout.format("<td rowspan = 2><img src=\\" + img.argolas + "\\" + " width=350 height= 140> </td>");
-		fout.format("<td align = center width = 400 height = 70 align = center> Listagem </td>");
-		fout.format("</tr>");
-		fout.format("<tr>");
-		fout.format("<td align = center width = 400 height= 70 align = center>" + linguas.get(it).getClassificacao() + " " + linguas.get(it).getDisciplina() + "</td>");
-		fout.format("</tr>");
-		fout.format("</table><br>");
-		Date d = new Date();
-		fout.format("<table border = 0 align = center>");
-		fout.format("<tr>");
-		fout.format("<td align = center>" + linguas.get(it).getData() + ": " + d + "</td>");
-		fout.format("</tr>");
-		fout.format("</table>");
-		fout.format("<table border = 1 align=center>");
-		fout.format("<tr>");
-		fout.format("<td width=400 align = center>" + linguas.get(it).getPosicao() + "</td><td>" + linguas.get(it).getNome() + "</td> <td>" + linguas.get(it).getOuro() + "</td> <td>" + linguas.get(it).getPrata() + "</td> <td>" + linguas.get(it).getBronze() + "</td>");
+		fout.format("<table border = 0 align = center>\n");
+		fout.format("<tr align = center>\n");
+		fout.format("<td><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getData() + ": " + d + "</font></td>\n");
+		fout.format("</tr>\n");
+		fout.format("</table>\n");
+		fout.format("<table border = 1 align=center>\n");
+		fout.format("<tr>\n");
+		fout.format("<td width=200 align = center><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPosicao() + "</font></td><td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getNome() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getOuro()
+				+ "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPrata() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getBronze() + "</font></td>\n");
 
 	}
 
