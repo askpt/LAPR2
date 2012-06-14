@@ -49,6 +49,10 @@ public class AddDados extends JFrame {
 	 */
 	private JTabbedPane jtp = new JTabbedPane();
 
+	private Pais country;
+	private Disciplina competition;
+	private Modalidade sport;
+
 	/**
 	 * Constructor of this class it calls its superclass constructor to set the
 	 * <code>title</code>, it also calls all the necessary methods in this class
@@ -69,15 +73,14 @@ public class AddDados extends JFrame {
 	 * 
 	 * @see #setProperties(int,int,int,boolean)
 	 */
-	public AddDados() {
-		super("Add Info");
+	public AddDados(Pais country, Disciplina competition, Modalidade sport) {
+		super("Add/Edit Info");
 
 		addPaineis();
 		addTabs();
-
-		addCountry();
+		addCountry(country);
 		addCompetition();
-		addSport();
+		addSport(sport);
 
 		setProperties(600, 480, 1, true);
 	}
@@ -123,6 +126,36 @@ public class AddDados extends JFrame {
 	 */
 	public void setSelectedIndex(int i) {
 		jtp.setSelectedIndex(i);
+	}
+
+	/**
+	 * Sets the country to edit
+	 * 
+	 * @param pais
+	 *            country to edit
+	 */
+	public void setCountry(Pais pais) {
+		this.country = pais;
+	}
+
+	/**
+	 * Sets the competition to edit
+	 * 
+	 * @param comp
+	 *            competition to edit
+	 */
+	public void setCompetition(Disciplina comp) {
+		this.competition = comp;
+	}
+
+	/**
+	 * Sets the sport to edit
+	 * 
+	 * @param mod
+	 *            sport to edit
+	 */
+	public void setSport(Modalidade mod) {
+		this.sport = mod;
 	}
 
 	/**
@@ -275,7 +308,6 @@ public class AddDados extends JFrame {
 	 * @return Returns true if there is already a country with the name equal to
 	 *         the name in the parameter
 	 */
-	@SuppressWarnings("unused")
 	private boolean nameExists(String name) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
 			if (Main.getPaises().get(i).getNomePais().equalsIgnoreCase(name))
@@ -330,16 +362,34 @@ public class AddDados extends JFrame {
 		return novo;
 	}
 
+	private boolean isCountryValid(String name, String code) {
+		if (name.equals("")) {
+			JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
+			return false;
+		} else if (code.equals("")) {
+			JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
+			return false;
+		} else if (!code.matches("^[A-Z]{3}$")) {
+			JOptionPane.showMessageDialog(AddDados.this, "Make sure the code field is formatted within the correct format!");
+			return false;
+		} else if (!name.matches("^[A-Za-z]{1,}$")) {
+			JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
+			return false;
+		} else {
+
+			return true;
+		}
+	}
+
 	/**
-	 * Creates the form to create a <code>Country</code> that will be inserted
-	 * into the panel <code>co</code>. This form allows the user to give the
-	 * country a name and its correspondent code. This method is really
+	 * Creates the form to create or edit a <code>Country</code> that will be
+	 * inserted into the panel <code>co</code>. This form allows the user to
+	 * give the country a name and its correspondent code. This method is really
 	 * meticulous about the way it reads the input as it tests if the input
 	 * matches the desired format.It will not accept until the user types
 	 * something that matches the format.
 	 */
-	@SuppressWarnings("unused")
-	private void addCountry() {
+	private void addCountry(final Pais country) {
 
 		// Layout
 		final CardLayout cl = new CardLayout();
@@ -364,6 +414,11 @@ public class AddDados extends JFrame {
 		// TextFields
 		final JTextField txtName = new JTextField(20);
 		final JTextField txtCode = new JTextField(20);
+		// If country is not null it means the user wants to edit that country
+		if (country != null) {
+			txtName.setText(country.getNomePais());
+			txtCode.setText(country.getCodigoPais(0));
+		}
 
 		// Buttons
 		final Botao ok = new Botao(img.ok, img.ok_o);
@@ -398,30 +453,29 @@ public class AddDados extends JFrame {
 
 		ok.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (txtName.equals("")) {
-					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
-					txtName.requestFocus();
-				} else if (txtCode.equals("")) {
-					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
-					txtCode.requestFocus();
-				} else if (!txtCode.getText().matches("^[A-Z]{3}$")) {
-					JOptionPane.showMessageDialog(AddDados.this, "Make sure the code field is formatted within the correct format!");
-					txtCode.requestFocus();
-				} else if (!txtName.getText().matches("^[A-Za-z]{1,}$")) {
-					JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
-					txtName.requestFocus();
-				} else if (codeExists(txtCode.getText())) {
-					JOptionPane.showMessageDialog(AddDados.this, "That code already exists!");
-					txtCode.requestFocus();
-				} else if (codeExists(txtName.getText())) {
-					JOptionPane.showMessageDialog(AddDados.this, "That name already exists!");
+				if (!isCountryValid(txtName.getText(), txtCode.getText())) {
 					txtName.requestFocus();
 				} else {
-					Pais pais = new Pais(txtCode.getText(), corrigirNome(txtName.getText()));
-					Main.getPaises().add(pais);
-					JOptionPane.showMessageDialog(AddDados.this, "Country (" + pais + ") was added successfully!");
-					txtName.setText("");
-					txtCode.setText("");
+					if (codeExists(txtCode.getText())) {
+						JOptionPane.showMessageDialog(AddDados.this, "That code already exists!");
+						txtCode.requestFocus();
+					} else if (nameExists(txtName.getText())) {
+						JOptionPane.showMessageDialog(AddDados.this, "That name already exists!");
+						txtName.requestFocus();
+					} else {
+						if (country == null) {
+							Pais pais = new Pais(txtCode.getText(), corrigirNome(txtName.getText()));
+							Main.getPaises().add(pais);
+							JOptionPane.showMessageDialog(AddDados.this, "Country (" + pais + ") was added successfully!");
+						} else {
+							country.setNomePais(corrigirNome(txtName.getText()));
+							country.setCodigoPais(txtCode.getText());
+							JOptionPane.showMessageDialog(AddDados.this, "Country was edited successfully!");
+							dispose();
+						}
+						txtName.setText("");
+						txtCode.setText("");
+					}
 				}
 			}
 		});
@@ -721,7 +775,7 @@ public class AddDados extends JFrame {
 	 * input as it tests if the input matches the desired format.It will not
 	 * accept until the user types something that matches the format.
 	 */
-	private void addSport() {
+	private void addSport(final Modalidade sport) {
 
 		// Layout
 		spo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));

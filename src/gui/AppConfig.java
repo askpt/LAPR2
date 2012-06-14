@@ -7,6 +7,7 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import jogosolimpicos.*;
 import dados.*;
 
 /**
@@ -660,7 +661,7 @@ public class AppConfig extends JFrame {
 					a.setSelectedIndex(0);
 					a.setVisible(true);
 				} else {
-					a = new AddDados();
+					a = new AddDados(null, null, null);
 					a.setSelectedIndex(0);
 				}
 			}
@@ -674,7 +675,7 @@ public class AppConfig extends JFrame {
 					a.setSelectedIndex(1);
 					a.setVisible(true);
 				} else {
-					a = new AddDados();
+					a = new AddDados(null, null, null);
 					a.setSelectedIndex(1);
 				}
 			}
@@ -687,7 +688,7 @@ public class AppConfig extends JFrame {
 					a.setSelectedIndex(2);
 					a.setVisible(true);
 				} else {
-					a = new AddDados();
+					a = new AddDados(null, null, null);
 					a.setSelectedIndex(2);
 				}
 			}
@@ -753,21 +754,43 @@ public class AppConfig extends JFrame {
 		// Edit country
 		editCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: não implementado
+				Pais pais = (Pais) JOptionPane.showInputDialog(AppConfig.this, "Choose the country you want to edit", "Edit Country", JOptionPane.QUESTION_MESSAGE, null, Main.getPaises().toArray(), Main.getPaises().toArray()[0]);
+				if (pais != null) {
+					if (a != null) {
+						a.setCountry(pais);
+						a.setSelectedIndex(0);
+						a.setVisible(true);
+					} else {
+						a = new AddDados(pais, null, null);
+						a.setSelectedIndex(0);
+					}
+				}
 			}
 		});
 
 		// Edit competition
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: não implementado
+				if (a != null) {
+					a.setSelectedIndex(1);
+					a.setVisible(true);
+				} else {
+					a = new AddDados(null, null, null);
+					a.setSelectedIndex(1);
+				}
 			}
 		});
 
 		// Edit sport
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: não implementado
+				if (a != null) {
+					a.setSelectedIndex(2);
+					a.setVisible(true);
+				} else {
+					a = new AddDados(null, null, null);
+					a.setSelectedIndex(2);
+				}
 			}
 		});
 
@@ -781,5 +804,4 @@ public class AppConfig extends JFrame {
 
 		edit.add(main_panel);
 	}
-
 }
