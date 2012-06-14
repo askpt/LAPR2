@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -14,14 +15,15 @@ import org.jfree.ui.*;
 
 import dados.*;
 
-/*
- * Class that creates a frame to show listings and statistics, an instance of this class is created on the class AppConfig.
+/**
+ * Class that creates a frame to show listings and statistics, an instance of
+ * this class is created on the class AppConfig.
  * 
  */
 @SuppressWarnings("serial")
 public class AddList extends JFrame {
 
-	/*
+	/**
 	 * Custom Panel that contains the JPanel card (uses FlowLayout).
 	 * 
 	 * @see #card content of this panel
@@ -29,7 +31,7 @@ public class AddList extends JFrame {
 	 * @see Panel Panel Class
 	 */
 	private Painel ca;
-	/*
+	/**
 	 * Custom Panel that contains the JPanel card1 (uses FlowLayout).
 	 * 
 	 * @see #card1 content of this panel
@@ -37,7 +39,7 @@ public class AddList extends JFrame {
 	 * @see Panel Panel Class
 	 */
 	private Painel nr;
-	/*
+	/**
 	 * Custom Panel that contains the JPanel card2 (uses FlowLayout).
 	 * 
 	 * @see #card2 content of this panel
@@ -45,7 +47,7 @@ public class AddList extends JFrame {
 	 * @see Panel Panel Class
 	 */
 	private Painel ar;
-	/*
+	/**
 	 * Custom Panel that contains the JPanel card3 (uses FlowLayout).
 	 * 
 	 * @see #card3 content of this panel
@@ -53,7 +55,7 @@ public class AddList extends JFrame {
 	 * @see Panel Panel Class
 	 */
 	private Painel rd;
-	/*
+	/**
 	 * Custom Panel that contains the JPanel card4 (uses FlowLayout).
 	 * 
 	 * @see #card4 content of this panel
@@ -62,38 +64,38 @@ public class AddList extends JFrame {
 	 */
 	private Painel me;
 
-	/*
+	/**
 	 * Instance of the class <code>Imagens</code>, used to load images in order
 	 * to fill buttons and panels.
 	 * 
 	 * @see Imagens Imagens Class
 	 */
 	private Imagens img = new Imagens();
-	/*
+	/**
 	 * TabbedPane that will hold various tabs.
 	 */
 	private JTabbedPane jtp = new JTabbedPane();
-	/*
+	/**
 	 * Current index of the card.
 	 * 
 	 * @see #card used on this card
 	 */
 	private int index = 1;
-	/*
+	/**
 	 * max size of <code>Comparative Analysis'</code> card (used to avoid
 	 * errors).
 	 * 
 	 * @see #addCA() used in this method
 	 */
 	private final int MAX = 4;
-	/*
+	/**
 	 * max size of <code>Comparative Analysis'</code> card (used to avoid
 	 * errors).
 	 * 
 	 * @see #addCA() used in this method
 	 */
 	private final int MIN = 1;
-	/*
+	/**
 	 * custom button used on <code>addCA()</code> method, its fuction is to show
 	 * the next card index each time it is pressed.
 	 * 
@@ -102,7 +104,7 @@ public class AddList extends JFrame {
 	 * @see #addCA() used in this method
 	 */
 	private Botao add1 = new Botao(img.add1);
-	/*
+	/**
 	 * custom button used on <code>addCA()</code> method,its fuction is to show
 	 * the previous card index each time it is pressed.
 	 * 
@@ -111,7 +113,7 @@ public class AddList extends JFrame {
 	 * @see #addCA() used in this method
 	 */
 	private Botao reduce1 = new Botao(img.remove1);
-	/*
+	/**
 	 * custom button used on <code>addCA()</code> method, its fuction is to show
 	 * the last card index in order to show a table with results as output.
 	 * 
@@ -121,55 +123,55 @@ public class AddList extends JFrame {
 	 * @see #addCA() used in this method
 	 */
 	private Botao getResults = new Botao(img.getResults);
-	/*
+	/**
 	 * CardLayout to be used in the panel card.
 	 */
 	private CardLayout cl = new CardLayout(10, 10);
-	/*
+	/**
 	 * CardLayout to be used in the panel card1.
 	 */
 	private CardLayout cl1 = new CardLayout(10, 10);
-	/*
+	/**
 	 * CardLayout to be used in the panel card2.
 	 */
 	private CardLayout cl2 = new CardLayout(10, 10);
-	/*
+	/**
 	 * CardLayout to be used in the panel card3.
 	 */
 	private CardLayout cl3 = new CardLayout(10, 10);
-	/*
+	/**
 	 * CardLayout to be used in the panel card4.
 	 */
 	private CardLayout cl4 = new CardLayout(10, 10);
-	/*
+	/**
 	 * JPanel using CardLayout, this panel is used in the method
 	 * <code>addCA()</code>.
 	 * 
 	 * @see #addCA()
 	 */
 	private JPanel card = new JPanel(cl);
-	/*
+	/**
 	 * JPanel using CardLayout, this panel is used in the method
 	 * <code>addHistoricoPaises()</code>.
 	 * 
 	 * @see #addHistoricoPaises()
 	 */
 	private JPanel card1 = new JPanel(cl1);
-	/*
+	/**
 	 * JPanel using CardLayout, this panel is used in the method
 	 * <code>addHistoricoAtletas()</code>.
 	 * 
 	 * @see #addHistoricoAtletas()
 	 */
 	private JPanel card2 = new JPanel(cl2);
-	/*
+	/**
 	 * JPanel using CardLayout, this panel is used in the method
 	 * <code>addHistoricoDiscipline()</code>.
 	 * 
 	 * @see #addHistoricoDiscipline()
 	 */
 	private JPanel card3 = new JPanel(cl3);
-	/*
+	/**
 	 * JPanel using CardLayout, this panel is used in the method
 	 * <code>addHistoricoSport()</code>.
 	 * 
@@ -177,7 +179,7 @@ public class AddList extends JFrame {
 	 */
 	private JPanel card4 = new JPanel(cl4);
 
-	/*
+	/**
 	 * Constructor of this class it calls its superclass constructor to set the
 	 * <code>title</code>, it also calls all the necessary methods in this class
 	 * in order to initialize the <code>panels</code> when an object of this
@@ -215,7 +217,7 @@ public class AddList extends JFrame {
 		setProperties(680, 520, 1, true);
 	}
 
-	/*
+	/**
 	 * Sets the properties to this frame such as <code>/size<code>,
 	 * <code>visibility</code> and the <code>operation</code> that will happen
 	 * by default when the user initiates a "close" on this frame.
@@ -226,14 +228,18 @@ public class AddList extends JFrame {
 	 * 
 	 * @see java.awt.Window#setVisible(boolean)
 	 * 
-	 * @param w the desired width to the window
+	 * @param w
+	 *            the desired width to the window
 	 * 
-	 * @param h the desired height to the window
+	 * @param h
+	 *            the desired height to the window
 	 * 
-	 * @param opcao parameter to use when calling
-	 * javax.swing.JFrame#setDefaultCloseOperation(int)
+	 * @param opcao
+	 *            parameter to use when calling
+	 *            javax.swing.JFrame#setDefaultCloseOperation(int)
 	 * 
-	 * @param visible sets the windows to visible if the parameter is true
+	 * @param visible
+	 *            sets the windows to visible if the parameter is true
 	 */
 	private void setProperties(int w, int h, int opcao, boolean visible) {
 		setSize(w, h);
@@ -242,19 +248,20 @@ public class AddList extends JFrame {
 		setLocationRelativeTo(null);
 	}
 
-	/*
+	/**
 	 * Sets the selected index of the <code>TabbedPane/<code>, this method is
 	 * for exterior use and it is used in the class <code>AppConfig</code>.
 	 * 
 	 * @see AppConfig used in this class
 	 * 
-	 * @param i index of the tab
+	 * @param i
+	 *            index of the tab
 	 */
 	public void setSelectedIndex(int i) {
 		jtp.setSelectedIndex(i);
 	}
 
-	/*
+	/**
 	 * This method adds tabs to the TabbedPane, it is called on the constructor.
 	 * 
 	 * @see #constructor
@@ -271,7 +278,7 @@ public class AddList extends JFrame {
 
 	}
 
-	/*
+	/***
 	 * This method creates custom panels and sets them as not Opaque, it is
 	 * called in the constructor.
 	 * 
@@ -308,7 +315,7 @@ public class AddList extends JFrame {
 		me.setOpaque(false);
 	}
 
-	/*
+	/***
 	 * Creates the form to <code>Comparative Analysis</code> that will be
 	 * inserted into the panel <code>ca</code>. This form allows the user to
 	 * choose from 2 to 5 countries he wants to compare, the first 4 indexes of
@@ -349,10 +356,12 @@ public class AddList extends JFrame {
 		add1.setBotaoRollOver(img.add1_o);
 		add1.setContentAreaFilled(false);
 		add1.setBorderPainted(false);
+		final Botao reduce1 = new Botao(img.remove1);
 		reduce1.setBotaoRollOver(img.remove1_o);
 		reduce1.setBorderPainted(false);
 		reduce1.setContentAreaFilled(false);
 		reduce1.setVisible(false);
+		reduce1.setMnemonic('-');
 		getResults.setBotaoRollOver(img.getResults_o);
 		getResults.setBorderPainted(false);
 		getResults.setContentAreaFilled(false);
@@ -829,7 +838,7 @@ public class AddList extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * Creates the form to <code>Nation's Ranking</code> that will be inserted
 	 * into the panel <code>nr</code>. This form allows the user to choose 2
 	 * editions of the games, as a result a table will be created using the
@@ -941,13 +950,7 @@ public class AddList extends JFrame {
 				JogosOlimpicos jogos_fim = (JogosOlimpicos) cmb2_1.getSelectedItem();
 				int ano_inicio = jogos_inicio.getAno();
 				int ano_fim = jogos_fim.getAno();
-				int index = 0;
-				for (int i = 0; i < Main.getLingua().size(); i++) {
-					if (Main.getLingua().get(i).getLinguagem().equalsIgnoreCase("English")) {
-						index = i;
-					}
-				}
-				html.exportPais(AddList.this, ano_inicio, ano_fim, Main.getLingua().get(index), Main.getLingua(), Main.getProvas(), Main.getPaises());
+				html.exportPais(AddList.this, ano_inicio, ano_fim, lingua, Main.getLingua(), Main.getProvas(), Main.getPaises());
 			}
 		});
 
@@ -958,7 +961,7 @@ public class AddList extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * Creates the form to <code>Athlete's Ranking</code> that will be inserted
 	 * into the panel <code>ar</code>. This form allows the user to choose 2
 	 * editions of the games, as a result a table will be created using the
@@ -1089,7 +1092,7 @@ public class AddList extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * Creates the form to <code>Competition's Ranking</code> that will be
 	 * inserted into the panel <code>ar</code>. This form allows the user to
 	 * choose 2 editions of the games and a competition, as a result a table
@@ -1210,7 +1213,7 @@ public class AddList extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * Creates the form to <code>Sports Ranking</code> that will be inserted
 	 * into the panel <code>me</code>. This form allows the user to choose 2
 	 * editions of the games and a sport, as a result a table will be created
@@ -1331,7 +1334,7 @@ public class AddList extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * Returns true if the container of countries is empty.
 	 * 
 	 * @return true if the container of countries is empty
@@ -1340,14 +1343,15 @@ public class AddList extends JFrame {
 		return Main.getPaises().isEmpty();
 	}
 
-	/*
+	/**
 	 * Returns the index of the country with the same name as the parameter
 	 * variable.
 	 * 
-	 * @param name the name of the <code>country</code>
+	 * @param name
+	 *            the name of the <code>country</code>
 	 * 
 	 * @return i returns the index of the country with the same name as the
-	 * parameter variable or -1 if it wasnt found
+	 *         parameter variable or -1 if it wasnt found
 	 */
 	private int findPais(String name) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
@@ -1358,12 +1362,12 @@ public class AddList extends JFrame {
 		return -1;
 	}
 
-	/*
+	/**
 	 * Returns a linked list with filtered sports, only sports with results will
 	 * be added to the list.
 	 * 
 	 * @return modalidadesValidas Returns a linked list with filtered sports,
-	 * only sports with results will be added to the list
+	 *         only sports with results will be added to the list
 	 */
 	private ListaLigada<Modalidade> sportsFiltrados() {
 		ListaLigada<Modalidade> modalidadesValidas = new ListaLigada<Modalidade>();
@@ -1385,12 +1389,13 @@ public class AddList extends JFrame {
 		return modalidadesValidas;
 	}
 
-	/*
+	/**
 	 * Returns a linked list with filtered competitions, only competitions with
 	 * results will be added to the list.
 	 * 
 	 * @return disciplinaValidas Returns a linked list with filtered
-	 * competitions, only competitions with results will be added to the list
+	 *         competitions, only competitions with results will be added to the
+	 *         list
 	 */
 	private ListaLigada<Disciplina> competitionsFiltradas() {
 		ListaLigada<Disciplina> disciplinaValidas = new ListaLigada<Disciplina>();
@@ -1412,23 +1417,25 @@ public class AddList extends JFrame {
 		return disciplinaValidas;
 	}
 
-	/*
+	/**
 	 * Returns a panel with a <code>JTable</code> created with the data parsed
 	 * in parameters. The header is the only part that is defined inside the
 	 * method yet, it is easy to modify.
 	 * 
-	 * @param a a linked list with the name of athletes and the number of medals
-	 * they have got
+	 * @param atleta
+	 *            a linked list with the name of athletes and the number of
+	 *            medals they have got
 	 * 
-	 * @param tit the title
+	 * @param title
+	 *            the title
 	 * 
 	 * @return pTabela Returns a panel with a table created with the data parsed
-	 * in parameters
+	 *         in parameters
 	 */
 	@SuppressWarnings("unused")
-	private JPanel createTableDiscipline(ListaLigada<Atleta> a, String tit) {
+	private JPanel createTableDiscipline(ListaLigada<Atleta> atleta, String title) {
 		JPanel pTabela = new JPanel(new GridLayout(2, 1));
-		JLabel titulo = new JLabel(tit);
+		JLabel titulo = new JLabel(title);
 		titulo.setFont((new Font("Arial", Font.BOLD, 14)));
 		titulo.setForeground(Color.white);
 		pTabela.add(titulo);
@@ -1438,10 +1445,10 @@ public class AddList extends JFrame {
 		Object[][] linhas = new Object[TOP][col.length];
 		Object[] aux = new Object[4];
 		for (int j = 0; j < TOP; j++) {
-			aux[0] = ((Atleta) a.get(j)).getNome();
-			aux[1] = ((Atleta) a.get(j)).getMedalha().getOuro();
-			aux[2] = ((Atleta) a.get(j)).getMedalha().getPrata();
-			aux[3] = ((Atleta) a.get(j)).getMedalha().getBronze();
+			aux[0] = ((Atleta) atleta.get(j)).getNome();
+			aux[1] = ((Atleta) atleta.get(j)).getMedalha().getOuro();
+			aux[2] = ((Atleta) atleta.get(j)).getMedalha().getPrata();
+			aux[3] = ((Atleta) atleta.get(j)).getMedalha().getBronze();
 			for (int k = 0; k < col.length; k++) {
 				linhas[j][k] = aux[k];
 			}
@@ -1459,18 +1466,20 @@ public class AddList extends JFrame {
 		return pTabela;
 	}
 
-	/*
+	/**
 	 * Returns a panel with a <code>JTable</code> created with the data parsed
 	 * in parameters. The header is the only part that is defined inside the
 	 * method yet, it is easy to modify.
 	 * 
-	 * @param a a linked list with the name of athletes and the number of medals
-	 * they have got
+	 * @param a
+	 *            a linked list with the name of athletes and the number of
+	 *            medals they have got
 	 * 
-	 * @param tit the title
+	 * @param tit
+	 *            the title
 	 * 
 	 * @return pTabela Returns a panel with a table created with the data parsed
-	 * in parameters
+	 *         in parameters
 	 */
 	private JPanel createTablePaisAtleta(ListaLigada<?> p, String tipo) {
 		JPanel pTabela = new JPanel(new FlowLayout());
@@ -1515,16 +1524,17 @@ public class AddList extends JFrame {
 		return pTabela;
 	}
 
-	/*
+	/**
 	 * Returns a panel with a <code>JTable</code> created with the data parsed
 	 * in parameters. The header is the only part that is defined inside the
 	 * method yet, it is easy to modify.
 	 * 
-	 * @param a vector with indexes of countries
+	 * @param a
+	 *            vector with indexes of countries
 	 * 
 	 * 
 	 * @return pTabela Returns a panel with a table created with the data parsed
-	 * in parameters
+	 *         in parameters
 	 */
 	private JPanel createTable(int[] i) {
 		JPanel pTabela = new JPanel(new FlowLayout());

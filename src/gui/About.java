@@ -8,16 +8,18 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-/*
- * The purpose of this class is to show a dialog with information about the application
+/**
+ * The purpose of this class is to show a dialog with information about the
+ * application
  */
 @SuppressWarnings("serial")
 public class About extends JDialog {
 
-	/*
+	/**
 	 * Constructor of this class
 	 * 
-	 * @param parent the parent frame where this class will be shown
+	 * @param parent
+	 *            the parent frame where this class will be shown
 	 */
 	@SuppressWarnings("unused")
 	public About(JFrame parent) throws URISyntaxException {
@@ -61,7 +63,7 @@ public class About extends JDialog {
 
 	}
 
-	/*
+	/**
 	 * This method was implemented to let the button logo have a link when
 	 * clicked, open the site on the browser
 	 */

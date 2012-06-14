@@ -19,6 +19,7 @@ import org.jfree.data.xy.*;
  * data from an {@link XYDataset}.
  * 
  */
+@SuppressWarnings("serial")
 public class Chart extends JFrame {
 
 	/**
@@ -63,6 +64,7 @@ public class Chart extends JFrame {
 	private CategoryDataset createDataset(ListaLigada<String> nomes, ListaLigada<Integer> pais1, ListaLigada<Integer> pais2, ListaLigada<Integer> pais3, ListaLigada<Integer> pais4, ListaLigada<Integer> pais5) {
 
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		@SuppressWarnings("unused")
 		ListaLigada<JogosOlimpicos> temp = sortEditions();
 
 		if (pais1 != null) {
@@ -91,7 +93,7 @@ public class Chart extends JFrame {
 
 		if (pais5 != null) {
 			for (int i = 0; i < pais5.size(); i++) {
-				dataset.addValue((double) pais5.get(i), nomes.get(1), sortEditions().get(i));
+				dataset.addValue((double) pais5.get(i), nomes.get(4), sortEditions().get(i));
 			}
 		}
 
@@ -112,7 +114,6 @@ public class Chart extends JFrame {
 						JogosOlimpicos temp = jogosTemp.get(j);
 						jogosTemp.set(j, jogosTemp.get(i));
 						jogosTemp.set(i, temp);
-						System.out.println(jogosTemp.get(i));
 					}
 				}
 			}

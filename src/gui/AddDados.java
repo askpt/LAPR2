@@ -2,52 +2,54 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.net.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
 import jogosolimpicos.*;
 
-/*
- * Class that creates a frame to add data manually, an instance of this class is created on the class AppConfig.
+/**
+ * Class that creates a frame to add data manually, an instance of this class is
+ * created on the class AppConfig.
  * 
  */
 @SuppressWarnings("serial")
 public class AddDados extends JFrame {
 
-	/*
+	/**
 	 * Custom Panel that contains a form within another panel.
 	 * 
 	 * @see Panel Panel Class
 	 */
 	private Painel co;
-	/*
+	/**
 	 * Custom Panel that contains a form within another panel.
 	 * 
 	 * @see Panel Panel Class
 	 */
 	private Painel di;
-	/*
+	/**
 	 * Custom Panel that contains a form within another panel.
 	 * 
 	 * @see Panel Panel Class
 	 */
 	private Painel spo;
-	/*
+	/**
 	 * Instance of the class <code>Imagens</code>, used to load images in order
 	 * to fill buttons and panels.
 	 * 
 	 * @see Imagens Imagens Class
 	 */
 	private Imagens img = new Imagens();
-	/*
+	/**
 	 * Custom Panel that contains a form within another panel.
 	 * 
 	 * @see Panel Panel Class
 	 */
 	private JTabbedPane jtp = new JTabbedPane();
 
-	/*
+	/**
 	 * Constructor of this class it calls its superclass constructor to set the
 	 * <code>title</code>, it also calls all the necessary methods in this class
 	 * in order to initialize the <code>panels</code> when an object of this
@@ -80,7 +82,7 @@ public class AddDados extends JFrame {
 		setProperties(600, 480, 1, true);
 	}
 
-	/*
+	/**
 	 * Sets the properties to this frame such as <code>/size<code>,
 	 * <code>visibility</code> and the <code>operation</code> that will happen
 	 * by default when the user initiates a "close" on this frame.
@@ -91,14 +93,18 @@ public class AddDados extends JFrame {
 	 * 
 	 * @see java.awt.Window#setVisible(boolean)
 	 * 
-	 * @param w the desired width to the window
+	 * @param w
+	 *            the desired width to the window
 	 * 
-	 * @param h the desired height to the window
+	 * @param h
+	 *            the desired height to the window
 	 * 
-	 * @param opcao parameter to use when calling
-	 * javax.swing.JFrame#setDefaultCloseOperation(int)
+	 * @param opcao
+	 *            parameter to use when calling
+	 *            javax.swing.JFrame#setDefaultCloseOperation(int)
 	 * 
-	 * @param visible sets the windows to visible if the parameter is true
+	 * @param visible
+	 *            sets the windows to visible if the parameter is true
 	 */
 	private void setProperties(int w, int h, int opcao, boolean visible) {
 		setSize(w, h);
@@ -106,19 +112,20 @@ public class AddDados extends JFrame {
 		setVisible(visible);
 	}
 
-	/*
+	/**
 	 * Sets the selected index of the <code>TabbedPane/<code>, this method is
 	 * for exterior use and it is used in the class <code>AppConfig</code>.
 	 * 
 	 * @see AppConfig used in this class
 	 * 
-	 * @param i index of the tab
+	 * @param i
+	 *            index of the tab
 	 */
 	public void setSelectedIndex(int i) {
 		jtp.setSelectedIndex(i);
 	}
 
-	/*
+	/**
 	 * This method adds tabs to the TabbedPane, it is called on the constructor.
 	 * 
 	 * @see #constructor
@@ -133,7 +140,7 @@ public class AddDados extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * This method creates custom panels and sets them as not Opaque, it is
 	 * called in the constructor.
 	 * 
@@ -162,7 +169,7 @@ public class AddDados extends JFrame {
 		spo.setOpaque(false);
 	}
 
-	/*
+	/**
 	 * Creates the form to create a <code>Country</code> that will be inserted
 	 * into the panel <code>co</code>. This form allows the user to give the
 	 * country a name and its correspondent code. This method is really
@@ -260,7 +267,7 @@ public class AddDados extends JFrame {
 
 	}
 
-	/*
+	/**
 	 * Creates the form to create a <code>Competition</code> that will be
 	 * inserted into the panel <code>di</code>. This form allows the user to
 	 * give the competition a name, to choose its correspondent sport. This
@@ -518,7 +525,7 @@ public class AddDados extends JFrame {
 		di.add(panel);
 	}
 
-	/*
+	/**
 	 * Creates the form to create a <code>Sport</code> that will be inserted
 	 * into the panel <code>spo</code>. This form allows the user to give the
 	 * sport a name. This method is really meticulous about the way it reads the
@@ -610,12 +617,12 @@ public class AddDados extends JFrame {
 		spo.add(p1);
 	}
 
-	/*
+	/**
 	 * Returns true if there is already a country with the code equal to the
 	 * code in the parameter.
 	 * 
 	 * @return Returns true if there is already a country with the code equal to
-	 * the code in the parameter
+	 *         the code in the parameter
 	 */
 	private boolean codeExists(String code) {
 		for (int i = 0; i < Main.getPaises().size(); i++) {
@@ -625,12 +632,12 @@ public class AddDados extends JFrame {
 		return false;
 	}
 
-	/*
+	/**
 	 * Returns true if there is already a sport with the name equal to the name
 	 * in the parameter.
 	 * 
 	 * @return Returns true if there is already a sport with the name equal to
-	 * the name in the parameter
+	 *         the name in the parameter
 	 */
 	private boolean sportExists(String sport) {
 		for (int i = 0; i < Main.getModalidades().size(); i++) {
@@ -640,11 +647,11 @@ public class AddDados extends JFrame {
 		return false;
 	}
 
-	/*
+	/**
 	 * Returns true if there is already a competition equal to the the parameter
 	 * 
 	 * @return Returns true if there is already a competition equal to the the
-	 * parameter
+	 *         parameter
 	 */
 	private boolean competitionExists(Disciplina a) {
 		for (int i = 0; i < Main.getDisciplinas().size(); i++) {
@@ -654,12 +661,12 @@ public class AddDados extends JFrame {
 		return false;
 	}
 
-	/*
+	/**
 	 * Returns true if there is already a country with the name equal to the
 	 * name in the parameter.
 	 * 
 	 * @return Returns true if there is already a country with the name equal to
-	 * the name in the parameter
+	 *         the name in the parameter
 	 */
 	@SuppressWarnings("unused")
 	private boolean nameExists(String name) {
