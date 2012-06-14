@@ -55,7 +55,7 @@ public class AppConfig extends JFrame {
 	 * 
 	 * @see Panel Panel Class
 	 */
-	private Painel add;
+	private Painel ad;
 
 	/**
 	 * Custom Panel that contains a menu within another panel.
@@ -197,7 +197,7 @@ public class AppConfig extends JFrame {
 		// Tabs
 		jtp.addTab("Import", imp);
 		jtp.addTab("Export", exp);
-		jtp.addTab("Add", add);
+		jtp.addTab("Add", ad);
 		jtp.addTab("Edit", edit);
 		jtp.addTab("List", list);
 		jtp.setBackground(new Color(61, 71, 78));
@@ -213,7 +213,7 @@ public class AppConfig extends JFrame {
 	 * 
 	 * @see #exp
 	 * 
-	 * @see #add
+	 * @see #ad
 	 * 
 	 * @see #edit
 	 * 
@@ -230,13 +230,13 @@ public class AppConfig extends JFrame {
 		// Panels
 		imp = new Painel(img.bg3);
 		exp = new Painel(img.bg3);
-		add = new Painel(img.bg3);
+		ad = new Painel(img.bg3);
 		edit = new Painel(img.bg3);
 		list = new Painel(img.bg3);
 
 		imp.setOpaque(false);
 		exp.setOpaque(false);
-		add.setOpaque(false);
+		ad.setOpaque(false);
 		edit.setOpaque(false);
 		list.setOpaque(false);
 
@@ -252,6 +252,22 @@ public class AppConfig extends JFrame {
 	}
 
 	/**
+	 * Sets both contentAreaFilled and BorderPainted of the vector botoes to
+	 * false. Sets an empty border
+	 * 
+	 * @param botoes
+	 *            vector of Botao
+	 */
+	private void configButtons(Botao[] botoes) {
+		final Border emptyBorder = BorderFactory.createEmptyBorder();
+		for (Botao bt : botoes) {
+			bt.setContentAreaFilled(false);
+			bt.setBorderPainted(false);
+			bt.setBorder(emptyBorder);
+		}
+	}
+
+	/**
 	 * Has the purpose to create a minimalistic menu, adding a title and
 	 * programmed buttons to the <code>list</code> panel. This method is
 	 * meticulous about the way tabs behave trying to give the user a smooth
@@ -259,25 +275,46 @@ public class AppConfig extends JFrame {
 	 * order to aproach a safer implementation of the method.
 	 */
 	private void addList() {
-		Border emptyBorder = BorderFactory.createEmptyBorder();
-		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p1.setOpaque(false);
+
+		// Panels
+		final Painel main_panel = new Painel(img.bg4);
+		final JPanel buttons_panel = new JPanel(new GridLayout(5, 2, 10, 10));
+
+		// Layout
 		list.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+		main_panel.setLayout(new BorderLayout());
 
-		JPanel p2 = new JPanel(new GridLayout(5, 2, 10, 10));
-		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p2.setOpaque(false);
+		// Buttons
+		final Botao compAnalysis = new Botao(img.ca, img.ca_o);
+		final Botao rankP = new Botao(img.rn, img.rn_o);
+		final Botao rankA = new Botao(img.ra, img.ra_o);
+		final Botao rankC = new Botao(img.rc, img.rc_o);
+		final Botao rankS = new Botao(img.rs, img.rs_o);
+		final Botao[] botoes = { compAnalysis, rankP, rankA, rankC, rankS };
 
-		JLabel lb = new JLabel("     Statistics and Listings:");
-		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+		// Labels
+		final JLabel lb = new JLabel("     Statistics and Listings:");
+
+		// Border
+		main_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		buttons_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+		// Customization
+
+		// Color
 		lb.setForeground(Color.white);
 
-		Botao compAnalysis = new Botao(img.ca);
-		compAnalysis.setBotaoRollOver(img.ca_o);
-		compAnalysis.setContentAreaFilled(false);
-		compAnalysis.setBorder(emptyBorder);
+		// Font
+		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+
+		// Opaque
+		main_panel.setOpaque(false);
+		buttons_panel.setOpaque(false);
+
+		// Buttons
+		configButtons(botoes);
+
+		// ActionListeners
 		compAnalysis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (Main.getPaises().size() >= 5) {
@@ -295,10 +332,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao rankP = new Botao(img.rn);
-		rankP.setBotaoRollOver(img.rn_o);
-		rankP.setContentAreaFilled(false);
-		rankP.setBorder(emptyBorder);
 		rankP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isReady()) {
@@ -315,10 +348,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao rankA = new Botao(img.ra);
-		rankA.setBotaoRollOver(img.ra_o);
-		rankA.setContentAreaFilled(false);
-		rankA.setBorder(emptyBorder);
 		rankA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isReady()) {
@@ -335,10 +364,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao rankC = new Botao(img.rc);
-		rankC.setBotaoRollOver(img.rc_o);
-		rankC.setContentAreaFilled(false);
-		rankC.setBorder(emptyBorder);
 		rankC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isReady()) {
@@ -355,10 +380,6 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao rankS = new Botao(img.rs);
-		rankS.setBotaoRollOver(img.rs_o);
-		rankS.setContentAreaFilled(false);
-		rankS.setBorder(emptyBorder);
 		rankS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (isReady()) {
@@ -375,14 +396,17 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		p2.add(compAnalysis);
-		p2.add(rankP);
-		p2.add(rankA);
-		p2.add(rankC);
-		p2.add(rankS);
-		p1.add(lb, BorderLayout.NORTH);
-		p1.add(p2, BorderLayout.SOUTH);
-		list.add(p1);
+		// Adding to panels
+		buttons_panel.add(compAnalysis);
+		buttons_panel.add(rankP);
+		buttons_panel.add(rankA);
+		buttons_panel.add(rankC);
+		buttons_panel.add(rankS);
+
+		main_panel.add(lb, BorderLayout.NORTH);
+		main_panel.add(buttons_panel, BorderLayout.SOUTH);
+
+		list.add(main_panel);
 
 	}
 
@@ -395,26 +419,47 @@ public class AppConfig extends JFrame {
 	 */
 	private void addImports() {
 
-		Border emptyBorder = BorderFactory.createEmptyBorder();
-		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p1.setOpaque(false);
+		// Panels
+		Painel main_panel = new Painel(img.bg4);
+		JPanel buttons_panel = new JPanel(new GridLayout(3, 1, 10, 10));
+
+		// Layout
+		main_panel.setLayout(new BorderLayout());
 		imp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
 
-		JPanel p2 = new JPanel(new GridLayout(3, 1, 10, 10));
-		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p2.setOpaque(false);
-
+		// Labels
 		JLabel lb = new JLabel("     Import:");
+
+		// Buttons
+		Botao intelImport = new Botao(img.intelImport, img.intelImport_o);
+		Botao drag = new Botao(img.impdrag, img.impdrag_o);
+		Botao impCountry = new Botao(img.impCountry, img.impCountry_o);
+		Botao impDisc = new Botao(img.impDisc, img.impDisc_o);
+		Botao impResu = new Botao(img.impResu, img.impResu_o);
+		Botao impEv = new Botao(img.impEv, img.impEv_o);
+		Botao[] botoes = { intelImport, drag, impCountry, impDisc, impResu, impEv };
+
+		// Customize
+
+		// Borders
+		main_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		buttons_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+		// Opaque
+		main_panel.setOpaque(false);
+		buttons_panel.setOpaque(false);
+
+		// Font
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+
+		// Color
 		lb.setForeground(Color.white);
 
-		// inteImport!
-		Botao intelImport = new Botao(img.intelImport);
-		intelImport.setBotaoRollOver(img.intelImport_o);
-		intelImport.setContentAreaFilled(false);
-		intelImport.setBorder(emptyBorder);
+		// Buttons
+		configButtons(botoes);
+
+		// ActionListeners
+		// intelImport
 		intelImport.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.intelImport(null, AppConfig.this, Main.getPaises(), Main.getDisciplinas(), Main.getModalidades(), Main.getJogos(), Main.getProvas(), Main.getEquipas(), Main.getAtleta());
@@ -423,10 +468,6 @@ public class AppConfig extends JFrame {
 		});
 
 		// dragndrop
-		Botao drag = new Botao(img.impdrag);
-		drag.setBotaoRollOver(img.impdrag_o);
-		drag.setContentAreaFilled(false);
-		drag.setBorder(emptyBorder);
 		drag.addActionListener(new ActionListener() {
 			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
@@ -438,10 +479,6 @@ public class AppConfig extends JFrame {
 		});
 
 		// Countries
-		Botao impCountry = new Botao(img.impCountry);
-		impCountry.setBotaoRollOver(img.impCountry_o);
-		impCountry.setContentAreaFilled(false);
-		impCountry.setBorder(emptyBorder);
 		impCountry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.importPais(null, AppConfig.this, Main.getPaises());
@@ -449,10 +486,6 @@ public class AppConfig extends JFrame {
 		});
 
 		// Disciplines
-		Botao impDisc = new Botao(img.impDisc);
-		impDisc.setBotaoRollOver(img.impDisc_o);
-		impDisc.setContentAreaFilled(false);
-		impDisc.setBorder(emptyBorder);
 		impDisc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.importDisc(null, AppConfig.this, Main.getDisciplinas(), Main.getModalidades());
@@ -460,10 +493,6 @@ public class AppConfig extends JFrame {
 		});
 
 		// Results
-		Botao impResu = new Botao(img.impResu);
-		impResu.setBotaoRollOver(img.impResu_o);
-		impResu.setContentAreaFilled(false);
-		impResu.setBorder(emptyBorder);
 		impResu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.importResultados(null, AppConfig.this, Main.getAtleta(), Main.getModalidades(), Main.getPaises(), Main.getProvas(), Main.getEquipas(), Main.getJogos());
@@ -471,25 +500,24 @@ public class AppConfig extends JFrame {
 		});
 
 		// Events
-		Botao impEv = new Botao(img.impEv);
-		impEv.setBotaoRollOver(img.impEv_o);
-		impEv.setContentAreaFilled(false);
-		impEv.setBorder(emptyBorder);
+
 		impEv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.importProvas(null, AppConfig.this, Main.getJogos(), Main.getProvas(), Main.getDisciplinas(), Main.getModalidades());
 			}
 		});
+		// Adding to panels
+		buttons_panel.add(intelImport);
+		buttons_panel.add(drag);
+		buttons_panel.add(impCountry);
+		buttons_panel.add(impDisc);
+		buttons_panel.add(impEv);
+		buttons_panel.add(impResu);
 
-		p2.add(intelImport);
-		p2.add(drag);
-		p2.add(impCountry);
-		p2.add(impDisc);
-		p2.add(impEv);
-		p2.add(impResu);
-		p1.add(lb, BorderLayout.NORTH);
-		p1.add(p2, BorderLayout.SOUTH);
-		imp.add(p1);
+		main_panel.add(lb, BorderLayout.NORTH);
+		main_panel.add(buttons_panel, BorderLayout.SOUTH);
+
+		imp.add(main_panel);
 	}
 
 	/**
@@ -501,58 +529,61 @@ public class AppConfig extends JFrame {
 	 */
 	private void addExports() {
 
-		Border emptyBorder = BorderFactory.createEmptyBorder();
-		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p1.setOpaque(false);
+		// Panels
+		Painel main_panel = new Painel(img.bg4);
+		JPanel buttons_panel = new JPanel(new GridLayout(3, 2, 10, 10));
+
+		// Layouts
 		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+		main_panel.setLayout(new BorderLayout());
 
-		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
-		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p2.setOpaque(false);
-
+		// Labels
 		JLabel lb = new JLabel("     Export:");
+
+		// Buttons
+		Botao expCountry = new Botao(img.expCountry, img.expCountry_o);
+		Botao expCountryHtml = new Botao(img.expCountryHtml, img.expCountryHtml_o);
+		Botao expDisc = new Botao(img.expDisc, img.expDisc_o);
+		Botao expDiscHtml = new Botao(img.expDiscHtml, img.expDiscHtml_o);
+		Botao expResu = new Botao(img.expResu, img.expResu_o);
+		Botao expResuHtml = new Botao(img.expResuHtml, img.expResuHtml_o);
+		Botao[] botoes = { expCountry, expCountryHtml, expDisc, expDiscHtml, expResu, expResuHtml };
+
+		// Customize
+
+		// Font
 		lb.setFont((new Font("Arial", Font.BOLD, 14)));
+
+		// Color
 		lb.setForeground(Color.white);
 
+		// Border
+		main_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		buttons_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+		// Opaque
+		main_panel.setOpaque(false);
+		buttons_panel.setOpaque(false);
+
+		// Buttons
+		configButtons(botoes);
+
+		// ActionListeners
 		// Countries
-		Botao expCountry = new Botao(img.expCountry);
-		expCountry.setBotaoRollOver(img.expCountry_o);
-		expCountry.setContentAreaFilled(false);
-		expCountry.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.exportPais(AppConfig.this, Main.getPaises());
 			}
 		});
 
-		Botao expCountryHtml = new Botao(img.expCountryHtml);
-		expCountryHtml.setBotaoRollOver(img.expCountryHtml_o);
-		expCountryHtml.setContentAreaFilled(false);
-		expCountryHtml.setBorder(emptyBorder);
-
 		// Disciplines
-		Botao expDisc = new Botao(img.expDisc);
-		expDisc.setBotaoRollOver(img.expDisc_o);
-		expDisc.setContentAreaFilled(false);
-		expDisc.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.exportDisciplina(AppConfig.this, Main.getModalidades());
 			}
 		});
 
-		Botao expDiscHtml = new Botao(img.expDiscHtml);
-		expDiscHtml.setBotaoRollOver(img.expDiscHtml_o);
-		expDiscHtml.setContentAreaFilled(false);
-		expDiscHtml.setBorder(emptyBorder);
-
 		// Results
-		Botao expResu = new Botao(img.expResu);
-		expResu.setBotaoRollOver(img.expResu_o);
-		expResu.setContentAreaFilled(false);
-		expResu.setBorder(emptyBorder);
 		expCountry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.exportResultados(AppConfig.this, Main.getModalidades(), Main.getProvas(), "Gymnastics", 1, 2008);
@@ -561,20 +592,19 @@ public class AppConfig extends JFrame {
 		// FIXME erro a exportar CSV, adicionar botão competition with event
 		// (exportProvas),
 		// remover html's, check pre-definidos
-		Botao expResuHtml = new Botao(img.expResuHtml);
-		expResuHtml.setBotaoRollOver(img.expResuHtml_o);
-		expResuHtml.setContentAreaFilled(false);
-		expResuHtml.setBorder(emptyBorder);
 
-		p2.add(expCountry);
-		p2.add(expCountryHtml);
-		p2.add(expDisc);
-		p2.add(expDiscHtml);
-		p2.add(expResu);
-		p2.add(expResuHtml);
-		p1.add(lb, BorderLayout.NORTH);
-		p1.add(p2, BorderLayout.SOUTH);
-		exp.add(p1);
+		// Adding to panels
+		buttons_panel.add(expCountry);
+		buttons_panel.add(expCountryHtml);
+		buttons_panel.add(expDisc);
+		buttons_panel.add(expDiscHtml);
+		buttons_panel.add(expResu);
+		buttons_panel.add(expResuHtml);
+
+		main_panel.add(lb, BorderLayout.NORTH);
+		main_panel.add(buttons_panel, BorderLayout.SOUTH);
+
+		exp.add(main_panel);
 	}
 
 	/**
@@ -586,25 +616,44 @@ public class AppConfig extends JFrame {
 	 */
 	private void addAdds() {
 
-		Border emptyBorder = BorderFactory.createEmptyBorder();
-		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p1.setOpaque(false);
-		add.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+		// Panels
+		Painel main_panel = new Painel(img.bg4);
+		JPanel buttons_panel = new JPanel(new GridLayout(3, 2, 10, 10));
 
-		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
-		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p2.setOpaque(false);
+		// Layout
+		ad.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+		main_panel.setLayout(new BorderLayout());
 
-		JLabel lb = new JLabel("     Add:");
-		lb.setFont((new Font("Arial", Font.BOLD, 14)));
-		lb.setForeground(Color.white);
+		// Labels
+		JLabel lbl_add = new JLabel("     Add:");
 
-		Botao addCo = new Botao(img.addCo);
-		addCo.setBotaoRollOver(img.addCo_o);
-		addCo.setContentAreaFilled(false);
-		addCo.setBorder(emptyBorder);
+		// Buttons
+		Botao addCo = new Botao(img.addCo, img.addCo_o);
+		Botao addDis = new Botao(img.addDis, img.addDis_o);
+		Botao addSpo = new Botao(img.addSpo, img.addSpo_o);
+		Botao[] botoes = { addCo, addDis, addSpo };
+
+		// Customize
+
+		// Font
+		lbl_add.setFont((new Font("Arial", Font.BOLD, 14)));
+
+		// Color
+		lbl_add.setForeground(Color.white);
+
+		// Borders
+		main_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		buttons_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+		// Opaque
+		main_panel.setOpaque(false);
+		buttons_panel.setOpaque(false);
+
+		// Buttons
+		configButtons(botoes);
+		// ActionListeners
+
+		// Add country
 		addCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
@@ -618,10 +667,7 @@ public class AppConfig extends JFrame {
 
 		});
 
-		Botao addDis = new Botao(img.addDis);
-		addDis.setBotaoRollOver(img.addDis_o);
-		addDis.setContentAreaFilled(false);
-		addDis.setBorder(emptyBorder);
+		// Add Competition
 		addDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
@@ -634,10 +680,7 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		Botao addSpo = new Botao(img.addSpo);
-		addSpo.setBotaoRollOver(img.addSpo_o);
-		addSpo.setContentAreaFilled(false);
-		addSpo.setBorder(emptyBorder);
+		// Add Sport
 		addSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
@@ -650,12 +693,15 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		p2.add(addCo);
-		p2.add(addDis);
-		p2.add(addSpo);
-		p1.add(lb, BorderLayout.NORTH);
-		p1.add(p2, BorderLayout.SOUTH);
-		add.add(p1);
+		// Adding to panels
+		buttons_panel.add(addCo);
+		buttons_panel.add(addDis);
+		buttons_panel.add(addSpo);
+
+		main_panel.add(lbl_add, BorderLayout.NORTH);
+		main_panel.add(buttons_panel, BorderLayout.SOUTH);
+
+		ad.add(main_panel);
 
 	}
 
@@ -668,57 +714,72 @@ public class AppConfig extends JFrame {
 	 */
 	private void addEdits() {
 
-		Border emptyBorder = BorderFactory.createEmptyBorder();
-		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p1.setOpaque(false);
+		// Panels
+		Painel main_panel = new Painel(img.bg4);
+		JPanel buttons_panel = new JPanel(new GridLayout(3, 2, 10, 10));
+
+		// Layout
 		edit.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
+		main_panel.setLayout(new BorderLayout());
 
-		JPanel p2 = new JPanel(new GridLayout(3, 2, 10, 10));
-		p2.setBorder(new EmptyBorder(20, 20, 20, 20));
-		p2.setOpaque(false);
+		// Labels
+		JLabel lbl_edit = new JLabel("     Edit:");
 
-		JLabel lb = new JLabel("     Edit:");
-		lb.setFont((new Font("Arial", Font.BOLD, 14)));
-		lb.setForeground(Color.white);
+		// Buttons
+		Botao editCo = new Botao(img.editCo, img.editCo_o);
+		Botao editDis = new Botao(img.editDis, img.editDis_o);
+		Botao editSpo = new Botao(img.editSpo, img.editSpo_o);
+		Botao[] botoes = { editCo, editDis, editSpo };
 
-		Botao editCo = new Botao(img.editCo);
-		editCo.setBotaoRollOver(img.editCo_o);
-		editCo.setContentAreaFilled(false);
-		editCo.setBorder(emptyBorder);
+		// Customize
+
+		// Font
+		lbl_edit.setFont((new Font("Arial", Font.BOLD, 14)));
+
+		// Color
+		lbl_edit.setForeground(Color.white);
+
+		// Border
+		main_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		buttons_panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+		// Opaque
+		main_panel.setOpaque(false);
+		buttons_panel.setOpaque(false);
+
+		// Buttons
+		configButtons(botoes);
+
+		// ActionListener
+		// Edit country
 		editCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: não implementado
 			}
 		});
 
-		Botao editDis = new Botao(img.editDis);
-		editDis.setBotaoRollOver(img.editDis_o);
-		editDis.setContentAreaFilled(false);
-		editDis.setBorder(emptyBorder);
+		// Edit competition
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: não implementado
 			}
 		});
 
-		Botao editSpo = new Botao(img.editSpo);
-		editSpo.setBotaoRollOver(img.editSpo_o);
-		editSpo.setContentAreaFilled(false);
-		editSpo.setBorder(emptyBorder);
+		// Edit sport
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO: não implementado
 			}
 		});
 
-		p2.add(editCo);
-		p2.add(editDis);
-		p2.add(editSpo);
-		p1.add(lb, BorderLayout.NORTH);
-		p1.add(p2, BorderLayout.SOUTH);
-		edit.add(p1);
+		// Adding to panels
+		buttons_panel.add(editCo);
+		buttons_panel.add(editDis);
+		buttons_panel.add(editSpo);
+
+		main_panel.add(lbl_edit, BorderLayout.NORTH);
+		main_panel.add(buttons_panel, BorderLayout.SOUTH);
+
+		edit.add(main_panel);
 	}
 
 }

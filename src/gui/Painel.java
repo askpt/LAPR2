@@ -19,7 +19,7 @@ public class Painel extends JPanel {
 	/**
 	 * Default image
 	 */
-	String imagem = "bin/Imagens/background.png";
+	private String imagem = "bin/Imagens/background.png";
 
 	/**
 	 * Constructor of this class
@@ -51,8 +51,36 @@ public class Painel extends JPanel {
 		imagem = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
 	}
 
+	/**
+	 * Constructor of this class, sets the manager layout
+	 * 
+	 * @param layout
+	 *            manager layout
+	 */
 	public Painel(LayoutManager layout) {
 		super(layout);
+	}
+
+	/**
+	 * Sets the image
+	 * 
+	 * @param image
+	 *            image path
+	 */
+	public void setImage(String image) {
+		this.imagem = image;
+	}
+
+	/**
+	 * Sets the image
+	 * 
+	 * @param imageURL
+	 *            image url
+	 */
+	public void setImage(URL imageURL) {
+		String temp = imageURL.getPath();
+		String[] temparray = temp.split("/");
+		this.imagem = temparray[temparray.length - 3] + "/" + temparray[temparray.length - 2] + "/" + temparray[temparray.length - 1];
 	}
 
 	/**
