@@ -1,7 +1,5 @@
 package dados;
 
-import gui.*;
-
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -429,7 +427,11 @@ public class Csv extends JComponent implements Accessible {
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
 			File ficheiro = fc.getSelectedFile();
-			Formatter out = new Formatter(ficheiro + ".csv");
+			Formatter out;
+			if (ficheiro.getPath().endsWith(".csv"))
+				out = new Formatter(ficheiro);
+			else
+				out = new Formatter(ficheiro + ".csv");
 			out.format("Code ;Nation (NOC) ;\n");
 			for (int i = 0; i < paises.size(); i++) {
 				out.format("%s ;%s ;", paises.get(i).getCodigoPais(0), paises.get(i).getNomePais());
@@ -825,7 +827,11 @@ public class Csv extends JComponent implements Accessible {
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
 			File ficheiro = fc.getSelectedFile();
-			Formatter out = new Formatter(ficheiro + ".csv");
+			Formatter out;
+			if (ficheiro.getPath().endsWith(".csv"))
+				out = new Formatter(ficheiro);
+			else
+				out = new Formatter(ficheiro + ".csv");
 			out.format("Sport;Discipline;Type;Men;Women;Mixed;Type;Order\n");
 			for (int i = 0; i < modalidades.size(); i++) {
 				String nomeModal = modalidades.get(i).getNome();
@@ -1089,31 +1095,27 @@ public class Csv extends JComponent implements Accessible {
 						ListaLigada<Atleta> atletasEqu = new ListaLigada<Atleta>();
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
+						Equipa equiTemp = new Equipa(paises.get(itPais));
+
 						for (int i = 0; i < atletasTemp.length; i++) {
-							boolean existeAtleta = false;
 							int itAtleta = 0;
+							boolean existeAtleta = false;
 							for (; itAtleta < atletas.size(); itAtleta++) {
 								if (atletas.get(itAtleta).getNome().equalsIgnoreCase(atletasTemp[i]) && atletas.get(itAtleta).getPais().getCodigoPais(ano).equalsIgnoreCase(team[0])) {
 									existeAtleta = true;
 									break;
 								}
+
 							}
 							if (!existeAtleta) {
-								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
-							}
 
-							atletasEqu.add(atletas.get(itAtleta));
-						}
-						Equipa equiTemp = new Equipa(paises.get(itPais));
-						equiTemp.setAtletas(atletasEqu);
-						int itEquipa = 0;
-						for (; itEquipa < equipas.size(); itEquipa++) {
-							if (equiTemp.equals(equipas.get(itEquipa))) {
-								break;
+								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
+
 							}
+							equiTemp.addAtleta(atletas.get(itAtleta));
 						}
-						if (itEquipa == equipas.size())
-							equipas.add(new Equipa(paises.get(itPais)));
+						int itEquipa = equipas.size();
+						equipas.add(equiTemp);
 						int i = 0;
 						for (; i < ((ProvaCol) provas.get(itProva)).getResultados().size(); i++) {
 							if (((ProvaCol) provas.get(itProva)).getResultados().get(i).equals(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass)))
@@ -1243,7 +1245,7 @@ public class Csv extends JComponent implements Accessible {
 
 						String[] atletasTemp = team[1].split(", ");
 						atletasTemp[atletasTemp.length - 1] = atletasTemp[atletasTemp.length - 1].replaceAll("\\)", "");
-						ListaLigada<Atleta> atletasEqu = new ListaLigada<Atleta>();
+						Equipa equiTemp = new Equipa(paises.get(itPais));
 
 						for (int i = 0; i < atletasTemp.length; i++) {
 							int itAtleta = 0;
@@ -1260,18 +1262,10 @@ public class Csv extends JComponent implements Accessible {
 								atletas.add(new Atleta(atletasTemp[i], paises.get(itPais)));
 
 							}
-							atletasEqu.add(atletas.get(itAtleta));
+							equiTemp.addAtleta(atletas.get(itAtleta));
 						}
-						Equipa equiTemp = new Equipa(paises.get(itPais));
-						equiTemp.setAtletas(atletasEqu);
-						int itEquipa = 0;
-						for (; itEquipa < equipas.size(); itEquipa++) {
-							if (equiTemp.equals(equipas.get(itEquipa))) {
-								break;
-							}
-						}
-						if (itEquipa == equipas.size())
-							equipas.add(new Equipa(paises.get(itPais)));
+						int itEquipa = equipas.size();
+						equipas.add(equiTemp);
 						int i = 0;
 						for (; i < ((ProvaCol) provas.get(itProva)).getResultados().size(); i++) {
 							if (((ProvaCol) provas.get(itProva)).getResultados().get(i).equals(new ResultadosCol(equipas.get(itEquipa), temp[2], tipoClass)))
@@ -1338,10 +1332,14 @@ public class Csv extends JComponent implements Accessible {
 				return;
 			File ficheiro = fc.getSelectedFile();
 			Formatter out;
-			if (genero == 0)
-				out = new Formatter(ficheiro + "\\" + ano + "_" + modalidade + "_Men.csv");
+			if (ficheiro.getPath().endsWith(ficheiro + "\\" + ano + "_" + modalidade + "_Men.csv") || ficheiro.getPath().endsWith(ficheiro + "\\" + ano + "_" + modalidade + "_Women.csv"))
+				out = new Formatter(ficheiro);
 			else {
-				out = new Formatter(ficheiro + "\\" + ano + "_" + modalidade + "_Women.csv");
+				if (genero == 0)
+					out = new Formatter(ficheiro + "\\" + ano + "_" + modalidade + "_Men.csv");
+				else {
+					out = new Formatter(ficheiro + "\\" + ano + "_" + modalidade + "_Women.csv");
+				}
 			}
 			out.format("Individual ;;Value\n");
 			int imod = 0;
@@ -1370,7 +1368,7 @@ public class Csv extends JComponent implements Accessible {
 				if (!modalidades.get(itModal).getDisc().get(i).getTipoMod())
 					for (int j = 0; j < provasTemp.size(); j++) {
 
-						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(provasTemp.get(j).getDisciplina().getModalidade().getNome())) {
+						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(provasTemp.get(j).getDisciplina().getModalidade().getNome()) && provasTemp.get(j).getJogosOlimpicos().getAno() == ano) {
 
 							if (provasTemp.get(j) instanceof ProvaInd) {
 
@@ -1390,9 +1388,9 @@ public class Csv extends JComponent implements Accessible {
 			out.format("Team ;;Value\n");
 			for (int i = 0; i < modalidades.get(itModal).getDisc().size(); i++) {
 				if (modalidades.get(itModal).getDisc().get(i).getTipoMod())
-					for (int j = 0; j < Main.getProvas().size(); j++) {
+					for (int j = 0; j < provasTemp.size(); j++) {
 
-						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && modalidades.get(itModal).getNome().equals(provasTemp.get(j).getDisciplina().getModalidade().getNome())) {
+						if (modalidades.get(itModal).getDisc().get(i).getNome().equals(provasTemp.get(j).getDisciplina().getNome()) && provasTemp.get(j).getDisciplina().getGenero() == genero && provasTemp.get(j).getJogosOlimpicos().getAno() == ano && modalidades.get(itModal).getNome().equals(provasTemp.get(j).getDisciplina().getModalidade().getNome())) {
 
 							if (provasTemp.get(j) instanceof ProvaCol) {
 								out.format(modalidades.get(itModal).getDisc().get(i).getNome());
