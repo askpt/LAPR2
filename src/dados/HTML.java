@@ -5,6 +5,7 @@ import gui.*;
 import java.awt.*;
 import java.io.*;
 import java.net.*;
+import java.nio.channels.*;
 import java.util.*;
 
 import javax.swing.*;
@@ -98,25 +99,46 @@ public class HTML {
 
 		File f1 = new File(img.getPath().replaceAll("\\\\", "/"));
 		File f2 = new File(dir + "/" + image);
-		System.out.println(f1);
-		System.out.println(f2); // TODO rem
 
-		InputStream in = new FileInputStream(f1);
+		copyFile(f1, f2);
+		// System.out.println(f1);
+		// System.out.println(f2); // TODO rem
+		//
+		// InputStream in = new FileInputStream(f1);
+		//
+		// // For Append the file.
+		// // OutputStream out = new FileOutputStream(f2,true);
+		//
+		// // For Overwrite the file.
+		// OutputStream out = new FileOutputStream(f2);
+		//
+		// byte[] buf = new byte[1024];
+		// int len;
+		// while ((len = in.read(buf)) > 0) {
+		// out.write(buf, 0, len);
+		// }
+		// in.close();
+		// out.close();
 
-		// For Append the file.
-		// OutputStream out = new FileOutputStream(f2,true);
+	}
 
-		// For Overwrite the file.
-		OutputStream out = new FileOutputStream(f2);
+	public static void copyFile(File source, File destination) throws IOException {
+		if (destination.exists())
+			destination.delete();
 
-		byte[] buf = new byte[1024];
-		int len;
-		while ((len = in.read(buf)) > 0) {
-			out.write(buf, 0, len);
+		FileChannel sourceChannel = null;
+		FileChannel destinationChannel = null;
+
+		try {
+			sourceChannel = new FileInputStream(source).getChannel();
+			destinationChannel = new FileOutputStream(destination).getChannel();
+			sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
+		} finally {
+			if (sourceChannel != null && sourceChannel.isOpen())
+				sourceChannel.close();
+			if (destinationChannel != null && destinationChannel.isOpen())
+				destinationChannel.close();
 		}
-		in.close();
-		out.close();
-
 	}
 
 	/**
