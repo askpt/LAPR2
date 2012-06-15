@@ -1586,7 +1586,7 @@ public class Csv extends JComponent implements Accessible {
 					if (!tipoProva) {
 						int itDisc = 0;
 						for (; itDisc < disciplinas.size(); itDisc++) {
-							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
+							if (temp[1].replaceAll(" ", "").equalsIgnoreCase(disciplinas.get(itDisc).getNome().replaceAll(" ", "")) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
 								break;
 						}
 
