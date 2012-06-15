@@ -1,6 +1,5 @@
 package gui;
 
-
 public class Imagens {
 	ClassLoader classLoader = getClass().getClassLoader();
 
@@ -29,18 +28,15 @@ public class Imagens {
 	// exports
 	String expCountry = ("Imagens/exportCo.png");
 	String expCountry_o = ("Imagens/exportCoOver.png");
-	String expCountryHtml = ("Imagens/exportCoH.png");
-	String expCountryHtml_o = ("Imagens/exportCoHOver.png");
 
 	String expDisc = ("Imagens/exportDi.png");
 	String expDisc_o = ("Imagens/exportDiOver.png");
-	String expDiscHtml = ("Imagens/exportDiH.png");
-	String expDiscHtml_o = ("Imagens/exportDiHOver.png");
 
 	String expResu = ("Imagens/exportRe.png");
 	String expResu_o = ("Imagens/exportReOver.png");
-	String expResuHtml = ("Imagens/exportReH.png");
-	String expResuHtml_o = ("Imagens/exportReHOver.png");
+
+	String expEv = ("Imagens/exportEv.png");
+	String expEv_o = ("Imagens/exportEvOver.png");
 
 	// imports
 	String impCountry = ("Imagens/importCo.png");

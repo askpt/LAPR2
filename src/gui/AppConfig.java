@@ -532,7 +532,7 @@ public class AppConfig extends JFrame {
 
 		// Panels
 		Painel main_panel = new Painel(img.bg4);
-		JPanel buttons_panel = new JPanel(new GridLayout(3, 2, 10, 10));
+		JPanel buttons_panel = new JPanel(new GridLayout(4, 2, 10, 10));
 
 		// Layouts
 		exp.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 70));
@@ -543,12 +543,10 @@ public class AppConfig extends JFrame {
 
 		// Buttons
 		Botao expCountry = new Botao(img.expCountry, img.expCountry_o);
-		Botao expCountryHtml = new Botao(img.expCountryHtml, img.expCountryHtml_o);
 		Botao expDisc = new Botao(img.expDisc, img.expDisc_o);
-		Botao expDiscHtml = new Botao(img.expDiscHtml, img.expDiscHtml_o);
 		Botao expResu = new Botao(img.expResu, img.expResu_o);
-		Botao expResuHtml = new Botao(img.expResuHtml, img.expResuHtml_o);
-		Botao[] botoes = { expCountry, expCountryHtml, expDisc, expDiscHtml, expResu, expResuHtml };
+		Botao expPro = new Botao(img.expEv, img.expEv_o);
+		Botao[] botoes = { expCountry, expDisc, expResu, expPro };
 
 		// Customize
 
@@ -577,30 +575,57 @@ public class AppConfig extends JFrame {
 			}
 		});
 
-		// Disciplines
-		expCountry.addActionListener(new ActionListener() {
+		// Competitions
+		expDisc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				csv.exportDisciplina(AppConfig.this, Main.getModalidades());
 			}
 		});
 
 		// Results
-		expCountry.addActionListener(new ActionListener() {
+		expResu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				csv.exportResultados(AppConfig.this, Main.getModalidades(), Main.getProvas(), "Gymnastics", 1, 2008);
+				String[] genero = { "Male", "Female", "Mixed" };
+				Modalidade mod = (Modalidade) JOptionPane.showInputDialog(AppConfig.this, "Choose a sport?", "Export Results", JOptionPane.QUESTION_MESSAGE, null, Main.getModalidades().toArray(), Main.getModalidades().toArray()[0]);
+				if (mod != null) {
+					JogosOlimpicos edition = (JogosOlimpicos) JOptionPane.showInputDialog(AppConfig.this, "Which year?", "Export Events", JOptionPane.QUESTION_MESSAGE, null, Main.getJogos().toArray(), Main.getJogos().toArray()[0]);
+					if (edition != null) {
+						String genre = (String) JOptionPane.showInputDialog(AppConfig.this, "Which genre?", "Export Events?", JOptionPane.QUESTION_MESSAGE, null, genero, genero[0]);
+						if (genre != null) {
+							int ano = edition.getAno();
+							int tipo = -1;
+							if (genre.equals("Male")) {
+								tipo = 0;
+							} else if (genre.equals("Female")) {
+								tipo = 1;
+							} else if (genre.equals("Mixed")) {
+								tipo = 2;
+							}
+							if (tipo != -1 || mod != null || edition != null || genre != null)
+								csv.exportResultados(AppConfig.this, Main.getModalidades(), Main.getProvas(), mod.getNome(), tipo, ano);
+						}
+					}
+				}
 			}
 		});
-		// FIXME erro a exportar CSV, adicionar botão competition with event
-		// (exportProvas),
-		// remover html's, check pre-definidos
+
+		// Events
+		expPro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JogosOlimpicos edition = (JogosOlimpicos) JOptionPane.showInputDialog(AppConfig.this, "Which year", "Export Events", JOptionPane.QUESTION_MESSAGE, null, Main.getJogos().toArray(), Main.getJogos().toArray()[0]);
+				if (edition != null) {
+					int ano = edition.getAno();
+					csv.exportProvas(AppConfig.this, Main.getProvas(), ano);
+				}
+
+			}
+		});
 
 		// Adding to panels
 		buttons_panel.add(expCountry);
-		buttons_panel.add(expCountryHtml);
 		buttons_panel.add(expDisc);
-		buttons_panel.add(expDiscHtml);
 		buttons_panel.add(expResu);
-		buttons_panel.add(expResuHtml);
+		buttons_panel.add(expPro);
 
 		main_panel.add(lb, BorderLayout.NORTH);
 		main_panel.add(buttons_panel, BorderLayout.SOUTH);

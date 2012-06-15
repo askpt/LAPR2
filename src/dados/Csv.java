@@ -1333,6 +1333,13 @@ public class Csv extends JComponent implements Accessible {
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
 			File ficheiro = fc.getSelectedFile();
+
+			// if directory does not exist yet
+			if (!ficheiro.exists()) {
+				File newDir = new File(ficheiro.getPath());
+				newDir.mkdir();
+			}
+
 			Formatter out;
 			if (ficheiro.getPath().endsWith(ficheiro + "\\" + ano + "_" + modalidade + "_Men.csv") || ficheiro.getPath().endsWith(ficheiro + "\\" + ano + "_" + modalidade + "_Women.csv"))
 				out = new Formatter(ficheiro);
@@ -1586,7 +1593,7 @@ public class Csv extends JComponent implements Accessible {
 					if (!tipoProva) {
 						int itDisc = 0;
 						for (; itDisc < disciplinas.size(); itDisc++) {
-							if (temp[1].replaceAll(" ", "").equalsIgnoreCase(disciplinas.get(itDisc).getNome().replaceAll(" ", "")) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
+							if (temp[1].equalsIgnoreCase(disciplinas.get(itDisc).getNome()) && 1 == disciplinas.get(itDisc).getGenero() && temp[0].equalsIgnoreCase(disciplinas.get(itDisc).getModalidade().getNome()))
 								break;
 						}
 
@@ -1621,7 +1628,8 @@ public class Csv extends JComponent implements Accessible {
 	}
 
 	/**
-	 * Method to export the competitions with event to csv.
+	 * Method to export the competitions with event to csv. Checks if the
+	 * selected directory exists and creates a new one if it doesnt.
 	 * 
 	 * @param janela
 	 *            the parent component of the dialog
@@ -1647,6 +1655,13 @@ public class Csv extends JComponent implements Accessible {
 			if (returnVal != JFileChooser.APPROVE_OPTION)
 				return;
 			File ficheiro = fc.getSelectedFile();
+
+			// if directory does not exist yet
+			if (!ficheiro.exists()) {
+				File newDir = new File(ficheiro.getPath());
+				newDir.mkdir();
+			}
+
 			Formatter out = new Formatter(ficheiro + "\\IOC_Sports_OG_" + ano + ".csv");
 			ListaLigada<Prova> provaTemp = provas;
 			out.format("Sport;Discipline;Men;Women\n");
