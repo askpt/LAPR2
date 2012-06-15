@@ -9,7 +9,6 @@ import javax.swing.border.*;
 
 import jogosolimpicos.*;
 
-//TODO set aqui?
 /**
  * Class that creates a frame to add data manually, an instance of this class is
  * created on the class AppConfig.
@@ -50,6 +49,7 @@ public class AddDados extends JFrame {
 	 */
 	private JTabbedPane jtp = new JTabbedPane();
 
+	@SuppressWarnings("unused")
 	private Pais country;
 	private Disciplina competition;
 	private Modalidade sport;

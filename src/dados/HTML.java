@@ -4,7 +4,6 @@ import gui.*;
 
 import java.awt.*;
 import java.io.*;
-import java.net.*;
 import java.nio.file.*;
 import java.util.*;
 
@@ -86,28 +85,30 @@ public class HTML {
 		}
 	}
 
-	/**
-	 * Copy the image to the specified directory, near the html document.
-	 * 
-	 * @param dirHTML
-	 *            the html directory
-	 * @param img
-	 *            the image to be copied
-	 * @throws IOException
-	 */
-	private void createImage(String dirHTML, URL img) throws IOException {
-		File dir = new File(dirHTML + "/Imagens");
-		dir.mkdirs();
-
-		String[] temp = img.getPath().split("/");
-		String image = temp[temp.length - 1];
-
-		File f1 = new File(img.getPath().replaceAll("\\\\", "/").replaceAll("%20", " "));
-		File f2 = new File(dir + "/" + image);
-
-		Files.copy(f1.toPath(), f2.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-	}
+	// /**
+	// * Copy the image to the specified directory, near the html document.
+	// *
+	// * @param dirHTML
+	// * the html directory
+	// * @param img
+	// * the image to be copied
+	// * @throws IOException
+	// */
+	// private void createImage(String dirHTML, URL img) throws IOException {
+	// File dir = new File(dirHTML + "/Imagens");
+	// dir.mkdirs();
+	//
+	// String[] temp = img.getPath().split("/");
+	// String image = temp[temp.length - 1];
+	//
+	// File f1 = new File(img.getPath().replaceAll("\\\\",
+	// "/").replaceAll("%20", " "));
+	// File f2 = new File(dir + "/" + image);
+	//
+	// Files.copy(f1.toPath(), f2.toPath(),
+	// StandardCopyOption.REPLACE_EXISTING);
+	//
+	// }
 
 	/**
 	 * Copy the image to the specified directory, near the html document.
@@ -377,8 +378,7 @@ public class HTML {
 		fout.format("</table>\n");
 		fout.format("<table border = 1 align=center>\n");
 		fout.format("<tr>\n");
-		fout.format("<td width=200 align = center><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPosicao() + "</font></td><td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getNome() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getOuro()
-				+ "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPrata() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getBronze() + "</font></td>\n");
+		fout.format("<td width=200 align = center><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPosicao() + "</font></td><td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getNome() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getOuro() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getPrata() + "</font></td> <td align=center width=200><font = \"Times New Roman\" color = \"white\">" + linguas.get(it).getBronze() + "</font></td>\n");
 
 	}
 
