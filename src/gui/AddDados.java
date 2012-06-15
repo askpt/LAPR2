@@ -9,6 +9,7 @@ import javax.swing.border.*;
 
 import jogosolimpicos.*;
 
+//TODO set aqui?
 /**
  * Class that creates a frame to add data manually, an instance of this class is
  * created on the class AppConfig.

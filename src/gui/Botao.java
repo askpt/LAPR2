@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 
+//TODO javadoc
 @SuppressWarnings("serial")
 public class Botao extends JButton {
 
