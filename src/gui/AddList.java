@@ -104,7 +104,7 @@ public class AddList extends JFrame {
 	 * 
 	 * @see #addCA() used in this method
 	 */
-	private Botao getResults = new Botao(img.getResults);
+	// private Botao getResults = new Botao(img.getResults);
 	/**
 	 * CardLayout to be used in the panel card.
 	 */
@@ -297,6 +297,32 @@ public class AddList extends JFrame {
 		me.setOpaque(false);
 	}
 
+	/**
+	 * Sets both contentAreaFilled and BorderPainted of the vector botoes to
+	 * false
+	 * 
+	 * @param botoes
+	 *            vector of Botao
+	 */
+	private void configButtons(Botao[] botoes) {
+		for (Botao bt : botoes) {
+			bt.setContentAreaFilled(false);
+			bt.setBorderPainted(false);
+		}
+	}
+
+	/**
+	 * Sets panel's opaque option to false
+	 * 
+	 * @param panels
+	 *            vector of JPanel
+	 */
+	private void setOpaquePanels(JPanel[] panels) {
+		for (JPanel panel : panels) {
+			panel.setOpaque(false);
+		}
+	}
+
 	/***
 	 * Creates the form to <code>Comparative Analysis</code> that will be
 	 * inserted into the panel <code>ca</code>. This form allows the user to
@@ -319,75 +345,67 @@ public class AddList extends JFrame {
 	private void addCA() {
 
 		// Panels
-		Painel main_panel = new Painel(img.bg4);
-		JPanel title_panel = new JPanel();
-		JPanel buttons_panel = new JPanel();
+		final Painel main_panel = new Painel(img.bg4);
+		final JPanel title_panel = new JPanel();
+		final JPanel buttons_panel = new JPanel();
 
 		// Layout
+		ca.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
 		main_panel.setLayout(new BorderLayout());
 
 		// Labels
+		JLabel lbl_header = new JLabel("Choose 2 to 5 countries you want to compare");
 
 		// Textfields
 
 		// Comboboxes
 
 		// Buttons
+		final Botao btn_add = new Botao(img.add1, img.add1_o);
+		final Botao btn_reduce = new Botao(img.remove1, img.remove1_o);
+		final Botao btn_back = new Botao(img.back, img.back_o);
+		final Botao btn_chart = new Botao(img.chart, img.chart_o);
+		final Botao btn_results = new Botao(img.getResults, img.getResults_o);
+		final Botao[] btns = { btn_add, btn_reduce, btn_back, btn_chart, btn_results };
 
 		// Customize
 
 		// Borders
+		main_panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		// Font
+		lbl_header.setFont((new Font("Arial", Font.BOLD, 14)));
 
 		// Color
+		final Color color = Color.WHITE;
+		lbl_header.setForeground(color);
 
 		// Opaque
+		main_panel.setOpaque(false);
+		title_panel.setOpaque(false);
+		card.setOpaque(false);
+		buttons_panel.setOpaque(false);
 
 		// Buttons
-		main_panel.setBorder(new EmptyBorder(10, 10, 10, 10));
-		main_panel.setOpaque(false);
-		ca.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
+		configButtons(btns);
+		btn_reduce.setVisible(false);
+		btn_back.setVisible(false);
+		btn_chart.setVisible(false);
 
-		card.setOpaque(false);
+		btn_add.setMnemonic('+');
+		btn_reduce.setMnemonic('-');
 
-		title_panel.setOpaque(false);
-		JLabel a = new JLabel("Choose 2 to 5 countries you want to compare");
-		a.setFont((new Font("Arial", Font.BOLD, 14)));
-		a.setForeground(Color.white);
-		title_panel.add(a);
+		// Adding to panels
+		title_panel.add(lbl_header);
 
-		buttons_panel.setOpaque(false);
-		final Botao add1 = new Botao(img.add1);
-		add1.setBotaoRollOver(img.add1_o);
-		add1.setContentAreaFilled(false);
-		add1.setBorderPainted(false);
-		final Botao reduce1 = new Botao(img.remove1);
-		reduce1.setBotaoRollOver(img.remove1_o);
-		reduce1.setBorderPainted(false);
-		reduce1.setContentAreaFilled(false);
-		reduce1.setVisible(false);
-		add1.setMnemonic('+');
-		reduce1.setMnemonic('-');
-		getResults.setBotaoRollOver(img.getResults_o);
-		getResults.setBorderPainted(false);
-		getResults.setContentAreaFilled(false);
-		final Botao voltar = new Botao(img.back, img.back_o);
-		voltar.setContentAreaFilled(false);
-		voltar.setBorderPainted(false);
-		voltar.setVisible(false);
-		final Botao chart = new Botao(img.chart, img.chart_o);
-		chart.setContentAreaFilled(false);
-		chart.setBorderPainted(false);
-		chart.setVisible(false);
-		buttons_panel.add(add1);
-		buttons_panel.add(reduce1);
-		buttons_panel.add(getResults);
-		buttons_panel.add(voltar);
-		buttons_panel.add(chart);
+		buttons_panel.add(btn_add);
+		buttons_panel.add(btn_reduce);
+		buttons_panel.add(btn_results);
+		buttons_panel.add(btn_back);
+		buttons_panel.add(btn_chart);
 
-		// PARA 2 PAISES
-		JPanel p1_1 = new JPanel(new BorderLayout());
+		// 2 COUNTRIES
+		final JPanel p1_1 = new JPanel(new BorderLayout());
 
 		p1_1.setOpaque(false);
 		p1_1.setBorder(new EmptyBorder(10, 10, 0, 10));
@@ -418,7 +436,7 @@ public class AddList extends JFrame {
 		opcao1.add(p1_1);
 		opcao1.add(p2_1);
 
-		// PARA 3 PAISES
+		// 3 COUNTRIES
 		JPanel p1_2 = new JPanel(new BorderLayout());
 		p1_2.setOpaque(false);
 		p1_2.setBorder(new EmptyBorder(10, 10, 0, 10));
@@ -463,7 +481,7 @@ public class AddList extends JFrame {
 		opcao2.add(p2_2);
 		opcao2.add(p3_2);
 
-		// PARA 4 PAISES
+		// 4 COUNTRIES
 		JPanel p1_3 = new JPanel(new BorderLayout(0, 10));
 		p1_3.setOpaque(false);
 		p1_3.setBorder(new EmptyBorder(10, 10, 0, 10));
@@ -522,7 +540,7 @@ public class AddList extends JFrame {
 		opcao3.add(p3_3);
 		opcao3.add(p4_3);
 
-		// PARA 5 PAISES
+		// 5 COUNTRIES
 		JPanel p1_4 = new JPanel(new BorderLayout());
 		p1_4.setOpaque(false);
 		p1_4.setBorder(new EmptyBorder(10, 10, 0, 10));
@@ -600,18 +618,18 @@ public class AddList extends JFrame {
 		card.add(opcao3, "3");
 		card.add(opcao4, "4");
 
-		add1.addActionListener(new ActionListener() {
+		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (index < MAX) {
 					index += 1;
 					cl.show(card, "" + (index));
 					if (index == MAX) {
-						add1.setVisible(false);
-						reduce1.setVisible(true);
+						btn_add.setVisible(false);
+						btn_reduce.setVisible(true);
 					} else {
-						add1.setVisible(true);
+						btn_add.setVisible(true);
 						if (index > MIN) {
-							reduce1.setVisible(true);
+							btn_reduce.setVisible(true);
 						}
 					}
 					if (index == 2) {
@@ -631,32 +649,32 @@ public class AddList extends JFrame {
 			}
 		});
 
-		reduce1.addActionListener(new ActionListener() {
+		btn_reduce.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (index > MIN) {
 					index -= 1;
-					reduce1.setVisible(true);
+					btn_reduce.setVisible(true);
 					cl.show(card, "" + (index));
 					if (index == MIN) {
-						reduce1.setVisible(false);
-						add1.setVisible(true);
+						btn_reduce.setVisible(false);
+						btn_add.setVisible(true);
 					} else {
-						reduce1.setVisible(true);
+						btn_reduce.setVisible(true);
 						if (index < MAX) {
-							add1.setVisible(true);
+							btn_add.setVisible(true);
 						}
 					}
 				}
 			}
 		});
 
-		getResults.addActionListener(new ActionListener() {
+		btn_results.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				add1.setVisible(false);
-				reduce1.setVisible(false);
-				voltar.setVisible(true);
-				getResults.setVisible(false);
-				chart.setVisible(true);
+				btn_add.setVisible(false);
+				btn_reduce.setVisible(false);
+				btn_back.setVisible(true);
+				btn_results.setVisible(false);
+				btn_chart.setVisible(true);
 
 				if (index + 4 == 5) {
 					if (cmb2_1.getSelectedItem() == null || cmb1_2.getSelectedItem() == null) {
@@ -730,18 +748,18 @@ public class AddList extends JFrame {
 			}
 		});
 
-		voltar.addActionListener(new ActionListener() {
+		btn_back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cl.show(card, "" + index);
-				add1.setVisible(true);
-				reduce1.setVisible(true);
-				voltar.setVisible(false);
-				getResults.setVisible(true);
-				chart.setVisible(false);
+				btn_add.setVisible(true);
+				btn_reduce.setVisible(true);
+				btn_back.setVisible(false);
+				btn_results.setVisible(true);
+				btn_chart.setVisible(false);
 			}
 		});
 
-		chart.addActionListener(new ActionListener() {
+		btn_chart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (index + 4 == 5) {
 					ListaLigada<String> nomes = new ListaLigada<String>();
