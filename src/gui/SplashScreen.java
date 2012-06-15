@@ -82,6 +82,23 @@ public class SplashScreen extends JWindow {
 	}
 
 	/**
+	 * Constructor of this class
+	 * 
+	 * @param d
+	 *            the value of the time that the thread will sleep
+	 * @param image
+	 *            image to show in the splash screen
+	 * @param show
+	 *            sets whether you want to show the splash the screen or not
+	 */
+	public SplashScreen(int d, String image, boolean show) {
+		setDuration(d);
+		setImage(image);
+		setShow(show);
+
+	}
+
+	/**
 	 * This method shows the splashscreen in the middle of the screen, uses a
 	 * label to show an image and the duration of the thread is set in the
 	 * constructor
@@ -145,6 +162,10 @@ public class SplashScreen extends JWindow {
 	 */
 	public void setImage(URL urlImage) {
 		this.image = new ImageIcon(urlImage);
+	}
+
+	public void setImage(String path) {
+		this.image = new ImageIcon(path);
 	}
 
 	/**
