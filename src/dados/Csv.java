@@ -284,16 +284,16 @@ public class Csv extends JComponent implements Accessible {
 								if (anos[j].matches("^[0-9]{4}$")) {
 									int ano = Integer.parseInt(anos[j]);
 
-									paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
+									paises.get(index).getCodigos().add(new CodigosPais(code[0].replaceAll(",", ""), ano));
 								} else if (anos[j].matches("^[0-9]{4}(S){1}$")) {
 									anos[j] = anos[j].replaceAll("S", "");
 									int ano = Integer.parseInt(anos[j]);
-									paises.get(index).getCodigos().add(new CodigosPais(code[0], ano));
+									paises.get(index).getCodigos().add(new CodigosPais(code[0].replaceAll(",", ""), ano));
 								} else if (anos[j].matches("^[0-9]{4}(_){1}[0-9]{4}$")) {
 									String[] anosTemp = anos[j].split("_");
 									int anoInicio = Integer.parseInt(anosTemp[0]);
 									int anoFim = Integer.parseInt(anosTemp[1]);
-									paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
+									paises.get(index).getCodigos().add(new CodigosPais(code[0].replaceAll(",", ""), anoInicio, anoFim));
 								} else if (anos[j].matches("^[0-9]{4}(S|W){0,1}_[0-9]{4}(S|W){0,1}$")) {
 									String[] anosTemp = anos[j].split("_");
 									int anoInicio = 0;
@@ -318,7 +318,7 @@ public class Csv extends JComponent implements Accessible {
 									} else if (anosTemp[1].matches("^[0-9]{4}")) {
 										anoFim = Integer.parseInt(anosTemp[1]);
 									}
-									paises.get(index).getCodigos().add(new CodigosPais(code[0], anoInicio, anoFim));
+									paises.get(index).getCodigos().add(new CodigosPais(code[0].replaceAll(",", ""), anoInicio, anoFim));
 								} else if (anos[j].matches("^[0-9]{4}(W){1}$")) {
 								}
 
@@ -439,11 +439,11 @@ public class Csv extends JComponent implements Accessible {
 				out.format("%s ;%s ;", paises.get(i).getCodigoPais(0), paises.get(i).getNomePais());
 				for (int j = 0; j < paises.get(i).getCodigos().size(); j++) {
 					if (paises.get(i).getCodigos().get(j).getAnoInicio() == paises.get(i).getCodigos().get(j).getAnoFim()) {
-						out.format("%s (%d), ", paises.get(i).getCodigos().get(j).getCodigo(), paises.get(i).getCodigos().get(j).getAnoInicio());
+						out.format("%s (%d)", paises.get(i).getCodigos().get(j).getCodigo(), paises.get(i).getCodigos().get(j).getAnoInicio());
 					} else {
-						out.format("%s (%d_%d), ", paises.get(i).getCodigos().get(j).getCodigo(), paises.get(i).getCodigos().get(j).getAnoInicio(), paises.get(i).getCodigos().get(j).getAnoFim());
-
+						out.format("%s (%d_%d)", paises.get(i).getCodigos().get(j).getCodigo(), paises.get(i).getCodigos().get(j).getAnoInicio(), paises.get(i).getCodigos().get(j).getAnoFim());
 					}
+					out.format(",");
 				}
 				out.format("\n");
 			}
@@ -1663,14 +1663,18 @@ public class Csv extends JComponent implements Accessible {
 			}
 
 			Formatter out = new Formatter(ficheiro + "\\IOC_Sports_OG_" + ano + ".csv");
-			ListaLigada<Prova> provaTemp = provas;
+			ListaLigada<Prova> provaTemp = new ListaLigada<Prova>();
+			for (int i = 0; i < provas.size(); i++) {
+				provaTemp.add(provas.get(i));
+
+			}
 			out.format("Sport;Discipline;Men;Women\n");
 			for (int i = 0; i < provaTemp.size(); i++) {
 				if (provaTemp.get(i).getJogosOlimpicos().getAno() != ano) {
 					provaTemp.remove(i);
+					i--;
 				}
 			}
-
 			for (int j = 0; j < provaTemp.size(); j++) {
 				String nomeDisc = provaTemp.get(j).getDisciplina().getNome();
 				String modalidade = provaTemp.get(j).getDisciplina().getModalidade().getNome();
@@ -1683,7 +1687,9 @@ public class Csv extends JComponent implements Accessible {
 					women = "X";
 
 				for (int k = j + 1; k < provaTemp.size(); k++) {
-					if (provaTemp.get(j).equals(provaTemp.get(k))) {
+
+					// if (provaTemp.get(j).equals(provaTemp.get(k))) {
+					if (nomeDisc.equalsIgnoreCase(provaTemp.get(k).getDisciplina().getNome()) && modalidade.equalsIgnoreCase(provaTemp.get(k).getDisciplina().getModalidade().getNome()) && provaTemp.get(j).getDisciplina().getTipoMod() == provaTemp.get(k).getDisciplina().getTipoMod()) {
 						if (provaTemp.get(k).getDisciplina().getGenero() == 0)
 							men = "X";
 						else if (provaTemp.get(k).getDisciplina().getGenero() == 1)
