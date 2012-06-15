@@ -771,12 +771,16 @@ public class AppConfig extends JFrame {
 		// Edit competition
 		editDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (a != null) {
-					a.setSelectedIndex(1);
-					a.setVisible(true);
-				} else {
-					a = new AddDados(null, null, null);
-					a.setSelectedIndex(1);
+				Disciplina dis = (Disciplina) JOptionPane.showInputDialog(AppConfig.this, "Choose the competition you want to edit", "Edit Competition", JOptionPane.QUESTION_MESSAGE, null, Main.getDisciplinas().toArray(), Main.getDisciplinas().toArray()[0]);
+				if (dis != null) {
+					if (a != null) {
+						a = new AddDados(null, dis, null);
+						a.setSelectedIndex(1);
+						a.setVisible(true);
+					} else {
+						a = new AddDados(null, dis, null);
+						a.setSelectedIndex(1);
+					}
 				}
 			}
 		});
@@ -784,12 +788,16 @@ public class AppConfig extends JFrame {
 		// Edit sport
 		editSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (a != null) {
-					a.setSelectedIndex(2);
-					a.setVisible(true);
-				} else {
-					a = new AddDados(null, null, null);
-					a.setSelectedIndex(2);
+				Modalidade mod = (Modalidade) JOptionPane.showInputDialog(AppConfig.this, "Choose the sport you want to edit", "Edit Sport", JOptionPane.QUESTION_MESSAGE, null, Main.getModalidades().toArray(), Main.getModalidades().toArray()[0]);
+				if (mod != null) {
+					if (a != null) {
+						a = new AddDados(null, null, mod);
+						a.setSelectedIndex(2);
+						a.setVisible(true);
+					} else {
+						a = new AddDados(null, null, mod);
+						a.setSelectedIndex(2);
+					}
 				}
 			}
 		});

@@ -79,9 +79,11 @@ public class AddDados extends JFrame {
 
 		addPaineis();
 		addTabs();
+		setSport(sport);
+		setCompetition(competition);
 		addCountry(country);
 		addCompetition();
-		addSport(sport);
+		addSport();
 
 		setProperties(600, 480, 1, true);
 	}
@@ -535,9 +537,16 @@ public class AddDados extends JFrame {
 
 		// TextFields
 		final JTextField txtName = new JTextField(20);
+		if (this.competition != null) {
+			txtName.setText(competition.getNome());
+		}
 
 		// ComboBoxes
 		final JComboBox<?> cmb_sport = new JComboBox<Object>(Main.getModalidades().toArray());
+		if (competition != null) {
+			cmb_sport.setEditable(true);
+			cmb_sport.setSelectedItem(competition.getModalidade().getNome());
+		}
 
 		// Buttons
 		final Botao ok = new Botao(img.ok, img.ok_o);
@@ -546,23 +555,60 @@ public class AddDados extends JFrame {
 
 		// JRadio Buttons
 		final ButtonGroup btngrp = new ButtonGroup(); // classification type
-		final JRadioButton rbDistancia = new JRadioButton("Distance", true);
-		final JRadioButton rbTempo = new JRadioButton("Time", false);
-		final JRadioButton rbPontos = new JRadioButton("Score", false);
-		final JRadioButton rbRank = new JRadioButton("Rank", false);
+		final JRadioButton rbDistancia = new JRadioButton("Distance");
+		final JRadioButton rbTempo = new JRadioButton("Time");
+		final JRadioButton rbPontos = new JRadioButton("Score");
+		final JRadioButton rbRank = new JRadioButton("Rank");
+		if (competition != null) {
+			int tipoClass = competition.getTipoClass();
+			if (tipoClass == 0) {
+				rbDistancia.setSelected(true);
+			} else if (tipoClass == 1) {
+				rbTempo.setSelected(true);
+			} else if (tipoClass == 2) {
+				rbPontos.setSelected(true);
+			} else {
+				rbRank.setSelected(true);
+			}
+		}
 
 		final ButtonGroup btngrp2 = new ButtonGroup(); // competition genre
-		final JRadioButton rbM = new JRadioButton("Male", true);
-		final JRadioButton rbF = new JRadioButton("Female", false);
-		final JRadioButton rbMi = new JRadioButton("Mixed", false);
+		final JRadioButton rbM = new JRadioButton("Male");
+		final JRadioButton rbF = new JRadioButton("Female");
+		final JRadioButton rbMi = new JRadioButton("Mixed");
+		if (competition != null) {
+			int genero = competition.getGenero();
+			if (genero == 0) {
+				rbM.setSelected(true);
+			} else if (genero == 1) {
+				rbF.setSelected(true);
+			} else {
+				rbMi.setSelected(true);
+			}
+		}
 
 		final ButtonGroup btngrp3 = new ButtonGroup(); // competition type
-		final JRadioButton rbI = new JRadioButton("Individual", true);
-		final JRadioButton rbC = new JRadioButton("Colective", false);
-
+		final JRadioButton rbI = new JRadioButton("Individual");
+		final JRadioButton rbC = new JRadioButton("Colective");
+		if (competition != null) {
+			boolean ver = competition.getTipoMod();
+			if (ver == false) {
+				rbI.setSelected(true);
+			} else {
+				rbC.setSelected(true);
+			}
+		}
 		final ButtonGroup btngrp4 = new ButtonGroup(); // ordination type
-		final JRadioButton rbH = new JRadioButton("Highest", true);
-		final JRadioButton rbL = new JRadioButton("Lowest", false);
+		final JRadioButton rbH = new JRadioButton("Highest");
+		final JRadioButton rbL = new JRadioButton("Lowest");
+		if (competition != null) {
+			boolean ver = competition.getOrdenacao();
+			if (ver) {
+				rbH.setSelected(true);
+			} else {
+				rbL.setSelected(true);
+			}
+		}
 
 		final JRadioButton[] rdbtns = { rbDistancia, rbTempo, rbPontos, rbRank, rbM, rbF, rbMi, rbI, rbC, rbH, rbL };
 
@@ -630,40 +676,195 @@ public class AddDados extends JFrame {
 					txtName.requestFocus();
 				} else if (txtName.getText().matches("^[A-Za-z]{1,}$")) {
 					String comp = corrigirNome(txtName.getText());
+					if (competition != null) {
+						competition.setNome(txtName.getText());
+					}
 					if (comp != null) {
+
 						Disciplina comp_ = new Disciplina(comp);
 						if (rbM.isSelected()) {
-							comp_.setGenero(0);
+							if (competition == null) {
+								comp_.setGenero(0);
+							} else {
+								competition.setGenero(0);
+							}
 						} else if (rbF.isSelected()) {
-							comp_.setGenero(1);
+							if (competition == null) {
+								comp_.setGenero(1);
+							} else {
+								competition.setGenero(1);
+							}
 						} else if (rbMi.isSelected()) {
-							comp_.setGenero(2);
+							if (competition == null) {
+								comp_.setGenero(2);
+							} else {
+								competition.setGenero(2);
+							}
 						}
 						if (rbI.isSelected()) {
-							comp_.setTipoDisc(false);
+							if (competition == null) {
+								comp_.setTipoDisc(false);
+							} else {
+								competition.setTipoDisc(false);
+							}
 						} else if (rbC.isSelected()) {
-							comp_.setTipoDisc(true);
+							if (competition == null) {
+								comp_.setTipoDisc(true);
+							} else {
+								competition.setTipoDisc(true);
+							}
 						}
 						if (rbDistancia.isSelected()) {
-							comp_.setTipoClass(0);
+							if (competition == null) {
+								comp_.setTipoClass(0);
+							} else {
+								competition.setTipoClass(0);
+							}
 						} else if (rbPontos.isSelected()) {
-							comp_.setTipoClass(2);
+							if (competition == null) {
+								comp_.setTipoClass(2);
+							} else {
+								competition.setTipoClass(2);
+							}
 						} else if (rbRank.isSelected()) {
-							comp_.setTipoClass(3);
+							if (competition == null) {
+								comp_.setTipoClass(3);
+							} else {
+								competition.setTipoClass(3);
+							}
 						} else if (rbTempo.isSelected()) {
-							comp_.setTipoClass(1);
-
+							if (competition == null) {
+								comp_.setTipoClass(1);
+							} else {
+								competition.setTipoClass(1);
+							}
 						}
 						if (rbH.isSelected()) {
-							comp_.setOrdenacao(true);
+							if (competition == null) {
+								comp_.setOrdenacao(true);
+							} else {
+								competition.setOrdenacao(true);
+							}
 						} else if (rbL.isSelected()) {
-							comp_.setOrdenacao(false);
+							if (competition == null) {
+								comp_.setOrdenacao(false);
+							} else {
+								competition.setOrdenacao(false);
+							}
 						}
 
 						if (cmb_sport.getSelectedItem() != null) {
 							int index = Main.getModalidades().indexOf((Modalidade) cmb_sport.getSelectedItem());
-							comp_.setModalidade(Main.getModalidades().get(index));
+							if (competition == null) {
+								comp_.setModalidade(Main.getModalidades().get(index));
+							} else {
+								competition.setModalidade(Main.getModalidades().get(index));
+							}
 						}
+						if (competition == null) {
+							if (competitionExists(comp_)) {
+								JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
+								txtName.setText("");
+								txtName.requestFocus();
+							} else {
+								Main.getDisciplinas().add(comp_);
+								JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
+								txtName.setText("");
+							}
+						} else {
+							JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
+							txtName.setText("");
+							txtName.requestFocus();
+						}
+					}
+				} else if (txtName.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")) {
+					String comp = corrigirNomeCar(txtName.getText());
+					if (competition != null) {
+						competition.setNome(txtName.getText());
+					}
+					Disciplina comp_ = new Disciplina(comp);
+					if (rbM.isSelected()) {
+						if (competition == null) {
+							comp_.setGenero(0);
+						} else {
+							competition.setGenero(0);
+						}
+					} else if (rbF.isSelected()) {
+						if (competition == null) {
+							comp_.setGenero(1);
+						} else {
+							competition.setGenero(1);
+						}
+					} else if (rbMi.isSelected()) {
+						if (competition == null) {
+							comp_.setGenero(2);
+						} else {
+							competition.setGenero(2);
+						}
+					}
+					if (rbI.isSelected()) {
+						if (competition == null) {
+							comp_.setTipoDisc(false);
+						} else {
+							competition.setTipoDisc(false);
+						}
+					} else if (rbC.isSelected()) {
+						if (competition == null) {
+							comp_.setTipoDisc(true);
+						} else {
+							competition.setTipoDisc(true);
+						}
+					}
+					if (rbDistancia.isSelected()) {
+						if (competition == null) {
+							comp_.setTipoClass(0);
+						} else {
+							competition.setTipoClass(0);
+						}
+					} else if (rbPontos.isSelected()) {
+						if (competition == null) {
+							comp_.setTipoClass(2);
+						} else {
+							competition.setTipoClass(2);
+						}
+					} else if (rbRank.isSelected()) {
+						if (competition == null) {
+							comp_.setTipoClass(3);
+						} else {
+							competition.setTipoClass(3);
+						}
+					} else if (rbTempo.isSelected()) {
+						if (competition == null) {
+							comp_.setTipoClass(1);
+						} else {
+							competition.setTipoClass(1);
+						}
+					}
+					if (rbH.isSelected()) {
+						if (competition == null) {
+							comp_.setOrdenacao(true);
+						} else {
+							competition.setOrdenacao(true);
+						}
+					} else if (rbL.isSelected()) {
+						if (competition == null) {
+							comp_.setOrdenacao(false);
+						} else {
+							competition.setOrdenacao(false);
+						}
+					}
+
+					if (cmb_sport.getSelectedItem() != null) {
+						int index = Main.getModalidades().indexOf((Modalidade) cmb_sport.getSelectedItem());
+						if (competition == null) {
+							cmb_sport.setEditable(true);
+							comp_.setModalidade(Main.getModalidades().get(index));
+						} else {
+							cmb_sport.setEditable(true);
+							competition.setModalidade(Main.getModalidades().get(index));
+						}
+					}
+					if (competition == null) {
 						if (competitionExists(comp_)) {
 							JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
 							txtName.setText("");
@@ -672,57 +873,18 @@ public class AddDados extends JFrame {
 							Main.getDisciplinas().add(comp_);
 							JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
 							txtName.setText("");
-
+						}
+					} else {
+						if (competitionExists(competition)) {
+							JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
+							txtName.setText("");
+							txtName.requestFocus();
+						} else {
+							JOptionPane.showMessageDialog(AddDados.this, "Competition (" + competition + ") was added successfully!");
+							txtName.setText("");
 						}
 					}
-				} else if (txtName.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")) {
-					String comp = corrigirNomeCar(txtName.getText());
-
-					Disciplina comp_ = new Disciplina(comp);
-					if (rbM.isSelected()) {
-						comp_.setGenero(0);
-					} else if (rbF.isSelected()) {
-						comp_.setGenero(1);
-					} else if (rbMi.isSelected()) {
-						comp_.setGenero(2);
-					}
-					if (rbI.isSelected()) {
-						comp_.setTipoDisc(false);
-					} else if (rbC.isSelected()) {
-						comp_.setTipoDisc(true);
-					}
-					if (rbDistancia.isSelected()) {
-						comp_.setTipoClass(0);
-					} else if (rbPontos.isSelected()) {
-						comp_.setTipoClass(2);
-					} else if (rbRank.isSelected()) {
-						comp_.setTipoClass(3);
-					} else if (rbTempo.isSelected()) {
-						comp_.setTipoClass(1);
-
-					}
-					if (rbH.isSelected()) {
-						comp_.setOrdenacao(true);
-					} else if (rbL.isSelected()) {
-						comp_.setOrdenacao(false);
-					}
-
-					if (cmb_sport.getSelectedItem() != null) {
-						int index = Main.getModalidades().indexOf((Modalidade) cmb_sport.getSelectedItem());
-						comp_.setModalidade(Main.getModalidades().get(index));
-					}
-					if (competitionExists(comp_)) {
-						JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
-						txtName.setText("");
-						txtName.requestFocus();
-					} else {
-						Main.getDisciplinas().add(comp_);
-						JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
-						txtName.setText("");
-					}
-
 				}
-
 			}
 		});
 
@@ -776,7 +938,7 @@ public class AddDados extends JFrame {
 	 * input as it tests if the input matches the desired format.It will not
 	 * accept until the user types something that matches the format.
 	 */
-	private void addSport(final Modalidade sport) {
+	private void addSport() {
 
 		// Layout
 		spo.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 100));
@@ -800,6 +962,10 @@ public class AddDados extends JFrame {
 
 		// TextFields
 		final JTextField txtSpo = new JTextField(20);
+		// If sport is not null it means the user wants to edit that sport
+		if (this.sport != null) {
+			txtSpo.setText(this.sport.getNome());
+		}
 
 		// Customize
 
@@ -849,9 +1015,14 @@ public class AddDados extends JFrame {
 						txtSpo.requestFocus();
 					} else {
 						if (modalidade != null) {
-							Modalidade n_mod = new Modalidade(modalidade);
-							Main.getModalidades().add(n_mod);
-							JOptionPane.showMessageDialog(AddDados.this, "Sport (" + n_mod + ") was added successfully!");
+							if (sport == null) {
+								Modalidade n_mod = new Modalidade(modalidade);
+								Main.getModalidades().add(n_mod);
+								JOptionPane.showMessageDialog(AddDados.this, "Sport (" + n_mod + ") was added successfully!");
+							} else {
+								sport.setNome(modalidade);
+								JOptionPane.showMessageDialog(AddDados.this, "Sport was edited successfully!");
+							}
 							txtSpo.setText("");
 
 						}
