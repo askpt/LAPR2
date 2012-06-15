@@ -1,23 +1,42 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import java.net.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
+import javax.imageio.*;
+import javax.swing.*;
 
-//TODO javadoc
+/**
+ * 
+ * A custom Button that extends JButton and loads an image to the button
+ * 
+ */
 @SuppressWarnings("serial")
 public class Botao extends JButton {
 
-	private BufferedImage image, imageRollOver;
+	/**
+	 * the image to the button
+	 */
+	private BufferedImage image;
+
+	/**
+	 * the image to the button when the mouse is over the button
+	 */
+	private BufferedImage imageRollOver;
+
+	/**
+	 * Whether or not we've set the RollOver image.
+	 */
 	private boolean hasRollOver = false;
 
+	/**
+	 * Constructor of this class, loads an image
+	 * 
+	 * @param botao
+	 *            the path of the image
+	 */
 	public Botao(String botao) {
 		try {
 			image = ImageIO.read(new File(botao));
@@ -25,6 +44,15 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * Constructor of this class, loads an image to the button and other to the
+	 * roll over option
+	 * 
+	 * @param botao
+	 *            the path of the image
+	 * @param btnRoll
+	 *            the path of the roll over image
+	 */
 	public Botao(String botao, String btnRoll) {
 		try {
 			image = ImageIO.read(new File(botao));
@@ -35,6 +63,12 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * Constructor of this class, loads an image from the url
+	 * 
+	 * @param url
+	 *            the url of the image
+	 */
 	public Botao(URL url) {
 		try {
 			String temp = url.getPath();
@@ -45,6 +79,15 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * Constructor of this class, loads an image to the button and other to the
+	 * roll over option from the url
+	 * 
+	 * @param url
+	 *            the url of the image
+	 * @param urlRollOver
+	 *            the url of the roll over image
+	 */
 	public Botao(URL url, URL urlRollOver) {
 		try {
 			String temp = url.getPath();
@@ -60,6 +103,12 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * Adds the rollover option to the button
+	 * 
+	 * @param urlRollOver
+	 *            image url
+	 */
 	public void setBotaoRollOver(URL urlRollOver) {
 		try {
 			String temp = urlRollOver.getPath();
@@ -71,6 +120,12 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * Adds the rollover option to the button
+	 * 
+	 * @param uRollOver
+	 *            image path
+	 */
 	public void setBotaoRollOver(String uRollOver) {
 		try {
 			imageRollOver = ImageIO.read(new File(uRollOver));
@@ -79,6 +134,11 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * Draws the image into the button
+	 * 
+	 * @see JComponent
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -91,6 +151,15 @@ public class Botao extends JButton {
 		}
 	}
 
+	/**
+	 * If the <code>preferredSize</code> has been set to a non-<code>null</code>
+	 * value just returns it. If the UI delegate's <code>getPreferredSize</code>
+	 * method returns a non <code>null</code> value then return that; otherwise
+	 * defer to the component's layout manager.
+	 * 
+	 * @return the value of the <code>preferredSize</code> property
+	 * @see JComponent
+	 */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(image.getWidth(), image.getHeight());

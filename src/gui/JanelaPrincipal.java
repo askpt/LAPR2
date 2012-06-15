@@ -9,7 +9,8 @@ import javax.swing.border.*;
 
 /**
  * 
- * Main GUI window
+ * Main GUI window, it is loaded after the splash screen and loads the main
+ * menu.
  * 
  */
 @SuppressWarnings("serial")

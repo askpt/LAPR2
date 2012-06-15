@@ -318,23 +318,46 @@ public class AddList extends JFrame {
 	 */
 	private void addCA() {
 
-		Painel p1 = new Painel(img.bg4);
-		p1.setLayout(new BorderLayout());
-		p1.setBorder(new EmptyBorder(10, 10, 10, 10));
-		p1.setOpaque(false);
+		// Panels
+		Painel main_panel = new Painel(img.bg4);
+		JPanel title_panel = new JPanel();
+		JPanel buttons_panel = new JPanel();
+
+		// Layout
+		main_panel.setLayout(new BorderLayout());
+
+		// Labels
+
+		// Textfields
+
+		// Comboboxes
+
+		// Buttons
+
+		// Customize
+
+		// Borders
+
+		// Font
+
+		// Color
+
+		// Opaque
+
+		// Buttons
+		main_panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		main_panel.setOpaque(false);
 		ca.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 50));
 
 		card.setOpaque(false);
 
-		JPanel pTitulo = new JPanel();
-		pTitulo.setOpaque(false);
+		title_panel.setOpaque(false);
 		JLabel a = new JLabel("Choose 2 to 5 countries you want to compare");
 		a.setFont((new Font("Arial", Font.BOLD, 14)));
 		a.setForeground(Color.white);
-		pTitulo.add(a);
+		title_panel.add(a);
 
-		JPanel pButn = new JPanel();
-		pButn.setOpaque(false);
+		buttons_panel.setOpaque(false);
 		final Botao add1 = new Botao(img.add1);
 		add1.setBotaoRollOver(img.add1_o);
 		add1.setContentAreaFilled(false);
@@ -357,11 +380,11 @@ public class AddList extends JFrame {
 		chart.setContentAreaFilled(false);
 		chart.setBorderPainted(false);
 		chart.setVisible(false);
-		pButn.add(add1);
-		pButn.add(reduce1);
-		pButn.add(getResults);
-		pButn.add(voltar);
-		pButn.add(chart);
+		buttons_panel.add(add1);
+		buttons_panel.add(reduce1);
+		buttons_panel.add(getResults);
+		buttons_panel.add(voltar);
+		buttons_panel.add(chart);
 
 		// PARA 2 PAISES
 		JPanel p1_1 = new JPanel(new BorderLayout());
@@ -683,7 +706,8 @@ public class AddList extends JFrame {
 						cl.show(card, "7");
 					}
 				} else if (index + 4 == 8) {
-					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
+					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem())
+							|| (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_4.getSelectedItem();
@@ -814,10 +838,10 @@ public class AddList extends JFrame {
 			}
 		});
 
-		p1.add(pTitulo, BorderLayout.NORTH);
-		p1.add(card, BorderLayout.CENTER);
-		p1.add(pButn, BorderLayout.SOUTH);
-		ca.add(p1);
+		main_panel.add(title_panel, BorderLayout.NORTH);
+		main_panel.add(card, BorderLayout.CENTER);
+		main_panel.add(buttons_panel, BorderLayout.SOUTH);
+		ca.add(main_panel);
 
 	}
 
