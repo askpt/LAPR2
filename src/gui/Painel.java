@@ -19,7 +19,7 @@ public class Painel extends JPanel {
 	/**
 	 * Default image
 	 */
-	private String imagem = "bin/Imagens/background.png";
+	private String imagem = "Imagens/background.png";
 
 	/**
 	 * Constructor of this class
