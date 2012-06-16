@@ -311,18 +311,6 @@ public class AddList extends JFrame {
 		}
 	}
 
-	/**
-	 * Sets panel's opaque option to false
-	 * 
-	 * @param panels
-	 *            vector of JPanel
-	 */
-	private void setOpaquePanels(JPanel[] panels) {
-		for (JPanel panel : panels) {
-			panel.setOpaque(false);
-		}
-	}
-
 	/***
 	 * Creates the form to <code>Comparative Analysis</code> that will be
 	 * inserted into the panel <code>ca</code>. This form allows the user to
@@ -355,10 +343,6 @@ public class AddList extends JFrame {
 
 		// Labels
 		JLabel lbl_header = new JLabel("Choose 2 to 5 countries you want to compare");
-
-		// Textfields
-
-		// Comboboxes
 
 		// Buttons
 		final Botao btn_add = new Botao(img.add1, img.add1_o);

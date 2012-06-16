@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 import jogosolimpicos.*;
+import listaligada.*;
 
 /**
  * Class that creates a frame to add data manually, an instance of this class is
@@ -261,21 +262,6 @@ public class AddDados extends JFrame {
 	}
 
 	/**
-	 * Returns true if there is already a country with the code equal to the
-	 * code in the parameter.
-	 * 
-	 * @return Returns true if there is already a country with the code equal to
-	 *         the code in the parameter
-	 */
-	private boolean codeExists(String code) {
-		for (int i = 0; i < Main.getPaises().size(); i++) {
-			if (Main.getPaises().get(i).getCodigoPais(0).equalsIgnoreCase(code))
-				return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Returns true if there is already a sport with the name equal to the name
 	 * in the parameter.
 	 * 
@@ -305,16 +291,26 @@ public class AddDados extends JFrame {
 	}
 
 	/**
-	 * Returns true if there is already a country with the name equal to the
-	 * name in the parameter.
+	 * Returns true if there is already a country with the name and code equal
+	 * to the parameter.
 	 * 
-	 * @return Returns true if there is already a country with the name equal to
-	 *         the name in the parameter
+	 * @return Returns true if there is already a country with the name and code
+	 *         equal to the parameter
 	 */
-	private boolean nameExists(String name) {
+	@SuppressWarnings("unused")
+	private boolean countryExists(String name, String code) {
+		ListaLigada<Pais> temp = new ListaLigada<Pais>();
 		for (int i = 0; i < Main.getPaises().size(); i++) {
-			if (Main.getPaises().get(i).getNomePais().equalsIgnoreCase(name))
+			if (!Main.getPaises().get(i).getNomePais().equalsIgnoreCase(name) && !Main.getPaises().get(i).getCodigoPais(0).equals(code)) {
+				temp.add(Main.getPaises().get(i));
+			}
+		}
+		for (int j = 0; j < temp.size(); j++) {
+			if (temp.get(j).getNomePais().equalsIgnoreCase(name) || temp.get(j).getCodigoPais(0).equals(code)) {
 				return true;
+			} else {
+				return false;
+			}
 		}
 		return false;
 	}
@@ -459,12 +455,9 @@ public class AddDados extends JFrame {
 				if (!isCountryValid(txtName.getText(), txtCode.getText())) {
 					txtName.requestFocus();
 				} else {
-					if (codeExists(txtCode.getText())) {
-						JOptionPane.showMessageDialog(AddDados.this, "That code already exists!");
-						txtCode.requestFocus();
-					} else if (nameExists(txtName.getText())) {
-						JOptionPane.showMessageDialog(AddDados.this, "That name already exists!");
-						txtName.requestFocus();
+					if (countryExists(corrigirNome(txtName.getText()), txtCode.getText())) {
+						JOptionPane.showMessageDialog(AddDados.this, "That country already exists!");
+
 					} else {
 						if (country == null) {
 							Pais pais = new Pais(txtCode.getText(), corrigirNome(txtName.getText()));
@@ -671,85 +664,87 @@ public class AddDados extends JFrame {
 				if (txtName.equals("")) {
 					JOptionPane.showMessageDialog(AddDados.this, "Make sure there are no empty fields!");
 					txtName.requestFocus();
-				} else if (!((txtName.getText().matches("^[A-Za-z]{1,}$")) || (txtName.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")))) {
-					JOptionPane.showMessageDialog(AddDados.this, "Make sure the name field is formatted within the correct format!");
-					txtName.requestFocus();
-				} else if (txtName.getText().matches("^[A-Za-z]{1,}$")) {
+				} else {
+
 					String comp = corrigirNome(txtName.getText());
-					if (competition != null) {
-						competition.setNome(txtName.getText());
-					}
+
 					if (comp != null) {
+
+						int GENRE = -1;
+						boolean TIPO_DISC = false;
+						int TIPO = -1;
+						boolean ORD = false;
+						Modalidade MOD = null;
 
 						Disciplina comp_ = new Disciplina(comp);
 						if (rbM.isSelected()) {
 							if (competition == null) {
 								comp_.setGenero(0);
 							} else {
-								competition.setGenero(0);
+								GENRE = 0;
 							}
 						} else if (rbF.isSelected()) {
 							if (competition == null) {
 								comp_.setGenero(1);
 							} else {
-								competition.setGenero(1);
+								GENRE = 1;
 							}
 						} else if (rbMi.isSelected()) {
 							if (competition == null) {
 								comp_.setGenero(2);
 							} else {
-								competition.setGenero(2);
+								GENRE = 2;
 							}
 						}
 						if (rbI.isSelected()) {
 							if (competition == null) {
 								comp_.setTipoDisc(false);
 							} else {
-								competition.setTipoDisc(false);
+								TIPO_DISC = false;
 							}
 						} else if (rbC.isSelected()) {
 							if (competition == null) {
 								comp_.setTipoDisc(true);
 							} else {
-								competition.setTipoDisc(true);
+								TIPO_DISC = true;
 							}
 						}
 						if (rbDistancia.isSelected()) {
 							if (competition == null) {
 								comp_.setTipoClass(0);
 							} else {
-								competition.setTipoClass(0);
+								TIPO = 0;
 							}
 						} else if (rbPontos.isSelected()) {
 							if (competition == null) {
 								comp_.setTipoClass(2);
 							} else {
-								competition.setTipoClass(2);
+								TIPO = 2;
 							}
 						} else if (rbRank.isSelected()) {
 							if (competition == null) {
 								comp_.setTipoClass(3);
 							} else {
-								competition.setTipoClass(3);
+								TIPO = 3;
 							}
 						} else if (rbTempo.isSelected()) {
 							if (competition == null) {
 								comp_.setTipoClass(1);
 							} else {
-								competition.setTipoClass(1);
+								TIPO = 1;
 							}
 						}
 						if (rbH.isSelected()) {
 							if (competition == null) {
 								comp_.setOrdenacao(true);
 							} else {
-								competition.setOrdenacao(true);
+								ORD = true;
 							}
 						} else if (rbL.isSelected()) {
 							if (competition == null) {
 								comp_.setOrdenacao(false);
 							} else {
-								competition.setOrdenacao(false);
+								ORD = false;
 							}
 						}
 
@@ -758,17 +753,32 @@ public class AddDados extends JFrame {
 							if (competition == null) {
 								comp_.setModalidade(Main.getModalidades().get(index));
 							} else {
-								competition.setModalidade(Main.getModalidades().get(index));
+								MOD = Main.getModalidades().get(index);
 							}
 						}
+
 						if (competition == null) {
 							if (competitionExists(comp_)) {
 								JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
 								txtName.setText("");
 								txtName.requestFocus();
 							} else {
-								Main.getDisciplinas().add(comp_);
-								JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
+								// edit
+								Disciplina old_competition = competition;
+								if (competition != null) {
+									competition.setNome(comp);
+									competition.setModalidade(MOD);
+									competition.setGenero(GENRE);
+									competition.setTipoDisc(TIPO_DISC);
+									competition.setTipoClass(TIPO);
+									competition.setOrdenacao(ORD);
+									if (competition.equals(old_competition)) {
+										JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
+									} else {
+										Main.getDisciplinas().add(competition);
+										JOptionPane.showMessageDialog(AddDados.this, "Competition (" + competition + ") was added successfully!");
+									}
+								}
 								txtName.setText("");
 							}
 						} else {
@@ -777,113 +787,7 @@ public class AddDados extends JFrame {
 							txtName.requestFocus();
 						}
 					}
-				} else if (txtName.getText().matches("^[A-Za-z-]{1,}[-]{1}[A-Za-z]{1,}$")) {
-					String comp = corrigirNomeCar(txtName.getText());
-					if (competition != null) {
-						competition.setNome(txtName.getText());
-					}
-					Disciplina comp_ = new Disciplina(comp);
-					if (rbM.isSelected()) {
-						if (competition == null) {
-							comp_.setGenero(0);
-						} else {
-							competition.setGenero(0);
-						}
-					} else if (rbF.isSelected()) {
-						if (competition == null) {
-							comp_.setGenero(1);
-						} else {
-							competition.setGenero(1);
-						}
-					} else if (rbMi.isSelected()) {
-						if (competition == null) {
-							comp_.setGenero(2);
-						} else {
-							competition.setGenero(2);
-						}
-					}
-					if (rbI.isSelected()) {
-						if (competition == null) {
-							comp_.setTipoDisc(false);
-						} else {
-							competition.setTipoDisc(false);
-						}
-					} else if (rbC.isSelected()) {
-						if (competition == null) {
-							comp_.setTipoDisc(true);
-						} else {
-							competition.setTipoDisc(true);
-						}
-					}
-					if (rbDistancia.isSelected()) {
-						if (competition == null) {
-							comp_.setTipoClass(0);
-						} else {
-							competition.setTipoClass(0);
-						}
-					} else if (rbPontos.isSelected()) {
-						if (competition == null) {
-							comp_.setTipoClass(2);
-						} else {
-							competition.setTipoClass(2);
-						}
-					} else if (rbRank.isSelected()) {
-						if (competition == null) {
-							comp_.setTipoClass(3);
-						} else {
-							competition.setTipoClass(3);
-						}
-					} else if (rbTempo.isSelected()) {
-						if (competition == null) {
-							comp_.setTipoClass(1);
-						} else {
-							competition.setTipoClass(1);
-						}
-					}
-					if (rbH.isSelected()) {
-						if (competition == null) {
-							comp_.setOrdenacao(true);
-						} else {
-							competition.setOrdenacao(true);
-						}
-					} else if (rbL.isSelected()) {
-						if (competition == null) {
-							comp_.setOrdenacao(false);
-						} else {
-							competition.setOrdenacao(false);
-						}
-					}
 
-					if (cmb_sport.getSelectedItem() != null) {
-						int index = Main.getModalidades().indexOf((Modalidade) cmb_sport.getSelectedItem());
-						if (competition == null) {
-							cmb_sport.setEditable(true);
-							comp_.setModalidade(Main.getModalidades().get(index));
-						} else {
-							cmb_sport.setEditable(true);
-							competition.setModalidade(Main.getModalidades().get(index));
-						}
-					}
-					if (competition == null) {
-						if (competitionExists(comp_)) {
-							JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
-							txtName.setText("");
-							txtName.requestFocus();
-						} else {
-							Main.getDisciplinas().add(comp_);
-							JOptionPane.showMessageDialog(AddDados.this, "Competition (" + comp_ + ") was added successfully!");
-							txtName.setText("");
-						}
-					} else {
-						if (competitionExists(competition)) {
-							JOptionPane.showMessageDialog(AddDados.this, "That competition already exists!");
-							txtName.setText("");
-							txtName.requestFocus();
-						} else {
-							JOptionPane.showMessageDialog(AddDados.this, "Competition (" + competition + ") was added successfully!");
-							txtName.setText("");
-						}
-					}
 				}
 			}
 		});
