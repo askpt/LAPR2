@@ -1,6 +1,7 @@
 package jogosolimpicos;
 
 import java.io.*;
+
 import listaligada.*;
 
 /**
@@ -13,6 +14,7 @@ public class Pais implements Comparable, Serializable {
 	 * the current IOC code
 	 */
 	private String codigoPais;
+
 	/**
 	 * name of the country
 	 */
@@ -122,6 +124,10 @@ public class Pais implements Comparable, Serializable {
 		return this.codigos;
 	}
 
+	public String getCodigoPais() {
+		return codigoPais;
+	}
+
 	/**
 	 * @return returns a String in this format: "countrycode - countryname"
 	 * 
@@ -159,5 +165,24 @@ public class Pais implements Comparable, Serializable {
 			}
 		}
 		return 0;
+	}
+
+	/**
+	 * Compares tow countries and returns true if either their name or code is
+	 * the same
+	 * 
+	 * @param another
+	 *            country
+	 * @return returns true if either their name or code is the same, false if
+	 *         it isn't
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Pais) {
+			Pais pais = (Pais) obj;
+			return this.getNomePais().equalsIgnoreCase(pais.getNomePais()) || this.getCodigoPais().equalsIgnoreCase(pais.getCodigoPais());
+		} else {
+			return false;
+		}
 	}
 }

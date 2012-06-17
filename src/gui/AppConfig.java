@@ -683,12 +683,12 @@ public class AppConfig extends JFrame {
 		addCo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
-					a.setSelectedIndex(0);
-					a.setVisible(true);
-				} else {
-					a = new AddDados(null, null, null);
-					a.setSelectedIndex(0);
+					a.setVisible(false);
+					a = null;
 				}
+				a = new AddDados(null, null, null);
+				a.setSelectedIndex(0);
+
 			}
 
 		});
@@ -697,12 +697,11 @@ public class AppConfig extends JFrame {
 		addDis.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
-					a.setSelectedIndex(1);
-					a.setVisible(true);
-				} else {
-					a = new AddDados(null, null, null);
-					a.setSelectedIndex(1);
+					a.setVisible(false);
+					a = null;
 				}
+				a = new AddDados(null, null, null);
+				a.setSelectedIndex(1);
 			}
 		});
 
@@ -710,12 +709,11 @@ public class AppConfig extends JFrame {
 		addSpo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (a != null) {
-					a.setSelectedIndex(2);
-					a.setVisible(true);
-				} else {
-					a = new AddDados(null, null, null);
-					a.setSelectedIndex(2);
+					a.setVisible(false);
+					a = null;
 				}
+				a = new AddDados(null, null, null);
+				a.setSelectedIndex(2);
 			}
 		});
 
@@ -782,13 +780,13 @@ public class AppConfig extends JFrame {
 				Pais pais = (Pais) JOptionPane.showInputDialog(AppConfig.this, "Choose the country you want to edit", "Edit Country", JOptionPane.QUESTION_MESSAGE, null, Main.getPaises().toArray(), Main.getPaises().toArray()[0]);
 				if (pais != null) {
 					if (a != null) {
-						a.setCountry(pais);
-						a.setSelectedIndex(0);
-						a.setVisible(true);
-					} else {
-						a = new AddDados(pais, null, null);
-						a.setSelectedIndex(0);
+						a.setVisible(false);
+						a = null;
 					}
+
+					a = new AddDados(pais, null, null);
+					a.setCountry(pais);
+					a.setSelectedIndex(0);
 				}
 			}
 		});
@@ -799,13 +797,12 @@ public class AppConfig extends JFrame {
 				Disciplina dis = (Disciplina) JOptionPane.showInputDialog(AppConfig.this, "Choose the competition you want to edit", "Edit Competition", JOptionPane.QUESTION_MESSAGE, null, Main.getDisciplinas().toArray(), Main.getDisciplinas().toArray()[0]);
 				if (dis != null) {
 					if (a != null) {
-						a = new AddDados(null, dis, null);
-						a.setSelectedIndex(1);
-						a.setVisible(true);
-					} else {
-						a = new AddDados(null, dis, null);
-						a.setSelectedIndex(1);
+						a.setVisible(false);
+						a = null;
 					}
+					a = new AddDados(null, dis, null);
+					a.setCompetition(dis);
+					a.setSelectedIndex(1);
 				}
 			}
 		});
@@ -816,13 +813,12 @@ public class AppConfig extends JFrame {
 				Modalidade mod = (Modalidade) JOptionPane.showInputDialog(AppConfig.this, "Choose the sport you want to edit", "Edit Sport", JOptionPane.QUESTION_MESSAGE, null, Main.getModalidades().toArray(), Main.getModalidades().toArray()[0]);
 				if (mod != null) {
 					if (a != null) {
-						a = new AddDados(null, null, mod);
-						a.setSelectedIndex(2);
-						a.setVisible(true);
-					} else {
-						a = new AddDados(null, null, mod);
-						a.setSelectedIndex(2);
+						a.setVisible(false);
+						a = null;
 					}
+					a = new AddDados(null, null, mod);
+					a.setSport(mod);
+					a.setSelectedIndex(2);
 				}
 			}
 		});

@@ -242,8 +242,8 @@ public class Disciplina implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Disciplina) {
-			Disciplina disc = (Disciplina) obj;
-			return (this.getNome().equalsIgnoreCase(disc.getNome()) && this.mod.getNome().equalsIgnoreCase(disc.getModalidade().getNome()) && this.tipoDisc == disc.getTipoMod() && this.genero == disc.getGenero());
+			Disciplina that = (Disciplina) obj;
+			return (this.getNome().equalsIgnoreCase(that.getNome()) && this.mod.getNome().equalsIgnoreCase(that.getModalidade().getNome()) && this.tipoDisc == that.getTipoMod() && this.genero == that.getGenero());
 		}
 		return false;
 	}

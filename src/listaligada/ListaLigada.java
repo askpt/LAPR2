@@ -38,6 +38,15 @@ public class ListaLigada<E> implements Serializable {
 	}
 
 	/**
+	 * Constructor of the Linked List. Copies a LinkedList.
+	 */
+	public ListaLigada(ListaLigada<E> list) {
+		for (int i = 0; i < list.size(); i++) {
+			add(list.get(i));
+		}
+	}
+
+	/**
 	 * Method to get the size of the Linked List.
 	 * 
 	 * @return size of the Linked List.
