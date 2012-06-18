@@ -73,7 +73,7 @@ public class JanelaPrincipal extends JFrame {
 	 *            parameter to use when calling
 	 *            javax.swing.JFrame#setDefaultCloseOperation(int)
 	 * 
-	 * @param visible
+	 * @param v
 	 *            sets the windows to visible if the parameter is true
 	 */
 	private void setProperties(int w, int h, int opcao, boolean v) {

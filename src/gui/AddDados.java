@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -61,13 +60,9 @@ public class AddDados extends JFrame {
 	 * in order to initialize the <code>panels</code> when an object of this
 	 * class is created. Sets properties.
 	 * 
-	 * @see javax.swing.JFrame#constructor(String)
-	 * 
 	 * @see #addPaineis()
 	 * 
 	 * @see #addTabs()
-	 * 
-	 * @see #addCountry()
 	 * 
 	 * @see #addCompetition()
 	 * 
@@ -165,7 +160,6 @@ public class AddDados extends JFrame {
 	/**
 	 * This method adds tabs to the TabbedPane, it is called on the constructor.
 	 * 
-	 * @see #constructor
 	 */
 	private void addTabs() {
 
@@ -187,12 +181,6 @@ public class AddDados extends JFrame {
 	 * 
 	 * @see #spo
 	 * 
-	 * @see javax.swing.JComponent#setOpaque()
-	 * 
-	 * @see gui.Painel#constructor(URL)
-	 * 
-	 * 
-	 * @see #constructor
 	 */
 	private void addPaineis() {
 

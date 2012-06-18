@@ -46,10 +46,6 @@ public class Drag extends JDialog {
 	 * @param h
 	 *            the desired height to the window
 	 * 
-	 * @param opcao
-	 *            parameter to use when calling
-	 *            javax.swing.JFrame#setDefaultCloseOperation(int)
-	 * 
 	 * @param visible
 	 *            sets the windows to visible if the parameter is true
 	 * @param onTop

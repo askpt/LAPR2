@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -26,8 +25,6 @@ public class AppConfig extends JFrame {
 	 * 
 	 * @see #addPaineis()
 	 * 
-	 * @see addImports()
-	 * 
 	 * @see Panel Panel Class
 	 */
 	private Painel imp;
@@ -38,8 +35,6 @@ public class AppConfig extends JFrame {
 	 * @see #addTabs()
 	 * 
 	 * @see #addPaineis()
-	 * 
-	 * @see addExports()
 	 * 
 	 * @see Panel Panel Class
 	 */
@@ -52,8 +47,6 @@ public class AppConfig extends JFrame {
 	 * 
 	 * @see #addPaineis()
 	 * 
-	 * @see addAdds()
-	 * 
 	 * @see Panel Panel Class
 	 */
 	private Painel ad;
@@ -65,8 +58,6 @@ public class AppConfig extends JFrame {
 	 * 
 	 * @see #addPaineis()
 	 * 
-	 * @see addEdits()
-	 * 
 	 * @see Panel Panel Class
 	 */
 	private Painel edit;
@@ -77,8 +68,6 @@ public class AppConfig extends JFrame {
 	 * @see #addTabs()
 	 * 
 	 * @see #addPaineis()
-	 * 
-	 * @see addList()
 	 * 
 	 * @see Panel Panel Class
 	 */
@@ -123,8 +112,6 @@ public class AppConfig extends JFrame {
 	 * <code>title</code>, it also calls all the necessary methods in this class
 	 * in order to initialize the <code>panels</code> when an object of this
 	 * class is created. Sets properties.
-	 * 
-	 * @see javax.swing.JFrame#constructor(String)
 	 * 
 	 * @see #addPaineis()
 	 * 
@@ -189,7 +176,6 @@ public class AppConfig extends JFrame {
 	/**
 	 * This method adds tabs to the TabbedPane, it is called on the constructor.
 	 * 
-	 * @see #constructor
 	 */
 	private void addTabs() {
 
@@ -220,11 +206,6 @@ public class AppConfig extends JFrame {
 	 * 
 	 * @see #list
 	 * 
-	 * @see javax.swing.JComponent#setOpaque()
-	 * 
-	 * @see gui.Painel#constructor(URL)
-	 * 
-	 * @see #constructor
 	 */
 	private void addPaineis() {
 

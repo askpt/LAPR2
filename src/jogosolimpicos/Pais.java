@@ -171,7 +171,7 @@ public class Pais implements Comparable, Serializable {
 	 * Compares tow countries and returns true if either their name or code is
 	 * the same
 	 * 
-	 * @param another
+	 * @param obj
 	 *            country
 	 * @return returns true if either their name or code is the same, false if
 	 *         it isn't

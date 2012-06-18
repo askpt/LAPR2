@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.net.*;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -167,8 +166,6 @@ public class AddList extends JFrame {
 	 * in order to initialize the <code>panels</code> when an object of this
 	 * class is created. Sets properties.
 	 * 
-	 * @see javax.swing.JFrame#constructor(String)
-	 * 
 	 * @see #addPaineis()
 	 * 
 	 * @see #addTabs()
@@ -246,7 +243,6 @@ public class AddList extends JFrame {
 	/**
 	 * This method adds tabs to the TabbedPane, it is called on the constructor.
 	 * 
-	 * @see #constructor
 	 */
 	private void addTabs() {
 
@@ -274,12 +270,6 @@ public class AddList extends JFrame {
 	 * 
 	 * @see #me
 	 * 
-	 * @see javax.swing.JComponent#setOpaque()
-	 * 
-	 * @see gui.Painel#constructor(URL)
-	 * 
-	 * 
-	 * @see #constructor
 	 */
 	private void addPaineis() {
 
@@ -326,9 +316,6 @@ public class AddList extends JFrame {
 	 * 
 	 * @see #ca container
 	 * 
-	 * @see #isEmpty()
-	 * 
-	 * @see #createTable()
 	 */
 	private void addCA() {
 
@@ -708,8 +695,7 @@ public class AddList extends JFrame {
 						cl.show(card, "7");
 					}
 				} else if (index + 4 == 8) {
-					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem())
-							|| (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
+					if ((cmb1_4.getSelectedItem() == cmb2_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb1_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb3_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb2_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb4_4.getSelectedItem()) || (cmb3_4.getSelectedItem() == cmb5_4.getSelectedItem()) || (cmb4_4.getSelectedItem() == cmb5_4.getSelectedItem())) {
 						JOptionPane.showMessageDialog(null, "Repeated countries!");
 					} else {
 						Pais pais = (Pais) cmb1_4.getSelectedItem();
@@ -862,7 +848,6 @@ public class AddList extends JFrame {
 	 * 
 	 * @see jogosolimpicos.Listagem#listarMedalhasPais
 	 * 
-	 * @see #createTablePaisAtleta()
 	 */
 	private void addHistoricoPaises() {
 		Painel p1 = new Painel(img.bg4);
@@ -986,7 +971,6 @@ public class AddList extends JFrame {
 	 * 
 	 * @see jogosolimpicos.Listagem#listarMedalhasAtleta
 	 * 
-	 * @see #createTablePaisAtleta()
 	 */
 	private void addHistoricoAtletas() {
 		Painel p1 = new Painel(img.bg4);
@@ -1113,7 +1097,6 @@ public class AddList extends JFrame {
 	 * 
 	 * @see jogosolimpicos.Listagem#listarMedalhasAtleta
 	 * 
-	 * @see #createTablePaisAtleta()
 	 */
 	private void addHistoricoDiscipline() {
 		Painel p1 = new Painel(img.bg4);
@@ -1250,7 +1233,6 @@ public class AddList extends JFrame {
 	 * 
 	 * @see jogosolimpicos.Listagem#listarMedalhasAtleta
 	 * 
-	 * @see #createTablePaisAtleta()
 	 */
 	private void addHistoricoSport() {
 		Painel p1 = new Painel(img.bg4);
@@ -1511,11 +1493,11 @@ public class AddList extends JFrame {
 	 * in parameters. The header is the only part that is defined inside the
 	 * method yet, it is easy to modify.
 	 * 
-	 * @param a
+	 * @param p
 	 *            a linked list with the name of athletes and the number of
 	 *            medals they have got
 	 * 
-	 * @param tit
+	 * @param tipo
 	 *            the title
 	 * 
 	 * @return pTabela Returns a panel with a table created with the data parsed
@@ -1569,7 +1551,7 @@ public class AddList extends JFrame {
 	 * in parameters. The header is the only part that is defined inside the
 	 * method yet, it is easy to modify.
 	 * 
-	 * @param a
+	 * @param i
 	 *            vector with indexes of countries
 	 * 
 	 * 

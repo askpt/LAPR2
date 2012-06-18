@@ -201,8 +201,6 @@ public class HTML {
 	 * Method to export HTML files about a specific sport.
 	 * 
 	 * @param janela
-	 * 
-	 * @param janela
 	 *            the parent component of the dialog
 	 * @param anoInicio
 	 *            sets from which year starts the ranking
@@ -275,10 +273,6 @@ public class HTML {
 	 *            languages details
 	 * @param lingua
 	 *            sets which language it will be used to present the data
-	 * @param atleta
-	 *            athletes details
-	 * @param equipa
-	 *            team details
 	 * @param pais
 	 *            country details
 	 * @param provas
